@@ -12,7 +12,9 @@
     "verify:v9": "tsx scripts/verify/v9-toolchain.ts",
     "verify:c1": "tsx scripts/verify/c1-scaffold.ts",
     "verify:c2": "tsx scripts/verify/c2-wallets.ts",
-    "verify:all": "tsx scripts/verify/all.ts"
+    "verify:all": "tsx scripts/verify/all.ts",
+    "test": "vitest run",
+    "verify:c9": "tsx scripts/gen-program-fixtures.ts && cd contracts && forge test --match-contract ProgramRoundTripTest"
   },
   "devDependencies": {
     "tsx": "^4.19.2",
