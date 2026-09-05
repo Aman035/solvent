@@ -1,0 +1,7068 @@
+{
+ "count": 1009,
+ "cases": [
+  {
+   "honoredValueUsd6": "0",
+   "honoredCount": 0,
+   "failedCount": 0,
+   "diversityBps": 0,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "31240000000",
+   "honoredCount": 12,
+   "failedCount": 0,
+   "diversityBps": 0,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "31240000000",
+   "honoredCount": 12,
+   "failedCount": 0,
+   "diversityBps": 10000,
+   "expected": "31240"
+  },
+  {
+   "honoredValueUsd6": "0",
+   "honoredCount": 5,
+   "failedCount": 0,
+   "diversityBps": 10000,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "1000000",
+   "honoredCount": 0,
+   "failedCount": 9,
+   "diversityBps": 10000,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "340282366920938463463374607431768211455",
+   "honoredCount": 1,
+   "failedCount": 0,
+   "diversityBps": 10000,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "340282366920938463463374607431768211455",
+   "honoredCount": 4294967295,
+   "failedCount": 0,
+   "diversityBps": 10000,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "1000000",
+   "honoredCount": 1,
+   "failedCount": 0,
+   "diversityBps": 1,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "8467741931",
+   "honoredCount": 11,
+   "failedCount": 0,
+   "diversityBps": 6638,
+   "expected": "5620"
+  },
+  {
+   "honoredValueUsd6": "910736103000",
+   "honoredCount": 24842,
+   "failedCount": 377,
+   "diversityBps": 8344,
+   "expected": "726827"
+  },
+  {
+   "honoredValueUsd6": "586732576",
+   "honoredCount": 27735,
+   "failedCount": 877,
+   "diversityBps": 7350,
+   "expected": "393"
+  },
+  {
+   "honoredValueUsd6": "181412891",
+   "honoredCount": 52965,
+   "failedCount": 988,
+   "diversityBps": 9299,
+   "expected": "159"
+  },
+  {
+   "honoredValueUsd6": "964669053000000000",
+   "honoredCount": 99224,
+   "failedCount": 850,
+   "diversityBps": 91,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "817882852000000000",
+   "honoredCount": 69095,
+   "failedCount": 811,
+   "diversityBps": 2542,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "991505134000",
+   "honoredCount": 31988,
+   "failedCount": 986,
+   "diversityBps": 1028,
+   "expected": "93299"
+  },
+  {
+   "honoredValueUsd6": "670157125000",
+   "honoredCount": 52531,
+   "failedCount": 944,
+   "diversityBps": 833,
+   "expected": "52968"
+  },
+  {
+   "honoredValueUsd6": "528396477000000",
+   "honoredCount": 38348,
+   "failedCount": 305,
+   "diversityBps": 2870,
+   "expected": "148115684"
+  },
+  {
+   "honoredValueUsd6": "291837482",
+   "honoredCount": 2159,
+   "failedCount": 236,
+   "diversityBps": 3607,
+   "expected": "79"
+  },
+  {
+   "honoredValueUsd6": "34978252000000000",
+   "honoredCount": 41159,
+   "failedCount": 735,
+   "diversityBps": 6919,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "251429269326550240505057586283697668096",
+   "honoredCount": 65409,
+   "failedCount": 669,
+   "diversityBps": 3578,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "104841265998381352819159502020386226178",
+   "honoredCount": 12420,
+   "failedCount": 165,
+   "diversityBps": 9533,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "806058522000000000",
+   "honoredCount": 79753,
+   "failedCount": 938,
+   "diversityBps": 9561,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "446548988",
+   "honoredCount": 19127,
+   "failedCount": 26,
+   "diversityBps": 3294,
+   "expected": "146"
+  },
+  {
+   "honoredValueUsd6": "491009399000",
+   "honoredCount": 65681,
+   "failedCount": 204,
+   "diversityBps": 7142,
+   "expected": "347441"
+  },
+  {
+   "honoredValueUsd6": "540437050000000000000",
+   "honoredCount": 21699,
+   "failedCount": 481,
+   "diversityBps": 7625,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "706627943000000",
+   "honoredCount": 11342,
+   "failedCount": 702,
+   "diversityBps": 296,
+   "expected": "17640645"
+  },
+  {
+   "honoredValueUsd6": "102091818046727138766912454543743647746",
+   "honoredCount": 88344,
+   "failedCount": 147,
+   "diversityBps": 8894,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "46485607",
+   "honoredCount": 69229,
+   "failedCount": 774,
+   "diversityBps": 2021,
+   "expected": "8"
+  },
+  {
+   "honoredValueUsd6": "579372623000",
+   "honoredCount": 45137,
+   "failedCount": 107,
+   "diversityBps": 2375,
+   "expected": "136629"
+  },
+  {
+   "honoredValueUsd6": "591950868000000000000",
+   "honoredCount": 25621,
+   "failedCount": 671,
+   "diversityBps": 3639,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "537608079000000000",
+   "honoredCount": 32400,
+   "failedCount": 77,
+   "diversityBps": 8221,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "409154633",
+   "honoredCount": 35204,
+   "failedCount": 69,
+   "diversityBps": 8843,
+   "expected": "359"
+  },
+  {
+   "honoredValueUsd6": "3188693",
+   "honoredCount": 89677,
+   "failedCount": 818,
+   "diversityBps": 6712,
+   "expected": "1"
+  },
+  {
+   "honoredValueUsd6": "716869341000",
+   "honoredCount": 17740,
+   "failedCount": 329,
+   "diversityBps": 2791,
+   "expected": "189533"
+  },
+  {
+   "honoredValueUsd6": "3653154000",
+   "honoredCount": 263,
+   "failedCount": 499,
+   "diversityBps": 4906,
+   "expected": "267"
+  },
+  {
+   "honoredValueUsd6": "599447279",
+   "honoredCount": 21892,
+   "failedCount": 104,
+   "diversityBps": 6857,
+   "expected": "404"
+  },
+  {
+   "honoredValueUsd6": "671422625000000000",
+   "honoredCount": 98243,
+   "failedCount": 577,
+   "diversityBps": 3159,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "249315157000000000000",
+   "honoredCount": 54827,
+   "failedCount": 559,
+   "diversityBps": 9056,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "112203234000000000000",
+   "honoredCount": 32470,
+   "failedCount": 180,
+   "diversityBps": 6398,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "154186103000000000000",
+   "honoredCount": 86037,
+   "failedCount": 222,
+   "diversityBps": 6868,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "413357418000000000000",
+   "honoredCount": 99231,
+   "failedCount": 680,
+   "diversityBps": 7149,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "239828465002959017167383225139252428801",
+   "honoredCount": 41372,
+   "failedCount": 995,
+   "diversityBps": 6253,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "305549817",
+   "honoredCount": 54625,
+   "failedCount": 593,
+   "diversityBps": 5778,
+   "expected": "170"
+  },
+  {
+   "honoredValueUsd6": "480406218000000000",
+   "honoredCount": 39681,
+   "failedCount": 76,
+   "diversityBps": 6240,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "558356177000000000000",
+   "honoredCount": 5324,
+   "failedCount": 824,
+   "diversityBps": 3784,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "156655186000000",
+   "honoredCount": 71046,
+   "failedCount": 91,
+   "diversityBps": 5729,
+   "expected": "89404213"
+  },
+  {
+   "honoredValueUsd6": "484469051000000000",
+   "honoredCount": 8474,
+   "failedCount": 923,
+   "diversityBps": 8981,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "475777654000000000",
+   "honoredCount": 3594,
+   "failedCount": 674,
+   "diversityBps": 6133,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "260141907000000000000",
+   "honoredCount": 94424,
+   "failedCount": 347,
+   "diversityBps": 2577,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "990784114000000000000",
+   "honoredCount": 16496,
+   "failedCount": 648,
+   "diversityBps": 3369,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "954083551000000000",
+   "honoredCount": 15910,
+   "failedCount": 859,
+   "diversityBps": 8182,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "618754285000",
+   "honoredCount": 21334,
+   "failedCount": 795,
+   "diversityBps": 3646,
+   "expected": "202913"
+  },
+  {
+   "honoredValueUsd6": "505647598",
+   "honoredCount": 30540,
+   "failedCount": 163,
+   "diversityBps": 7199,
+   "expected": "357"
+  },
+  {
+   "honoredValueUsd6": "381988916000000",
+   "honoredCount": 33699,
+   "failedCount": 719,
+   "diversityBps": 2516,
+   "expected": "90326789"
+  },
+  {
+   "honoredValueUsd6": "218357024000000",
+   "honoredCount": 96185,
+   "failedCount": 799,
+   "diversityBps": 4665,
+   "expected": "99386761"
+  },
+  {
+   "honoredValueUsd6": "981574319000000",
+   "honoredCount": 23029,
+   "failedCount": 375,
+   "diversityBps": 3991,
+   "expected": "373500281"
+  },
+  {
+   "honoredValueUsd6": "949061647000000000000",
+   "honoredCount": 7413,
+   "failedCount": 149,
+   "diversityBps": 9770,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "221059814000000",
+   "honoredCount": 82428,
+   "failedCount": 115,
+   "diversityBps": 9210,
+   "expected": "202747494"
+  },
+  {
+   "honoredValueUsd6": "888846716000",
+   "honoredCount": 81664,
+   "failedCount": 368,
+   "diversityBps": 6923,
+   "expected": "607140"
+  },
+  {
+   "honoredValueUsd6": "869237345",
+   "honoredCount": 52921,
+   "failedCount": 686,
+   "diversityBps": 390,
+   "expected": "32"
+  },
+  {
+   "honoredValueUsd6": "961693570000",
+   "honoredCount": 22725,
+   "failedCount": 13,
+   "diversityBps": 1720,
+   "expected": "165127"
+  },
+  {
+   "honoredValueUsd6": "630114091000",
+   "honoredCount": 89393,
+   "failedCount": 953,
+   "diversityBps": 8638,
+   "expected": "527424"
+  },
+  {
+   "honoredValueUsd6": "223338663000000",
+   "honoredCount": 2428,
+   "failedCount": 382,
+   "diversityBps": 2284,
+   "expected": "34654061"
+  },
+  {
+   "honoredValueUsd6": "37582950000000000000",
+   "honoredCount": 99741,
+   "failedCount": 373,
+   "diversityBps": 1818,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "538285048000000000",
+   "honoredCount": 15671,
+   "failedCount": 898,
+   "diversityBps": 5759,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "374522353000000",
+   "honoredCount": 5617,
+   "failedCount": 965,
+   "diversityBps": 4221,
+   "expected": "104319597"
+  },
+  {
+   "honoredValueUsd6": "59990756000000000000",
+   "honoredCount": 35032,
+   "failedCount": 660,
+   "diversityBps": 2854,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "198672514967757248384982779928489492482",
+   "honoredCount": 93983,
+   "failedCount": 696,
+   "diversityBps": 1273,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "950391265000",
+   "honoredCount": 25738,
+   "failedCount": 238,
+   "diversityBps": 5971,
+   "expected": "552160"
+  },
+  {
+   "honoredValueUsd6": "752373866000000000",
+   "honoredCount": 34621,
+   "failedCount": 502,
+   "diversityBps": 3229,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "162608624000000",
+   "honoredCount": 35743,
+   "failedCount": 311,
+   "diversityBps": 9033,
+   "expected": "143147781"
+  },
+  {
+   "honoredValueUsd6": "731062840000000",
+   "honoredCount": 61132,
+   "failedCount": 545,
+   "diversityBps": 9718,
+   "expected": "691940636"
+  },
+  {
+   "honoredValueUsd6": "287457574000000000",
+   "honoredCount": 55469,
+   "failedCount": 643,
+   "diversityBps": 5590,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "50206505022458642035978950820258381824",
+   "honoredCount": 32961,
+   "failedCount": 447,
+   "diversityBps": 5336,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "242679322000",
+   "honoredCount": 3552,
+   "failedCount": 395,
+   "diversityBps": 6411,
+   "expected": "116661"
+  },
+  {
+   "honoredValueUsd6": "904705674000000000000",
+   "honoredCount": 44911,
+   "failedCount": 52,
+   "diversityBps": 3349,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "9863601996881855255339862608062709761",
+   "honoredCount": 45065,
+   "failedCount": 809,
+   "diversityBps": 4452,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "818922431000000000000",
+   "honoredCount": 9703,
+   "failedCount": 494,
+   "diversityBps": 3019,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "220302253350114493569457809699855400960",
+   "honoredCount": 43298,
+   "failedCount": 94,
+   "diversityBps": 4311,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "114861795533667861505028247505055252483",
+   "honoredCount": 39614,
+   "failedCount": 890,
+   "diversityBps": 4355,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "24123214718909773786595453956559732736",
+   "honoredCount": 91597,
+   "failedCount": 737,
+   "diversityBps": 700,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "770626171000000000000",
+   "honoredCount": 76378,
+   "failedCount": 481,
+   "diversityBps": 5213,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "164041396000",
+   "honoredCount": 24190,
+   "failedCount": 797,
+   "diversityBps": 6765,
+   "expected": "100991"
+  },
+  {
+   "honoredValueUsd6": "473218317000000",
+   "honoredCount": 95579,
+   "failedCount": 579,
+   "diversityBps": 7820,
+   "expected": "363451555"
+  },
+  {
+   "honoredValueUsd6": "6250512564846350109458921714519900162",
+   "honoredCount": 70672,
+   "failedCount": 771,
+   "diversityBps": 3728,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "753490637000000000",
+   "honoredCount": 23987,
+   "failedCount": 749,
+   "diversityBps": 8124,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "902126615000",
+   "honoredCount": 54056,
+   "failedCount": 713,
+   "diversityBps": 9199,
+   "expected": "798277"
+  },
+  {
+   "honoredValueUsd6": "200579524000000000",
+   "honoredCount": 86870,
+   "failedCount": 378,
+   "diversityBps": 9914,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "292085848",
+   "honoredCount": 43345,
+   "failedCount": 210,
+   "diversityBps": 7925,
+   "expected": "228"
+  },
+  {
+   "honoredValueUsd6": "321724090166307808076632423672087314432",
+   "honoredCount": 28628,
+   "failedCount": 713,
+   "diversityBps": 9601,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "942624418",
+   "honoredCount": 14632,
+   "failedCount": 931,
+   "diversityBps": 6617,
+   "expected": "523"
+  },
+  {
+   "honoredValueUsd6": "396701951000000000",
+   "honoredCount": 55229,
+   "failedCount": 592,
+   "diversityBps": 5056,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "218933368172952037767957579776498073603",
+   "honoredCount": 56104,
+   "failedCount": 529,
+   "diversityBps": 9246,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "530651619000",
+   "honoredCount": 12289,
+   "failedCount": 115,
+   "diversityBps": 5982,
+   "expected": "308767"
+  },
+  {
+   "honoredValueUsd6": "846207804000000000000",
+   "honoredCount": 28187,
+   "failedCount": 51,
+   "diversityBps": 1556,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "298412734000000000000",
+   "honoredCount": 69358,
+   "failedCount": 372,
+   "diversityBps": 2174,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "388670900",
+   "honoredCount": 66728,
+   "failedCount": 459,
+   "diversityBps": 9123,
+   "expected": "346"
+  },
+  {
+   "honoredValueUsd6": "35739245000000000",
+   "honoredCount": 10383,
+   "failedCount": 640,
+   "diversityBps": 2822,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "840347409000000000000",
+   "honoredCount": 50822,
+   "failedCount": 778,
+   "diversityBps": 2604,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "631281837000",
+   "honoredCount": 63600,
+   "failedCount": 338,
+   "diversityBps": 2741,
+   "expected": "170318"
+  },
+  {
+   "honoredValueUsd6": "86534778000000",
+   "honoredCount": 53839,
+   "failedCount": 445,
+   "diversityBps": 2776,
+   "expected": "23440812"
+  },
+  {
+   "honoredValueUsd6": "165149588650866138751378174418358370307",
+   "honoredCount": 22589,
+   "failedCount": 874,
+   "diversityBps": 3396,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "16149887000",
+   "honoredCount": 12730,
+   "failedCount": 129,
+   "diversityBps": 6744,
+   "expected": "10569"
+  },
+  {
+   "honoredValueUsd6": "40591288000000000",
+   "honoredCount": 45070,
+   "failedCount": 600,
+   "diversityBps": 5727,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "112619932000000",
+   "honoredCount": 92961,
+   "failedCount": 253,
+   "diversityBps": 1430,
+   "expected": "15974225"
+  },
+  {
+   "honoredValueUsd6": "814510595000",
+   "honoredCount": 48546,
+   "failedCount": 785,
+   "diversityBps": 1394,
+   "expected": "108289"
+  },
+  {
+   "honoredValueUsd6": "326954098000",
+   "honoredCount": 50751,
+   "failedCount": 129,
+   "diversityBps": 1333,
+   "expected": "43253"
+  },
+  {
+   "honoredValueUsd6": "85780986000000000",
+   "honoredCount": 83315,
+   "failedCount": 7,
+   "diversityBps": 7141,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "94934490",
+   "honoredCount": 6888,
+   "failedCount": 740,
+   "diversityBps": 481,
+   "expected": "3"
+  },
+  {
+   "honoredValueUsd6": "886349627000000",
+   "honoredCount": 34980,
+   "failedCount": 196,
+   "diversityBps": 6716,
+   "expected": "585431536"
+  },
+  {
+   "honoredValueUsd6": "904310117000000000",
+   "honoredCount": 3513,
+   "failedCount": 153,
+   "diversityBps": 3969,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "751496060000000000000",
+   "honoredCount": 21542,
+   "failedCount": 702,
+   "diversityBps": 4300,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "400885535",
+   "honoredCount": 23188,
+   "failedCount": 44,
+   "diversityBps": 8145,
+   "expected": "323"
+  },
+  {
+   "honoredValueUsd6": "293106815",
+   "honoredCount": 85821,
+   "failedCount": 943,
+   "diversityBps": 5762,
+   "expected": "163"
+  },
+  {
+   "honoredValueUsd6": "456966046000000",
+   "honoredCount": 64496,
+   "failedCount": 290,
+   "diversityBps": 1043,
+   "expected": "47027198"
+  },
+  {
+   "honoredValueUsd6": "678360793000000000",
+   "honoredCount": 73510,
+   "failedCount": 307,
+   "diversityBps": 7498,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "284275976304303802762039585945843400704",
+   "honoredCount": 96646,
+   "failedCount": 723,
+   "diversityBps": 1605,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "318634975000000",
+   "honoredCount": 11861,
+   "failedCount": 674,
+   "diversityBps": 135,
+   "expected": "3675066"
+  },
+  {
+   "honoredValueUsd6": "768487644000000",
+   "honoredCount": 13310,
+   "failedCount": 377,
+   "diversityBps": 8260,
+   "expected": "585056385"
+  },
+  {
+   "honoredValueUsd6": "566604115000000000",
+   "honoredCount": 95109,
+   "failedCount": 328,
+   "diversityBps": 4216,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "747366100000",
+   "honoredCount": 79458,
+   "failedCount": 596,
+   "diversityBps": 221,
+   "expected": "16153"
+  },
+  {
+   "honoredValueUsd6": "595484585000000",
+   "honoredCount": 21536,
+   "failedCount": 493,
+   "diversityBps": 160,
+   "expected": "8915476"
+  },
+  {
+   "honoredValueUsd6": "559135770000",
+   "honoredCount": 70511,
+   "failedCount": 599,
+   "diversityBps": 8891,
+   "expected": "484772"
+  },
+  {
+   "honoredValueUsd6": "455661651000000",
+   "honoredCount": 44721,
+   "failedCount": 593,
+   "diversityBps": 3548,
+   "expected": "155483620"
+  },
+  {
+   "honoredValueUsd6": "769082010000000000",
+   "honoredCount": 46996,
+   "failedCount": 316,
+   "diversityBps": 7789,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "633040992000000",
+   "honoredCount": 79379,
+   "failedCount": 905,
+   "diversityBps": 2117,
+   "expected": "129582662"
+  },
+  {
+   "honoredValueUsd6": "227626636",
+   "honoredCount": 46261,
+   "failedCount": 777,
+   "diversityBps": 8065,
+   "expected": "174"
+  },
+  {
+   "honoredValueUsd6": "832879336000",
+   "honoredCount": 71412,
+   "failedCount": 809,
+   "diversityBps": 977,
+   "expected": "78697"
+  },
+  {
+   "honoredValueUsd6": "439233945000000000",
+   "honoredCount": 11950,
+   "failedCount": 924,
+   "diversityBps": 8412,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "310670335388642676224256358809109266432",
+   "honoredCount": 83710,
+   "failedCount": 759,
+   "diversityBps": 606,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "302207739567482459875221251086924906496",
+   "honoredCount": 78160,
+   "failedCount": 758,
+   "diversityBps": 3858,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "774443588",
+   "honoredCount": 95013,
+   "failedCount": 571,
+   "diversityBps": 6174,
+   "expected": "469"
+  },
+  {
+   "honoredValueUsd6": "234293670502302725834468145047894228995",
+   "honoredCount": 84659,
+   "failedCount": 908,
+   "diversityBps": 3012,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "212921822958055911639433604576630013954",
+   "honoredCount": 40131,
+   "failedCount": 144,
+   "diversityBps": 9948,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "170019404",
+   "honoredCount": 78533,
+   "failedCount": 532,
+   "diversityBps": 8473,
+   "expected": "141"
+  },
+  {
+   "honoredValueUsd6": "571663048000000",
+   "honoredCount": 67162,
+   "failedCount": 384,
+   "diversityBps": 8970,
+   "expected": "504134557"
+  },
+  {
+   "honoredValueUsd6": "605763439",
+   "honoredCount": 62451,
+   "failedCount": 544,
+   "diversityBps": 6005,
+   "expected": "354"
+  },
+  {
+   "honoredValueUsd6": "705802608000000",
+   "honoredCount": 32378,
+   "failedCount": 447,
+   "diversityBps": 1011,
+   "expected": "68518799"
+  },
+  {
+   "honoredValueUsd6": "690332154000000000000",
+   "honoredCount": 36516,
+   "failedCount": 972,
+   "diversityBps": 5289,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "545726881000000000000",
+   "honoredCount": 27365,
+   "failedCount": 552,
+   "diversityBps": 1162,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "819319819000000",
+   "honoredCount": 55795,
+   "failedCount": 506,
+   "diversityBps": 4163,
+   "expected": "332048873"
+  },
+  {
+   "honoredValueUsd6": "456226812",
+   "honoredCount": 17104,
+   "failedCount": 14,
+   "diversityBps": 2409,
+   "expected": "109"
+  },
+  {
+   "honoredValueUsd6": "974009532000",
+   "honoredCount": 45234,
+   "failedCount": 333,
+   "diversityBps": 60,
+   "expected": "5717"
+  },
+  {
+   "honoredValueUsd6": "4064640",
+   "honoredCount": 93140,
+   "failedCount": 986,
+   "diversityBps": 4298,
+   "expected": "1"
+  },
+  {
+   "honoredValueUsd6": "79659124000000000000",
+   "honoredCount": 84083,
+   "failedCount": 41,
+   "diversityBps": 2219,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "485594211000000",
+   "honoredCount": 94153,
+   "failedCount": 136,
+   "diversityBps": 7418,
+   "expected": "358659580"
+  },
+  {
+   "honoredValueUsd6": "328096759000",
+   "honoredCount": 49390,
+   "failedCount": 909,
+   "diversityBps": 7050,
+   "expected": "219204"
+  },
+  {
+   "honoredValueUsd6": "541432689000000",
+   "honoredCount": 48302,
+   "failedCount": 278,
+   "diversityBps": 6108,
+   "expected": "325093896"
+  },
+  {
+   "honoredValueUsd6": "377345941000",
+   "honoredCount": 98856,
+   "failedCount": 208,
+   "diversityBps": 2225,
+   "expected": "83432"
+  },
+  {
+   "honoredValueUsd6": "991118218000",
+   "honoredCount": 28874,
+   "failedCount": 286,
+   "diversityBps": 582,
+   "expected": "56018"
+  },
+  {
+   "honoredValueUsd6": "41194995000000000000",
+   "honoredCount": 33578,
+   "failedCount": 483,
+   "diversityBps": 3368,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "138852194",
+   "honoredCount": 18459,
+   "failedCount": 605,
+   "diversityBps": 737,
+   "expected": "9"
+  },
+  {
+   "honoredValueUsd6": "70883847",
+   "honoredCount": 17278,
+   "failedCount": 944,
+   "diversityBps": 6198,
+   "expected": "37"
+  },
+  {
+   "honoredValueUsd6": "802401312",
+   "honoredCount": 28058,
+   "failedCount": 839,
+   "diversityBps": 363,
+   "expected": "26"
+  },
+  {
+   "honoredValueUsd6": "234553858323300770375584146374204063746",
+   "honoredCount": 96627,
+   "failedCount": 462,
+   "diversityBps": 7315,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "763523672000000",
+   "honoredCount": 47776,
+   "failedCount": 306,
+   "diversityBps": 430,
+   "expected": "32212564"
+  },
+  {
+   "honoredValueUsd6": "303768643",
+   "honoredCount": 73685,
+   "failedCount": 989,
+   "diversityBps": 4095,
+   "expected": "119"
+  },
+  {
+   "honoredValueUsd6": "292384749000",
+   "honoredCount": 96047,
+   "failedCount": 710,
+   "diversityBps": 6772,
+   "expected": "193706"
+  },
+  {
+   "honoredValueUsd6": "642131290000",
+   "honoredCount": 82299,
+   "failedCount": 831,
+   "diversityBps": 8994,
+   "expected": "560552"
+  },
+  {
+   "honoredValueUsd6": "422843108000000000000",
+   "honoredCount": 16072,
+   "failedCount": 196,
+   "diversityBps": 8824,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "652986878000000000",
+   "honoredCount": 22005,
+   "failedCount": 916,
+   "diversityBps": 1639,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "812712329000000",
+   "honoredCount": 22584,
+   "failedCount": 617,
+   "diversityBps": 5369,
+   "expected": "403291226"
+  },
+  {
+   "honoredValueUsd6": "850949898000000",
+   "honoredCount": 61641,
+   "failedCount": 334,
+   "diversityBps": 3976,
+   "expected": "332925832"
+  },
+  {
+   "honoredValueUsd6": "875644623000",
+   "honoredCount": 60305,
+   "failedCount": 953,
+   "diversityBps": 8516,
+   "expected": "711945"
+  },
+  {
+   "honoredValueUsd6": "899584705000000",
+   "honoredCount": 46872,
+   "failedCount": 794,
+   "diversityBps": 5027,
+   "expected": "430351109"
+  },
+  {
+   "honoredValueUsd6": "481633230000000",
+   "honoredCount": 78958,
+   "failedCount": 923,
+   "diversityBps": 1556,
+   "expected": "72403009"
+  },
+  {
+   "honoredValueUsd6": "74534559000",
+   "honoredCount": 87314,
+   "failedCount": 501,
+   "diversityBps": 3316,
+   "expected": "24297"
+  },
+  {
+   "honoredValueUsd6": "453794721",
+   "honoredCount": 89528,
+   "failedCount": 160,
+   "diversityBps": 8051,
+   "expected": "362"
+  },
+  {
+   "honoredValueUsd6": "61932038000000",
+   "honoredCount": 66247,
+   "failedCount": 253,
+   "diversityBps": 2055,
+   "expected": "12582870"
+  },
+  {
+   "honoredValueUsd6": "170034344600231396329499760073031811073",
+   "honoredCount": 24019,
+   "failedCount": 264,
+   "diversityBps": 1552,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "667896496000000000000",
+   "honoredCount": 65206,
+   "failedCount": 428,
+   "diversityBps": 5676,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "697263085000000",
+   "honoredCount": 7348,
+   "failedCount": 810,
+   "diversityBps": 5990,
+   "expected": "313864798"
+  },
+  {
+   "honoredValueUsd6": "82307022000000000",
+   "honoredCount": 33352,
+   "failedCount": 946,
+   "diversityBps": 1694,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "641469025",
+   "honoredCount": 46615,
+   "failedCount": 407,
+   "diversityBps": 8966,
+   "expected": "560"
+  },
+  {
+   "honoredValueUsd6": "133984710000",
+   "honoredCount": 13640,
+   "failedCount": 444,
+   "diversityBps": 9848,
+   "expected": "120208"
+  },
+  {
+   "honoredValueUsd6": "755794940000000000000",
+   "honoredCount": 80981,
+   "failedCount": 386,
+   "diversityBps": 2211,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "807425824000000000000",
+   "honoredCount": 70730,
+   "failedCount": 704,
+   "diversityBps": 6643,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "541081524000000",
+   "honoredCount": 96017,
+   "failedCount": 50,
+   "diversityBps": 8368,
+   "expected": "452070783"
+  },
+  {
+   "honoredValueUsd6": "975797791000000000",
+   "honoredCount": 5496,
+   "failedCount": 52,
+   "diversityBps": 8471,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "760309982000000000000",
+   "honoredCount": 20943,
+   "failedCount": 809,
+   "diversityBps": 9113,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "153542726000000",
+   "honoredCount": 94256,
+   "failedCount": 868,
+   "diversityBps": 5885,
+   "expected": "87930644"
+  },
+  {
+   "honoredValueUsd6": "253861807163448597663389260952402657280",
+   "honoredCount": 76895,
+   "failedCount": 514,
+   "diversityBps": 9779,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "897128549",
+   "honoredCount": 13554,
+   "failedCount": 798,
+   "diversityBps": 6199,
+   "expected": "472"
+  },
+  {
+   "honoredValueUsd6": "617152862000000000000",
+   "honoredCount": 60449,
+   "failedCount": 856,
+   "diversityBps": 7849,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "596745535000000",
+   "honoredCount": 9893,
+   "failedCount": 593,
+   "diversityBps": 6796,
+   "expected": "343736205"
+  },
+  {
+   "honoredValueUsd6": "196445152000",
+   "honoredCount": 10413,
+   "failedCount": 527,
+   "diversityBps": 465,
+   "expected": "7930"
+  },
+  {
+   "honoredValueUsd6": "617566457000000000000",
+   "honoredCount": 4371,
+   "failedCount": 938,
+   "diversityBps": 8116,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "928320241000000",
+   "honoredCount": 48587,
+   "failedCount": 863,
+   "diversityBps": 7294,
+   "expected": "642861364"
+  },
+  {
+   "honoredValueUsd6": "379071311",
+   "honoredCount": 91016,
+   "failedCount": 115,
+   "diversityBps": 8815,
+   "expected": "332"
+  },
+  {
+   "honoredValueUsd6": "879410428000000000000",
+   "honoredCount": 87988,
+   "failedCount": 558,
+   "diversityBps": 2954,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "817382901000000",
+   "honoredCount": 51008,
+   "failedCount": 65,
+   "diversityBps": 6681,
+   "expected": "544013789"
+  },
+  {
+   "honoredValueUsd6": "990789400",
+   "honoredCount": 96317,
+   "failedCount": 805,
+   "diversityBps": 5841,
+   "expected": "564"
+  },
+  {
+   "honoredValueUsd6": "90088624660756068798550396397519110144",
+   "honoredCount": 69121,
+   "failedCount": 262,
+   "diversityBps": 3227,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "814454848",
+   "honoredCount": 69300,
+   "failedCount": 401,
+   "diversityBps": 683,
+   "expected": "54"
+  },
+  {
+   "honoredValueUsd6": "977924250000",
+   "honoredCount": 59918,
+   "failedCount": 70,
+   "diversityBps": 7974,
+   "expected": "777073"
+  },
+  {
+   "honoredValueUsd6": "98969815189569449462941934975260295168",
+   "honoredCount": 39371,
+   "failedCount": 60,
+   "diversityBps": 8743,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "381422760000000",
+   "honoredCount": 95714,
+   "failedCount": 721,
+   "diversityBps": 6072,
+   "expected": "226481735"
+  },
+  {
+   "honoredValueUsd6": "203110061000000000000",
+   "honoredCount": 1094,
+   "failedCount": 962,
+   "diversityBps": 5177,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "133137734",
+   "honoredCount": 32298,
+   "failedCount": 92,
+   "diversityBps": 529,
+   "expected": "6"
+  },
+  {
+   "honoredValueUsd6": "239196102571637565843364200732063432705",
+   "honoredCount": 7102,
+   "failedCount": 457,
+   "diversityBps": 6106,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "354294676000000",
+   "honoredCount": 58219,
+   "failedCount": 820,
+   "diversityBps": 3726,
+   "expected": "126658343"
+  },
+  {
+   "honoredValueUsd6": "359521393000",
+   "honoredCount": 58346,
+   "failedCount": 458,
+   "diversityBps": 1161,
+   "expected": "40780"
+  },
+  {
+   "honoredValueUsd6": "797855133",
+   "honoredCount": 5241,
+   "failedCount": 329,
+   "diversityBps": 2549,
+   "expected": "170"
+  },
+  {
+   "honoredValueUsd6": "48713222756594589626851046417951096835",
+   "honoredCount": 11362,
+   "failedCount": 422,
+   "diversityBps": 9233,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "97000897741993763100078452563263881217",
+   "honoredCount": 57685,
+   "failedCount": 856,
+   "diversityBps": 3179,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "570616306000",
+   "honoredCount": 34365,
+   "failedCount": 471,
+   "diversityBps": 8535,
+   "expected": "467786"
+  },
+  {
+   "honoredValueUsd6": "588459286000000000000",
+   "honoredCount": 42971,
+   "failedCount": 875,
+   "diversityBps": 5749,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "249484813000000000",
+   "honoredCount": 94454,
+   "failedCount": 309,
+   "diversityBps": 5435,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "414385830000000",
+   "honoredCount": 81138,
+   "failedCount": 210,
+   "diversityBps": 1538,
+   "expected": "63241498"
+  },
+  {
+   "honoredValueUsd6": "918186916000",
+   "honoredCount": 31364,
+   "failedCount": 566,
+   "diversityBps": 2575,
+   "expected": "224290"
+  },
+  {
+   "honoredValueUsd6": "301558401000000000000",
+   "honoredCount": 73499,
+   "failedCount": 947,
+   "diversityBps": 6651,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "423493649",
+   "honoredCount": 235,
+   "failedCount": 232,
+   "diversityBps": 4001,
+   "expected": "42"
+  },
+  {
+   "honoredValueUsd6": "33435381000",
+   "honoredCount": 26365,
+   "failedCount": 798,
+   "diversityBps": 1791,
+   "expected": "5489"
+  },
+  {
+   "honoredValueUsd6": "108644258363885248326990459531016798211",
+   "honoredCount": 28105,
+   "failedCount": 430,
+   "diversityBps": 6320,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "466293191000000",
+   "honoredCount": 90993,
+   "failedCount": 167,
+   "diversityBps": 8585,
+   "expected": "398120684"
+  },
+  {
+   "honoredValueUsd6": "341960221",
+   "honoredCount": 57419,
+   "failedCount": 992,
+   "diversityBps": 8452,
+   "expected": "274"
+  },
+  {
+   "honoredValueUsd6": "237182609000",
+   "honoredCount": 61954,
+   "failedCount": 584,
+   "diversityBps": 4366,
+   "expected": "100705"
+  },
+  {
+   "honoredValueUsd6": "75848798696947112700022767089354801155",
+   "honoredCount": 26134,
+   "failedCount": 724,
+   "diversityBps": 1501,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "635901807000",
+   "honoredCount": 69193,
+   "failedCount": 773,
+   "diversityBps": 177,
+   "expected": "10890"
+  },
+  {
+   "honoredValueUsd6": "448708583",
+   "honoredCount": 89157,
+   "failedCount": 913,
+   "diversityBps": 2763,
+   "expected": "120"
+  },
+  {
+   "honoredValueUsd6": "620112084000000000",
+   "honoredCount": 30399,
+   "failedCount": 214,
+   "diversityBps": 6505,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "780470570000000000",
+   "honoredCount": 1212,
+   "failedCount": 117,
+   "diversityBps": 6956,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "934167600",
+   "honoredCount": 56162,
+   "failedCount": 904,
+   "diversityBps": 8626,
+   "expected": "768"
+  },
+  {
+   "honoredValueUsd6": "599828565",
+   "honoredCount": 87943,
+   "failedCount": 679,
+   "diversityBps": 1689,
+   "expected": "98"
+  },
+  {
+   "honoredValueUsd6": "9420952351438760058860630312480669699",
+   "honoredCount": 27090,
+   "failedCount": 994,
+   "diversityBps": 4000,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "591733905000000000000",
+   "honoredCount": 11471,
+   "failedCount": 186,
+   "diversityBps": 5909,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "622374684000000000000",
+   "honoredCount": 45709,
+   "failedCount": 356,
+   "diversityBps": 8524,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "139742104432359143475832395477400158211",
+   "honoredCount": 19918,
+   "failedCount": 479,
+   "diversityBps": 7861,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "78421320654327472774702919699623051265",
+   "honoredCount": 12986,
+   "failedCount": 759,
+   "diversityBps": 2305,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "67933950897193713590686180332103794689",
+   "honoredCount": 38875,
+   "failedCount": 151,
+   "diversityBps": 6045,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "702396312000000000",
+   "honoredCount": 45773,
+   "failedCount": 439,
+   "diversityBps": 9523,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "237206389315965135377169164903982825475",
+   "honoredCount": 47632,
+   "failedCount": 69,
+   "diversityBps": 801,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "934145297000000",
+   "honoredCount": 43798,
+   "failedCount": 391,
+   "diversityBps": 6572,
+   "expected": "597907114"
+  },
+  {
+   "honoredValueUsd6": "796996992000000",
+   "honoredCount": 65547,
+   "failedCount": 641,
+   "diversityBps": 8768,
+   "expected": "678889876"
+  },
+  {
+   "honoredValueUsd6": "821541073",
+   "honoredCount": 89104,
+   "failedCount": 836,
+   "diversityBps": 8620,
+   "expected": "688"
+  },
+  {
+   "honoredValueUsd6": "179110327000",
+   "honoredCount": 85317,
+   "failedCount": 544,
+   "diversityBps": 5531,
+   "expected": "97206"
+  },
+  {
+   "honoredValueUsd6": "896450337000000",
+   "honoredCount": 23485,
+   "failedCount": 982,
+   "diversityBps": 2628,
+   "expected": "209328598"
+  },
+  {
+   "honoredValueUsd6": "387833693000000000000",
+   "honoredCount": 11517,
+   "failedCount": 946,
+   "diversityBps": 6549,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "994781892",
+   "honoredCount": 56531,
+   "failedCount": 593,
+   "diversityBps": 5338,
+   "expected": "514"
+  },
+  {
+   "honoredValueUsd6": "868557108000000000",
+   "honoredCount": 25759,
+   "failedCount": 929,
+   "diversityBps": 893,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "808864338000000",
+   "honoredCount": 14881,
+   "failedCount": 944,
+   "diversityBps": 3434,
+   "expected": "233354388"
+  },
+  {
+   "honoredValueUsd6": "341153553",
+   "honoredCount": 85463,
+   "failedCount": 457,
+   "diversityBps": 9790,
+   "expected": "328"
+  },
+  {
+   "honoredValueUsd6": "132705879207780532675196590175530516483",
+   "honoredCount": 8148,
+   "failedCount": 648,
+   "diversityBps": 590,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "10109666000",
+   "honoredCount": 2792,
+   "failedCount": 894,
+   "diversityBps": 296,
+   "expected": "152"
+  },
+  {
+   "honoredValueUsd6": "825739725000000000",
+   "honoredCount": 65264,
+   "failedCount": 545,
+   "diversityBps": 8055,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "523939270",
+   "honoredCount": 24995,
+   "failedCount": 244,
+   "diversityBps": 7083,
+   "expected": "359"
+  },
+  {
+   "honoredValueUsd6": "831818801",
+   "honoredCount": 42716,
+   "failedCount": 515,
+   "diversityBps": 2514,
+   "expected": "201"
+  },
+  {
+   "honoredValueUsd6": "294353373000000",
+   "honoredCount": 78522,
+   "failedCount": 190,
+   "diversityBps": 9979,
+   "expected": "291618340"
+  },
+  {
+   "honoredValueUsd6": "482551515000",
+   "honoredCount": 29674,
+   "failedCount": 664,
+   "diversityBps": 2664,
+   "expected": "120464"
+  },
+  {
+   "honoredValueUsd6": "661636830000000000000",
+   "honoredCount": 28064,
+   "failedCount": 987,
+   "diversityBps": 5291,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "369802838",
+   "honoredCount": 30608,
+   "failedCount": 42,
+   "diversityBps": 5038,
+   "expected": "185"
+  },
+  {
+   "honoredValueUsd6": "713970926",
+   "honoredCount": 69303,
+   "failedCount": 619,
+   "diversityBps": 2494,
+   "expected": "173"
+  },
+  {
+   "honoredValueUsd6": "480138034000",
+   "honoredCount": 99804,
+   "failedCount": 761,
+   "diversityBps": 5629,
+   "expected": "264225"
+  },
+  {
+   "honoredValueUsd6": "163662890562219671765761643892499808257",
+   "honoredCount": 2038,
+   "failedCount": 697,
+   "diversityBps": 8348,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "626396521000000000",
+   "honoredCount": 90595,
+   "failedCount": 356,
+   "diversityBps": 7480,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "234845581488280692579521181186154037249",
+   "honoredCount": 49554,
+   "failedCount": 622,
+   "diversityBps": 5560,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "75386958",
+   "honoredCount": 71266,
+   "failedCount": 344,
+   "diversityBps": 1191,
+   "expected": "8"
+  },
+  {
+   "honoredValueUsd6": "272208002169709269586572841775714533378",
+   "honoredCount": 82016,
+   "failedCount": 942,
+   "diversityBps": 6182,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "490477957000000000000",
+   "honoredCount": 5793,
+   "failedCount": 411,
+   "diversityBps": 5954,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "55849820555699271631497360679622410241",
+   "honoredCount": 97467,
+   "failedCount": 817,
+   "diversityBps": 8911,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "968991654000000",
+   "honoredCount": 7048,
+   "failedCount": 435,
+   "diversityBps": 8792,
+   "expected": "718838169"
+  },
+  {
+   "honoredValueUsd6": "806764520000000",
+   "honoredCount": 94950,
+   "failedCount": 523,
+   "diversityBps": 7678,
+   "expected": "609364365"
+  },
+  {
+   "honoredValueUsd6": "92002676000000000",
+   "honoredCount": 99089,
+   "failedCount": 757,
+   "diversityBps": 9863,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "111090239000000000",
+   "honoredCount": 71675,
+   "failedCount": 58,
+   "diversityBps": 4338,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "830902848000",
+   "honoredCount": 79978,
+   "failedCount": 810,
+   "diversityBps": 7552,
+   "expected": "608993"
+  },
+  {
+   "honoredValueUsd6": "700957615000000",
+   "honoredCount": 71121,
+   "failedCount": 815,
+   "diversityBps": 4077,
+   "expected": "276282375"
+  },
+  {
+   "honoredValueUsd6": "683412323",
+   "honoredCount": 13340,
+   "failedCount": 436,
+   "diversityBps": 9257,
+   "expected": "575"
+  },
+  {
+   "honoredValueUsd6": "787985817000000000000",
+   "honoredCount": 32937,
+   "failedCount": 848,
+   "diversityBps": 6555,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "854100589000000000000",
+   "honoredCount": 2003,
+   "failedCount": 25,
+   "diversityBps": 7957,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "320603067443357377741777442629773950976",
+   "honoredCount": 29550,
+   "failedCount": 212,
+   "diversityBps": 1718,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "463426161000000000",
+   "honoredCount": 66685,
+   "failedCount": 144,
+   "diversityBps": 1345,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "137059679",
+   "honoredCount": 49906,
+   "failedCount": 183,
+   "diversityBps": 5044,
+   "expected": "68"
+  },
+  {
+   "honoredValueUsd6": "218042462063461037916356295267056615427",
+   "honoredCount": 73094,
+   "failedCount": 488,
+   "diversityBps": 5268,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "799849598",
+   "honoredCount": 88890,
+   "failedCount": 385,
+   "diversityBps": 5538,
+   "expected": "436"
+  },
+  {
+   "honoredValueUsd6": "108840387",
+   "honoredCount": 78253,
+   "failedCount": 38,
+   "diversityBps": 6946,
+   "expected": "74"
+  },
+  {
+   "honoredValueUsd6": "389909009000000000000",
+   "honoredCount": 53040,
+   "failedCount": 157,
+   "diversityBps": 9555,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "667296580000",
+   "honoredCount": 7595,
+   "failedCount": 111,
+   "diversityBps": 1694,
+   "expected": "108291"
+  },
+  {
+   "honoredValueUsd6": "75241025000",
+   "honoredCount": 80371,
+   "failedCount": 310,
+   "diversityBps": 7223,
+   "expected": "53724"
+  },
+  {
+   "honoredValueUsd6": "37979146642596213121403223162711179264",
+   "honoredCount": 84602,
+   "failedCount": 844,
+   "diversityBps": 132,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "121740624189119734430256616150132588544",
+   "honoredCount": 25724,
+   "failedCount": 894,
+   "diversityBps": 4394,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "401333697000000000",
+   "honoredCount": 20830,
+   "failedCount": 280,
+   "diversityBps": 6854,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "204708494000000000000",
+   "honoredCount": 64361,
+   "failedCount": 265,
+   "diversityBps": 4431,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "615290059000000000",
+   "honoredCount": 92192,
+   "failedCount": 147,
+   "diversityBps": 6893,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "4014496000",
+   "honoredCount": 46656,
+   "failedCount": 661,
+   "diversityBps": 9175,
+   "expected": "3532"
+  },
+  {
+   "honoredValueUsd6": "240521230000000000000",
+   "honoredCount": 83765,
+   "failedCount": 182,
+   "diversityBps": 8555,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "148229395000000",
+   "honoredCount": 77100,
+   "failedCount": 248,
+   "diversityBps": 9982,
+   "expected": "146548418"
+  },
+  {
+   "honoredValueUsd6": "222852250423979398235902767390867324931",
+   "honoredCount": 36203,
+   "failedCount": 5,
+   "diversityBps": 1050,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "896751919",
+   "honoredCount": 22569,
+   "failedCount": 208,
+   "diversityBps": 6173,
+   "expected": "538"
+  },
+  {
+   "honoredValueUsd6": "134526396000000000",
+   "honoredCount": 78565,
+   "failedCount": 749,
+   "diversityBps": 8440,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "166749286",
+   "honoredCount": 59173,
+   "failedCount": 525,
+   "diversityBps": 2421,
+   "expected": "39"
+  },
+  {
+   "honoredValueUsd6": "991535827000000000000",
+   "honoredCount": 41014,
+   "failedCount": 282,
+   "diversityBps": 8250,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "583986132",
+   "honoredCount": 75349,
+   "failedCount": 694,
+   "diversityBps": 6960,
+   "expected": "394"
+  },
+  {
+   "honoredValueUsd6": "848404134000",
+   "honoredCount": 12825,
+   "failedCount": 724,
+   "diversityBps": 9503,
+   "expected": "689471"
+  },
+  {
+   "honoredValueUsd6": "141334727000",
+   "honoredCount": 42281,
+   "failedCount": 249,
+   "diversityBps": 1873,
+   "expected": "26012"
+  },
+  {
+   "honoredValueUsd6": "564774209000000",
+   "honoredCount": 2658,
+   "failedCount": 335,
+   "diversityBps": 1271,
+   "expected": "52088093"
+  },
+  {
+   "honoredValueUsd6": "505127582000",
+   "honoredCount": 72604,
+   "failedCount": 748,
+   "diversityBps": 3443,
+   "expected": "168701"
+  },
+  {
+   "honoredValueUsd6": "652111273000",
+   "honoredCount": 75318,
+   "failedCount": 629,
+   "diversityBps": 5030,
+   "expected": "319994"
+  },
+  {
+   "honoredValueUsd6": "822990176",
+   "honoredCount": 95883,
+   "failedCount": 374,
+   "diversityBps": 7581,
+   "expected": "615"
+  },
+  {
+   "honoredValueUsd6": "531051891000000",
+   "honoredCount": 38558,
+   "failedCount": 947,
+   "diversityBps": 2481,
+   "expected": "122712377"
+  },
+  {
+   "honoredValueUsd6": "645580523000000000",
+   "honoredCount": 15757,
+   "failedCount": 520,
+   "diversityBps": 1007,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "207059312888927417985184793779211599872",
+   "honoredCount": 41056,
+   "failedCount": 637,
+   "diversityBps": 986,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "341263944",
+   "honoredCount": 60253,
+   "failedCount": 289,
+   "diversityBps": 6038,
+   "expected": "202"
+  },
+  {
+   "honoredValueUsd6": "557990725000",
+   "honoredCount": 74862,
+   "failedCount": 650,
+   "diversityBps": 1659,
+   "expected": "90220"
+  },
+  {
+   "honoredValueUsd6": "719665376000000",
+   "honoredCount": 24722,
+   "failedCount": 779,
+   "diversityBps": 3872,
+   "expected": "254587934"
+  },
+  {
+   "honoredValueUsd6": "984302638000",
+   "honoredCount": 58474,
+   "failedCount": 633,
+   "diversityBps": 6380,
+   "expected": "608231"
+  },
+  {
+   "honoredValueUsd6": "549768215",
+   "honoredCount": 17537,
+   "failedCount": 904,
+   "diversityBps": 1131,
+   "expected": "53"
+  },
+  {
+   "honoredValueUsd6": "908965278000",
+   "honoredCount": 66689,
+   "failedCount": 828,
+   "diversityBps": 28,
+   "expected": "2453"
+  },
+  {
+   "honoredValueUsd6": "823267656000",
+   "honoredCount": 83218,
+   "failedCount": 400,
+   "diversityBps": 5358,
+   "expected": "434836"
+  },
+  {
+   "honoredValueUsd6": "23071764000000",
+   "honoredCount": 76565,
+   "failedCount": 951,
+   "diversityBps": 8634,
+   "expected": "19204552"
+  },
+  {
+   "honoredValueUsd6": "36738130",
+   "honoredCount": 77350,
+   "failedCount": 119,
+   "diversityBps": 180,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "50097463000000000",
+   "honoredCount": 71597,
+   "failedCount": 233,
+   "diversityBps": 3740,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "9338461000000000000",
+   "honoredCount": 33802,
+   "failedCount": 812,
+   "diversityBps": 8193,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "640135601000",
+   "honoredCount": 94759,
+   "failedCount": 583,
+   "diversityBps": 3502,
+   "expected": "220112"
+  },
+  {
+   "honoredValueUsd6": "93107112437549721117824096678954663939",
+   "honoredCount": 78493,
+   "failedCount": 894,
+   "diversityBps": 2303,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "371508976000000000",
+   "honoredCount": 21585,
+   "failedCount": 818,
+   "diversityBps": 2595,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "280069734141662505655757315171957080065",
+   "honoredCount": 36656,
+   "failedCount": 233,
+   "diversityBps": 2520,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "10758743",
+   "honoredCount": 43379,
+   "failedCount": 857,
+   "diversityBps": 1559,
+   "expected": "1"
+  },
+  {
+   "honoredValueUsd6": "465758157000000000",
+   "honoredCount": 33344,
+   "failedCount": 359,
+   "diversityBps": 7994,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "538456558000",
+   "honoredCount": 63946,
+   "failedCount": 12,
+   "diversityBps": 2305,
+   "expected": "124044"
+  },
+  {
+   "honoredValueUsd6": "413981812000000000000",
+   "honoredCount": 31219,
+   "failedCount": 774,
+   "diversityBps": 1783,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "343794198000000000",
+   "honoredCount": 27467,
+   "failedCount": 849,
+   "diversityBps": 5790,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "975471938000000",
+   "honoredCount": 66487,
+   "failedCount": 684,
+   "diversityBps": 1328,
+   "expected": "125664274"
+  },
+  {
+   "honoredValueUsd6": "237975053000000",
+   "honoredCount": 66275,
+   "failedCount": 845,
+   "diversityBps": 1050,
+   "expected": "24066831"
+  },
+  {
+   "honoredValueUsd6": "212046606560043936583134644762761494529",
+   "honoredCount": 64711,
+   "failedCount": 746,
+   "diversityBps": 9110,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "847564729000000",
+   "honoredCount": 91804,
+   "failedCount": 59,
+   "diversityBps": 7315,
+   "expected": "618800539"
+  },
+  {
+   "honoredValueUsd6": "325370304000",
+   "honoredCount": 24142,
+   "failedCount": 644,
+   "diversityBps": 8711,
+   "expected": "262428"
+  },
+  {
+   "honoredValueUsd6": "336653293000000",
+   "honoredCount": 5955,
+   "failedCount": 544,
+   "diversityBps": 3629,
+   "expected": "95891810"
+  },
+  {
+   "honoredValueUsd6": "507182847",
+   "honoredCount": 76603,
+   "failedCount": 732,
+   "diversityBps": 9380,
+   "expected": "462"
+  },
+  {
+   "honoredValueUsd6": "583439517000000000",
+   "honoredCount": 89937,
+   "failedCount": 100,
+   "diversityBps": 8780,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "680306588000",
+   "honoredCount": 55956,
+   "failedCount": 101,
+   "diversityBps": 549,
+   "expected": "37147"
+  },
+  {
+   "honoredValueUsd6": "715167785000000",
+   "honoredCount": 89427,
+   "failedCount": 512,
+   "diversityBps": 8975,
+   "expected": "631024595"
+  },
+  {
+   "honoredValueUsd6": "617739171000000000000",
+   "honoredCount": 53126,
+   "failedCount": 263,
+   "diversityBps": 4622,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "597731132000",
+   "honoredCount": 65021,
+   "failedCount": 427,
+   "diversityBps": 7449,
+   "expected": "436647"
+  },
+  {
+   "honoredValueUsd6": "843931885000000000",
+   "honoredCount": 95728,
+   "failedCount": 837,
+   "diversityBps": 4783,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "33927098963665477383060208373320384513",
+   "honoredCount": 71552,
+   "failedCount": 812,
+   "diversityBps": 9322,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "421672052",
+   "honoredCount": 90843,
+   "failedCount": 185,
+   "diversityBps": 2898,
+   "expected": "121"
+  },
+  {
+   "honoredValueUsd6": "972537821000000",
+   "honoredCount": 75283,
+   "failedCount": 368,
+   "diversityBps": 2520,
+   "expected": "241537464"
+  },
+  {
+   "honoredValueUsd6": "112027569000000",
+   "honoredCount": 92609,
+   "failedCount": 457,
+   "diversityBps": 3660,
+   "expected": "40403943"
+  },
+  {
+   "honoredValueUsd6": "30875885518976333093557469201934843904",
+   "honoredCount": 70392,
+   "failedCount": 557,
+   "diversityBps": 1810,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "961186583000000000000",
+   "honoredCount": 33377,
+   "failedCount": 18,
+   "diversityBps": 3325,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "686156100000",
+   "honoredCount": 21940,
+   "failedCount": 970,
+   "diversityBps": 3702,
+   "expected": "224269"
+  },
+  {
+   "honoredValueUsd6": "415876876000000000000",
+   "honoredCount": 69364,
+   "failedCount": 306,
+   "diversityBps": 7675,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "834735279000000000",
+   "honoredCount": 97707,
+   "failedCount": 841,
+   "diversityBps": 5794,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "167212280551593708384217375449972473859",
+   "honoredCount": 70346,
+   "failedCount": 919,
+   "diversityBps": 2401,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "423688672000000000",
+   "honoredCount": 62363,
+   "failedCount": 429,
+   "diversityBps": 584,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "36120663112360609419309929043857506307",
+   "honoredCount": 9243,
+   "failedCount": 606,
+   "diversityBps": 3068,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "840730099000000",
+   "honoredCount": 50489,
+   "failedCount": 114,
+   "diversityBps": 1651,
+   "expected": "137870637"
+  },
+  {
+   "honoredValueUsd6": "293079835075900860520022219641243828224",
+   "honoredCount": 12558,
+   "failedCount": 45,
+   "diversityBps": 9283,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "242884049306917748391862324943290105858",
+   "honoredCount": 16304,
+   "failedCount": 119,
+   "diversityBps": 4825,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "798981537000000",
+   "honoredCount": 98029,
+   "failedCount": 263,
+   "diversityBps": 1797,
+   "expected": "142430609"
+  },
+  {
+   "honoredValueUsd6": "291734940000",
+   "honoredCount": 33846,
+   "failedCount": 119,
+   "diversityBps": 9364,
+   "expected": "270328"
+  },
+  {
+   "honoredValueUsd6": "630995983",
+   "honoredCount": 82548,
+   "failedCount": 423,
+   "diversityBps": 175,
+   "expected": "10"
+  },
+  {
+   "honoredValueUsd6": "134953061000",
+   "honoredCount": 98012,
+   "failedCount": 487,
+   "diversityBps": 9696,
+   "expected": "128928"
+  },
+  {
+   "honoredValueUsd6": "581703784",
+   "honoredCount": 72820,
+   "failedCount": 59,
+   "diversityBps": 5384,
+   "expected": "312"
+  },
+  {
+   "honoredValueUsd6": "45347393000",
+   "honoredCount": 10544,
+   "failedCount": 801,
+   "diversityBps": 7655,
+   "expected": "28270"
+  },
+  {
+   "honoredValueUsd6": "963980480000",
+   "honoredCount": 84508,
+   "failedCount": 626,
+   "diversityBps": 4493,
+   "expected": "423700"
+  },
+  {
+   "honoredValueUsd6": "173626760000000",
+   "honoredCount": 32034,
+   "failedCount": 322,
+   "diversityBps": 4012,
+   "expected": "67619945"
+  },
+  {
+   "honoredValueUsd6": "874130040000000000000",
+   "honoredCount": 54118,
+   "failedCount": 160,
+   "diversityBps": 6551,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "576707312000000000000",
+   "honoredCount": 97519,
+   "failedCount": 830,
+   "diversityBps": 6971,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "90522635000000000000",
+   "honoredCount": 42669,
+   "failedCount": 865,
+   "diversityBps": 7938,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "388681527000000000000",
+   "honoredCount": 35517,
+   "failedCount": 179,
+   "diversityBps": 9978,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "555743765",
+   "honoredCount": 62781,
+   "failedCount": 170,
+   "diversityBps": 5034,
+   "expected": "277"
+  },
+  {
+   "honoredValueUsd6": "789593013000000000",
+   "honoredCount": 54681,
+   "failedCount": 605,
+   "diversityBps": 2073,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "460931488000",
+   "honoredCount": 22203,
+   "failedCount": 296,
+   "diversityBps": 163,
+   "expected": "7224"
+  },
+  {
+   "honoredValueUsd6": "758955565000000000000",
+   "honoredCount": 74836,
+   "failedCount": 953,
+   "diversityBps": 6977,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "967580089000000000000",
+   "honoredCount": 48389,
+   "failedCount": 158,
+   "diversityBps": 6507,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "183682918041684302583498903058957467648",
+   "honoredCount": 36309,
+   "failedCount": 911,
+   "diversityBps": 2532,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "189002556000000",
+   "honoredCount": 71719,
+   "failedCount": 637,
+   "diversityBps": 7171,
+   "expected": "132016077"
+  },
+  {
+   "honoredValueUsd6": "162842286000000",
+   "honoredCount": 29342,
+   "failedCount": 889,
+   "diversityBps": 5842,
+   "expected": "87205996"
+  },
+  {
+   "honoredValueUsd6": "6256320939896595856576579608606932993",
+   "honoredCount": 80620,
+   "failedCount": 380,
+   "diversityBps": 5997,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "872129146000000000000",
+   "honoredCount": 360,
+   "failedCount": 592,
+   "diversityBps": 1913,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "845291766000000000",
+   "honoredCount": 51381,
+   "failedCount": 420,
+   "diversityBps": 1102,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "777765407000000",
+   "honoredCount": 20053,
+   "failedCount": 531,
+   "diversityBps": 637,
+   "expected": "45897576"
+  },
+  {
+   "honoredValueUsd6": "735728550000",
+   "honoredCount": 80153,
+   "failedCount": 645,
+   "diversityBps": 9708,
+   "expected": "697408"
+  },
+  {
+   "honoredValueUsd6": "279503596",
+   "honoredCount": 96000,
+   "failedCount": 906,
+   "diversityBps": 8909,
+   "expected": "241"
+  },
+  {
+   "honoredValueUsd6": "423240937",
+   "honoredCount": 35760,
+   "failedCount": 454,
+   "diversityBps": 2578,
+   "expected": "105"
+  },
+  {
+   "honoredValueUsd6": "554849356",
+   "honoredCount": 86105,
+   "failedCount": 375,
+   "diversityBps": 7483,
+   "expected": "409"
+  },
+  {
+   "honoredValueUsd6": "985494763000000000000",
+   "honoredCount": 90704,
+   "failedCount": 518,
+   "diversityBps": 1668,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "202714416371283757375196215105424457729",
+   "honoredCount": 74667,
+   "failedCount": 423,
+   "diversityBps": 6227,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "181279835000000",
+   "honoredCount": 5429,
+   "failedCount": 326,
+   "diversityBps": 3240,
+   "expected": "49769081"
+  },
+  {
+   "honoredValueUsd6": "159410000000000000000",
+   "honoredCount": 16761,
+   "failedCount": 255,
+   "diversityBps": 2438,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "612377075",
+   "honoredCount": 18724,
+   "failedCount": 830,
+   "diversityBps": 4089,
+   "expected": "220"
+  },
+  {
+   "honoredValueUsd6": "687352075000",
+   "honoredCount": 94988,
+   "failedCount": 642,
+   "diversityBps": 5504,
+   "expected": "370800"
+  },
+  {
+   "honoredValueUsd6": "314029785000000000000",
+   "honoredCount": 66412,
+   "failedCount": 23,
+   "diversityBps": 8664,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "17890678000000",
+   "honoredCount": 71806,
+   "failedCount": 709,
+   "diversityBps": 3011,
+   "expected": "5231906"
+  },
+  {
+   "honoredValueUsd6": "655000488000000000000",
+   "honoredCount": 92342,
+   "failedCount": 179,
+   "diversityBps": 2852,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "932329603000",
+   "honoredCount": 16851,
+   "failedCount": 684,
+   "diversityBps": 9016,
+   "expected": "749338"
+  },
+  {
+   "honoredValueUsd6": "655733845000000000000",
+   "honoredCount": 61513,
+   "failedCount": 1,
+   "diversityBps": 4272,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "361868548000000",
+   "honoredCount": 48127,
+   "failedCount": 852,
+   "diversityBps": 283,
+   "expected": "9724420"
+  },
+  {
+   "honoredValueUsd6": "818497724000",
+   "honoredCount": 16110,
+   "failedCount": 393,
+   "diversityBps": 2034,
+   "expected": "155129"
+  },
+  {
+   "honoredValueUsd6": "407128648000",
+   "honoredCount": 4949,
+   "failedCount": 719,
+   "diversityBps": 1488,
+   "expected": "42191"
+  },
+  {
+   "honoredValueUsd6": "869038548000000000000",
+   "honoredCount": 62609,
+   "failedCount": 272,
+   "diversityBps": 9443,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "409756246000000000",
+   "honoredCount": 75302,
+   "failedCount": 526,
+   "diversityBps": 1209,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "497763623",
+   "honoredCount": 23105,
+   "failedCount": 148,
+   "diversityBps": 3868,
+   "expected": "188"
+  },
+  {
+   "honoredValueUsd6": "307849109257051739138608363506868682753",
+   "honoredCount": 87114,
+   "failedCount": 27,
+   "diversityBps": 7769,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "822252200000",
+   "honoredCount": 57963,
+   "failedCount": 353,
+   "diversityBps": 7429,
+   "expected": "599890"
+  },
+  {
+   "honoredValueUsd6": "76823865",
+   "honoredCount": 48006,
+   "failedCount": 728,
+   "diversityBps": 3112,
+   "expected": "22"
+  },
+  {
+   "honoredValueUsd6": "934498594000",
+   "honoredCount": 50964,
+   "failedCount": 193,
+   "diversityBps": 3049,
+   "expected": "281727"
+  },
+  {
+   "honoredValueUsd6": "38115111043024892322319555058410192896",
+   "honoredCount": 37748,
+   "failedCount": 803,
+   "diversityBps": 4648,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "137165807411491303733994585684986298368",
+   "honoredCount": 73612,
+   "failedCount": 137,
+   "diversityBps": 1273,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "854166230000",
+   "honoredCount": 28036,
+   "failedCount": 593,
+   "diversityBps": 4906,
+   "expected": "394049"
+  },
+  {
+   "honoredValueUsd6": "86166142000000000000",
+   "honoredCount": 93400,
+   "failedCount": 897,
+   "diversityBps": 6795,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "572521638000000000",
+   "honoredCount": 81654,
+   "failedCount": 130,
+   "diversityBps": 7622,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "907834182000",
+   "honoredCount": 92907,
+   "failedCount": 32,
+   "diversityBps": 8370,
+   "expected": "759072"
+  },
+  {
+   "honoredValueUsd6": "266675140836218326303495044156744531970",
+   "honoredCount": 73795,
+   "failedCount": 446,
+   "diversityBps": 2082,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "34989442000000000000",
+   "honoredCount": 3775,
+   "failedCount": 49,
+   "diversityBps": 4561,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "233157297",
+   "honoredCount": 38607,
+   "failedCount": 740,
+   "diversityBps": 5853,
+   "expected": "128"
+  },
+  {
+   "honoredValueUsd6": "651624575000",
+   "honoredCount": 63258,
+   "failedCount": 923,
+   "diversityBps": 8812,
+   "expected": "550130"
+  },
+  {
+   "honoredValueUsd6": "185284428512844040534238391490830139393",
+   "honoredCount": 80010,
+   "failedCount": 682,
+   "diversityBps": 4983,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "15111990000",
+   "honoredCount": 52283,
+   "failedCount": 143,
+   "diversityBps": 3828,
+   "expected": "5737"
+  },
+  {
+   "honoredValueUsd6": "742885990000000000",
+   "honoredCount": 53946,
+   "failedCount": 459,
+   "diversityBps": 1142,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "182020579",
+   "honoredCount": 4148,
+   "failedCount": 815,
+   "diversityBps": 5207,
+   "expected": "59"
+  },
+  {
+   "honoredValueUsd6": "897442885000",
+   "honoredCount": 35534,
+   "failedCount": 505,
+   "diversityBps": 2394,
+   "expected": "206062"
+  },
+  {
+   "honoredValueUsd6": "386047309",
+   "honoredCount": 63313,
+   "failedCount": 574,
+   "diversityBps": 848,
+   "expected": "31"
+  },
+  {
+   "honoredValueUsd6": "624844096000",
+   "honoredCount": 85518,
+   "failedCount": 481,
+   "diversityBps": 9160,
+   "expected": "562859"
+  },
+  {
+   "honoredValueUsd6": "369943568",
+   "honoredCount": 55478,
+   "failedCount": 209,
+   "diversityBps": 4095,
+   "expected": "149"
+  },
+  {
+   "honoredValueUsd6": "55458235679385170199998620079262531586",
+   "honoredCount": 32014,
+   "failedCount": 764,
+   "diversityBps": 5003,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "130542712000000000",
+   "honoredCount": 84539,
+   "failedCount": 465,
+   "diversityBps": 7777,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "153035142445267238686052561108720418816",
+   "honoredCount": 42287,
+   "failedCount": 851,
+   "diversityBps": 3742,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "388534306",
+   "honoredCount": 30306,
+   "failedCount": 553,
+   "diversityBps": 1642,
+   "expected": "60"
+  },
+  {
+   "honoredValueUsd6": "275693411000000",
+   "honoredCount": 81257,
+   "failedCount": 438,
+   "diversityBps": 5726,
+   "expected": "155349897"
+  },
+  {
+   "honoredValueUsd6": "704982146000000",
+   "honoredCount": 64328,
+   "failedCount": 77,
+   "diversityBps": 86,
+   "expected": "6041152"
+  },
+  {
+   "honoredValueUsd6": "903234684000",
+   "honoredCount": 94907,
+   "failedCount": 815,
+   "diversityBps": 7530,
+   "expected": "663053"
+  },
+  {
+   "honoredValueUsd6": "123275454971056867286247976496699277312",
+   "honoredCount": 61047,
+   "failedCount": 339,
+   "diversityBps": 8749,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "566707622000000",
+   "honoredCount": 24101,
+   "failedCount": 503,
+   "diversityBps": 6465,
+   "expected": "344788734"
+  },
+  {
+   "honoredValueUsd6": "320453074000",
+   "honoredCount": 38994,
+   "failedCount": 988,
+   "diversityBps": 667,
+   "expected": "19864"
+  },
+  {
+   "honoredValueUsd6": "840328502000",
+   "honoredCount": 3586,
+   "failedCount": 907,
+   "diversityBps": 4710,
+   "expected": "225038"
+  },
+  {
+   "honoredValueUsd6": "239421033000",
+   "honoredCount": 53190,
+   "failedCount": 682,
+   "diversityBps": 3244,
+   "expected": "74791"
+  },
+  {
+   "honoredValueUsd6": "809270602000000000",
+   "honoredCount": 38594,
+   "failedCount": 218,
+   "diversityBps": 3302,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "982602441000000000000",
+   "honoredCount": 56492,
+   "failedCount": 526,
+   "diversityBps": 9528,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "326799597000000000000",
+   "honoredCount": 33547,
+   "failedCount": 924,
+   "diversityBps": 4179,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "406451462000",
+   "honoredCount": 85596,
+   "failedCount": 453,
+   "diversityBps": 9318,
+   "expected": "372811"
+  },
+  {
+   "honoredValueUsd6": "196675217358543652422278589325131120641",
+   "honoredCount": 80315,
+   "failedCount": 81,
+   "diversityBps": 4680,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "868406689000",
+   "honoredCount": 88089,
+   "failedCount": 124,
+   "diversityBps": 488,
+   "expected": "42200"
+  },
+  {
+   "honoredValueUsd6": "948898513",
+   "honoredCount": 53397,
+   "failedCount": 193,
+   "diversityBps": 3871,
+   "expected": "363"
+  },
+  {
+   "honoredValueUsd6": "971689808000000000000",
+   "honoredCount": 21442,
+   "failedCount": 294,
+   "diversityBps": 6837,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "131343507219402049516361250313242411009",
+   "honoredCount": 12623,
+   "failedCount": 982,
+   "diversityBps": 9586,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "867980841000",
+   "honoredCount": 4595,
+   "failedCount": 575,
+   "diversityBps": 8800,
+   "expected": "555342"
+  },
+  {
+   "honoredValueUsd6": "497576264",
+   "honoredCount": 36723,
+   "failedCount": 737,
+   "diversityBps": 9554,
+   "expected": "447"
+  },
+  {
+   "honoredValueUsd6": "447193615000000000000",
+   "honoredCount": 18869,
+   "failedCount": 96,
+   "diversityBps": 5724,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "962044343000000000",
+   "honoredCount": 9668,
+   "failedCount": 315,
+   "diversityBps": 5279,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "369551644000000",
+   "honoredCount": 18700,
+   "failedCount": 380,
+   "diversityBps": 6053,
+   "expected": "210836477"
+  },
+  {
+   "honoredValueUsd6": "595986774000",
+   "honoredCount": 12215,
+   "failedCount": 265,
+   "diversityBps": 3874,
+   "expected": "216776"
+  },
+  {
+   "honoredValueUsd6": "966453683000",
+   "honoredCount": 55408,
+   "failedCount": 770,
+   "diversityBps": 3024,
+   "expected": "280558"
+  },
+  {
+   "honoredValueUsd6": "364568368000000",
+   "honoredCount": 39969,
+   "failedCount": 59,
+   "diversityBps": 6594,
+   "expected": "239336496"
+  },
+  {
+   "honoredValueUsd6": "615719778000000000000",
+   "honoredCount": 19992,
+   "failedCount": 646,
+   "diversityBps": 1332,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "456872134000000000000",
+   "honoredCount": 32647,
+   "failedCount": 107,
+   "diversityBps": 3921,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "846222685000",
+   "honoredCount": 5228,
+   "failedCount": 382,
+   "diversityBps": 2849,
+   "expected": "197742"
+  },
+  {
+   "honoredValueUsd6": "489277960000000000000",
+   "honoredCount": 63365,
+   "failedCount": 104,
+   "diversityBps": 1340,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "209136123000000000",
+   "honoredCount": 54209,
+   "failedCount": 229,
+   "diversityBps": 9983,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "535455666",
+   "honoredCount": 58009,
+   "failedCount": 492,
+   "diversityBps": 8102,
+   "expected": "422"
+  },
+  {
+   "honoredValueUsd6": "430570340000000000000",
+   "honoredCount": 33283,
+   "failedCount": 983,
+   "diversityBps": 1829,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "106629672000000000",
+   "honoredCount": 99161,
+   "failedCount": 323,
+   "diversityBps": 8841,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "595717094",
+   "honoredCount": 23296,
+   "failedCount": 87,
+   "diversityBps": 3909,
+   "expected": "230"
+  },
+  {
+   "honoredValueUsd6": "93467803000000",
+   "honoredCount": 73119,
+   "failedCount": 800,
+   "diversityBps": 5598,
+   "expected": "50660438"
+  },
+  {
+   "honoredValueUsd6": "670290153000000",
+   "honoredCount": 95416,
+   "failedCount": 722,
+   "diversityBps": 5241,
+   "expected": "343501383"
+  },
+  {
+   "honoredValueUsd6": "357704598000000000000",
+   "honoredCount": 48281,
+   "failedCount": 176,
+   "diversityBps": 1140,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "603524033000000000",
+   "honoredCount": 7822,
+   "failedCount": 39,
+   "diversityBps": 9827,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "939929778000000000",
+   "honoredCount": 85016,
+   "failedCount": 701,
+   "diversityBps": 4203,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "140782715000000000",
+   "honoredCount": 58484,
+   "failedCount": 51,
+   "diversityBps": 1468,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "42355348000",
+   "honoredCount": 77229,
+   "failedCount": 842,
+   "diversityBps": 8901,
+   "expected": "36506"
+  },
+  {
+   "honoredValueUsd6": "365431668000000000000",
+   "honoredCount": 38325,
+   "failedCount": 380,
+   "diversityBps": 4341,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "864320132000000000",
+   "honoredCount": 70447,
+   "failedCount": 289,
+   "diversityBps": 4795,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "451540565000000000",
+   "honoredCount": 79560,
+   "failedCount": 117,
+   "diversityBps": 4946,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "326298331000000",
+   "honoredCount": 96687,
+   "failedCount": 156,
+   "diversityBps": 6537,
+   "expected": "212273737"
+  },
+  {
+   "honoredValueUsd6": "203710629",
+   "honoredCount": 67142,
+   "failedCount": 68,
+   "diversityBps": 7296,
+   "expected": "147"
+  },
+  {
+   "honoredValueUsd6": "328719005193126181337532254409900163073",
+   "honoredCount": 68776,
+   "failedCount": 634,
+   "diversityBps": 3256,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "317368522565911426231542045750717317120",
+   "honoredCount": 8288,
+   "failedCount": 663,
+   "diversityBps": 245,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "757776356000000000000",
+   "honoredCount": 92554,
+   "failedCount": 859,
+   "diversityBps": 3602,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "304649036000",
+   "honoredCount": 17295,
+   "failedCount": 418,
+   "diversityBps": 7267,
+   "expected": "206421"
+  },
+  {
+   "honoredValueUsd6": "827765380000000000000",
+   "honoredCount": 40604,
+   "failedCount": 368,
+   "diversityBps": 3093,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "8831343971911206227865885214299389953",
+   "honoredCount": 1433,
+   "failedCount": 11,
+   "diversityBps": 2464,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "734416536000000000000",
+   "honoredCount": 92229,
+   "failedCount": 939,
+   "diversityBps": 1972,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "331285446230577246595773427334892224512",
+   "honoredCount": 9987,
+   "failedCount": 522,
+   "diversityBps": 5628,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "2421794000000",
+   "honoredCount": 37426,
+   "failedCount": 213,
+   "diversityBps": 4555,
+   "expected": "1084608"
+  },
+  {
+   "honoredValueUsd6": "158236374000000000",
+   "honoredCount": 63713,
+   "failedCount": 966,
+   "diversityBps": 1566,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "810908519000",
+   "honoredCount": 73975,
+   "failedCount": 65,
+   "diversityBps": 844,
+   "expected": "68260"
+  },
+  {
+   "honoredValueUsd6": "812747021000000",
+   "honoredCount": 97270,
+   "failedCount": 841,
+   "diversityBps": 8083,
+   "expected": "640334353"
+  },
+  {
+   "honoredValueUsd6": "989222324",
+   "honoredCount": 52645,
+   "failedCount": 576,
+   "diversityBps": 8535,
+   "expected": "817"
+  },
+  {
+   "honoredValueUsd6": "159307070699353844503020368127191941123",
+   "honoredCount": 53956,
+   "failedCount": 706,
+   "diversityBps": 834,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "488128015",
+   "honoredCount": 52152,
+   "failedCount": 384,
+   "diversityBps": 4099,
+   "expected": "195"
+  },
+  {
+   "honoredValueUsd6": "357211383000000000",
+   "honoredCount": 51461,
+   "failedCount": 671,
+   "diversityBps": 5077,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "804578036000",
+   "honoredCount": 49233,
+   "failedCount": 621,
+   "diversityBps": 6014,
+   "expected": "466230"
+  },
+  {
+   "honoredValueUsd6": "440655424000000",
+   "honoredCount": 20652,
+   "failedCount": 4,
+   "diversityBps": 2089,
+   "expected": "91999461"
+  },
+  {
+   "honoredValueUsd6": "374330650000000",
+   "honoredCount": 96139,
+   "failedCount": 204,
+   "diversityBps": 7037,
+   "expected": "261750233"
+  },
+  {
+   "honoredValueUsd6": "68461358",
+   "honoredCount": 87851,
+   "failedCount": 440,
+   "diversityBps": 4990,
+   "expected": "33"
+  },
+  {
+   "honoredValueUsd6": "959395387000000000000",
+   "honoredCount": 84373,
+   "failedCount": 433,
+   "diversityBps": 6355,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "123934049000000000000",
+   "honoredCount": 55963,
+   "failedCount": 339,
+   "diversityBps": 2838,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "859041120000000000",
+   "honoredCount": 65776,
+   "failedCount": 313,
+   "diversityBps": 2038,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "692313414000000000000",
+   "honoredCount": 22278,
+   "failedCount": 36,
+   "diversityBps": 6522,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "176422419000000000000",
+   "honoredCount": 76387,
+   "failedCount": 195,
+   "diversityBps": 207,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "50706788402441113682197230727072841731",
+   "honoredCount": 82254,
+   "failedCount": 739,
+   "diversityBps": 2993,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "690262672000000000000",
+   "honoredCount": 71099,
+   "failedCount": 973,
+   "diversityBps": 5168,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "352151313000",
+   "honoredCount": 90127,
+   "failedCount": 618,
+   "diversityBps": 9171,
+   "expected": "316448"
+  },
+  {
+   "honoredValueUsd6": "924977760000000000",
+   "honoredCount": 84252,
+   "failedCount": 488,
+   "diversityBps": 5320,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "272575292522269997001591898059143380994",
+   "honoredCount": 10203,
+   "failedCount": 428,
+   "diversityBps": 1335,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "95631880",
+   "honoredCount": 89226,
+   "failedCount": 825,
+   "diversityBps": 8257,
+   "expected": "76"
+  },
+  {
+   "honoredValueUsd6": "941321125000",
+   "honoredCount": 78324,
+   "failedCount": 626,
+   "diversityBps": 3211,
+   "expected": "295180"
+  },
+  {
+   "honoredValueUsd6": "538687441000000000000",
+   "honoredCount": 95040,
+   "failedCount": 131,
+   "diversityBps": 6029,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "347969594000000000",
+   "honoredCount": 32559,
+   "failedCount": 613,
+   "diversityBps": 4368,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "88365760729985882218976227071092588545",
+   "honoredCount": 96169,
+   "failedCount": 250,
+   "diversityBps": 3494,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "930565315",
+   "honoredCount": 46867,
+   "failedCount": 914,
+   "diversityBps": 3090,
+   "expected": "271"
+  },
+  {
+   "honoredValueUsd6": "931854528000",
+   "honoredCount": 39568,
+   "failedCount": 181,
+   "diversityBps": 9709,
+   "expected": "892489"
+  },
+  {
+   "honoredValueUsd6": "242329307000000000",
+   "honoredCount": 42602,
+   "failedCount": 971,
+   "diversityBps": 2717,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "52944385662385773494937340880151904259",
+   "honoredCount": 96407,
+   "failedCount": 926,
+   "diversityBps": 66,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "167012932353503017484996806897301454850",
+   "honoredCount": 41486,
+   "failedCount": 250,
+   "diversityBps": 621,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "180086559000000000",
+   "honoredCount": 81593,
+   "failedCount": 1,
+   "diversityBps": 5975,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "271650878000000000000",
+   "honoredCount": 91379,
+   "failedCount": 689,
+   "diversityBps": 2739,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "58660471945983104827478070483723747329",
+   "honoredCount": 58024,
+   "failedCount": 621,
+   "diversityBps": 4858,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "298748640527410879352345925208661557249",
+   "honoredCount": 23967,
+   "failedCount": 593,
+   "diversityBps": 6921,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "269211391506974356050310171598197358593",
+   "honoredCount": 50848,
+   "failedCount": 518,
+   "diversityBps": 6904,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "952943327000000000000",
+   "honoredCount": 22767,
+   "failedCount": 113,
+   "diversityBps": 3491,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "399557607000000000000",
+   "honoredCount": 86227,
+   "failedCount": 464,
+   "diversityBps": 1763,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "306824157000000000",
+   "honoredCount": 71718,
+   "failedCount": 885,
+   "diversityBps": 4447,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "259267308000000",
+   "honoredCount": 15238,
+   "failedCount": 82,
+   "diversityBps": 9059,
+   "expected": "231138784"
+  },
+  {
+   "honoredValueUsd6": "468228033000000",
+   "honoredCount": 50432,
+   "failedCount": 347,
+   "diversityBps": 1712,
+   "expected": "78539454"
+  },
+  {
+   "honoredValueUsd6": "926574665000000",
+   "honoredCount": 93052,
+   "failedCount": 230,
+   "diversityBps": 6629,
+   "expected": "609705253"
+  },
+  {
+   "honoredValueUsd6": "216598726000",
+   "honoredCount": 23142,
+   "failedCount": 294,
+   "diversityBps": 3094,
+   "expected": "64555"
+  },
+  {
+   "honoredValueUsd6": "435709820",
+   "honoredCount": 12519,
+   "failedCount": 553,
+   "diversityBps": 615,
+   "expected": "23"
+  },
+  {
+   "honoredValueUsd6": "634570475",
+   "honoredCount": 65746,
+   "failedCount": 376,
+   "diversityBps": 9988,
+   "expected": "622"
+  },
+  {
+   "honoredValueUsd6": "725136134000000000",
+   "honoredCount": 46080,
+   "failedCount": 387,
+   "diversityBps": 7370,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "697783131000000000",
+   "honoredCount": 70361,
+   "failedCount": 107,
+   "diversityBps": 6714,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "119264433000000000",
+   "honoredCount": 86744,
+   "failedCount": 503,
+   "diversityBps": 9342,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "562588528",
+   "honoredCount": 90723,
+   "failedCount": 542,
+   "diversityBps": 5737,
+   "expected": "316"
+  },
+  {
+   "honoredValueUsd6": "287587694482641048650008700619340120065",
+   "honoredCount": 3958,
+   "failedCount": 935,
+   "diversityBps": 1270,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "227551417",
+   "honoredCount": 25877,
+   "failedCount": 746,
+   "diversityBps": 8979,
+   "expected": "187"
+  },
+  {
+   "honoredValueUsd6": "244246113000000000",
+   "honoredCount": 99827,
+   "failedCount": 693,
+   "diversityBps": 9735,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "956562331000000000",
+   "honoredCount": 15037,
+   "failedCount": 450,
+   "diversityBps": 1190,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "343035688000000000000",
+   "honoredCount": 71567,
+   "failedCount": 300,
+   "diversityBps": 4024,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "196106343000000",
+   "honoredCount": 14714,
+   "failedCount": 585,
+   "diversityBps": 15,
+   "expected": "262812"
+  },
+  {
+   "honoredValueUsd6": "914453011000000",
+   "honoredCount": 13498,
+   "failedCount": 193,
+   "diversityBps": 92,
+   "expected": "8066934"
+  },
+  {
+   "honoredValueUsd6": "259270708000",
+   "honoredCount": 81181,
+   "failedCount": 629,
+   "diversityBps": 7008,
+   "expected": "177568"
+  },
+  {
+   "honoredValueUsd6": "88334771743412702923027238664533966851",
+   "honoredCount": 32611,
+   "failedCount": 781,
+   "diversityBps": 7530,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "846925969",
+   "honoredCount": 68617,
+   "failedCount": 542,
+   "diversityBps": 7676,
+   "expected": "634"
+  },
+  {
+   "honoredValueUsd6": "471098592000000000000",
+   "honoredCount": 61998,
+   "failedCount": 805,
+   "diversityBps": 2796,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "94679162000000",
+   "honoredCount": 6842,
+   "failedCount": 542,
+   "diversityBps": 4696,
+   "expected": "35924002"
+  },
+  {
+   "honoredValueUsd6": "993492551000",
+   "honoredCount": 42476,
+   "failedCount": 348,
+   "diversityBps": 5976,
+   "expected": "579468"
+  },
+  {
+   "honoredValueUsd6": "84601535655138166422701841737888825345",
+   "honoredCount": 23856,
+   "failedCount": 638,
+   "diversityBps": 9883,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "550001575000000000000",
+   "honoredCount": 60793,
+   "failedCount": 657,
+   "diversityBps": 3579,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "711604421000000000",
+   "honoredCount": 58536,
+   "failedCount": 745,
+   "diversityBps": 5481,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "782346107000000000",
+   "honoredCount": 89148,
+   "failedCount": 778,
+   "diversityBps": 2254,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "232400988000000000000",
+   "honoredCount": 49216,
+   "failedCount": 976,
+   "diversityBps": 6948,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "643658689000",
+   "honoredCount": 21652,
+   "failedCount": 141,
+   "diversityBps": 8086,
+   "expected": "510488"
+  },
+  {
+   "honoredValueUsd6": "143301686332559015058676160528644046849",
+   "honoredCount": 15580,
+   "failedCount": 300,
+   "diversityBps": 5792,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "124079430",
+   "honoredCount": 55008,
+   "failedCount": 405,
+   "diversityBps": 9221,
+   "expected": "111"
+  },
+  {
+   "honoredValueUsd6": "70551232329617532217303780035850665984",
+   "honoredCount": 55714,
+   "failedCount": 853,
+   "diversityBps": 5263,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "933825240",
+   "honoredCount": 69368,
+   "failedCount": 548,
+   "diversityBps": 6471,
+   "expected": "589"
+  },
+  {
+   "honoredValueUsd6": "953351645000",
+   "honoredCount": 88456,
+   "failedCount": 757,
+   "diversityBps": 2016,
+   "expected": "187384"
+  },
+  {
+   "honoredValueUsd6": "169812787163624706851164969280202604547",
+   "honoredCount": 37325,
+   "failedCount": 4,
+   "diversityBps": 2838,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "649137988000000000",
+   "honoredCount": 64629,
+   "failedCount": 944,
+   "diversityBps": 6272,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "410228484000",
+   "honoredCount": 80468,
+   "failedCount": 75,
+   "diversityBps": 9355,
+   "expected": "382698"
+  },
+  {
+   "honoredValueUsd6": "19216034000",
+   "honoredCount": 80638,
+   "failedCount": 284,
+   "diversityBps": 9670,
+   "expected": "18387"
+  },
+  {
+   "honoredValueUsd6": "188533585000",
+   "honoredCount": 10250,
+   "failedCount": 571,
+   "diversityBps": 6750,
+   "expected": "109037"
+  },
+  {
+   "honoredValueUsd6": "496520098000000",
+   "honoredCount": 35385,
+   "failedCount": 771,
+   "diversityBps": 7140,
+   "expected": "332763691"
+  },
+  {
+   "honoredValueUsd6": "541038828000",
+   "honoredCount": 89197,
+   "failedCount": 66,
+   "diversityBps": 878,
+   "expected": "47397"
+  },
+  {
+   "honoredValueUsd6": "392847114000000000",
+   "honoredCount": 7929,
+   "failedCount": 774,
+   "diversityBps": 4654,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "27908337",
+   "honoredCount": 36121,
+   "failedCount": 8,
+   "diversityBps": 280,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "292047017",
+   "honoredCount": 79862,
+   "failedCount": 908,
+   "diversityBps": 2009,
+   "expected": "56"
+  },
+  {
+   "honoredValueUsd6": "10723825000000",
+   "honoredCount": 31100,
+   "failedCount": 650,
+   "diversityBps": 7175,
+   "expected": "7240366"
+  },
+  {
+   "honoredValueUsd6": "855215696",
+   "honoredCount": 14386,
+   "failedCount": 12,
+   "diversityBps": 6751,
+   "expected": "575"
+  },
+  {
+   "honoredValueUsd6": "758084950000",
+   "honoredCount": 58907,
+   "failedCount": 992,
+   "diversityBps": 4432,
+   "expected": "319825"
+  },
+  {
+   "honoredValueUsd6": "101569222748530050054998431163811364865",
+   "honoredCount": 14703,
+   "failedCount": 624,
+   "diversityBps": 5268,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "290909994000000000000",
+   "honoredCount": 19526,
+   "failedCount": 157,
+   "diversityBps": 1012,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "128290653434836209898012974407909113857",
+   "honoredCount": 48894,
+   "failedCount": 217,
+   "diversityBps": 8002,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "458281575000000",
+   "honoredCount": 37586,
+   "failedCount": 531,
+   "diversityBps": 2881,
+   "expected": "126662605"
+  },
+  {
+   "honoredValueUsd6": "670552287000000000000",
+   "honoredCount": 28161,
+   "failedCount": 919,
+   "diversityBps": 713,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "59877452000000000000",
+   "honoredCount": 75336,
+   "failedCount": 943,
+   "diversityBps": 5906,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "219780825000000",
+   "honoredCount": 91431,
+   "failedCount": 559,
+   "diversityBps": 1146,
+   "expected": "24733232"
+  },
+  {
+   "honoredValueUsd6": "445284262000",
+   "honoredCount": 2277,
+   "failedCount": 983,
+   "diversityBps": 7519,
+   "expected": "145878"
+  },
+  {
+   "honoredValueUsd6": "296030495939678701196939437320972533762",
+   "honoredCount": 63065,
+   "failedCount": 149,
+   "diversityBps": 3041,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "736312350000000000",
+   "honoredCount": 55165,
+   "failedCount": 537,
+   "diversityBps": 5470,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "773629230",
+   "honoredCount": 43126,
+   "failedCount": 453,
+   "diversityBps": 5757,
+   "expected": "431"
+  },
+  {
+   "honoredValueUsd6": "181282043581478446139157813042916360195",
+   "honoredCount": 40944,
+   "failedCount": 543,
+   "diversityBps": 559,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "555857790000000000",
+   "honoredCount": 42463,
+   "failedCount": 707,
+   "diversityBps": 550,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "642942130000000000",
+   "honoredCount": 48517,
+   "failedCount": 233,
+   "diversityBps": 6296,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "826574521000000",
+   "honoredCount": 19125,
+   "failedCount": 730,
+   "diversityBps": 2240,
+   "expected": "166129263"
+  },
+  {
+   "honoredValueUsd6": "640331180000",
+   "honoredCount": 49473,
+   "failedCount": 471,
+   "diversityBps": 7767,
+   "expected": "483534"
+  },
+  {
+   "honoredValueUsd6": "78218523178953560863280878617530204163",
+   "honoredCount": 89497,
+   "failedCount": 450,
+   "diversityBps": 474,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "565678589000",
+   "honoredCount": 39027,
+   "failedCount": 519,
+   "diversityBps": 5141,
+   "expected": "279657"
+  },
+  {
+   "honoredValueUsd6": "726714737000000",
+   "honoredCount": 8369,
+   "failedCount": 996,
+   "diversityBps": 6354,
+   "expected": "340268008"
+  },
+  {
+   "honoredValueUsd6": "916430088000",
+   "honoredCount": 2944,
+   "failedCount": 583,
+   "diversityBps": 9792,
+   "expected": "562934"
+  },
+  {
+   "honoredValueUsd6": "490712933",
+   "honoredCount": 18088,
+   "failedCount": 830,
+   "diversityBps": 850,
+   "expected": "36"
+  },
+  {
+   "honoredValueUsd6": "723893763000000",
+   "honoredCount": 50197,
+   "failedCount": 994,
+   "diversityBps": 3700,
+   "expected": "252821588"
+  },
+  {
+   "honoredValueUsd6": "735512327000",
+   "honoredCount": 89322,
+   "failedCount": 779,
+   "diversityBps": 9396,
+   "expected": "673466"
+  },
+  {
+   "honoredValueUsd6": "59902418",
+   "honoredCount": 30906,
+   "failedCount": 745,
+   "diversityBps": 1198,
+   "expected": "6"
+  },
+  {
+   "honoredValueUsd6": "730736230000000000",
+   "honoredCount": 95975,
+   "failedCount": 936,
+   "diversityBps": 5321,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "417453611000000000000",
+   "honoredCount": 20914,
+   "failedCount": 653,
+   "diversityBps": 6749,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "326927454000000",
+   "honoredCount": 15717,
+   "failedCount": 262,
+   "diversityBps": 1727,
+   "expected": "53771293"
+  },
+  {
+   "honoredValueUsd6": "686640818000000000",
+   "honoredCount": 4465,
+   "failedCount": 422,
+   "diversityBps": 9177,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "861678154000",
+   "honoredCount": 6686,
+   "failedCount": 890,
+   "diversityBps": 9787,
+   "expected": "602657"
+  },
+  {
+   "honoredValueUsd6": "866134527000",
+   "honoredCount": 81062,
+   "failedCount": 687,
+   "diversityBps": 1935,
+   "expected": "163441"
+  },
+  {
+   "honoredValueUsd6": "378152853000000000",
+   "honoredCount": 11389,
+   "failedCount": 709,
+   "diversityBps": 9784,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "108479863000000",
+   "honoredCount": 68008,
+   "failedCount": 518,
+   "diversityBps": 6479,
+   "expected": "68713971"
+  },
+  {
+   "honoredValueUsd6": "56788967108781956752972602229544452096",
+   "honoredCount": 61995,
+   "failedCount": 312,
+   "diversityBps": 2310,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "7047649000000",
+   "honoredCount": 22558,
+   "failedCount": 186,
+   "diversityBps": 2007,
+   "expected": "1380319"
+  },
+  {
+   "honoredValueUsd6": "455075259000000000000",
+   "honoredCount": 38247,
+   "failedCount": 895,
+   "diversityBps": 9215,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "506108648000000000",
+   "honoredCount": 73361,
+   "failedCount": 33,
+   "diversityBps": 5631,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "336504316848644658597247499053406617601",
+   "honoredCount": 41431,
+   "failedCount": 803,
+   "diversityBps": 173,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "265695994",
+   "honoredCount": 86090,
+   "failedCount": 379,
+   "diversityBps": 2746,
+   "expected": "71"
+  },
+  {
+   "honoredValueUsd6": "645588398",
+   "honoredCount": 26460,
+   "failedCount": 121,
+   "diversityBps": 9345,
+   "expected": "594"
+  },
+  {
+   "honoredValueUsd6": "66144364177080514156564232032462307328",
+   "honoredCount": 99209,
+   "failedCount": 310,
+   "diversityBps": 3918,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "316045312107525793763607143540552892416",
+   "honoredCount": 60396,
+   "failedCount": 636,
+   "diversityBps": 509,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "566289393000000000",
+   "honoredCount": 8911,
+   "failedCount": 325,
+   "diversityBps": 2404,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "643882532000000000",
+   "honoredCount": 80903,
+   "failedCount": 650,
+   "diversityBps": 6569,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "375232213000000",
+   "honoredCount": 63570,
+   "failedCount": 872,
+   "diversityBps": 1205,
+   "expected": "43428340"
+  },
+  {
+   "honoredValueUsd6": "48329522000",
+   "honoredCount": 93467,
+   "failedCount": 140,
+   "diversityBps": 3391,
+   "expected": "16315"
+  },
+  {
+   "honoredValueUsd6": "96942252000000",
+   "honoredCount": 3965,
+   "failedCount": 160,
+   "diversityBps": 906,
+   "expected": "7834526"
+  },
+  {
+   "honoredValueUsd6": "38835579000000000",
+   "honoredCount": 2947,
+   "failedCount": 630,
+   "diversityBps": 6870,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "5075553000000000",
+   "honoredCount": 62164,
+   "failedCount": 131,
+   "diversityBps": 5102,
+   "expected": "2573278904"
+  },
+  {
+   "honoredValueUsd6": "1754106447463411521403457073626218497",
+   "honoredCount": 4427,
+   "failedCount": 438,
+   "diversityBps": 8814,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "595379114000000000",
+   "honoredCount": 65682,
+   "failedCount": 322,
+   "diversityBps": 9616,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "9630783",
+   "honoredCount": 91629,
+   "failedCount": 841,
+   "diversityBps": 104,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "194397040067584486529937766709041561602",
+   "honoredCount": 90459,
+   "failedCount": 474,
+   "diversityBps": 521,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "143430726825409247670601517431435296769",
+   "honoredCount": 59604,
+   "failedCount": 530,
+   "diversityBps": 1441,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "170773038000000000000",
+   "honoredCount": 22743,
+   "failedCount": 382,
+   "diversityBps": 4938,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "881725955000",
+   "honoredCount": 13295,
+   "failedCount": 843,
+   "diversityBps": 1206,
+   "expected": "89341"
+  },
+  {
+   "honoredValueUsd6": "728036578000000",
+   "honoredCount": 32230,
+   "failedCount": 489,
+   "diversityBps": 3145,
+   "expected": "218999395"
+  },
+  {
+   "honoredValueUsd6": "808268439",
+   "honoredCount": 26069,
+   "failedCount": 902,
+   "diversityBps": 9561,
+   "expected": "699"
+  },
+  {
+   "honoredValueUsd6": "927341791000000000000",
+   "honoredCount": 83129,
+   "failedCount": 363,
+   "diversityBps": 1538,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "246299275",
+   "honoredCount": 53750,
+   "failedCount": 349,
+   "diversityBps": 5972,
+   "expected": "144"
+  },
+  {
+   "honoredValueUsd6": "698184159000000000",
+   "honoredCount": 22430,
+   "failedCount": 363,
+   "diversityBps": 8844,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "268109867000000000",
+   "honoredCount": 81262,
+   "failedCount": 118,
+   "diversityBps": 7117,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "905326853000000",
+   "honoredCount": 41767,
+   "failedCount": 708,
+   "diversityBps": 3465,
+   "expected": "298515198"
+  },
+  {
+   "honoredValueUsd6": "596296651000000000",
+   "honoredCount": 91994,
+   "failedCount": 904,
+   "diversityBps": 1588,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "240045620000000000000",
+   "honoredCount": 17191,
+   "failedCount": 698,
+   "diversityBps": 3569,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "249178224829038359634826399103015976960",
+   "honoredCount": 85606,
+   "failedCount": 109,
+   "diversityBps": 262,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "104980234000",
+   "honoredCount": 46093,
+   "failedCount": 272,
+   "diversityBps": 3951,
+   "expected": "40756"
+  },
+  {
+   "honoredValueUsd6": "682205650000000000000",
+   "honoredCount": 59606,
+   "failedCount": 198,
+   "diversityBps": 4545,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "764687254",
+   "honoredCount": 28768,
+   "failedCount": 273,
+   "diversityBps": 764,
+   "expected": "56"
+  },
+  {
+   "honoredValueUsd6": "85012066",
+   "honoredCount": 94668,
+   "failedCount": 93,
+   "diversityBps": 2306,
+   "expected": "19"
+  },
+  {
+   "honoredValueUsd6": "91667853637315595161099777277150887938",
+   "honoredCount": 39828,
+   "failedCount": 976,
+   "diversityBps": 7180,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "40680982000000000000",
+   "honoredCount": 74830,
+   "failedCount": 593,
+   "diversityBps": 1099,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "242032319000",
+   "honoredCount": 8236,
+   "failedCount": 511,
+   "diversityBps": 5808,
+   "expected": "118512"
+  },
+  {
+   "honoredValueUsd6": "812577695000000000",
+   "honoredCount": 12442,
+   "failedCount": 346,
+   "diversityBps": 3478,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "70328211000000000000",
+   "honoredCount": 30294,
+   "failedCount": 32,
+   "diversityBps": 7798,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "399146554000000000000",
+   "honoredCount": 65435,
+   "failedCount": 686,
+   "diversityBps": 7945,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "453851760000000000000",
+   "honoredCount": 83748,
+   "failedCount": 677,
+   "diversityBps": 9530,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "299293724000000000000",
+   "honoredCount": 12298,
+   "failedCount": 274,
+   "diversityBps": 4419,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "77070191000000",
+   "honoredCount": 49580,
+   "failedCount": 865,
+   "diversityBps": 6444,
+   "expected": "47193917"
+  },
+  {
+   "honoredValueUsd6": "909499081",
+   "honoredCount": 19401,
+   "failedCount": 994,
+   "diversityBps": 3247,
+   "expected": "255"
+  },
+  {
+   "honoredValueUsd6": "353200243000",
+   "honoredCount": 87185,
+   "failedCount": 56,
+   "diversityBps": 5337,
+   "expected": "188140"
+  },
+  {
+   "honoredValueUsd6": "74333347757386269015121488341391900672",
+   "honoredCount": 77176,
+   "failedCount": 474,
+   "diversityBps": 4794,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "166603573",
+   "honoredCount": 4863,
+   "failedCount": 115,
+   "diversityBps": 2099,
+   "expected": "32"
+  },
+  {
+   "honoredValueUsd6": "414038262000000000",
+   "honoredCount": 27506,
+   "failedCount": 83,
+   "diversityBps": 684,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "420922505000000",
+   "honoredCount": 26981,
+   "failedCount": 640,
+   "diversityBps": 6969,
+   "expected": "273853176"
+  },
+  {
+   "honoredValueUsd6": "477630026000000",
+   "honoredCount": 35577,
+   "failedCount": 764,
+   "diversityBps": 936,
+   "expected": "42000354"
+  },
+  {
+   "honoredValueUsd6": "498058693000000",
+   "honoredCount": 38206,
+   "failedCount": 390,
+   "diversityBps": 4510,
+   "expected": "217950084"
+  },
+  {
+   "honoredValueUsd6": "196748521000",
+   "honoredCount": 6867,
+   "failedCount": 724,
+   "diversityBps": 1676,
+   "expected": "25051"
+  },
+  {
+   "honoredValueUsd6": "159855011000000000",
+   "honoredCount": 89966,
+   "failedCount": 87,
+   "diversityBps": 6424,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "902578641000000000000",
+   "honoredCount": 94919,
+   "failedCount": 358,
+   "diversityBps": 8941,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "452661375000000000",
+   "honoredCount": 41137,
+   "failedCount": 621,
+   "diversityBps": 2490,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "923057303000000",
+   "honoredCount": 19500,
+   "failedCount": 894,
+   "diversityBps": 3434,
+   "expected": "278652448"
+  },
+  {
+   "honoredValueUsd6": "148756173900040247830777022975238471680",
+   "honoredCount": 80018,
+   "failedCount": 968,
+   "diversityBps": 4073,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "858632193000000000",
+   "honoredCount": 98819,
+   "failedCount": 660,
+   "diversityBps": 2086,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "176714960872530382849051301211510145026",
+   "honoredCount": 94330,
+   "failedCount": 196,
+   "diversityBps": 6370,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "721194943000000000",
+   "honoredCount": 24964,
+   "failedCount": 722,
+   "diversityBps": 2998,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "76732417",
+   "honoredCount": 26342,
+   "failedCount": 554,
+   "diversityBps": 5513,
+   "expected": "39"
+  },
+  {
+   "honoredValueUsd6": "981232701000000000",
+   "honoredCount": 59864,
+   "failedCount": 364,
+   "diversityBps": 4030,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "77975153278468744241634534052646092801",
+   "honoredCount": 27693,
+   "failedCount": 236,
+   "diversityBps": 5376,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "608281086000",
+   "honoredCount": 31146,
+   "failedCount": 676,
+   "diversityBps": 9922,
+   "expected": "566640"
+  },
+  {
+   "honoredValueUsd6": "308358213000",
+   "honoredCount": 19200,
+   "failedCount": 687,
+   "diversityBps": 2175,
+   "expected": "60566"
+  },
+  {
+   "honoredValueUsd6": "277840680846763384109183292798482251777",
+   "honoredCount": 44428,
+   "failedCount": 829,
+   "diversityBps": 1644,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "564096649000000",
+   "honoredCount": 21181,
+   "failedCount": 671,
+   "diversityBps": 3227,
+   "expected": "166235315"
+  },
+  {
+   "honoredValueUsd6": "714262679",
+   "honoredCount": 32258,
+   "failedCount": 605,
+   "diversityBps": 2748,
+   "expected": "185"
+  },
+  {
+   "honoredValueUsd6": "20826555000000",
+   "honoredCount": 55884,
+   "failedCount": 473,
+   "diversityBps": 5224,
+   "expected": "10610374"
+  },
+  {
+   "honoredValueUsd6": "266457923000000000",
+   "honoredCount": 11110,
+   "failedCount": 913,
+   "diversityBps": 3922,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "481949313000000000000",
+   "honoredCount": 91641,
+   "failedCount": 999,
+   "diversityBps": 7720,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "6828521000",
+   "honoredCount": 48100,
+   "failedCount": 428,
+   "diversityBps": 6949,
+   "expected": "4621"
+  },
+  {
+   "honoredValueUsd6": "170635837204136089811133536763763490817",
+   "honoredCount": 4762,
+   "failedCount": 823,
+   "diversityBps": 4776,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "137599120810263718020931794761460744195",
+   "honoredCount": 29340,
+   "failedCount": 745,
+   "diversityBps": 5860,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "107862077000000000000",
+   "honoredCount": 36009,
+   "failedCount": 869,
+   "diversityBps": 2593,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "256052643328052038549966960717641809921",
+   "honoredCount": 3655,
+   "failedCount": 582,
+   "diversityBps": 4468,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "117145593587388439366535306503157448707",
+   "honoredCount": 20203,
+   "failedCount": 119,
+   "diversityBps": 8983,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "293648975000000",
+   "honoredCount": 29729,
+   "failedCount": 103,
+   "diversityBps": 8708,
+   "expected": "253079051"
+  },
+  {
+   "honoredValueUsd6": "126153722000",
+   "honoredCount": 26162,
+   "failedCount": 882,
+   "diversityBps": 2450,
+   "expected": "28068"
+  },
+  {
+   "honoredValueUsd6": "942500650000000",
+   "honoredCount": 13081,
+   "failedCount": 533,
+   "diversityBps": 7536,
+   "expected": "632903413"
+  },
+  {
+   "honoredValueUsd6": "596931512000000",
+   "honoredCount": 66185,
+   "failedCount": 495,
+   "diversityBps": 9981,
+   "expected": "582722729"
+  },
+  {
+   "honoredValueUsd6": "450364753000000000",
+   "honoredCount": 62717,
+   "failedCount": 391,
+   "diversityBps": 508,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "406068110",
+   "honoredCount": 75748,
+   "failedCount": 246,
+   "diversityBps": 4013,
+   "expected": "161"
+  },
+  {
+   "honoredValueUsd6": "60096625",
+   "honoredCount": 57158,
+   "failedCount": 934,
+   "diversityBps": 1910,
+   "expected": "10"
+  },
+  {
+   "honoredValueUsd6": "900401663000000",
+   "honoredCount": 31423,
+   "failedCount": 528,
+   "diversityBps": 6275,
+   "expected": "537887696"
+  },
+  {
+   "honoredValueUsd6": "952753749000000000",
+   "honoredCount": 67085,
+   "failedCount": 386,
+   "diversityBps": 3325,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "52765269167874725136964659710638686210",
+   "honoredCount": 24296,
+   "failedCount": 182,
+   "diversityBps": 9503,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "19921266000000000",
+   "honoredCount": 68253,
+   "failedCount": 272,
+   "diversityBps": 7191,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "27584499188616147776958960151149150211",
+   "honoredCount": 43794,
+   "failedCount": 328,
+   "diversityBps": 3562,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "996160173000",
+   "honoredCount": 74895,
+   "failedCount": 223,
+   "diversityBps": 6064,
+   "expected": "598723"
+  },
+  {
+   "honoredValueUsd6": "180075909000000",
+   "honoredCount": 8928,
+   "failedCount": 211,
+   "diversityBps": 411,
+   "expected": "6911117"
+  },
+  {
+   "honoredValueUsd6": "105020581000000000",
+   "honoredCount": 61873,
+   "failedCount": 55,
+   "diversityBps": 4375,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "620615450000",
+   "honoredCount": 16908,
+   "failedCount": 312,
+   "diversityBps": 8528,
+   "expected": "501498"
+  },
+  {
+   "honoredValueUsd6": "841788983000000000000",
+   "honoredCount": 4411,
+   "failedCount": 319,
+   "diversityBps": 4298,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "130312223000000000",
+   "honoredCount": 18981,
+   "failedCount": 727,
+   "diversityBps": 2470,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "181177544000000000000",
+   "honoredCount": 78856,
+   "failedCount": 896,
+   "diversityBps": 3305,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "539587347",
+   "honoredCount": 86611,
+   "failedCount": 170,
+   "diversityBps": 2662,
+   "expected": "142"
+  },
+  {
+   "honoredValueUsd6": "421014968000",
+   "honoredCount": 17579,
+   "failedCount": 191,
+   "diversityBps": 1001,
+   "expected": "40813"
+  },
+  {
+   "honoredValueUsd6": "557313529000000",
+   "honoredCount": 53844,
+   "failedCount": 483,
+   "diversityBps": 5063,
+   "expected": "274773391"
+  },
+  {
+   "honoredValueUsd6": "100514143209803492213609308622241660930",
+   "honoredCount": 27271,
+   "failedCount": 53,
+   "diversityBps": 5163,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "212155893253590812696296478539503370243",
+   "honoredCount": 20241,
+   "failedCount": 784,
+   "diversityBps": 5609,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "182855889000",
+   "honoredCount": 43620,
+   "failedCount": 364,
+   "diversityBps": 4598,
+   "expected": "82023"
+  },
+  {
+   "honoredValueUsd6": "237798205000",
+   "honoredCount": 29343,
+   "failedCount": 893,
+   "diversityBps": 897,
+   "expected": "19545"
+  },
+  {
+   "honoredValueUsd6": "324960661000000000000",
+   "honoredCount": 38090,
+   "failedCount": 258,
+   "diversityBps": 7673,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "269804195000000000000",
+   "honoredCount": 6458,
+   "failedCount": 127,
+   "diversityBps": 96,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "512734694000000000000",
+   "honoredCount": 95288,
+   "failedCount": 831,
+   "diversityBps": 3224,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "166979044000000000000",
+   "honoredCount": 2963,
+   "failedCount": 272,
+   "diversityBps": 4194,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "894099818000000000",
+   "honoredCount": 73691,
+   "failedCount": 919,
+   "diversityBps": 3161,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "929766358000000000000",
+   "honoredCount": 58446,
+   "failedCount": 398,
+   "diversityBps": 2960,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "300655777000000000000",
+   "honoredCount": 29383,
+   "failedCount": 760,
+   "diversityBps": 6633,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "23956321",
+   "honoredCount": 13235,
+   "failedCount": 434,
+   "diversityBps": 8186,
+   "expected": "17"
+  },
+  {
+   "honoredValueUsd6": "988206423000000",
+   "honoredCount": 53251,
+   "failedCount": 12,
+   "diversityBps": 2136,
+   "expected": "210938288"
+  },
+  {
+   "honoredValueUsd6": "34778478000000000000",
+   "honoredCount": 88308,
+   "failedCount": 909,
+   "diversityBps": 9307,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "486920319",
+   "honoredCount": 28049,
+   "failedCount": 413,
+   "diversityBps": 9613,
+   "expected": "447"
+  },
+  {
+   "honoredValueUsd6": "548243673",
+   "honoredCount": 53595,
+   "failedCount": 257,
+   "diversityBps": 5203,
+   "expected": "281"
+  },
+  {
+   "honoredValueUsd6": "491911869000",
+   "honoredCount": 84102,
+   "failedCount": 254,
+   "diversityBps": 7544,
+   "expected": "367765"
+  },
+  {
+   "honoredValueUsd6": "72845477000",
+   "honoredCount": 35468,
+   "failedCount": 502,
+   "diversityBps": 9346,
+   "expected": "65307"
+  },
+  {
+   "honoredValueUsd6": "160528635862010776624625658687536496642",
+   "honoredCount": 2446,
+   "failedCount": 457,
+   "diversityBps": 3362,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "93051786",
+   "honoredCount": 26027,
+   "failedCount": 127,
+   "diversityBps": 5129,
+   "expected": "47"
+  },
+  {
+   "honoredValueUsd6": "90235890000000",
+   "honoredCount": 13107,
+   "failedCount": 373,
+   "diversityBps": 7351,
+   "expected": "61114775"
+  },
+  {
+   "honoredValueUsd6": "538400043000000000000",
+   "honoredCount": 56886,
+   "failedCount": 487,
+   "diversityBps": 9916,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "59233845000000000000",
+   "honoredCount": 45343,
+   "failedCount": 155,
+   "diversityBps": 3699,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "870954904000",
+   "honoredCount": 44804,
+   "failedCount": 391,
+   "diversityBps": 507,
+   "expected": "43030"
+  },
+  {
+   "honoredValueUsd6": "240571415000000000000",
+   "honoredCount": 37109,
+   "failedCount": 562,
+   "diversityBps": 5612,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "951894914",
+   "honoredCount": 11901,
+   "failedCount": 401,
+   "diversityBps": 5237,
+   "expected": "452"
+  },
+  {
+   "honoredValueUsd6": "276878360373057926726019290017262731265",
+   "honoredCount": 84200,
+   "failedCount": 105,
+   "diversityBps": 7532,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "657565143000000000000",
+   "honoredCount": 85642,
+   "failedCount": 220,
+   "diversityBps": 9077,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "739396001000000000000",
+   "honoredCount": 36537,
+   "failedCount": 439,
+   "diversityBps": 4686,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "188965476000000",
+   "honoredCount": 99520,
+   "failedCount": 65,
+   "diversityBps": 3930,
+   "expected": "74118204"
+  },
+  {
+   "honoredValueUsd6": "80163936000",
+   "honoredCount": 11301,
+   "failedCount": 500,
+   "diversityBps": 1473,
+   "expected": "10424"
+  },
+  {
+   "honoredValueUsd6": "968839620000000",
+   "honoredCount": 572,
+   "failedCount": 509,
+   "diversityBps": 7021,
+   "expected": "185367867"
+  },
+  {
+   "honoredValueUsd6": "336834818000000",
+   "honoredCount": 21209,
+   "failedCount": 99,
+   "diversityBps": 3745,
+   "expected": "124402569"
+  },
+  {
+   "honoredValueUsd6": "259787671000000000000",
+   "honoredCount": 30958,
+   "failedCount": 737,
+   "diversityBps": 1815,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "119146023561235199284090595460136304643",
+   "honoredCount": 92503,
+   "failedCount": 114,
+   "diversityBps": 9040,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "977645395",
+   "honoredCount": 43849,
+   "failedCount": 710,
+   "diversityBps": 8715,
+   "expected": "812"
+  },
+  {
+   "honoredValueUsd6": "102200200000000",
+   "honoredCount": 2411,
+   "failedCount": 75,
+   "diversityBps": 1241,
+   "expected": "11600463"
+  },
+  {
+   "honoredValueUsd6": "929256224000000000",
+   "honoredCount": 45244,
+   "failedCount": 360,
+   "diversityBps": 2548,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "732291539000000",
+   "honoredCount": 81151,
+   "failedCount": 450,
+   "diversityBps": 5302,
+   "expected": "381907689"
+  },
+  {
+   "honoredValueUsd6": "685207224",
+   "honoredCount": 79212,
+   "failedCount": 753,
+   "diversityBps": 1242,
+   "expected": "82"
+  },
+  {
+   "honoredValueUsd6": "493632758000000000",
+   "honoredCount": 30302,
+   "failedCount": 295,
+   "diversityBps": 1485,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "818608174",
+   "honoredCount": 706,
+   "failedCount": 173,
+   "diversityBps": 595,
+   "expected": "28"
+  },
+  {
+   "honoredValueUsd6": "170142579143780083012258351586113224706",
+   "honoredCount": 88748,
+   "failedCount": 774,
+   "diversityBps": 424,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "113063127000000",
+   "honoredCount": 63798,
+   "failedCount": 414,
+   "diversityBps": 4477,
+   "expected": "49651756"
+  },
+  {
+   "honoredValueUsd6": "334969057",
+   "honoredCount": 60722,
+   "failedCount": 362,
+   "diversityBps": 7992,
+   "expected": "262"
+  },
+  {
+   "honoredValueUsd6": "879116724000000000",
+   "honoredCount": 149,
+   "failedCount": 203,
+   "diversityBps": 3606,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "290055513",
+   "honoredCount": 88909,
+   "failedCount": 969,
+   "diversityBps": 5983,
+   "expected": "168"
+  },
+  {
+   "honoredValueUsd6": "333033751908894013739435635494650642433",
+   "honoredCount": 29034,
+   "failedCount": 809,
+   "diversityBps": 9989,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "152960855000000000000",
+   "honoredCount": 40447,
+   "failedCount": 728,
+   "diversityBps": 8745,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "378480400000000000000",
+   "honoredCount": 32535,
+   "failedCount": 401,
+   "diversityBps": 3688,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "505171340000000",
+   "honoredCount": 56187,
+   "failedCount": 432,
+   "diversityBps": 476,
+   "expected": "23504016"
+  },
+  {
+   "honoredValueUsd6": "987663628",
+   "honoredCount": 3812,
+   "failedCount": 866,
+   "diversityBps": 4583,
+   "expected": "269"
+  },
+  {
+   "honoredValueUsd6": "577970900",
+   "honoredCount": 24973,
+   "failedCount": 604,
+   "diversityBps": 1054,
+   "expected": "56"
+  },
+  {
+   "honoredValueUsd6": "790532526000",
+   "honoredCount": 38984,
+   "failedCount": 443,
+   "diversityBps": 9643,
+   "expected": "737178"
+  },
+  {
+   "honoredValueUsd6": "220042331735742496956516122681218695169",
+   "honoredCount": 66326,
+   "failedCount": 446,
+   "diversityBps": 2923,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "151343717517033312423864911518490427394",
+   "honoredCount": 50260,
+   "failedCount": 954,
+   "diversityBps": 6734,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "761270297000",
+   "honoredCount": 67872,
+   "failedCount": 666,
+   "diversityBps": 6135,
+   "expected": "453683"
+  },
+  {
+   "honoredValueUsd6": "228896005000000",
+   "honoredCount": 35892,
+   "failedCount": 452,
+   "diversityBps": 4670,
+   "expected": "103002981"
+  },
+  {
+   "honoredValueUsd6": "890670827000000000000",
+   "honoredCount": 9497,
+   "failedCount": 744,
+   "diversityBps": 5978,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "766320024000000000",
+   "honoredCount": 7426,
+   "failedCount": 22,
+   "diversityBps": 6697,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "12062433000000",
+   "honoredCount": 45803,
+   "failedCount": 903,
+   "diversityBps": 6088,
+   "expected": "6933528"
+  },
+  {
+   "honoredValueUsd6": "315208419000000000",
+   "honoredCount": 53008,
+   "failedCount": 169,
+   "diversityBps": 6590,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "175631303000000000",
+   "honoredCount": 93087,
+   "failedCount": 218,
+   "diversityBps": 2435,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "167082441438865331987769075624161837056",
+   "honoredCount": 63185,
+   "failedCount": 921,
+   "diversityBps": 3588,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "107358463000000000000",
+   "honoredCount": 8226,
+   "failedCount": 171,
+   "diversityBps": 8427,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "622542440000",
+   "honoredCount": 69249,
+   "failedCount": 326,
+   "diversityBps": 96,
+   "expected": "5893"
+  },
+  {
+   "honoredValueUsd6": "518927694000000000",
+   "honoredCount": 35603,
+   "failedCount": 971,
+   "diversityBps": 1566,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "544386392000",
+   "honoredCount": 99675,
+   "failedCount": 776,
+   "diversityBps": 5209,
+   "expected": "277098"
+  },
+  {
+   "honoredValueUsd6": "977829364",
+   "honoredCount": 65878,
+   "failedCount": 293,
+   "diversityBps": 5810,
+   "expected": "560"
+  },
+  {
+   "honoredValueUsd6": "84646553000000000",
+   "honoredCount": 54091,
+   "failedCount": 245,
+   "diversityBps": 3092,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "224501011000",
+   "honoredCount": 78250,
+   "failedCount": 163,
+   "diversityBps": 4163,
+   "expected": "92879"
+  },
+  {
+   "honoredValueUsd6": "546457752000000000000",
+   "honoredCount": 82591,
+   "failedCount": 566,
+   "diversityBps": 8892,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "722759546000",
+   "honoredCount": 57094,
+   "failedCount": 767,
+   "diversityBps": 1133,
+   "expected": "78716"
+  },
+  {
+   "honoredValueUsd6": "11631088",
+   "honoredCount": 47337,
+   "failedCount": 928,
+   "diversityBps": 1622,
+   "expected": "1"
+  },
+  {
+   "honoredValueUsd6": "262006531000000000",
+   "honoredCount": 65747,
+   "failedCount": 360,
+   "diversityBps": 7721,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "349650897000",
+   "honoredCount": 89631,
+   "failedCount": 290,
+   "diversityBps": 4152,
+   "expected": "143779"
+  },
+  {
+   "honoredValueUsd6": "157227031000",
+   "honoredCount": 56015,
+   "failedCount": 436,
+   "diversityBps": 640,
+   "expected": "9832"
+  },
+  {
+   "honoredValueUsd6": "602724569000000000000",
+   "honoredCount": 35069,
+   "failedCount": 151,
+   "diversityBps": 444,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "78154124000000000",
+   "honoredCount": 72946,
+   "failedCount": 343,
+   "diversityBps": 5638,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "914487765000",
+   "honoredCount": 98416,
+   "failedCount": 363,
+   "diversityBps": 436,
+   "expected": "39435"
+  },
+  {
+   "honoredValueUsd6": "344635185000000000000",
+   "honoredCount": 11752,
+   "failedCount": 665,
+   "diversityBps": 211,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "122613983479002375130482383293805232128",
+   "honoredCount": 4619,
+   "failedCount": 324,
+   "diversityBps": 8762,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "713712651",
+   "honoredCount": 78810,
+   "failedCount": 565,
+   "diversityBps": 6877,
+   "expected": "480"
+  },
+  {
+   "honoredValueUsd6": "456788907000000000000",
+   "honoredCount": 79198,
+   "failedCount": 140,
+   "diversityBps": 5731,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "817721025000",
+   "honoredCount": 32573,
+   "failedCount": 884,
+   "diversityBps": 2472,
+   "expected": "186921"
+  },
+  {
+   "honoredValueUsd6": "950773720000000",
+   "honoredCount": 86339,
+   "failedCount": 145,
+   "diversityBps": 3159,
+   "expected": "298843759"
+  },
+  {
+   "honoredValueUsd6": "22098334300285811780344096588155584514",
+   "honoredCount": 14323,
+   "failedCount": 724,
+   "diversityBps": 4949,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "896464991",
+   "honoredCount": 62662,
+   "failedCount": 695,
+   "diversityBps": 4320,
+   "expected": "374"
+  },
+  {
+   "honoredValueUsd6": "441165080000000000",
+   "honoredCount": 54173,
+   "failedCount": 555,
+   "diversityBps": 4900,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "688068917000000000",
+   "honoredCount": 15017,
+   "failedCount": 302,
+   "diversityBps": 2263,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "293107717",
+   "honoredCount": 35881,
+   "failedCount": 148,
+   "diversityBps": 7666,
+   "expected": "221"
+  },
+  {
+   "honoredValueUsd6": "14316123000000000000",
+   "honoredCount": 78144,
+   "failedCount": 265,
+   "diversityBps": 4486,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "118927817000000",
+   "honoredCount": 56081,
+   "failedCount": 899,
+   "diversityBps": 1564,
+   "expected": "17746844"
+  },
+  {
+   "honoredValueUsd6": "305156997000000",
+   "honoredCount": 68717,
+   "failedCount": 736,
+   "diversityBps": 161,
+   "expected": "4760077"
+  },
+  {
+   "honoredValueUsd6": "933613355000000",
+   "honoredCount": 741,
+   "failedCount": 947,
+   "diversityBps": 1545,
+   "expected": "29839268"
+  },
+  {
+   "honoredValueUsd6": "332463969",
+   "honoredCount": 82563,
+   "failedCount": 972,
+   "diversityBps": 9411,
+   "expected": "301"
+  },
+  {
+   "honoredValueUsd6": "799437627000000",
+   "honoredCount": 15286,
+   "failedCount": 962,
+   "diversityBps": 3673,
+   "expected": "246999822"
+  },
+  {
+   "honoredValueUsd6": "379413612000",
+   "honoredCount": 67889,
+   "failedCount": 251,
+   "diversityBps": 8117,
+   "expected": "304591"
+  },
+  {
+   "honoredValueUsd6": "910525359",
+   "honoredCount": 46077,
+   "failedCount": 134,
+   "diversityBps": 7276,
+   "expected": "656"
+  },
+  {
+   "honoredValueUsd6": "984041704000",
+   "honoredCount": 25396,
+   "failedCount": 742,
+   "diversityBps": 7078,
+   "expected": "640374"
+  },
+  {
+   "honoredValueUsd6": "481755380000000000000",
+   "honoredCount": 11121,
+   "failedCount": 840,
+   "diversityBps": 6565,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "267347254",
+   "honoredCount": 42534,
+   "failedCount": 459,
+   "diversityBps": 6600,
+   "expected": "170"
+  },
+  {
+   "honoredValueUsd6": "656965648000",
+   "honoredCount": 98217,
+   "failedCount": 168,
+   "diversityBps": 5163,
+   "expected": "337459"
+  },
+  {
+   "honoredValueUsd6": "87766758000000000",
+   "honoredCount": 19997,
+   "failedCount": 547,
+   "diversityBps": 7450,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "175840536",
+   "honoredCount": 20486,
+   "failedCount": 157,
+   "diversityBps": 3324,
+   "expected": "56"
+  },
+  {
+   "honoredValueUsd6": "34347796000000000000",
+   "honoredCount": 255,
+   "failedCount": 350,
+   "diversityBps": 2179,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "196086811000000000",
+   "honoredCount": 63614,
+   "failedCount": 628,
+   "diversityBps": 1940,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "393021390000",
+   "honoredCount": 16576,
+   "failedCount": 359,
+   "diversityBps": 7697,
+   "expected": "284052"
+  },
+  {
+   "honoredValueUsd6": "20043819000",
+   "honoredCount": 67462,
+   "failedCount": 106,
+   "diversityBps": 7653,
+   "expected": "15266"
+  },
+  {
+   "honoredValueUsd6": "8246491817435708713585555746544680960",
+   "honoredCount": 52994,
+   "failedCount": 980,
+   "diversityBps": 6292,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "585224941000000",
+   "honoredCount": 78121,
+   "failedCount": 957,
+   "diversityBps": 2875,
+   "expected": "162287976"
+  },
+  {
+   "honoredValueUsd6": "211066061",
+   "honoredCount": 97152,
+   "failedCount": 462,
+   "diversityBps": 8772,
+   "expected": "182"
+  },
+  {
+   "honoredValueUsd6": "8951459000000",
+   "honoredCount": 16388,
+   "failedCount": 642,
+   "diversityBps": 1172,
+   "expected": "938780"
+  },
+  {
+   "honoredValueUsd6": "85124354000",
+   "honoredCount": 85275,
+   "failedCount": 70,
+   "diversityBps": 5432,
+   "expected": "46125"
+  },
+  {
+   "honoredValueUsd6": "28244610491576595042576747391503826945",
+   "honoredCount": 16128,
+   "failedCount": 498,
+   "diversityBps": 5553,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "898010628000000",
+   "honoredCount": 37791,
+   "failedCount": 12,
+   "diversityBps": 9097,
+   "expected": "816142804"
+  },
+  {
+   "honoredValueUsd6": "34705990000",
+   "honoredCount": 22445,
+   "failedCount": 653,
+   "diversityBps": 2806,
+   "expected": "8956"
+  },
+  {
+   "honoredValueUsd6": "214558196000000000",
+   "honoredCount": 71768,
+   "failedCount": 498,
+   "diversityBps": 4789,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "821504408000",
+   "honoredCount": 86122,
+   "failedCount": 260,
+   "diversityBps": 4268,
+   "expected": "347470"
+  },
+  {
+   "honoredValueUsd6": "405168350",
+   "honoredCount": 8438,
+   "failedCount": 988,
+   "diversityBps": 3654,
+   "expected": "109"
+  },
+  {
+   "honoredValueUsd6": "194928614000000",
+   "honoredCount": 78837,
+   "failedCount": 185,
+   "diversityBps": 393,
+   "expected": "7607141"
+  },
+  {
+   "honoredValueUsd6": "643988845000",
+   "honoredCount": 76973,
+   "failedCount": 987,
+   "diversityBps": 9858,
+   "expected": "611326"
+  },
+  {
+   "honoredValueUsd6": "199657804000000000",
+   "honoredCount": 64243,
+   "failedCount": 122,
+   "diversityBps": 6406,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "662417699000",
+   "honoredCount": 5669,
+   "failedCount": 910,
+   "diversityBps": 9259,
+   "expected": "413975"
+  },
+  {
+   "honoredValueUsd6": "570368129000000000000",
+   "honoredCount": 24609,
+   "failedCount": 58,
+   "diversityBps": 7201,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "873777030000000",
+   "honoredCount": 94853,
+   "failedCount": 468,
+   "diversityBps": 3067,
+   "expected": "264078563"
+  },
+  {
+   "honoredValueUsd6": "121607476508324762355070409928955920384",
+   "honoredCount": 42381,
+   "failedCount": 430,
+   "diversityBps": 4741,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "810196993000000000000",
+   "honoredCount": 38651,
+   "failedCount": 991,
+   "diversityBps": 9290,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "925401412",
+   "honoredCount": 2168,
+   "failedCount": 429,
+   "diversityBps": 8479,
+   "expected": "492"
+  },
+  {
+   "honoredValueUsd6": "427007630000000000000",
+   "honoredCount": 11217,
+   "failedCount": 912,
+   "diversityBps": 4943,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "708488420000000",
+   "honoredCount": 92395,
+   "failedCount": 190,
+   "diversityBps": 2049,
+   "expected": "144279195"
+  },
+  {
+   "honoredValueUsd6": "545756837",
+   "honoredCount": 13653,
+   "failedCount": 589,
+   "diversityBps": 3672,
+   "expected": "177"
+  },
+  {
+   "honoredValueUsd6": "43747224347911305054616938551548313600",
+   "honoredCount": 78582,
+   "failedCount": 161,
+   "diversityBps": 5725,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "39993145548467816006472132830800379907",
+   "honoredCount": 96669,
+   "failedCount": 633,
+   "diversityBps": 1846,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "223159844574474177871946540926948605954",
+   "honoredCount": 72999,
+   "failedCount": 307,
+   "diversityBps": 6934,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "99295377",
+   "honoredCount": 87391,
+   "failedCount": 107,
+   "diversityBps": 2381,
+   "expected": "23"
+  },
+  {
+   "honoredValueUsd6": "64637714535637055068397544894854332418",
+   "honoredCount": 69708,
+   "failedCount": 52,
+   "diversityBps": 8814,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "281368409222680720743626248691581452289",
+   "honoredCount": 62940,
+   "failedCount": 328,
+   "diversityBps": 4811,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "861636246000",
+   "honoredCount": 30897,
+   "failedCount": 575,
+   "diversityBps": 2285,
+   "expected": "186472"
+  },
+  {
+   "honoredValueUsd6": "605601363000000",
+   "honoredCount": 84539,
+   "failedCount": 746,
+   "diversityBps": 3250,
+   "expected": "191744395"
+  },
+  {
+   "honoredValueUsd6": "93554555069912279249670388009356230659",
+   "honoredCount": 31209,
+   "failedCount": 258,
+   "diversityBps": 8630,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "219487342",
+   "honoredCount": 40409,
+   "failedCount": 373,
+   "diversityBps": 6526,
+   "expected": "139"
+  },
+  {
+   "honoredValueUsd6": "60901753",
+   "honoredCount": 72709,
+   "failedCount": 373,
+   "diversityBps": 273,
+   "expected": "1"
+  },
+  {
+   "honoredValueUsd6": "103343522870055097270767730719499223043",
+   "honoredCount": 99719,
+   "failedCount": 724,
+   "diversityBps": 7371,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "728551279000000000",
+   "honoredCount": 5538,
+   "failedCount": 500,
+   "diversityBps": 5391,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "779346276000000",
+   "honoredCount": 59625,
+   "failedCount": 141,
+   "diversityBps": 5972,
+   "expected": "462146968"
+  },
+  {
+   "honoredValueUsd6": "3394876",
+   "honoredCount": 9266,
+   "failedCount": 266,
+   "diversityBps": 276,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "135296897455068822845073981182268407811",
+   "honoredCount": 29262,
+   "failedCount": 880,
+   "diversityBps": 7860,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "344770522000000",
+   "honoredCount": 38934,
+   "failedCount": 861,
+   "diversityBps": 291,
+   "expected": "9408625"
+  },
+  {
+   "honoredValueUsd6": "605445523000",
+   "honoredCount": 44648,
+   "failedCount": 357,
+   "diversityBps": 2759,
+   "expected": "163129"
+  },
+  {
+   "honoredValueUsd6": "187346499264777498334670859137873608706",
+   "honoredCount": 98826,
+   "failedCount": 965,
+   "diversityBps": 8657,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "229011610037115137053788265667998253057",
+   "honoredCount": 3079,
+   "failedCount": 782,
+   "diversityBps": 277,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "77858751000000000000",
+   "honoredCount": 7502,
+   "failedCount": 277,
+   "diversityBps": 636,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "489355986000000000000",
+   "honoredCount": 51022,
+   "failedCount": 749,
+   "diversityBps": 5702,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "381439252000000000",
+   "honoredCount": 40787,
+   "failedCount": 359,
+   "diversityBps": 1788,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "674614008000000000000",
+   "honoredCount": 11936,
+   "failedCount": 746,
+   "diversityBps": 5481,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "338949925430881969028938006228862238720",
+   "honoredCount": 16438,
+   "failedCount": 23,
+   "diversityBps": 1113,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "64159340000",
+   "honoredCount": 6185,
+   "failedCount": 523,
+   "diversityBps": 2638,
+   "expected": "13500"
+  },
+  {
+   "honoredValueUsd6": "920031677000000",
+   "honoredCount": 96438,
+   "failedCount": 550,
+   "diversityBps": 6244,
+   "expected": "564804294"
+  },
+  {
+   "honoredValueUsd6": "757508759000000",
+   "honoredCount": 50456,
+   "failedCount": 389,
+   "diversityBps": 8181,
+   "expected": "605708446"
+  },
+  {
+   "honoredValueUsd6": "638203919000000000000",
+   "honoredCount": 61461,
+   "failedCount": 798,
+   "diversityBps": 6370,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "240055941000",
+   "honoredCount": 35133,
+   "failedCount": 415,
+   "diversityBps": 1052,
+   "expected": "24389"
+  },
+  {
+   "honoredValueUsd6": "56291080856084516688552552588491358209",
+   "honoredCount": 38337,
+   "failedCount": 119,
+   "diversityBps": 2547,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "681802301000000000",
+   "honoredCount": 21147,
+   "failedCount": 626,
+   "diversityBps": 7001,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "179937308415900938335985496812324651011",
+   "honoredCount": 66516,
+   "failedCount": 218,
+   "diversityBps": 2539,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "980793052000000000000",
+   "honoredCount": 79153,
+   "failedCount": 349,
+   "diversityBps": 1512,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "91195573000000000000",
+   "honoredCount": 54854,
+   "failedCount": 60,
+   "diversityBps": 1390,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "824329740",
+   "honoredCount": 69792,
+   "failedCount": 237,
+   "diversityBps": 4310,
+   "expected": "351"
+  },
+  {
+   "honoredValueUsd6": "36920520217490216694148712845572833283",
+   "honoredCount": 36803,
+   "failedCount": 805,
+   "diversityBps": 7885,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "61538377000000000",
+   "honoredCount": 40433,
+   "failedCount": 955,
+   "diversityBps": 8470,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "912585499",
+   "honoredCount": 61456,
+   "failedCount": 91,
+   "diversityBps": 3735,
+   "expected": "339"
+  },
+  {
+   "honoredValueUsd6": "52942574000000000",
+   "honoredCount": 47487,
+   "failedCount": 404,
+   "diversityBps": 6612,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "80732747000",
+   "honoredCount": 91212,
+   "failedCount": 794,
+   "diversityBps": 5202,
+   "expected": "40927"
+  },
+  {
+   "honoredValueUsd6": "698823909000",
+   "honoredCount": 10365,
+   "failedCount": 461,
+   "diversityBps": 5431,
+   "expected": "334851"
+  },
+  {
+   "honoredValueUsd6": "270443349000000000",
+   "honoredCount": 95296,
+   "failedCount": 296,
+   "diversityBps": 8694,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "360847064",
+   "honoredCount": 19653,
+   "failedCount": 847,
+   "diversityBps": 8771,
+   "expected": "279"
+  },
+  {
+   "honoredValueUsd6": "726701248000000000",
+   "honoredCount": 63201,
+   "failedCount": 346,
+   "diversityBps": 1157,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "244891191490692716784098538943741427712",
+   "honoredCount": 64349,
+   "failedCount": 745,
+   "diversityBps": 4057,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "384584617000",
+   "honoredCount": 94662,
+   "failedCount": 292,
+   "diversityBps": 5598,
+   "expected": "213316"
+  },
+  {
+   "honoredValueUsd6": "302700432000000000",
+   "honoredCount": 67344,
+   "failedCount": 464,
+   "diversityBps": 7856,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "754384347000000000000",
+   "honoredCount": 84204,
+   "failedCount": 979,
+   "diversityBps": 191,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "215264698600349525903968015930915553283",
+   "honoredCount": 30918,
+   "failedCount": 533,
+   "diversityBps": 9207,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "600438961000",
+   "honoredCount": 89850,
+   "failedCount": 390,
+   "diversityBps": 9170,
+   "expected": "543524"
+  },
+  {
+   "honoredValueUsd6": "748089860",
+   "honoredCount": 51138,
+   "failedCount": 609,
+   "diversityBps": 4892,
+   "expected": "353"
+  },
+  {
+   "honoredValueUsd6": "285878343000000000000",
+   "honoredCount": 88618,
+   "failedCount": 315,
+   "diversityBps": 3177,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "694995535000000",
+   "honoredCount": 67985,
+   "failedCount": 34,
+   "diversityBps": 4451,
+   "expected": "308879091"
+  },
+  {
+   "honoredValueUsd6": "875195226000",
+   "honoredCount": 57029,
+   "failedCount": 444,
+   "diversityBps": 9186,
+   "expected": "785605"
+  },
+  {
+   "honoredValueUsd6": "718019310000000",
+   "honoredCount": 32946,
+   "failedCount": 390,
+   "diversityBps": 5281,
+   "expected": "366181905"
+  },
+  {
+   "honoredValueUsd6": "295574272291608362120028978327467327489",
+   "honoredCount": 4433,
+   "failedCount": 453,
+   "diversityBps": 3449,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "247519745000",
+   "honoredCount": 4043,
+   "failedCount": 511,
+   "diversityBps": 5111,
+   "expected": "91726"
+  },
+  {
+   "honoredValueUsd6": "226891106930764159019093807486702977024",
+   "honoredCount": 11655,
+   "failedCount": 331,
+   "diversityBps": 8555,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "320029152000000000000",
+   "honoredCount": 76045,
+   "failedCount": 650,
+   "diversityBps": 1199,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "731424249000",
+   "honoredCount": 18570,
+   "failedCount": 558,
+   "diversityBps": 5404,
+   "expected": "362576"
+  },
+  {
+   "honoredValueUsd6": "83802633090910531004602384953687146499",
+   "honoredCount": 27102,
+   "failedCount": 566,
+   "diversityBps": 8324,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "106390128404812411946396029374733221891",
+   "honoredCount": 43000,
+   "failedCount": 290,
+   "diversityBps": 6214,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "47573602000000000",
+   "honoredCount": 68642,
+   "failedCount": 489,
+   "diversityBps": 1726,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "421761808",
+   "honoredCount": 30989,
+   "failedCount": 486,
+   "diversityBps": 3288,
+   "expected": "132"
+  },
+  {
+   "honoredValueUsd6": "714907289",
+   "honoredCount": 29209,
+   "failedCount": 144,
+   "diversityBps": 2187,
+   "expected": "153"
+  },
+  {
+   "honoredValueUsd6": "506290940",
+   "honoredCount": 16352,
+   "failedCount": 549,
+   "diversityBps": 3731,
+   "expected": "171"
+  },
+  {
+   "honoredValueUsd6": "959280982000000000",
+   "honoredCount": 41287,
+   "failedCount": 506,
+   "diversityBps": 9011,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "931787224",
+   "honoredCount": 36629,
+   "failedCount": 535,
+   "diversityBps": 352,
+   "expected": "31"
+  },
+  {
+   "honoredValueUsd6": "507662640000",
+   "honoredCount": 39338,
+   "failedCount": 527,
+   "diversityBps": 8512,
+   "expected": "415425"
+  },
+  {
+   "honoredValueUsd6": "268490235",
+   "honoredCount": 94462,
+   "failedCount": 957,
+   "diversityBps": 7055,
+   "expected": "183"
+  },
+  {
+   "honoredValueUsd6": "298260851111744257135108796808639283201",
+   "honoredCount": 73448,
+   "failedCount": 115,
+   "diversityBps": 1233,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "361856839000",
+   "honoredCount": 99242,
+   "failedCount": 632,
+   "diversityBps": 1034,
+   "expected": "36714"
+  },
+  {
+   "honoredValueUsd6": "229793357000000000000",
+   "honoredCount": 2473,
+   "failedCount": 834,
+   "diversityBps": 6195,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "494733519000000",
+   "honoredCount": 54781,
+   "failedCount": 570,
+   "diversityBps": 7278,
+   "expected": "349167714"
+  },
+  {
+   "honoredValueUsd6": "5309538000000000",
+   "honoredCount": 9555,
+   "failedCount": 606,
+   "diversityBps": 5662,
+   "expected": "2525702828"
+  },
+  {
+   "honoredValueUsd6": "867292966000000000000",
+   "honoredCount": 6184,
+   "failedCount": 552,
+   "diversityBps": 1295,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "143565696120116747711437674415118090243",
+   "honoredCount": 87693,
+   "failedCount": 791,
+   "diversityBps": 4774,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "732747663000000000000",
+   "honoredCount": 4067,
+   "failedCount": 391,
+   "diversityBps": 6852,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "76959530000000000",
+   "honoredCount": 29833,
+   "failedCount": 816,
+   "diversityBps": 7579,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "203638171110778471335278483685026824192",
+   "honoredCount": 18225,
+   "failedCount": 989,
+   "diversityBps": 4804,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "3392015",
+   "honoredCount": 33080,
+   "failedCount": 788,
+   "diversityBps": 171,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "41127608",
+   "honoredCount": 16919,
+   "failedCount": 728,
+   "diversityBps": 144,
+   "expected": "0"
+  },
+  {
+   "honoredValueUsd6": "475130278000000000000",
+   "honoredCount": 46230,
+   "failedCount": 574,
+   "diversityBps": 3351,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "155535241000",
+   "honoredCount": 53446,
+   "failedCount": 552,
+   "diversityBps": 5097,
+   "expected": "76893"
+  },
+  {
+   "honoredValueUsd6": "809857686",
+   "honoredCount": 60249,
+   "failedCount": 487,
+   "diversityBps": 7166,
+   "expected": "566"
+  },
+  {
+   "honoredValueUsd6": "983293889000000000000",
+   "honoredCount": 49796,
+   "failedCount": 851,
+   "diversityBps": 9751,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "162872862",
+   "honoredCount": 18758,
+   "failedCount": 289,
+   "diversityBps": 8439,
+   "expected": "130"
+  },
+  {
+   "honoredValueUsd6": "955273400",
+   "honoredCount": 69269,
+   "failedCount": 25,
+   "diversityBps": 6389,
+   "expected": "609"
+  },
+  {
+   "honoredValueUsd6": "123199067000",
+   "honoredCount": 16319,
+   "failedCount": 496,
+   "diversityBps": 5628,
+   "expected": "63542"
+  },
+  {
+   "honoredValueUsd6": "161489214",
+   "honoredCount": 7085,
+   "failedCount": 937,
+   "diversityBps": 2456,
+   "expected": "28"
+  },
+  {
+   "honoredValueUsd6": "596513052",
+   "honoredCount": 12550,
+   "failedCount": 339,
+   "diversityBps": 3614,
+   "expected": "199"
+  },
+  {
+   "honoredValueUsd6": "639266506000",
+   "honoredCount": 31708,
+   "failedCount": 464,
+   "diversityBps": 8173,
+   "expected": "500499"
+  },
+  {
+   "honoredValueUsd6": "952066220000000000",
+   "honoredCount": 26148,
+   "failedCount": 878,
+   "diversityBps": 45,
+   "expected": "3892218186"
+  },
+  {
+   "honoredValueUsd6": "368939109000000000000",
+   "honoredCount": 60788,
+   "failedCount": 463,
+   "diversityBps": 1270,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "295560079675488206863649821238379937793",
+   "honoredCount": 40964,
+   "failedCount": 144,
+   "diversityBps": 5171,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "550447498000000",
+   "honoredCount": 85881,
+   "failedCount": 957,
+   "diversityBps": 1282,
+   "expected": "68284615"
+  },
+  {
+   "honoredValueUsd6": "883070179000000",
+   "honoredCount": 62620,
+   "failedCount": 507,
+   "diversityBps": 4366,
+   "expected": "376405782"
+  },
+  {
+   "honoredValueUsd6": "688301628000000000",
+   "honoredCount": 50378,
+   "failedCount": 536,
+   "diversityBps": 2433,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "653685234000000",
+   "honoredCount": 65022,
+   "failedCount": 59,
+   "diversityBps": 7419,
+   "expected": "483652497"
+  },
+  {
+   "honoredValueUsd6": "46635004671315424640302313765477548032",
+   "honoredCount": 66853,
+   "failedCount": 126,
+   "diversityBps": 5566,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "666781479000000000000",
+   "honoredCount": 67822,
+   "failedCount": 544,
+   "diversityBps": 6703,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "114531117000000",
+   "honoredCount": 14402,
+   "failedCount": 842,
+   "diversityBps": 8788,
+   "expected": "85630937"
+  },
+  {
+   "honoredValueUsd6": "429740742",
+   "honoredCount": 44516,
+   "failedCount": 488,
+   "diversityBps": 8225,
+   "expected": "341"
+  },
+  {
+   "honoredValueUsd6": "850043653000000000",
+   "honoredCount": 14881,
+   "failedCount": 704,
+   "diversityBps": 1821,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "925799007000000000000",
+   "honoredCount": 82907,
+   "failedCount": 530,
+   "diversityBps": 914,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "530281051",
+   "honoredCount": 30374,
+   "failedCount": 180,
+   "diversityBps": 3449,
+   "expected": "179"
+  },
+  {
+   "honoredValueUsd6": "145534837000000",
+   "honoredCount": 61087,
+   "failedCount": 855,
+   "diversityBps": 893,
+   "expected": "12472547"
+  },
+  {
+   "honoredValueUsd6": "654843036",
+   "honoredCount": 84109,
+   "failedCount": 758,
+   "diversityBps": 3160,
+   "expected": "201"
+  },
+  {
+   "honoredValueUsd6": "159108100261142021616161445592076124160",
+   "honoredCount": 69464,
+   "failedCount": 890,
+   "diversityBps": 4612,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "111970928000",
+   "honoredCount": 64543,
+   "failedCount": 771,
+   "diversityBps": 151,
+   "expected": "1632"
+  },
+  {
+   "honoredValueUsd6": "444897102000000000000",
+   "honoredCount": 58586,
+   "failedCount": 316,
+   "diversityBps": 8177,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "351263785000000000000",
+   "honoredCount": 58785,
+   "failedCount": 392,
+   "diversityBps": 3455,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "198195320000000000000",
+   "honoredCount": 30201,
+   "failedCount": 839,
+   "diversityBps": 5601,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "494642222000000000",
+   "honoredCount": 58075,
+   "failedCount": 809,
+   "diversityBps": 9201,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "256313647000000000000",
+   "honoredCount": 71035,
+   "failedCount": 365,
+   "diversityBps": 6668,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "164002297000000",
+   "honoredCount": 16061,
+   "failedCount": 4,
+   "diversityBps": 3010,
+   "expected": "49327836"
+  },
+  {
+   "honoredValueUsd6": "461017636000",
+   "honoredCount": 61760,
+   "failedCount": 961,
+   "diversityBps": 1312,
+   "expected": "57787"
+  },
+  {
+   "honoredValueUsd6": "6709611244478006810651975230894899201",
+   "honoredCount": 1232,
+   "failedCount": 948,
+   "diversityBps": 419,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "104630512747840408540013667628976439296",
+   "honoredCount": 33496,
+   "failedCount": 715,
+   "diversityBps": 2393,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "701273191000",
+   "honoredCount": 99435,
+   "failedCount": 429,
+   "diversityBps": 4141,
+   "expected": "286686"
+  },
+  {
+   "honoredValueUsd6": "718663125000000",
+   "honoredCount": 97470,
+   "failedCount": 995,
+   "diversityBps": 8239,
+   "expected": "574512222"
+  },
+  {
+   "honoredValueUsd6": "671864036000",
+   "honoredCount": 72098,
+   "failedCount": 675,
+   "diversityBps": 7011,
+   "expected": "458175"
+  },
+  {
+   "honoredValueUsd6": "638840345",
+   "honoredCount": 96166,
+   "failedCount": 100,
+   "diversityBps": 851,
+   "expected": "54"
+  },
+  {
+   "honoredValueUsd6": "213122911640420715897622428102802014209",
+   "honoredCount": 91904,
+   "failedCount": 539,
+   "diversityBps": 1793,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "691116079000000000",
+   "honoredCount": 22861,
+   "failedCount": 563,
+   "diversityBps": 910,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "448857889000000",
+   "honoredCount": 41421,
+   "failedCount": 791,
+   "diversityBps": 6725,
+   "expected": "285500660"
+  },
+  {
+   "honoredValueUsd6": "105500748000000000000",
+   "honoredCount": 87004,
+   "failedCount": 884,
+   "diversityBps": 7311,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "316341174000",
+   "honoredCount": 2883,
+   "failedCount": 139,
+   "diversityBps": 6867,
+   "expected": "189781"
+  },
+  {
+   "honoredValueUsd6": "157278792000000000",
+   "honoredCount": 71732,
+   "failedCount": 881,
+   "diversityBps": 2448,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "145170991795968767155170032002762014721",
+   "honoredCount": 70126,
+   "failedCount": 424,
+   "diversityBps": 9256,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "510203629000000",
+   "honoredCount": 93207,
+   "failedCount": 621,
+   "diversityBps": 5625,
+   "expected": "281365669"
+  },
+  {
+   "honoredValueUsd6": "446920799000000000000",
+   "honoredCount": 7956,
+   "failedCount": 229,
+   "diversityBps": 2401,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "455032588000",
+   "honoredCount": 35613,
+   "failedCount": 707,
+   "diversityBps": 1211,
+   "expected": "52006"
+  },
+  {
+   "honoredValueUsd6": "901513810000000000",
+   "honoredCount": 51071,
+   "failedCount": 307,
+   "diversityBps": 1259,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "5926214000",
+   "honoredCount": 56846,
+   "failedCount": 961,
+   "diversityBps": 6352,
+   "expected": "3582"
+  },
+  {
+   "honoredValueUsd6": "63481665000000",
+   "honoredCount": 5524,
+   "failedCount": 960,
+   "diversityBps": 5287,
+   "expected": "22061002"
+  },
+  {
+   "honoredValueUsd6": "289492326832977961043463482218385506304",
+   "honoredCount": 44404,
+   "failedCount": 43,
+   "diversityBps": 592,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "689219735000000000000",
+   "honoredCount": 71601,
+   "failedCount": 251,
+   "diversityBps": 2911,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "76015103046841654343434521079571283968",
+   "honoredCount": 4975,
+   "failedCount": 526,
+   "diversityBps": 7470,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "234493058000000000000",
+   "honoredCount": 79411,
+   "failedCount": 866,
+   "diversityBps": 8639,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "562217313",
+   "honoredCount": 1031,
+   "failedCount": 360,
+   "diversityBps": 1467,
+   "expected": "40"
+  },
+  {
+   "honoredValueUsd6": "351966325000000000",
+   "honoredCount": 98467,
+   "failedCount": 26,
+   "diversityBps": 2393,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "819721157000000000",
+   "honoredCount": 59525,
+   "failedCount": 670,
+   "diversityBps": 3454,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "4593850000000000",
+   "honoredCount": 81481,
+   "failedCount": 202,
+   "diversityBps": 2503,
+   "expected": "1141352058"
+  },
+  {
+   "honoredValueUsd6": "895589758000000000000",
+   "honoredCount": 77907,
+   "failedCount": 353,
+   "diversityBps": 9349,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "464522840000000",
+   "honoredCount": 11668,
+   "failedCount": 109,
+   "diversityBps": 7236,
+   "expected": "326965401"
+  },
+  {
+   "honoredValueUsd6": "170863601000000000",
+   "honoredCount": 97292,
+   "failedCount": 244,
+   "diversityBps": 1011,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "929077362000000",
+   "honoredCount": 73350,
+   "failedCount": 455,
+   "diversityBps": 3058,
+   "expected": "278921297"
+  },
+  {
+   "honoredValueUsd6": "353675579000000",
+   "honoredCount": 8028,
+   "failedCount": 509,
+   "diversityBps": 764,
+   "expected": "22702574"
+  },
+  {
+   "honoredValueUsd6": "580116941000000000000",
+   "honoredCount": 38788,
+   "failedCount": 989,
+   "diversityBps": 3908,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "253506746000000",
+   "honoredCount": 55346,
+   "failedCount": 770,
+   "diversityBps": 2236,
+   "expected": "54413047"
+  },
+  {
+   "honoredValueUsd6": "203102792000000000000",
+   "honoredCount": 91233,
+   "failedCount": 372,
+   "diversityBps": 2948,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "389502740000000000",
+   "honoredCount": 28514,
+   "failedCount": 978,
+   "diversityBps": 5898,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "38100858847326526339158527624272150528",
+   "honoredCount": 66373,
+   "failedCount": 990,
+   "diversityBps": 9565,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "452015911000000000",
+   "honoredCount": 2148,
+   "failedCount": 652,
+   "diversityBps": 8493,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "42405234913533891596328264180099448835",
+   "honoredCount": 22998,
+   "failedCount": 68,
+   "diversityBps": 7920,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "875796012000000",
+   "honoredCount": 59390,
+   "failedCount": 539,
+   "diversityBps": 7020,
+   "expected": "598513197"
+  },
+  {
+   "honoredValueUsd6": "69268511899053789624682084022769156098",
+   "honoredCount": 29932,
+   "failedCount": 814,
+   "diversityBps": 2361,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "124072609000000000",
+   "honoredCount": 19711,
+   "failedCount": 329,
+   "diversityBps": 779,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "593100060000000000",
+   "honoredCount": 11500,
+   "failedCount": 55,
+   "diversityBps": 7414,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "37655198000000000000",
+   "honoredCount": 25454,
+   "failedCount": 661,
+   "diversityBps": 4740,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "351604124000000000000",
+   "honoredCount": 9106,
+   "failedCount": 258,
+   "diversityBps": 9238,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "584622300000",
+   "honoredCount": 67113,
+   "failedCount": 496,
+   "diversityBps": 4873,
+   "expected": "278706"
+  },
+  {
+   "honoredValueUsd6": "80398792208153499229567701864849342466",
+   "honoredCount": 23232,
+   "failedCount": 259,
+   "diversityBps": 9270,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "866678664000000",
+   "honoredCount": 54002,
+   "failedCount": 922,
+   "diversityBps": 6615,
+   "expected": "545373717"
+  },
+  {
+   "honoredValueUsd6": "345868977000000000",
+   "honoredCount": 79581,
+   "failedCount": 806,
+   "diversityBps": 2576,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "110329956000",
+   "honoredCount": 20654,
+   "failedCount": 799,
+   "diversityBps": 2036,
+   "expected": "20127"
+  },
+  {
+   "honoredValueUsd6": "910984351000000",
+   "honoredCount": 46380,
+   "failedCount": 364,
+   "diversityBps": 1191,
+   "expected": "106002447"
+  },
+  {
+   "honoredValueUsd6": "907157192000000000",
+   "honoredCount": 6264,
+   "failedCount": 320,
+   "diversityBps": 5136,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "799308359000",
+   "honoredCount": 98298,
+   "failedCount": 50,
+   "diversityBps": 9651,
+   "expected": "770236"
+  },
+  {
+   "honoredValueUsd6": "980168440000000000",
+   "honoredCount": 11006,
+   "failedCount": 628,
+   "diversityBps": 8550,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "392009634000000",
+   "honoredCount": 7336,
+   "failedCount": 48,
+   "diversityBps": 4146,
+   "expected": "159398328"
+  },
+  {
+   "honoredValueUsd6": "554963137000",
+   "honoredCount": 25327,
+   "failedCount": 217,
+   "diversityBps": 4644,
+   "expected": "251266"
+  },
+  {
+   "honoredValueUsd6": "48070770",
+   "honoredCount": 23526,
+   "failedCount": 144,
+   "diversityBps": 1254,
+   "expected": "5"
+  },
+  {
+   "honoredValueUsd6": "15792813305293157884236626934741598211",
+   "honoredCount": 2631,
+   "failedCount": 913,
+   "diversityBps": 9873,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "689602115000",
+   "honoredCount": 19724,
+   "failedCount": 951,
+   "diversityBps": 5339,
+   "expected": "321652"
+  },
+  {
+   "honoredValueUsd6": "259759900000",
+   "honoredCount": 8388,
+   "failedCount": 954,
+   "diversityBps": 9177,
+   "expected": "177736"
+  },
+  {
+   "honoredValueUsd6": "469934502000000000000",
+   "honoredCount": 96364,
+   "failedCount": 741,
+   "diversityBps": 8433,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "751128773000000000",
+   "honoredCount": 85806,
+   "failedCount": 54,
+   "diversityBps": 7704,
+   "expected": "4294967295"
+  },
+  {
+   "honoredValueUsd6": "209183288000000",
+   "honoredCount": 5014,
+   "failedCount": 453,
+   "diversityBps": 918,
+   "expected": "15108107"
+  },
+  {
+   "honoredValueUsd6": "271156711000000000",
+   "honoredCount": 36128,
+   "failedCount": 387,
+   "diversityBps": 5802,
+   "expected": "4294967295"
+  }
+ ]
+}
