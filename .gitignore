@@ -10,3 +10,5 @@ dist/
 generated/
 node_modules/
 out/
+subgraph/build/
+subgraph/generated/

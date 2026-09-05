@@ -1,0 +1,67 @@
+specVersion: 1.0.0
+description: Proof of Fill - reputation you had to pay for
+repository: https://github.com/Aman035/proof-of-fill
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Aqua
+    network: base-sepolia
+    source:
+      address: "0x525bebb9c5b4dad791402923e344b360bf6ab6a2"
+      abi: Aqua
+      startBlock: 46430245
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: [Agent, Strategy, Fill, Counterparty, Global]
+      abis:
+        - name: Aqua
+          file: ./abis/Aqua.json
+      eventHandlers:
+        - event: Shipped(address,address,bytes32,bytes)
+          handler: handleShipped
+        - event: Docked(address,address,bytes32)
+          handler: handleDocked
+      file: ./src/aqua.ts
+
+  - kind: ethereum
+    name: Router
+    network: base-sepolia
+    source:
+      address: "0x06ac5984d1bdd04aefd3e4e33312f30ce058462e"
+      abi: ProofOfFillSwapVMRouter
+      startBlock: 46430248
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: [Agent, Strategy, Fill, Counterparty, Global]
+      abis:
+        - name: ProofOfFillSwapVMRouter
+          file: ./abis/ProofOfFillSwapVMRouter.json
+      eventHandlers:
+        - event: Swapped(bytes32,address,address,address,address,uint256,uint256)
+          handler: handleSwapped
+      file: ./src/router.ts
+
+  - kind: ethereum
+    name: ProofOfFillScore
+    network: base-sepolia
+    source:
+      address: "0x95908bb174224f085b0f30d6236a46b27c7a6711"
+      abi: ProofOfFillScore
+      startBlock: 46430246
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: [Agent, ScoreSnapshot]
+      abis:
+        - name: ProofOfFillScore
+          file: ./abis/ProofOfFillScore.json
+      eventHandlers:
+        - event: ScoreUpdated(indexed address,uint128,uint32,uint32,uint16,uint32)
+          handler: handleScoreUpdated
+      file: ./src/score.ts

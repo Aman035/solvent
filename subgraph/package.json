@@ -1,0 +1,13 @@
+{
+  "name": "@pof/subgraph",
+  "private": true,
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy proof-of-fill"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.98.1",
+    "@graphprotocol/graph-ts": "0.38.1"
+  }
+}
