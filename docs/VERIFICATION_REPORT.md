@@ -1,6 +1,6 @@
 # Phase 0 — Verification Report
 
-**Date:** 2026-09-05 · **Status:** V1, V2, V3, V10, V12 resolved · V9 partial · V4–V8, V11 outstanding
+**Date:** 2026-09-05 · **Status:** V1, V2, V3, V6, V10, V12 resolved · V9 partial · V4, V5, V7, V8, V11 outstanding
 
 Pinned upstream commits used for all findings below:
 
@@ -129,7 +129,6 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 | --- | --- | --- |
 | V4 SDK audit | C9 | Program bytes are simple; hand-encoding is viable regardless |
 | V5 ERC-8004 status | C19 | Needs network calls |
-| V6 Studio readiness | C13/C14 | **Hard gate on the Graph prize** — needs account + API key |
 | V7 Prior art | C5 | Low risk |
 | V8 Deadlines | C28 | Needs ETHGlobal dashboard |
 | V11 Score design | C6 | Design drafted in BUILD_PLAN §V11 |
@@ -184,3 +183,34 @@ try ISwapVM(SWAPVM).swap(order, amount, takerTraitsAndData) returns (uint256, ui
 - Bob is an on-chain **contract**, not only a script — a genuine upgrade to the pitch: *the taker agent records its own counterparty failures on-chain.*
 - `ProofOfFillTaker` must implement `ITakerCallbacks` (`preTransferInCallback` pushes `tokenIn` into Aqua). B5 failed until this was added — a real integration trap now caught on day 0.
 - **Caveat to document:** `SafeTransferFromFailed()` also occurs if the *taker* cannot pay. Disambiguate by reading the maker's balance at that block; the attestor's receipt-scan backstop cross-checks.
+
+
+---
+
+## V6 — Subgraph Studio readiness · **GREEN** ✅
+
+**The Graph prize's hard requirement — live data from a Graph provider on our target chain — is satisfiable and proven end to end.**
+
+| Fact | Value |
+| --- | --- |
+| `base-sepolia` supported by Studio | **YES** |
+| Studio account id | `42912` |
+| Subgraph slug | `proof-of-fill` |
+| Query endpoint shape | `https://api.studio.thegraph.com/query/42912/proof-of-fill/<version-label>` |
+| graph-cli | `0.98.1` · graph-ts `0.38.1` |
+| specVersion / apiVersion used | `1.0.0` / `0.0.7` |
+
+**Pipeline proven:** a probe subgraph (`v0.0.1-probe`, indexing WETH `Transfer` at `0x4200…0006`) went `graph codegen` → `graph build` → `graph deploy` → **synced with `hasIndexingErrors: false`**, returning 125 real Base Sepolia entities.
+
+**Latency — the number that governs the demo schedule:**
+
+- Cold deploy over a 500-block backfill window: **synced in ~2–3 minutes.**
+- Steady state: **2 blocks behind chain head** (≈4 s on Base).
+
+This is far better than `handover_doc.md` §13's assumption that fills must be pre-run "30+ min before recording." A few minutes of buffer is ample. **R7 (Studio indexing lag during recording) drops from High to Low likelihood.** `demo:check`'s 50-block gate (C25) remains the right guard.
+
+> **Note on "draft" status in Studio:** a subgraph shows *draft* until its first version is deployed. Resolved by the probe deploy.
+
+**Two distinct Graph credentials are in use, both secret, both in `.env`:**
+- `GRAPH_DEPLOY_KEY` — authenticates `graph deploy` against `api.studio.thegraph.com/deploy/`
+- `GRAPH_API_KEY` — query key for the gateway
