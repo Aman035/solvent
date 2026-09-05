@@ -24,7 +24,10 @@
     "dash": "cd dashboard && vite",
     "dash:build": "cd dashboard && vite build",
     "dash:preview": "cd dashboard && vite preview --port 4173",
-    "shoot": "tsx scripts/shoot.ts"
+    "shoot": "tsx scripts/shoot.ts",
+    "demo:check": "tsx scripts/demo/check.ts",
+    "demo:run": "tsx scripts/demo/run.ts",
+    "demo:reset": "tsx scripts/demo/reset.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
