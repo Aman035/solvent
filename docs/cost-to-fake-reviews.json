@@ -1,0 +1,30 @@
+{
+  "measuredAt": "2026-09-05T18:36:19.199Z",
+  "reviewers": 20,
+  "feedbackEvents": 40,
+  "totalGas": "6377600",
+  "gasPerReview": "159440",
+  "mainnetEquivalentUsdTotal": 0.574,
+  "mainnetEquivalentUsdPerReview": 0.01435,
+  "capitalRequiredUsd": 0,
+  "agents": [
+    {
+      "id": "0x98ba7e0b0efaea559282400525a2dc7272d90ce4",
+      "reviewCount": 20,
+      "reviewAvgBps": 50000,
+      "honoredCount": 0,
+      "proofOfFillScore": "0"
+    },
+    {
+      "id": "0xccd3ec4f9f4def07ac4a99b28b253e2aec115882",
+      "reviewCount": 20,
+      "reviewAvgBps": 50000,
+      "honoredCount": 14,
+      "proofOfFillScore": "4942"
+    }
+  ],
+  "assumptions": {
+    "ethUsd": 3000,
+    "baseGasGwei": 0.03
+  }
+}

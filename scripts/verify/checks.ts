@@ -133,6 +133,24 @@ export const checks: Check[] = [
     },
   },
   {
+    id: "C22/23", name: "Cost-to-fake measured", phase: "6 Adversarial",
+    async run() {
+      const need = ["docs/cost-to-fake.json", "docs/cost-to-fake-reviews.json", "docs/COST_TO_FAKE.md", "docs/score-simulation.md"];
+      const missing = need.filter((f) => !existsSync(resolve(REPO_ROOT, f)));
+      if (missing.length) return fail([`missing: ${missing.join(", ")}`], ["run: pnpm attack:all"]);
+      const wash = JSON.parse(readFileSync(resolve(REPO_ROOT, "docs/cost-to-fake.json"), "utf8"));
+      const rev = JSON.parse(readFileSync(resolve(REPO_ROOT, "docs/cost-to-fake-reviews.json"), "utf8"));
+      const ev = [
+        `reviews: $${rev.mainnetEquivalentUsdTotal} gas, $0 capital → PoF score 0`,
+        `wash trade: $${wash.gasMainnetEquivalentUsd} gas, $${wash.capitalRequiredUsd.toLocaleString()} capital → score ${wash.scoreAchieved}`,
+        `single-counterparty variant → score ${wash.scoreWithOnePuppet}`,
+      ];
+      // the structural claim must hold in the measured data
+      return (wash.scoreWithOnePuppet === "0" ? pass : fail)(ev,
+        wash.scoreWithOnePuppet !== "0" ? ["self-dealing produced a non-zero score — the diversity term is broken"] : undefined);
+    },
+  },
+  {
     id: "C13/14", name: "Subgraph live on Studio", phase: "4 Data",
     async run() {
       const pc = rd();

@@ -1,0 +1,19 @@
+{
+  "measuredAt": "2026-09-05T18:35:34.644Z",
+  "puppets": 3,
+  "fillsPerPuppet": 2,
+  "transactions": 15,
+  "gasUsed": "1258026",
+  "elapsedSeconds": 68.466,
+  "capitalRequiredUsd": 45000,
+  "gasMainnetEquivalentUsd": 0.1132,
+  "volumeFakedUsd": 2675,
+  "diversityBps": 6655,
+  "scoreAchieved": "1780",
+  "scoreWithOnePuppet": "0",
+  "assumptions": {
+    "ethUsd": 3000,
+    "baseGasGwei": 0.03
+  },
+  "attacker": "0xbDd0A238C32242bc16C47fE727870C0A485a291D"
+}

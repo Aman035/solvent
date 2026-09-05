@@ -16,7 +16,11 @@
     "bob": "tsx agents/taker/src/index.ts",
     "alice": "tsx agents/maker/src/index.ts",
     "attest:failures": "tsx services/attestor/src/scan.ts",
-    "verify": "tsx scripts/verify/all.ts"
+    "verify": "tsx scripts/verify/all.ts",
+    "attack:wash": "tsx scripts/attack/wash-trade.ts",
+    "attack:reviews": "tsx scripts/attack/sybil-reviews.ts",
+    "attack:simulate": "tsx scripts/attack/simulate-scores.ts",
+    "attack:all": "tsx scripts/attack/wash-trade.ts 3 2 && tsx scripts/attack/sybil-reviews.ts && tsx scripts/attack/simulate-scores.ts && tsx scripts/attack/report.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.2",
