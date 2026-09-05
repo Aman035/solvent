@@ -1,6 +1,6 @@
 # Phase 0 — Verification Report
 
-**Date:** 2026-09-05 · **Status:** V1, V2, V3, V5, V6, V10, V12 resolved · V9 partial · V4, V7, V8, V11 outstanding
+**Date:** 2026-09-05 · **Status:** V1, V2, V3, V4, V5, V6, V10, V12 resolved · V9 partial · V7, V8, V11 outstanding
 
 Pinned upstream commits used for all findings below:
 
@@ -127,7 +127,6 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 
 | Check | Blocker for | Notes |
 | --- | --- | --- |
-| V4 SDK audit | C9 | Program bytes are simple; hand-encoding is viable regardless |
 | V7 Prior art | C5 | Low risk |
 | V8 Deadlines | C28 | Needs ETHGlobal dashboard |
 | V11 Score design | C6 | Design drafted in BUILD_PLAN §V11 |
@@ -268,3 +267,46 @@ event ValidationResponse(address indexed validatorAddress, uint256 indexed agent
 **Open (non-blocking, resolve during C17):** whether `validationRequest` is permissioned to a registered validator.
 
 **Note:** `getAgentWallet(agentId)` exists natively, so `ReputationRegistryAdapter` (C8) can resolve `agentId → wallet` directly rather than parsing metadata.
+
+
+---
+
+## V4 — SDK audit · **RESOLVED** ⚠️ (with a consequential finding)
+
+### The published TypeScript SDK is out of sync with the contracts
+
+`@1inch/swap-vm-sdk@0.4.1` and `@1inch/aqua-sdk@0.3.1` exist on npm (the *contract* packages `@1inch/swap-vm` / `@1inch/aqua` do not — they are GitHub deps).
+
+`AquaProgramBuilder` exposes typed builders (`xycSwapXD`, `deadline`, `flatFeeAmountInXD`, `extruction`, …) and `ProgramBuilder(ixsSet)` takes its instruction set as a **constructor argument**, so the set is injectable in principle. But `add(ix)` validates against that set and `decode()` indexes it **by opcode byte** — and the SDK's bytes do not match the current contracts:
+
+| Instruction | SDK 0.4.1 emits | `main` `OpcodeList.sol` expects |
+| --- | --- | --- |
+| `XYCSwap` | `0x11` | **`0x50`** |
+| `Deadline` | `0x0d` | **`0x20`** |
+| `Extruction` | `0x20` | **`0x04`** |
+
+Verified by building real programs: `xycSwapXD()` → `0x1100`, `deadline(9999)` → `0x0d05000000270f`.
+
+### Root cause: released tags use a legacy opcode layout
+
+| Ref | `src/libs/OpcodeList.sol` | Layout |
+| --- | --- | --- |
+| `main` @ `f09a41e` (2026-09-03) | present | **banked 0x00–0xff, reserved free slots** |
+| `v1.0.2` @ `32c687c` | absent | legacy sequential |
+| `v1.0.1` @ `b6e4f97` | absent | legacy sequential |
+| `v1.0.0`, `0.0.6` | absent | legacy sequential |
+
+The banked opcode space — the thing that makes `ReputationGate` a clean, index-safe append — **exists only on `main`**. Every published tag, and the SDK that matches them, predates it.
+
+### DECISION: build against `main` @ `f09a41e` (pinned SHA), hand-encode programs
+
+**Rationale:**
+1. The entire 1inch story is "define your own instruction." `main`'s `OpcodeList.sol` documents that workflow explicitly (*"For new instructions take the next free `_Ix` slots of their family bank"*) and reserves the slots for it. On a legacy tag we would be appending to a sequential enum with no such affordance — a materially weaker and riskier story.
+2. The V1 spike is already green on `main` (6/6), as is the V10 spike (5/5).
+3. Hand-encoding is cheap: the format is `[opcode:1][argsLen:1][args]` (`ContextLib.runLoop`), and the Solidity `InstructionBuilder` gives an exact reference to test against.
+
+**Consequences:**
+- **C9 hand-encodes.** The SDK cannot be used to build programs for our router — this would have surfaced as baffling `UnknownOpcode` reverts on day 5.
+- C9's round-trip test (TS encode → Solidity decode) is now *load-bearing*, not a nicety.
+- Pin the exact SHA `f09a41e689240adc645934f965c8061749397cd2` everywhere; record it in `docs/DEVIATIONS.md` with this rationale.
+- The `aqua-sdk` event decoders (`ShippedEvent`, `PulledEvent`, `PushedEvent`, `DockedEvent`) and `SwappedEvent` remain usable for **off-chain decoding** — they are ABI-driven, not opcode-dependent.
