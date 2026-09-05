@@ -18,7 +18,9 @@
     "attest": "tsx services/attestor/src/index.ts --once",
     "attest:watch": "tsx services/attestor/src/index.ts",
     "verify:c16": "tsx scripts/gen-score-fixtures.ts && cd contracts && forge test --match-contract ScoreDifferentialTest",
-    "bob": "tsx agents/taker/src/index.ts"
+    "bob": "tsx agents/taker/src/index.ts",
+    "alice": "tsx agents/maker/src/index.ts",
+    "attest:failures": "tsx services/attestor/src/scan.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.2",

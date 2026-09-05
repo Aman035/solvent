@@ -65,6 +65,10 @@ const usdc = await deploy("usdc", "DemoToken.sol", "DemoToken", ["Proof of Fill 
 // 5. Read-only encoder: lets the TS agents build orders with the OFFICIAL libraries.
 await deploy("helper", "ProofOfFillHelper.sol", "ProofOfFillHelper", []);
 
+// 6. Makes broken promises indexable - a reverted swap destroys its own logs.
+await deploy("recorder", "ProofOfFillRecorder.sol", "ProofOfFillRecorder",
+  [deployer.address, attestor.address]);
+
 console.log(`\n  remaining: ${formatEther(await pc.getBalance({ address: deployer.address }))} ETH`);
 console.log(`  manifest : deployments/${activeChain.chainId}.json`);
 console.log(`  router   : ${explorerAddr(router)}\n`);

@@ -63,6 +63,8 @@ type Fill @entity(immutable: true) {
   valueUsd6: BigInt!               # USD value the MAKER delivered
   status: FillStatus!
   reason: Bytes                    # revert selector, for FAILED
+  failedTxHash: Bytes              # the real reverted tx, for FAILED
+  source: Int                      # 0 = attestor-observed, 1 = taker self-reported
   blockNumber: BigInt!
   timestamp: BigInt!
   txHash: Bytes!

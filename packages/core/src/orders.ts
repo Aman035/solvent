@@ -27,6 +27,7 @@ export const ERC20_ABI = [
   { name: "approve", type: "function", stateMutability: "nonpayable", inputs: [{ type: "address" }, { type: "uint256" }], outputs: [{ type: "bool" }] },
   { name: "allowance", type: "function", stateMutability: "view", inputs: [{ type: "address" }, { type: "address" }], outputs: [{ type: "uint256" }] },
   { name: "balanceOf", type: "function", stateMutability: "view", inputs: [{ type: "address" }], outputs: [{ type: "uint256" }] },
+  { name: "transfer", type: "function", stateMutability: "nonpayable", inputs: [{ type: "address" }, { type: "uint256" }], outputs: [{ type: "bool" }] },
 ] as const;
 
 export const AQUA_ABI = [
@@ -64,6 +65,7 @@ export function addrs() {
   return {
     aqua: c.aqua.address as Hex, router: c.router.address as Hex,
     score: c.proofOfFillScore.address as Hex, helper: c.helper.address as Hex,
+    recorder: c.recorder.address as Hex,
     usdc: c.usdc.address as Hex, weth: c.weth.address as Hex,
   };
 }
