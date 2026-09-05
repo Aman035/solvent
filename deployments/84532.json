@@ -1,14 +1,14 @@
 {
   "chainId": 84532,
   "chainKey": "base-sepolia",
-  "updatedAt": "2026-09-05T17:19:48.425Z",
+  "updatedAt": "2026-09-05T17:26:43.249Z",
   "contracts": {
     "aqua": {
       "address": "0x525bebb9c5b4dad791402923e344b360bf6ab6a2",
       "deployBlock": 46430245,
       "txHash": "0x3047c1e25825e6009f34d8c6454a985c8d9c07fa773f0083cd481244ffd9449d",
-      "sourceCommit": "9c5c42e5840e8741fba3597c48456c9510212b66",
       "verifiedUrl": "https://sepolia.basescan.org/address/0x525bebb9c5b4dad791402923e344b360bf6ab6a2#code",
+      "sourceCommit": "9c5c42e5840e8741fba3597c48456c9510212b66",
       "note": "Official 1inch Aqua, pinned commit, UNMODIFIED source. Official deployments are mainnet-only, so Base Sepolia requires a redeploy."
     },
     "proofOfFillScore": {
@@ -22,8 +22,8 @@
       "address": "0x06ac5984d1bdd04aefd3e4e33312f30ce058462e",
       "deployBlock": 46430248,
       "txHash": "0xf54d8579bfff29cc2ccf3d7569ef3a20c9b9f62a4f0dd0fdddc7a46ac6e5a869",
-      "sourceCommit": "f09a41e689240adc645934f965c8061749397cd2",
       "verifiedUrl": "https://sepolia.basescan.org/address/0x06ac5984d1bdd04aefd3e4e33312f30ce058462e#code",
+      "sourceCommit": "f09a41e689240adc645934f965c8061749397cd2",
       "note": "Official AquaSwapVMRouter shape + ReputationGate (0x21) and ReputationPriceAdjuster (0xb3). Permitted 'modified SwapVM redeploy'."
     },
     "weth": {
@@ -39,6 +39,11 @@
       "txHash": "0x641df7990a6e6b2e4b37fbe85190dde880f427ec39be03399950d5986602f068",
       "verifiedUrl": "https://sepolia.basescan.org/address/0x097b80a3a5e9a82c65ef934c3ea402502cdea1af#code",
       "note": "Demo faucet token, 6dp."
+    },
+    "helper": {
+      "address": "0x804eb88104aa6315714d6dcfb1217c2a4de0e193",
+      "deployBlock": 46430458,
+      "txHash": "0x2bb1f660313cfc3202c9b4e67cbd6866add477595ae6ca5d10d797421eac0ac7"
     }
   }
 }

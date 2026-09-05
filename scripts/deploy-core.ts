@@ -62,6 +62,9 @@ const router = await deploy("router", "ProofOfFillSwapVMRouter.sol", "ProofOfFil
 const weth = await deploy("weth", "DemoToken.sol", "DemoToken", ["Proof of Fill WETH", "pofWETH", 18]);
 const usdc = await deploy("usdc", "DemoToken.sol", "DemoToken", ["Proof of Fill USDC", "pofUSDC", 6]);
 
+// 5. Read-only encoder: lets the TS agents build orders with the OFFICIAL libraries.
+await deploy("helper", "ProofOfFillHelper.sol", "ProofOfFillHelper", []);
+
 console.log(`\n  remaining: ${formatEther(await pc.getBalance({ address: deployer.address }))} ETH`);
 console.log(`  manifest : deployments/${activeChain.chainId}.json`);
 console.log(`  router   : ${explorerAddr(router)}\n`);
