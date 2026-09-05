@@ -1,6 +1,6 @@
 # Phase 0 — Verification Report
 
-**Date:** 2026-09-05 · **Status:** V1, V2, V3, V6, V10, V12 resolved · V9 partial · V4, V5, V7, V8, V11 outstanding
+**Date:** 2026-09-05 · **Status:** V1, V2, V3, V5, V6, V10, V12 resolved · V9 partial · V4, V7, V8, V11 outstanding
 
 Pinned upstream commits used for all findings below:
 
@@ -128,7 +128,6 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 | Check | Blocker for | Notes |
 | --- | --- | --- |
 | V4 SDK audit | C9 | Program bytes are simple; hand-encoding is viable regardless |
-| V5 ERC-8004 status | C19 | Needs network calls |
 | V7 Prior art | C5 | Low risk |
 | V8 Deadlines | C28 | Needs ETHGlobal dashboard |
 | V11 Score design | C6 | Design drafted in BUILD_PLAN §V11 |
@@ -214,3 +213,58 @@ This is far better than `handover_doc.md` §13's assumption that fills must be p
 **Two distinct Graph credentials are in use, both secret, both in `.env`:**
 - `GRAPH_DEPLOY_KEY` — authenticates `graph deploy` against `api.studio.thegraph.com/deploy/`
 - `GRAPH_API_KEY` — query key for the gateway
+
+
+---
+
+## V5 — ERC-8004 deployment status · **RESOLVED** ✅
+
+### Registry availability, probed on-chain
+
+| Registry | Base mainnet (8453) | Base Sepolia (84532) |
+| --- | --- | --- |
+| Identity `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432` | ✅ deployed | ❌ **no code** |
+| Reputation `0x8004BAa17C55a88189AE136b182e5fdA19dE9b63` | ✅ deployed | ❌ **no code** |
+| Validation | not at a known canonical address | ❌ none |
+
+Base-mainnet Identity is an **ERC-1967 proxy** → implementation `0x7274e874ca62410a93bd8bf61c69d8045e399c02`. Live probe confirms it is an ERC-721: `name() = "AgentIdentity"`, `symbol() = "AGENT"`, no `totalSupply()` (not Enumerable). Reputation's `owner()` = `0x547289319C3e6aedB179C0b8e8aF0B5ACd062603`.
+
+### Decision
+
+**C19 deploys the reference implementation to Base Sepolia ourselves.**
+
+Source: **`ChaosChain/trustless-agents-erc-ri`** @ `2e5e79d` — the official ERC-8004 reference implementation. **CC0-1.0** (no attribution constraints), Solidity 0.8.19, 74/74 tests passing, v1.2.0 "Jan 2026 Spec Update". It contains all three registries, `ValidationRegistry.sol` included.
+
+Its `deployments.json` shows the only live deployment is **Ethereum Sepolia** — Identity `0xf66e7CBd…37A7`, Reputation `0x6E2a2852…E407`, Validation `0xC26171A3…CA2C`. **Nothing on Base Sepolia.** This substantiates the pitch line: we would be among the Validation Registry's first real users, and the first on Base Sepolia.
+
+### Exact signatures the subgraph (C13) and attestor (C17) consume
+
+```solidity
+// Identity
+event Registered(uint256 indexed agentId, string agentURI, address indexed owner);
+event URIUpdated(uint256 indexed agentId, string newURI, address indexed updatedBy);
+event AgentWalletSet(uint256 indexed agentId, address indexed newWallet, address indexed setBy);
+event MetadataSet(uint256 indexed agentId, string indexed indexedMetadataKey, string metadataKey, bytes metadataValue);
+function register(string calldata agentURI) external returns (uint256 agentId);
+function getAgentWallet(uint256 agentId) external view returns (address wallet);
+
+// Reputation  (note: int128 value + uint8 valueDecimals, NOT a uint8 score)
+event NewFeedback(uint256 indexed agentId, address indexed clientAddress, uint64 feedbackIndex,
+                  int128 value, uint8 valueDecimals, string indexed indexedTag1,
+                  string tag1, string tag2, string endpoint, string feedbackURI, bytes32 feedbackHash);
+event FeedbackRevoked(uint256 indexed agentId, address indexed clientAddress, uint64 indexed feedbackIndex);
+
+// Validation  — TWO-STEP flow
+event ValidationRequest (address indexed validatorAddress, uint256 indexed agentId,
+                         string requestURI, bytes32 indexed requestHash);
+event ValidationResponse(address indexed validatorAddress, uint256 indexed agentId, bytes32 indexed requestHash,
+                         uint8 response, string responseURI, bytes32 responseHash, string tag);
+```
+
+**Two consequences for C17:**
+1. The Validation flow is **request-then-respond**, not a single call. The attestor must create a `ValidationRequest` and then a `ValidationResponse` keyed by `requestHash`.
+2. `response` is a `uint8` (natural fit for HONORED / FAILED) and `tag` is a free `string` — so the **fill txHash goes in `tag`**, with the full JSON attestation behind `responseURI` (`data:` URI) and committed via `responseHash`.
+
+**Open (non-blocking, resolve during C17):** whether `validationRequest` is permissioned to a registered validator.
+
+**Note:** `getAgentWallet(agentId)` exists natively, so `ReputationRegistryAdapter` (C8) can resolve `agentId → wallet` directly rather than parsing metadata.
