@@ -1,0 +1,12 @@
+{
+  "name": "@pof/contracts",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "@1inch/aqua": "github:1inch/aqua#9c5c42e5840e8741fba3597c48456c9510212b66",
+    "@1inch/swap-vm": "github:1inch/swap-vm#f09a41e689240adc645934f965c8061749397cd2",
+    "@1inch/solidity-utils": "6.9.10",
+    "@openzeppelin/contracts": "5.4.0",
+    "forge-std": "github:foundry-rs/forge-std#v1.11.0"
+  }
+}

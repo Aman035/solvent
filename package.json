@@ -1,0 +1,30 @@
+{
+  "name": "proof-of-fill",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.3",
+  "scripts": {
+    "build:contracts": "cd contracts && forge build",
+    "test:contracts": "cd contracts && forge test",
+    "fmt:contracts": "cd contracts && forge fmt",
+    "wallets": "tsx scripts/balances.ts",
+    "fund": "tsx scripts/fund.ts",
+    "verify:v9": "tsx scripts/verify/v9-toolchain.ts",
+    "verify:c1": "tsx scripts/verify/c1-scaffold.ts",
+    "verify:c2": "tsx scripts/verify/c2-wallets.ts",
+    "verify:all": "tsx scripts/verify/all.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "@types/node": "^22.10.2"
+  },
+  "dependencies": {
+    "viem": "^2.21.55",
+    "zod": "^3.24.1",
+    "dotenv": "^16.4.7",
+    "@pof/core": "workspace:*"
+  },
+  "type": "module"
+}

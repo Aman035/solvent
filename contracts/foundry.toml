@@ -1,0 +1,33 @@
+# Default = FAST iteration. via_ir off: ~10x quicker rebuilds.
+# Use `FOUNDRY_PROFILE=deploy` for anything that gets deployed or verified,
+# so bytecode matches upstream's compilation settings exactly.
+[profile.default]
+src            = "src"
+test           = "test"
+script         = "script"
+out            = "out"
+libs           = ["../node_modules"]
+solc_version   = "0.8.30"
+optimizer      = true
+optimizer_runs = 700
+via_ir         = false
+fs_permissions = [{ access = "read-write", path = "../deployments" }]
+
+[profile.deploy]
+via_ir         = true
+optimizer      = true
+optimizer_runs = 700
+solc_version   = "0.8.30"
+
+[profile.ci]
+via_ir         = true
+optimizer      = true
+optimizer_runs = 700
+solc_version   = "0.8.30"
+
+[fmt]
+single_line_statement_blocks = "multi"
+multiline_func_header        = "all"
+bracket_spacing              = true
+int_types                    = "long"
+number_underscore            = "thousands"

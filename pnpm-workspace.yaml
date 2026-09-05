@@ -1,0 +1,6 @@
+packages:
+  - "packages/*"
+  - "contracts"
+  - "agents/*"
+  - "dashboard"
+  - "services/*"
