@@ -6,6 +6,7 @@
 broadcast/
 build/
 cache/
+dashboard/dist/
 dist/
 generated/
 node_modules/

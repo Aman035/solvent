@@ -1,0 +1,154 @@
+/* ── shell ──────────────────────────────────────────────────────────────── */
+.shell { max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter) 56px; }
+
+/* ── status rail ────────────────────────────────────────────────────────── */
+.rail {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 14px 0 13px; border-bottom: 1px solid var(--rule);
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--ink-900) 94%, transparent);
+  backdrop-filter: blur(8px);
+}
+.rail .mark { font-weight: 700; font-size: 14px; letter-spacing: -0.015em; }
+.rail .tag { color: var(--text-3); font-size: 12px; }
+.rail .spacer { flex: 1; }
+.rail .stat { display: flex; align-items: baseline; gap: 7px; }
+.rail .stat b { font-family: var(--mono); font-weight: 500; font-size: 12px; color: var(--text-2); }
+
+.pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--delivered); display: inline-block;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--delivered) 60%, transparent); animation: pulse 2.4s ease-out infinite; }
+.pulse.stale { background: var(--returned); animation: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--delivered) 55%, transparent); } 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+/* ── the statement header ───────────────────────────────────────────────── */
+.statement-head {
+  display: grid; grid-template-columns: 232px 1fr 210px 128px;
+  gap: 26px; padding: 26px 0 9px; border-bottom: 1px solid var(--rule);
+}
+.hed { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.hed .sub { display: block; color: var(--text-3); font-weight: 400; font-size: 12px; letter-spacing: 0; margin-top: 3px; }
+
+/* ── ledger row ─────────────────────────────────────────────────────────── */
+.row {
+  display: grid; grid-template-columns: 232px 1fr 210px 128px;
+  gap: 26px; align-items: center;
+  padding: 19px 0; border-bottom: 1px solid var(--rule);
+  transition: transform 260ms cubic-bezier(.2,.7,.3,1), background 260ms;
+  cursor: pointer; border-left: 2px solid transparent; padding-left: 0;
+}
+.row:hover { background: color-mix(in srgb, var(--ink-800) 55%, transparent); }
+.row.chosen { transform: translateY(-4px); }
+
+.who .nm { font-size: 16px; font-weight: 600; letter-spacing: -0.012em; }
+.who .meta { color: var(--text-3); font-size: 11.5px; margin-top: 2px; font-family: var(--mono); }
+
+/* ── THE SIGNATURE: claim ticks vs delivery segments ────────────────────── */
+.tape { display: grid; gap: 7px; }
+.tape-line { display: flex; align-items: center; gap: 11px; }
+.spread { font-family: var(--mono); font-size: 10.5px; color: var(--text-3); white-space: nowrap; margin-left: 2px; }
+.spread .thin { color: var(--returned); }
+.tape-key { width: 62px; flex: none; text-align: right; }
+
+/* claims: uniform hairline ticks — free, interchangeable, identical */
+.ticks { display: flex; gap: 3px; height: 15px; align-items: stretch; }
+.track-ticks { width: 100%; max-width: 400px; flex: none; }
+.tick { width: 7px; border: 1px solid var(--claimed); border-radius: 1px; opacity: .62; }
+.ticks.empty-note { color: var(--text-3); font-family: var(--mono); font-size: 11px; align-items: center; }
+
+/* delivery: discrete segments, one per counterparty, of real varying magnitude.
+   Gaps are wide enough that the segmentation itself is legible - a maker with one
+   fat block and a maker with six even ones must look different at a glance. */
+/* One fixed-width track for every agent, so bar LENGTH is comparable across rows and
+   segment COUNT shows how the value was spread. Bounded so a large honest maker does
+   not flood the page with the accent colour. */
+.track { display: flex; gap: 4px; height: 15px; align-items: stretch; width: 100%; max-width: 400px; flex: none; }
+.seg { background: var(--delivered); border-radius: 1px; min-width: 6px; transition: width 620ms cubic-bezier(.2,.7,.3,1); }
+.seg.failed { background: var(--returned); }
+.channel { width: 100%; max-width: 400px; flex: none; height: 15px; border: 1px dashed var(--rule-lit); border-radius: 1px;
+  display: flex; align-items: center; padding-left: 8px; color: var(--text-3); font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; }
+
+/* ── figures ────────────────────────────────────────────────────────────── */
+.figs { text-align: right; }
+.figs .big { font-family: var(--mono); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+.figs .score { font-family: var(--mono); font-size: 12px; color: var(--text-2); margin-top: 5px; }
+.figs .score b { color: var(--text); font-weight: 600; }
+.figs .big.zero { color: var(--text-3); }
+.figs .big:not(.zero) { color: var(--delivered); }
+.figs .sub { color: var(--text-3); font-size: 11px; font-family: var(--mono); margin-top: 3px; }
+.figs .sub .bad { color: var(--returned); }
+
+/* ── verdict stamp — the vernacular of a clearing house ─────────────────── */
+.stamp {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.17em; text-transform: uppercase;
+  border: 1px solid currentColor; border-radius: 2px;
+  padding: 6px 0; text-align: center; width: 100%;
+  opacity: .92;
+}
+.stamp.cleared { color: var(--delivered); }
+.stamp.norecord { color: var(--returned); }
+.stamp.partial { color: #d9a441; }
+.stamp.concentrated { color: var(--returned); opacity: .8; }
+
+/* ── two-column lower deck ──────────────────────────────────────────────── */
+.deck { display: grid; grid-template-columns: 1fr 460px; gap: 34px; margin-top: 34px; align-items: start; }
+@media (max-width: 1180px) { .deck { grid-template-columns: 1fr; } }
+
+.panel { border: 1px solid var(--rule); border-radius: 3px; background: var(--ink-800); }
+.panel > header { padding: 13px 16px; border-bottom: 1px solid var(--rule); display: flex; align-items: baseline; gap: 10px; }
+.panel > header .spacer { flex: 1; }
+.panel .body { padding: 4px 0; max-height: 420px; overflow-y: auto; }
+
+/* ── fills feed ─────────────────────────────────────────────────────────── */
+.fill {
+  display: grid; grid-template-columns: 46px 1fr 108px 86px; gap: 12px; align-items: center;
+  padding: 10px 16px; border-bottom: 1px solid color-mix(in srgb, var(--rule) 55%, transparent);
+  font-size: 12.5px;
+}
+.fill:last-child { border-bottom: 0; }
+.fill .t { color: var(--text-3); font-family: var(--mono); font-size: 11px; }
+.fill .amt { text-align: right; font-family: var(--mono); }
+.fill.honored .amt { color: var(--delivered); }
+.fill.failed .amt { color: var(--returned); }
+.fill .badge { font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-align: right; }
+.fill.honored .badge { color: var(--delivered); }
+.fill.failed .badge { color: var(--returned); }
+.fill.new { animation: print 420ms cubic-bezier(.2,.7,.3,1); }
+@keyframes print { from { opacity: 0; transform: translateY(-9px); } to { opacity: 1; transform: none; } }
+
+/* ── cost panel ─────────────────────────────────────────────────────────── */
+.cost { padding: 15px 16px; }
+.cost table { width: 100%; border-collapse: collapse; }
+.cost td { padding: 7px 0; border-bottom: 1px solid color-mix(in srgb, var(--rule) 50%, transparent); font-size: 12.5px; }
+.cost td:last-child { text-align: right; font-family: var(--mono); }
+.cost tr:last-child td { border-bottom: 0; }
+.cost .hi { color: var(--delivered); font-weight: 500; }
+.cost .warn { color: var(--returned); font-weight: 500; }
+.cost .note { color: var(--text-3); font-size: 11.5px; line-height: 1.55; margin: 12px 0 0; }
+
+/* ── detail drawer ──────────────────────────────────────────────────────── */
+.scrim { position: fixed; inset: 0; background: rgba(8,10,12,.6); z-index: 40; animation: fade 180ms ease; }
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; width: 560px; max-width: 92vw; z-index: 50;
+  background: var(--ink-800); border-left: 1px solid var(--rule-lit); overflow-y: auto;
+  animation: slide 260ms cubic-bezier(.2,.7,.3,1);
+}
+@keyframes slide { from { transform: translateX(24px); opacity: .4 } to { transform: none; opacity: 1 } }
+.drawer header { position: sticky; top: 0; background: var(--ink-800); padding: 18px 22px 14px; border-bottom: 1px solid var(--rule); display: flex; align-items: flex-start; gap: 14px; }
+.drawer h2 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.015em; }
+.drawer .close { margin-left: auto; background: none; border: 1px solid var(--rule-lit); color: var(--text-2); border-radius: 3px; cursor: pointer; padding: 4px 9px; font-family: var(--mono); font-size: 12px; }
+.drawer section { padding: 17px 22px; border-bottom: 1px solid var(--rule); }
+.drawer .kv { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin-top: 9px; }
+.drawer .kv div:nth-child(even) { font-family: var(--mono); text-align: right; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.chip { font-family: var(--mono); font-size: 10px; letter-spacing: .07em; padding: 4px 8px; border: 1px solid var(--rule-lit); border-radius: 2px; color: var(--text-2); }
+.chip.ours { border-color: var(--delivered-dim); color: var(--delivered); }
+
+.revgrid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+.revgrid a { width: 22px; height: 22px; border: 1px solid var(--claimed); opacity: .6; border-radius: 2px; display: block; }
+.revgrid a:hover { opacity: 1; }
+
+.empty { padding: 30px 16px; color: var(--text-3); font-size: 12.5px; text-align: center; font-family: var(--mono); }
+.err { border: 1px solid var(--returned-dim); color: var(--returned); padding: 13px 16px; border-radius: 3px; margin: 20px 0; font-family: var(--mono); font-size: 12.5px; }

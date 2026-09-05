@@ -20,19 +20,24 @@
     "attack:wash": "tsx scripts/attack/wash-trade.ts",
     "attack:reviews": "tsx scripts/attack/sybil-reviews.ts",
     "attack:simulate": "tsx scripts/attack/simulate-scores.ts",
-    "attack:all": "tsx scripts/attack/wash-trade.ts 3 2 && tsx scripts/attack/sybil-reviews.ts && tsx scripts/attack/simulate-scores.ts && tsx scripts/attack/report.ts"
+    "attack:all": "tsx scripts/attack/wash-trade.ts 3 2 && tsx scripts/attack/sybil-reviews.ts && tsx scripts/attack/simulate-scores.ts && tsx scripts/attack/report.ts",
+    "dash": "cd dashboard && vite",
+    "dash:build": "cd dashboard && vite build",
+    "dash:preview": "cd dashboard && vite preview --port 4173",
+    "shoot": "tsx scripts/shoot.ts"
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
+    "playwright": "^1.63.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.8",
-    "@types/node": "^22.10.2"
+    "vitest": "^2.1.8"
   },
   "dependencies": {
-    "viem": "^2.21.55",
-    "zod": "^3.24.1",
+    "@pof/core": "workspace:*",
     "dotenv": "^16.4.7",
-    "@pof/core": "workspace:*"
+    "viem": "^2.21.55",
+    "zod": "^3.24.1"
   },
   "type": "module"
 }
