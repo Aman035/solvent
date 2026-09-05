@@ -149,3 +149,24 @@ export async function ensureApproval(account: HDAccount, token: Hex, spender: He
   await tx(account, label, { address: token, abi: ERC20_ABI, functionName: "approve", args: [spender, MAX_UINT] });
   return true;
 }
+
+/**
+ * Aqua balances for a strategy, or null if it was never shipped.
+ *
+ * `safeBalances` REVERTS with SafeBalancesForTokenNotInActiveStrategy for an unknown or
+ * docked strategy, so it cannot be used directly as an existence check.
+ */
+export async function strategyBalances(
+  maker: Hex, strategyHash: Hex, token0: Hex, token1: Hex,
+): Promise<{ token0: bigint; token1: bigint } | null> {
+  const pc = readClient();
+  try {
+    const r = await pc.readContract({
+      address: addrs().aqua, abi: AQUA_ABI, functionName: "safeBalances",
+      args: [maker, addrs().router, strategyHash, token0, token1],
+    }) as readonly [bigint, bigint];
+    return { token0: r[0], token1: r[1] };
+  } catch {
+    return null;   // not an active strategy
+  }
+}
