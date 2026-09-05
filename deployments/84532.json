@@ -1,0 +1,44 @@
+{
+  "chainId": 84532,
+  "chainKey": "base-sepolia",
+  "updatedAt": "2026-09-05T17:19:48.425Z",
+  "contracts": {
+    "aqua": {
+      "address": "0x525bebb9c5b4dad791402923e344b360bf6ab6a2",
+      "deployBlock": 46430245,
+      "txHash": "0x3047c1e25825e6009f34d8c6454a985c8d9c07fa773f0083cd481244ffd9449d",
+      "sourceCommit": "9c5c42e5840e8741fba3597c48456c9510212b66",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x525bebb9c5b4dad791402923e344b360bf6ab6a2#code",
+      "note": "Official 1inch Aqua, pinned commit, UNMODIFIED source. Official deployments are mainnet-only, so Base Sepolia requires a redeploy."
+    },
+    "proofOfFillScore": {
+      "address": "0x95908bb174224f085b0f30d6236a46b27c7a6711",
+      "deployBlock": 46430246,
+      "txHash": "0x5597921577add1fb3235b5feb3f25a0d85ea800e21ce0a11685dff1ae322e77f",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x95908bb174224f085b0f30d6236a46b27c7a6711#code",
+      "note": "Score cache. Attestor writes; ReputationGate reads. Formula: docs/SCORE_DESIGN.md"
+    },
+    "router": {
+      "address": "0x06ac5984d1bdd04aefd3e4e33312f30ce058462e",
+      "deployBlock": 46430248,
+      "txHash": "0xf54d8579bfff29cc2ccf3d7569ef3a20c9b9f62a4f0dd0fdddc7a46ac6e5a869",
+      "sourceCommit": "f09a41e689240adc645934f965c8061749397cd2",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x06ac5984d1bdd04aefd3e4e33312f30ce058462e#code",
+      "note": "Official AquaSwapVMRouter shape + ReputationGate (0x21) and ReputationPriceAdjuster (0xb3). Permitted 'modified SwapVM redeploy'."
+    },
+    "weth": {
+      "address": "0x3ac3f85cdbd1ce973cce3e67bc3cf75b79c525c7",
+      "deployBlock": 46430249,
+      "txHash": "0xc72f56d5b2a003a2846ac230a7dd309a17db04627df425e82702e1c953ace765",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x3ac3f85cdbd1ce973cce3e67bc3cf75b79c525c7#code",
+      "note": "Demo faucet token, 18dp. Open mint so the demo never depends on testnet liquidity."
+    },
+    "usdc": {
+      "address": "0x097b80a3a5e9a82c65ef934c3ea402502cdea1af",
+      "deployBlock": 46430251,
+      "txHash": "0x641df7990a6e6b2e4b37fbe85190dde880f427ec39be03399950d5986602f068",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x097b80a3a5e9a82c65ef934c3ea402502cdea1af#code",
+      "note": "Demo faucet token, 6dp."
+    }
+  }
+}

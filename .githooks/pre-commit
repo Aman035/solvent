@@ -26,9 +26,19 @@ if [ -f .env ]; then
   done < .env
 fi
 
-# 3) generic high-signal patterns
-if git diff --cached -U0 | grep -qE '(quiknode\.pro/[a-f0-9]{20,}|alchemy\.com/v2/[A-Za-z0-9_-]{20,}|0x[a-fA-F0-9]{64})'; then
-  echo "❌ BLOCKED: an RPC URL with an embedded key or a raw private key is staged."; fail=1
+# 3) RPC URLs with an embedded key
+if git diff --cached -U0 | grep -qE '(quiknode\.pro/[a-f0-9]{20,}|alchemy\.com/v2/[A-Za-z0-9_-]{20,})'; then
+  echo "❌ BLOCKED: an RPC URL with an embedded key is staged."; fail=1
+fi
+
+# 4) raw 32-byte hex that is actually a KEY.
+#    A bare 0x[64 hex] is not enough - transaction hashes, block hashes and
+#    strategy hashes share that shape and are public. Require key-ish context
+#    on the same line to avoid blocking deployment manifests.
+if git diff --cached -U0 \
+   | grep -iE '(private[_-]?key|signing[_-]?key|secret|mnemonic|seed[_-]?phrase|PK\s*=)' \
+   | grep -qE '0x[a-fA-F0-9]{64}'; then
+  echo "❌ BLOCKED: a raw private key appears to be staged."; fail=1
 fi
 
 [ "$fail" -eq 1 ] && { echo "   Move it to .env and read it via process.env / vm.envString."; exit 1; }
