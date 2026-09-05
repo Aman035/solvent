@@ -1,6 +1,6 @@
 # Phase 0 — Verification Report
 
-**Date:** 2026-09-05 · **Status:** V1–V7, V10, V11, V12 resolved · V9 partial · **V8 needs you** (ETHGlobal dashboard login)
+**Date:** 2026-09-05 · **Status:** V1–V8, V10, V11, V12 resolved · V9 partial (needs deployer key + BaseScan/Anthropic keys) · **Phase 0 COMPLETE**
 
 Pinned upstream commits used for all findings below:
 
@@ -127,7 +127,7 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 
 | Check | Blocker for | Notes |
 | --- | --- | --- |
-| V8 Deadlines | C28 | **Blocked — needs ETHGlobal dashboard login** |
+| V8 Deadlines | C28 | ✅ **Sun 13 Sep 2026, 21:30 IST / 16:00 UTC** · video ~4 min max · see `docs/SUBMISSION_CHECKLIST.md` |
 | V11 Score design | C6 | Design drafted in BUILD_PLAN §V11 |
 
 
