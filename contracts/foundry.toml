@@ -1,6 +1,7 @@
-# Default = FAST iteration. via_ir off: ~10x quicker rebuilds.
-# Use `FOUNDRY_PROFILE=deploy` for anything that gets deployed or verified,
-# so bytecode matches upstream's compilation settings exactly.
+# SwapVM.sol does not compile without via_ir ("Stack too deep"), so via_ir is
+# REQUIRED for anything importing it - which is the router, the instructions and
+# every integration test. Upstream sets the same flags; matching them also keeps
+# our deployed bytecode comparable to a local build of the pinned source.
 [profile.default]
 src            = "src"
 test           = "test"
@@ -10,11 +11,13 @@ libs           = ["../node_modules"]
 solc_version   = "0.8.30"
 optimizer      = true
 optimizer_runs = 700
-via_ir         = false
+via_ir         = true
 fs_permissions = [{ access = "read-write", path = "../deployments" }]
 
-[profile.deploy]
-via_ir         = true
+# Fast iteration for contracts that do NOT import SwapVM (e.g. ProofOfFillScore).
+# Usage: FOUNDRY_PROFILE=fast forge test --match-contract ProofOfFillScoreTest
+[profile.fast]
+via_ir         = false
 optimizer      = true
 optimizer_runs = 700
 solc_version   = "0.8.30"
