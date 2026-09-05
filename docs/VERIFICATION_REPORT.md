@@ -1,6 +1,6 @@
 # Phase 0 — Verification Report
 
-**Date:** 2026-09-05 · **Status:** V1, V2, V3, V4, V5, V6, V10, V12 resolved · V9 partial · V7, V8, V11 outstanding
+**Date:** 2026-09-05 · **Status:** V1–V7, V10, V11, V12 resolved · V9 partial · **V8 needs you** (ETHGlobal dashboard login)
 
 Pinned upstream commits used for all findings below:
 
@@ -127,8 +127,7 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 
 | Check | Blocker for | Notes |
 | --- | --- | --- |
-| V7 Prior art | C5 | Low risk |
-| V8 Deadlines | C28 | Needs ETHGlobal dashboard |
+| V8 Deadlines | C28 | **Blocked — needs ETHGlobal dashboard login** |
 | V11 Score design | C6 | Design drafted in BUILD_PLAN §V11 |
 
 
@@ -310,3 +309,30 @@ The banked opcode space — the thing that makes `ReputationGate` a clean, index
 - C9's round-trip test (TS encode → Solidity decode) is now *load-bearing*, not a nicety.
 - Pin the exact SHA `f09a41e689240adc645934f965c8061749397cd2` everywhere; record it in `docs/DEVIATIONS.md` with this rationale.
 - The `aqua-sdk` event decoders (`ShippedEvent`, `PulledEvent`, `PushedEvent`, `DockedEvent`) and `SwappedEvent` remain usable for **off-chain decoding** — they are ABI-driven, not opcode-dependent.
+
+
+---
+
+## V7 — Prior art · **RESOLVED** ✅
+
+Read for *pattern only*; no code copied (Start Fresh compliance — see `docs/DEVIATIONS.md`).
+
+### Votive (`resistingdestiny/wishing-well-votive` @ `a41a455`)
+
+**They appended 7 custom opcodes** (`VOTIVE_OPCODE_COUNT = 7`) via a `VotiveOpcodes` mixin and a `VotiveAquaRouter is AquaSwapVMRouter, VotiveOpcodes`. So a custom-instruction submission has precedent and was accepted.
+
+**Crucially, they used a different extension API than we do — which independently confirms V4.** Votive overrides **`_opcodes()`** (a table-copy-and-append), whereas current `main` uses **`_runOpcode()`** (an `if/else` dispatch with `super` fallthrough). Their own comment describes appending to indices *"which are `_notInstruction` on the stock router"* — the **legacy sequential** layout. `main`'s banked `OpcodeList.sol` with named reserved slots per family bank did not exist yet.
+
+**Honest trade-off this exposes:** on the legacy layout Votive kept SDK compatibility (*"a program encoded by the Aqua SDK … runs byte-identically here"*). By building on `main` we give that up and hand-encode (C9). We gain the reserved-slot design that makes `ReputationGate` an index-safe, idiomatic append rather than a sequential tack-on — a materially stronger 1inch story. **V4's decision stands.**
+
+### Patterns to adopt
+
+1. **`new Aqua()` takes no constructor arguments.** C5 is genuinely trivial. (Note `main`'s `AquaSwapVMRouter` now takes **5** args — `aqua, weth, owner, name, version` — versus the 3 Votive used, another confirmation `main` has moved.)
+2. **Deploy our own mock tokens rather than hunting testnet WETH/USDC.** Votive's rationale is exactly right: *"depending on a faucet for testnet tokens is a good way to have a demo fail for a reason that has nothing to do with the protocol."* **Adopted** — C2 will deploy `TokenMock` WETH/USDC, removing a whole class of demo-day risk (R5).
+3. Deploy a `MockTaker`-style helper alongside, as we already plan with `ProofOfFillTaker` (C20).
+
+### ArcBook (`Ryad2/liquid_OB` @ `9039b86`)
+
+Redeploys Aqua + `AquaSwapVMRouter` and has a clean script layout (`DeployLiquidOB`, `SeedDemoPositions`, `DockDemoPositions`, `ReplayDemoRoute`) worth mirroring in C25's orchestration. **No custom opcode** — it consumes the stock router.
+
+**Conclusion:** nobody in the prior art scores Aqua makers, and no one has combined a custom SwapVM instruction with ERC-8004. The differentiator in `handover_doc.md` §5 holds.
