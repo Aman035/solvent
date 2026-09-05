@@ -9,18 +9,14 @@
     "fmt:contracts": "cd contracts && forge fmt",
     "wallets": "tsx scripts/balances.ts",
     "fund": "tsx scripts/fund.ts",
-    "verify:v9": "tsx scripts/verify/v9-toolchain.ts",
-    "verify:c1": "tsx scripts/verify/c1-scaffold.ts",
-    "verify:c2": "tsx scripts/verify/c2-wallets.ts",
     "verify:all": "tsx scripts/verify/all.ts",
     "test": "vitest run",
-    "verify:c9": "tsx scripts/gen-program-fixtures.ts && cd contracts && forge test --match-contract ProgramRoundTripTest",
     "attest": "tsx services/attestor/src/index.ts --once",
     "attest:watch": "tsx services/attestor/src/index.ts",
-    "verify:c16": "tsx scripts/gen-score-fixtures.ts && cd contracts && forge test --match-contract ScoreDifferentialTest",
     "bob": "tsx agents/taker/src/index.ts",
     "alice": "tsx agents/maker/src/index.ts",
-    "attest:failures": "tsx services/attestor/src/scan.ts"
+    "attest:failures": "tsx services/attestor/src/scan.ts",
+    "verify": "tsx scripts/verify/all.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.2",

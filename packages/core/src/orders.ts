@@ -88,7 +88,7 @@ export async function buildOrder(opts: {
       postTransferOutTarget: ZERO_ADDR, postTransferOutData: "0x",
       program: opts.program,
     }] as never,
-  }) as Order;
+  }) as unknown as Order;
 }
 
 /** Build taker data for a plain EOA taker (transferFrom + aqua.push path). */

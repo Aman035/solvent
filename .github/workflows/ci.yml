@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  contracts:
+    name: Contracts (forge)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Format check
+        run: cd contracts && forge fmt --check src test script
+        continue-on-error: true
+      - name: Build
+        run: cd contracts && forge build --sizes
+      - name: Generate cross-language fixtures
+        run: |
+          pnpm exec tsx scripts/gen-program-fixtures.ts
+          pnpm exec tsx scripts/gen-score-fixtures.ts
+        env:
+          # fixture generation is pure computation; these satisfy env validation only
+          BASE_SEPOLIA_RPC: https://sepolia.base.org
+          MNEMONIC: ${{ secrets.CI_MNEMONIC || 'test test test test test test test test test test test junk' }}
+      - name: Test
+        run: cd contracts && forge test -vv
+
+  typescript:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+      - name: Unit tests
+        run: pnpm exec vitest run
+        env:
+          BASE_SEPOLIA_RPC: https://sepolia.base.org
+          MNEMONIC: 'test test test test test test test test test test test junk'
+
+  subgraph:
+    name: Subgraph
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build subgraph
+        run: |
+          cd subgraph
+          npm install --no-audit --no-fund
+          npx graph codegen
+          npx graph build
