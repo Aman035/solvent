@@ -1,0 +1,16 @@
+import { formatUnits } from "viem";
+import { publicClient, role, addrs, ERC20_ABI, AQUA_ABI, orderHash, buildOrder, program } from "@pof/core";
+const pc = publicClient(); const A = addrs(); const alice = role("alice");
+const prog = program().gate(A.score, 0).xyc().fee(30_000);
+const order = await buildOrder({ maker: alice.address, tokenA: A.usdc, tokenB: A.weth, program: prog.encode() });
+const sh = await orderHash(order);
+const [aqU, aqW] = await pc.readContract({ address: A.aqua, abi: AQUA_ABI, functionName: "safeBalances", args: [alice.address, A.router, sh, A.usdc, A.weth] }) as readonly [bigint,bigint];
+const wW = await pc.readContract({ address: A.weth, abi: ERC20_ABI, functionName: "balanceOf", args: [alice.address] }) as bigint;
+const wU = await pc.readContract({ address: A.usdc, abi: ERC20_ABI, functionName: "balanceOf", args: [alice.address] }) as bigint;
+console.log(`\n  ── Alice: promised vs actually held ──`);
+console.log(`  WETH  committed in Aqua : ${formatUnits(aqW,18)}`);
+console.log(`  WETH  actually in wallet: ${formatUnits(wW,18)}`);
+console.log(`  USDC  committed in Aqua : ${formatUnits(aqU,6)}`);
+console.log(`  USDC  actually in wallet: ${formatUnits(wU,6)}`);
+console.log(`\n  ${wW < aqW ? "⚠️  PHANTOM LIQUIDITY — Alice has promised more WETH than she holds" : "✅ fully backed"}`);
+console.log(`  shortfall: ${formatUnits(aqW > wW ? aqW - wW : 0n, 18)} WETH\n`);

@@ -2,7 +2,23 @@ import { createPublicClient, createWalletClient, http, fallback, type PublicClie
 import { activeChain, type ChainConfig } from "./chains.js";
 import type { HDAccount } from "viem/accounts";
 
-/** Public client with automatic RPC failover (R8). */
+/**
+ * READ client - primary RPC only, no fallback.
+ *
+ * The public fallback endpoint lags behind and is NOT an archive node, which produced
+ * two nasty bug classes: a confirmed transfer reading back as "no transfer", and
+ * pinned-block reads failing with "Requested resource not found". Reads must be
+ * consistent, so they go to the primary endpoint exclusively; the fallback exists for
+ * write redundancy, where a stale read cannot silently corrupt a conclusion.
+ */
+export function readClient(c: ChainConfig = activeChain): PublicClient {
+  return createPublicClient({
+    chain: c.chain,
+    transport: http(c.rpc, { timeout: 30_000, retryCount: 3 }),
+  }) as PublicClient;
+}
+
+/** Public client with automatic RPC failover (R8). Use for writes and receipts. */
 export function publicClient(c: ChainConfig = activeChain): PublicClient {
   const transports = [http(c.rpc, { timeout: 20_000, retryCount: 3 })];
   if (c.rpcFallback) transports.push(http(c.rpcFallback, { timeout: 20_000, retryCount: 2 }));

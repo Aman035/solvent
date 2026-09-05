@@ -89,7 +89,7 @@ type ScoreSnapshot @entity(immutable: true) {
 
 "Singleton with indexing-wide totals, for the dashboard's live indicator."
 type Global @entity(immutable: false) {
-  id: Bytes!
+  id: ID!
   totalFills: Int!
   totalHonored: Int!
   totalFailed: Int!

@@ -96,11 +96,12 @@ export function recomputeScore(agent: Agent, counterpartyIds: Bytes[]): void {
   agent.proofOfFillScore = base.times(honored).times(diversityBps).div(denom.times(BPS));
 }
 
+export const GLOBAL_ID = "global";
+
 export function loadGlobal(block: ethereum.Block): Global {
-  let id = Bytes.fromI32(1);
-  let g = Global.load(id);
+  let g = Global.load(GLOBAL_ID);
   if (g == null) {
-    g = new Global(id);
+    g = new Global(GLOBAL_ID);
     g.totalFills = 0;
     g.totalHonored = 0;
     g.totalFailed = 0;

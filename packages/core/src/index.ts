@@ -4,3 +4,4 @@ export * from "./wallets.js";
 export * from "./manifest.js";
 export * from "./clients.js";
 export * from "./program.js";
+export * from "./orders.js";

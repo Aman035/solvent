@@ -17,8 +17,7 @@ const wallets = allWallets().filter((w) => w.label !== "deployer");
 const needed: { label: string; to: `0x${string}`; wei: bigint }[] = [];
 
 for (const w of wallets) {
-  const key = w.label.startsWith("sybil") ? "sybil" : w.label;
-  const target = targetFor(key);
+  const target = targetFor(w.label);
   const have = await pc.getBalance({ address: w.account.address });
   const want = parseEther(String(target));
   if (have < want) needed.push({ label: w.label, to: w.account.address, wei: want - have });
