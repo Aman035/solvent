@@ -1,7 +1,7 @@
 {
   "chainId": 84532,
   "chainKey": "base-sepolia",
-  "updatedAt": "2026-09-05T17:26:43.249Z",
+  "updatedAt": "2026-09-05T17:57:32.762Z",
   "contracts": {
     "aqua": {
       "address": "0x525bebb9c5b4dad791402923e344b360bf6ab6a2",
@@ -44,6 +44,42 @@
       "address": "0x804eb88104aa6315714d6dcfb1217c2a4de0e193",
       "deployBlock": 46430458,
       "txHash": "0x2bb1f660313cfc3202c9b4e67cbd6866add477595ae6ca5d10d797421eac0ac7"
+    },
+    "identityRegistry": {
+      "address": "0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33",
+      "deployBlock": 46431342,
+      "txHash": "0x27420519696c6e456378c7e0a1dc674fe8408d86490aac0c3c12584c7d92b1d6",
+      "sourceCommit": "2e5e79d"
+    },
+    "reputationRegistry": {
+      "address": "0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d",
+      "deployBlock": 46431343,
+      "txHash": "0x227d54d1c515d1ce3b11a0c72996f015cfa118fa4145fe8e81a874c82c72c422",
+      "sourceCommit": "2e5e79d"
+    },
+    "validationRegistry": {
+      "address": "0x26f213094e835ea8428fc35b27a144ab0d23563e",
+      "deployBlock": 46431345,
+      "txHash": "0x2802b2c34ef913044ef31746fab2a2e1f066218dd493d630f26c813f8822fe5a",
+      "sourceCommit": "2e5e79d"
+    },
+    "agentId.alice": {
+      "address": "0xcCd3Ec4f9f4DeF07Ac4a99b28b253e2aec115882",
+      "deployBlock": 46431378,
+      "txHash": "0x1e60b8c572b7851b833fac866c68cc842561b38f4e5d12b44acbb00c8eef83f7",
+      "note": "1"
+    },
+    "agentId.bob": {
+      "address": "0x74E8b85368b3e52a869b85c100ef64A9fF869bCf",
+      "deployBlock": 46431380,
+      "txHash": "0x1a4cfad1c08af985169e5d49c475dc548b5e76c8567ecf7958e76edfec2ee9ed",
+      "note": "2"
+    },
+    "agentId.mallory": {
+      "address": "0x98Ba7E0b0EFAeA559282400525A2dC7272D90ce4",
+      "deployBlock": 46431382,
+      "txHash": "0x4e5b93b126461a6c3c7132be06dc62da748bc8890ca4a8a002a0aef623b9d831",
+      "note": "3"
     }
   }
 }

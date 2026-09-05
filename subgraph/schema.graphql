@@ -16,10 +16,14 @@ type Agent @entity(immutable: false) {
   diversityBps: Int!               # 10000 - HHI, recomputed on every fill
   proofOfFillScore: BigInt!        # derived off-chain, mirrors ProofOfFillScore.computeScore
   onChainScore: BigInt!            # last value the attestor actually wrote on-chain
-  "--- claimed: ERC-8004 reviews (populated once registries are deployed) ---"
+  "--- claimed: ERC-8004 identity + reviews ---"
+  agentId: BigInt
+  agentURI: String
+  registeredAtBlock: BigInt
   reviewCount: Int!
   reviewSum: BigInt!
   reviewAvgBps: Int!
+  reviews: [Review!]! @derivedFrom(field: "agent")
   "--- bookkeeping ---"
   firstSeenBlock: BigInt!
   lastActiveBlock: BigInt!
@@ -95,4 +99,26 @@ type Global @entity(immutable: false) {
   totalFailed: Int!
   totalValueUsd6: BigInt!
   lastBlock: BigInt!
+}
+
+"""
+Maps an ERC-8004 agentId to the wallet that owns it, so review events can be joined
+back to the delivery record, which is keyed by address.
+"""
+type AgentIdLink @entity(immutable: false) {
+  id: ID!            # agentId as a decimal string
+  agent: Agent!
+}
+
+"A CLAIMED reputation record. Free to create: no stake, no prior interaction required."
+type Review @entity(immutable: true) {
+  id: Bytes!
+  agent: Agent!
+  reviewer: Bytes!
+  value: BigInt!
+  valueDecimals: Int!
+  tag1: String!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
 }

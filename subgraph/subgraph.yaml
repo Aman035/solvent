@@ -65,3 +65,43 @@ dataSources:
         - event: ScoreUpdated(indexed address,uint128,uint32,uint32,uint16,uint32)
           handler: handleScoreUpdated
       file: ./src/score.ts
+
+  - kind: ethereum
+    name: IdentityRegistry
+    network: base-sepolia
+    source:
+      address: "0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33"
+      abi: IdentityRegistry
+      startBlock: 46431342
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: [Agent, AgentIdLink]
+      abis:
+        - name: IdentityRegistry
+          file: ./abis/IdentityRegistry.json
+      eventHandlers:
+        - event: Registered(indexed uint256,string,indexed address)
+          handler: handleRegistered
+      file: ./src/erc8004.ts
+
+  - kind: ethereum
+    name: ReputationRegistry
+    network: base-sepolia
+    source:
+      address: "0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d"
+      abi: ReputationRegistry
+      startBlock: 46431343
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: [Agent, Review]
+      abis:
+        - name: ReputationRegistry
+          file: ./abis/ReputationRegistry.json
+      eventHandlers:
+        - event: NewFeedback(indexed uint256,indexed address,uint64,int128,uint8,indexed string,string,string,string,string,bytes32)
+          handler: handleNewFeedback
+      file: ./src/erc8004.ts
