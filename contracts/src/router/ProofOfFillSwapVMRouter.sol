@@ -16,7 +16,13 @@ import { ProofOfFillOpcodes } from "../opcodes/ProofOfFillOpcodes.sol";
 ///
 /// Powered by SwapVM — © Degensoft Ltd. See LICENSES/.
 contract ProofOfFillSwapVMRouter is Simulator, SwapVM, ProofOfFillOpcodes {
-    constructor(address aqua, address weth, address owner, string memory name, string memory version)
+    constructor(
+        address aqua,
+        address weth,
+        address owner,
+        string memory name,
+        string memory version
+    )
         SwapVM(aqua, weth, owner, name, version)
     { }
 

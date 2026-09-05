@@ -95,6 +95,36 @@ export const checks: Check[] = [
     },
   },
   {
+    id: "C8", name: "agentId → score adapter", phase: "2 Contracts",
+    async run() {
+      const pc = rd();
+      const m = readManifest().contracts;
+      const adapter = m.reputationRegistryAdapter?.address as Hex | undefined;
+      if (!adapter) return fail(["reputationRegistryAdapter not deployed"]);
+      const abi = [{ name: "scoreByAgentId", type: "function", stateMutability: "view", inputs: [{ type: "uint256" }], outputs: [{ type: "uint32" }] }] as const;
+      const ev: string[] = [];
+      for (const id of [1n, 2n, 3n]) {
+        try {
+          const s = await pc.readContract({ address: adapter, abi, functionName: "scoreByAgentId", args: [id] }) as number;
+          ev.push(`agentId ${id} → score ${s}`);
+        } catch (e) { return fail([...ev, `agentId ${id} threw`]); }
+      }
+      return pass(ev);
+    },
+  },
+  {
+    id: "C10/11", name: "Fill-and-revert proof + invariants", phase: "2 Contracts",
+    async run() {
+      const a = sh("cd contracts && forge test --match-contract FillAndRevertTest 2>&1 | tail -2");
+      const b = sh("cd contracts && forge test --match-path 'test/invariant/*' 2>&1 | tail -2");
+      const ok = /0 failed/.test(a) && /0 failed/.test(b);
+      return (ok ? pass : fail)([
+        `fill/revert: ${a.split("\n").filter(Boolean).pop()?.trim() ?? "?"}`,
+        `invariants: ${b.split("\n").filter(Boolean).pop()?.trim() ?? "?"}`,
+      ]);
+    },
+  },
+  {
     id: "C9", name: "TS↔Solidity program encoding", phase: "2 Contracts",
     async run() {
       sh("pnpm exec tsx scripts/gen-program-fixtures.ts");

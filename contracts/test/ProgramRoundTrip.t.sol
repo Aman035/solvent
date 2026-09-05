@@ -57,7 +57,7 @@ contract ProgramRoundTripTest is Test {
     function test_WidenThenXyc() public view {
         assertEq(
             _ts("widenThenXyc"),
-            bytes.concat(ReputationPriceAdjuster.build(oracle, 1_000, 300_000), XYCSwap.build()),
+            bytes.concat(ReputationPriceAdjuster.build(oracle, 1000, 300_000), XYCSwap.build()),
             "adjuster encoding diverged"
         );
     }
@@ -76,7 +76,7 @@ contract ProgramRoundTripTest is Test {
             _ts("full"),
             bytes.concat(
                 ReputationGate.build(oracle, 100),
-                ReputationPriceAdjuster.build(oracle, 1_000, 300_000),
+                ReputationPriceAdjuster.build(oracle, 1000, 300_000),
                 XYCSwap.build(),
                 FeeFlatIn.build(30_000)
             ),
@@ -89,7 +89,9 @@ contract ProgramRoundTripTest is Test {
         bytes memory prog = _ts("gateOnly");
         // strip the 2-byte header: [opcode][argsLen]
         bytes memory args = new bytes(prog.length - 2);
-        for (uint256 i = 0; i < args.length; ++i) args[i] = prog[i + 2];
+        for (uint256 i = 0; i < args.length; ++i) {
+            args[i] = prog[i + 2];
+        }
 
         assertEq(uint8(prog[0]), 0x21, "opcode byte");
         assertEq(uint8(prog[1]), 24, "args length byte");

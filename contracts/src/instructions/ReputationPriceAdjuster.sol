@@ -56,7 +56,12 @@ library ReputationPriceAdjuster {
         return build(MemoryPtrLib.alloc(sizeOf()), scoreOracle, minScore, widenBps).resolve();
     }
 
-    function build(MemoryPtr ptrStart, address scoreOracle, uint32 minScore, uint24 widenBps)
+    function build(
+        MemoryPtr ptrStart,
+        address scoreOracle,
+        uint32 minScore,
+        uint24 widenBps
+    )
         internal
         pure
         returns (MemoryPtr ptr)
@@ -67,11 +72,7 @@ library ReputationPriceAdjuster {
         ptrStart.patchLength(ptr);
     }
 
-    function parse(bytes calldata args)
-        internal
-        pure
-        returns (address scoreOracle, uint32 minScore, uint24 widenBps)
-    {
+    function parse(bytes calldata args) internal pure returns (address scoreOracle, uint32 minScore, uint24 widenBps) {
         scoreOracle = args.at(0).asAddress();
         minScore = args.at(20).asU32();
         widenBps = args.at(24).asU24();
@@ -95,8 +96,11 @@ library ReputationPriceAdjuster {
             ctx.runLoop();
             reduction -= ctx.swap.amountIn;
 
-            if (reduction == 0) ctx.swap.amountIn += widen;
-            else ctx.swap.amountIn += (ctx.swap.amountIn * widenBps).ceilDiv(BPS - widenBps);
+            if (reduction == 0) {
+                ctx.swap.amountIn += widen;
+            } else {
+                ctx.swap.amountIn += (ctx.swap.amountIn * widenBps).ceilDiv(BPS - widenBps);
+            }
         } else {
             ctx.runLoop();
             ctx.swap.amountIn += (ctx.swap.amountIn * widenBps).ceilDiv(BPS - widenBps);

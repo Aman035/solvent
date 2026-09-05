@@ -37,10 +37,15 @@ contract DeployCore is Script {
 
         // NOTE: do NOT use console.log("%s", addr) - forge fails to decode the
         // address during broadcast ("type check failed for offset (usize)").
-        console.log("AQUA");   console.logAddress(address(aqua));
-        console.log("SCORE");  console.logAddress(address(score));
-        console.log("ROUTER"); console.logAddress(address(router));
-        console.log("WETH");   console.logAddress(address(weth));
-        console.log("USDC");   console.logAddress(address(usdc));
+        console.log("AQUA");
+        console.logAddress(address(aqua));
+        console.log("SCORE");
+        console.logAddress(address(score));
+        console.log("ROUTER");
+        console.logAddress(address(router));
+        console.log("WETH");
+        console.logAddress(address(weth));
+        console.log("USDC");
+        console.logAddress(address(usdc));
     }
 }

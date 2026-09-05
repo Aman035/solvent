@@ -69,6 +69,17 @@ await deploy("helper", "ProofOfFillHelper.sol", "ProofOfFillHelper", []);
 await deploy("recorder", "ProofOfFillRecorder.sol", "ProofOfFillRecorder",
   [deployer.address, attestor.address]);
 
+// 7. Reads the score by ERC-8004 agentId instead of by wallet, so any consumer can
+//    cross the identity/address boundary without reimplementing the lookup.
+//    Requires the ERC-8004 registries (scripts/deploy-erc8004.ts) to exist first.
+const identity = readManifest().contracts.identityRegistry?.address;
+if (identity) {
+  await deploy("reputationRegistryAdapter", "ReputationRegistryAdapter.sol", "ReputationRegistryAdapter",
+    [identity, score]);
+} else {
+  console.log(`  ! reputationRegistryAdapter skipped - deploy ERC-8004 first`);
+}
+
 console.log(`\n  remaining: ${formatEther(await pc.getBalance({ address: deployer.address }))} ETH`);
 console.log(`  manifest : deployments/${activeChain.chainId}.json`);
 console.log(`  router   : ${explorerAddr(router)}\n`);

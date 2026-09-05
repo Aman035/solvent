@@ -89,7 +89,9 @@ contract ProofOfFillScore is AccessControl {
     ///         differentially tested against it. Never reverts.
     function computeScore(Score memory s) public pure returns (uint32) {
         uint256 denom = uint256(s.honoredCount) + _FAILURE_WEIGHT * uint256(s.failedCount);
-        if (denom == 0 || s.honoredValueUsd6 == 0 || s.diversityBps == 0) return 0;
+        if (denom == 0 || s.honoredValueUsd6 == 0 || s.diversityBps == 0) {
+            return 0;
+        }
 
         // base (whole USD) · reliability · diversity, multiplying before dividing.
         uint256 v = uint256(s.honoredValueUsd6) / 1e6;

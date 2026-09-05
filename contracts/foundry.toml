@@ -28,6 +28,11 @@ optimizer      = true
 optimizer_runs = 700
 solc_version   = "0.8.30"
 
+[invariant]
+runs = 128
+depth = 32
+fail_on_revert = false
+
 [fmt]
 single_line_statement_blocks = "multi"
 multiline_func_header        = "all"

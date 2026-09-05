@@ -25,7 +25,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Format check
         run: cd contracts && forge fmt --check src test script
-        continue-on-error: true
       - name: Build
         run: cd contracts && forge build --sizes
       - name: Generate cross-language fixtures

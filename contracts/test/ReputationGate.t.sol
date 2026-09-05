@@ -37,17 +37,22 @@ contract ReputationGateTest is AquaSwapVMTest {
 
     function _setup() internal pure returns (MakerSetup memory) {
         return MakerSetup({
-            balanceA: INITIAL_BALANCE_A, balanceB: INITIAL_BALANCE_B,
-            priceMin: 0, priceMax: 0, protocolFeeBps: 0, feeInBps: 0,
-            protocolFeeRecipient: address(0), swapType: SwapType.XYC
+            balanceA: INITIAL_BALANCE_A,
+            balanceB: INITIAL_BALANCE_B,
+            priceMin: 0,
+            priceMax: 0,
+            protocolFeeBps: 0,
+            feeInBps: 0,
+            protocolFeeRecipient: address(0),
+            swapType: SwapType.XYC
         });
     }
 
     function _prog(uint256 amt) internal view returns (SwapProgram memory) {
-        return SwapProgram({
-            amount: amt, taker: taker, tokenA: tokenA, tokenB: tokenB,
-            zeroForOne: true, isExactIn: true
-        });
+        return
+            SwapProgram({
+                amount: amt, taker: taker, tokenA: tokenA, tokenB: tokenB, zeroForOne: true, isExactIn: true
+            });
     }
 
     function _ship(bytes memory program, MakerSetup memory s) internal returns (ISwapVM.Order memory o) {
@@ -85,11 +90,9 @@ contract ReputationGateTest is AquaSwapVMTest {
 
     function test_GateIsPriceNeutralAboveFloor() public {
         MakerSetup memory s = _setup();
-        _setScore(address(taker), 5_000);
+        _setScore(address(taker), 5000);
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
@@ -101,15 +104,15 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 0);
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
-        vm.expectRevert(abi.encodeWithSelector(
-            ReputationGate.TakerBelowReputationFloor.selector, address(taker), uint32(0), uint32(100)
-        ));
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                ReputationGate.TakerBelowReputationFloor.selector, address(taker), uint32(0), uint32(100)
+            )
+        );
         swap(p, o);
     }
 
@@ -118,27 +121,25 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(this), 0);
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s);
 
         // resolve asView() first: it is its own external call and would consume expectRevert
         ISwapVM v = swapVM.asView();
         bytes memory td = takerData(address(this), true, true);
 
-        vm.expectRevert(abi.encodeWithSelector(
-            ReputationGate.TakerBelowReputationFloor.selector, address(this), uint32(0), uint32(100)
-        ));
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                ReputationGate.TakerBelowReputationFloor.selector, address(this), uint32(0), uint32(100)
+            )
+        );
         v.quote(o, 100e18, td);
     }
 
     function test_GateQuoteSucceedsAboveFloor() public {
         MakerSetup memory s = _setup();
-        _setScore(address(this), 5_000);
+        _setScore(address(this), 5000);
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s);
         (, uint256 amountOut) = quote(_prog(100e18), o);
         assertEq(amountOut, _expectedXycOut(s, 100e18));
     }
@@ -147,9 +148,7 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 100); // exactly at the floor
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(pofScore), 100), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
         (uint256 amountIn, uint256 amountOut) = swap(p, o);
@@ -160,11 +159,10 @@ contract ReputationGateTest is AquaSwapVMTest {
 
     function test_AdjusterIsPriceNeutralAboveThreshold() public {
         MakerSetup memory s = _setup();
-        _setScore(address(taker), 5_000);
+        _setScore(address(taker), 5000);
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationPriceAdjuster.build(address(pofScore), 1_000, 300_000), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationPriceAdjuster.build(address(pofScore), 1000, 300_000), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
@@ -176,9 +174,8 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 10); // below threshold
 
-        ISwapVM.Order memory o = _ship(
-            bytes.concat(ReputationPriceAdjuster.build(address(pofScore), 1_000, 300_000), buildProgram(s)), s
-        );
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationPriceAdjuster.build(address(pofScore), 1000, 300_000), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
@@ -189,17 +186,21 @@ contract ReputationGateTest is AquaSwapVMTest {
 
     /// @dev build() is an internal library call, so it must be reached through an
     ///      external hop for vm.expectRevert to observe the revert.
-    function buildAdjusterExternal(address oracle, uint32 minScore, uint24 widenBps)
-        external pure returns (bytes memory)
+    function buildAdjusterExternal(
+        address oracle,
+        uint32 minScore,
+        uint24 widenBps
+    )
+        external
+        pure
+        returns (bytes memory)
     {
         return ReputationPriceAdjuster.build(oracle, minScore, widenBps);
     }
 
     function test_AdjusterRejectsOutOfRangeWidenBps() public {
-        vm.expectRevert(abi.encodeWithSelector(
-            ReputationPriceAdjuster.WidenBpsOutOfRange.selector, uint24(10_000_000)
-        ));
-        this.buildAdjusterExternal(address(pofScore), 1_000, 10_000_000);
+        vm.expectRevert(abi.encodeWithSelector(ReputationPriceAdjuster.WidenBpsOutOfRange.selector, uint24(10_000_000)));
+        this.buildAdjusterExternal(address(pofScore), 1000, 10_000_000);
     }
 
     // ====================== gate + adjuster composed ========================
@@ -211,9 +212,10 @@ contract ReputationGateTest is AquaSwapVMTest {
         ISwapVM.Order memory o = _ship(
             bytes.concat(
                 ReputationGate.build(address(pofScore), 100),
-                ReputationPriceAdjuster.build(address(pofScore), 1_000, 300_000),
+                ReputationPriceAdjuster.build(address(pofScore), 1000, 300_000),
                 buildProgram(s)
-            ), s
+            ),
+            s
         );
         SwapProgram memory p = _prog(100e18);
         _fund(p);

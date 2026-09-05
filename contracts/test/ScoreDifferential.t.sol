@@ -37,10 +37,7 @@ contract ScoreDifferentialTest is Test {
                 updatedAt: 0
             });
             uint256 expected = json.readUint(string.concat(base, ".expected"));
-            assertEq(
-                uint256(score.computeScore(s)), expected,
-                string.concat("divergence at case ", vm.toString(i))
-            );
+            assertEq(uint256(score.computeScore(s)), expected, string.concat("divergence at case ", vm.toString(i)));
         }
     }
 }

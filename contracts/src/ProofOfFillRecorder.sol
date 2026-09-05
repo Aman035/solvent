@@ -67,7 +67,10 @@ contract ProofOfFillRecorder is AccessControl {
         uint256 amountOut,
         bytes4 reason,
         bytes32 failedTxHash
-    ) external onlyRole(RECORDER_ROLE) {
+    )
+        external
+        onlyRole(RECORDER_ROLE)
+    {
         require(!recorded[failedTxHash], AlreadyRecorded(failedTxHash));
         recorded[failedTxHash] = true;
         emit FillFailed(strategyHash, maker, taker, tokenOut, amountOut, reason, failedTxHash, 0);
@@ -81,7 +84,9 @@ contract ProofOfFillRecorder is AccessControl {
         address tokenOut,
         uint256 amountOut,
         bytes4 reason
-    ) external {
+    )
+        external
+    {
         emit FillFailed(strategyHash, maker, msg.sender, tokenOut, amountOut, reason, bytes32(0), 1);
     }
 
