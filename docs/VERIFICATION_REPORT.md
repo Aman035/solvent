@@ -1,6 +1,6 @@
 # Phase 0 — Verification Report
 
-**Date:** 2026-09-05 · **Status:** V1/V2/V3/V12 resolved · V4–V11 outstanding
+**Date:** 2026-09-05 · **Status:** V1, V2, V3, V10, V12 resolved · V9 partial · V4–V8, V11 outstanding
 
 Pinned upstream commits used for all findings below:
 
@@ -108,7 +108,9 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 
 **Resolver restriction:** none found in Aqua's source — no access-control errors, no allowlist. It appears to be a router-level or off-chain 1inch policy, so our unmodified Aqua redeploy should be unrestricted. *Still to confirm against the router before C5 (does not block).*
 
-**Outstanding:** the concrete revert selector when `pull` finds an under-funded maker. It bubbles the token's own `transferFrom` failure (e.g. OZ `ERC20InsufficientBalance(address,uint256,uint256)`), so it is token-dependent — pin it empirically in C10.
+**Revert selector — RESOLVED empirically (see V10):** `SafeTransferFromFailed()` = **`0xf4059071`**, from `@1inch/solidity-utils/contracts/libraries/SafeERC20.sol`. 1inch's SafeERC20 *normalizes* the failure rather than bubbling the token's own error, so this selector is **stable and token-independent** — ideal for classification.
+
+**Also found:** `SwapVM` already emits `Swapped(bytes32 orderHash, address maker, address taker, address tokenIn, address tokenOut, uint256 amountIn, uint256 amountOut)` (`SwapVM.sol:242`). Like Aqua's events, none of its parameters are indexed.
 
 ---
 
@@ -130,5 +132,55 @@ event Pushed (address maker, address app, bytes32 strategyHash, address token, u
 | V6 Studio readiness | C13/C14 | **Hard gate on the Graph prize** — needs account + API key |
 | V7 Prior art | C5 | Low risk |
 | V8 Deadlines | C28 | Needs ETHGlobal dashboard |
-| V10 Revert observability | C15 | Design chosen; needs empirical test |
 | V11 Score design | C6 | Design drafted in BUILD_PLAN §V11 |
+
+
+---
+
+## V10 — Revert observability · **RESOLVED** ✅
+
+Spike: `spike/SpikeRevertObservability.t.sol` — **5/5 pass.**
+
+### Finding 1 — an honored fill needs no custom event
+
+| Assertion | Result |
+| --- | --- |
+| B1: one `Swapped` + one `Pulled` + one `Pushed` per honored fill (6 logs total) | ✅ |
+
+Upstream already emits everything the subgraph needs for the honored side. **`FillCompleted` is deleted from C8** — `Swapped` (router, carries maker/taker/amounts) joined to Aqua's `Pulled` (tokens actually leaving the maker's wallet) *is* the honored-fill record.
+
+### Finding 2 — a broken promise reverts with a stable selector
+
+| Assertion | Result |
+| --- | --- |
+| B2: under-funded maker at pull time reverts with **`0xf4059071` = `SafeTransferFromFailed()`** | ✅ |
+| B3: **zero logs survive** that revert | ✅ |
+
+### Finding 3 — router-level try/catch is IMPOSSIBLE
+
+`SwapVM.sol` declares `_transferIn`, `_transferOut`, `_transferFrom`, `_transferOrPull` all **`private`**, and `swap()` is `external payable` but **not `virtual`**. Only `_dispatch` is `internal virtual`. So `handover_doc.md` §9.6 option 1 and BUILD_PLAN V10 option A (router catches the pull and emits) cannot be built without forking `SwapVM.sol` itself. A self-call wrapper is also ruled out: `ctx.query.taker` is hardcoded to `msg.sender`, so `address(this).swap(...)` would score the router instead of the taker.
+
+### Finding 4 — THE DESIGN: the taker agent is a contract
+
+**`ProofOfFillTaker` try/catches its own swap.** The outer transaction succeeds, so its logs survive and are natively indexable, while `msg.sender` to SwapVM remains the taker contract — keeping `ReputationGate`'s scoring target consistent.
+
+| Assertion | Result |
+| --- | --- |
+| B4: failed fill → tx does **not** revert; `FillAttempted` + `FillFailed(selector)` both survive; no `Swapped` | ✅ |
+| B5: honored fill → `honored == true`, `Swapped` emitted, no `FillFailed` | ✅ |
+
+```solidity
+try ISwapVM(SWAPVM).swap(order, amount, takerTraitsAndData) returns (uint256, uint256, bytes32) {
+    honored = true;                       // upstream `Swapped` is the receipt
+} catch (bytes memory reason) {
+    emit FillFailed(strategyHash, order.maker, bytes4(reason));
+    honored = false;                      // deliberately does NOT revert -> log survives
+}
+```
+
+**One transaction. Fully on-chain. Natively indexable.** Strictly better than `handover_doc.md` §9.6's expected "option 2" (off-chain receipt scanning), which now becomes the *backstop* rather than the primary.
+
+**Consequences for the build:**
+- Bob is an on-chain **contract**, not only a script — a genuine upgrade to the pitch: *the taker agent records its own counterparty failures on-chain.*
+- `ProofOfFillTaker` must implement `ITakerCallbacks` (`preTransferInCallback` pushes `tokenIn` into Aqua). B5 failed until this was added — a real integration trap now caught on day 0.
+- **Caveat to document:** `SafeTransferFromFailed()` also occurs if the *taker* cannot pay. Disambiguate by reading the maker's balance at that block; the attestor's receipt-scan backstop cross-checks.
