@@ -65,6 +65,23 @@ Plus our differentiator beat:
 
 ---
 
+## Ready to submit — evidence
+
+| Requirement | Evidence |
+| --- | --- |
+| Official Aqua, unmodified | `0x525bebb9c5b4dad791402923e344b360bf6ab6a2` — verified, deployed from pinned `1inch/aqua@9c5c42e` |
+| Modified SwapVM redeployed | `0x06ac5984d1bdd04aefd3e4e33312f30ce058462e` — `PROOF_OF_FILL_OPCODE_COUNT = 2` |
+| Custom instruction working | `TakerBelowReputationFloor` reverts on-chain, refuses at quote time |
+| Upstream unaffected | 35 of 1inch's own Aqua tests pass against our router |
+| On-chain token transfer | `Swapped` + Aqua `Pulled`, WETH leaving the maker's wallet |
+| Contracts verified | all 11 on BaseScan |
+| Git history | 30+ commits across the build, all signed, CI green |
+| The Graph load-bearing | `REVIEW_DELIVERY_DIVERGENCE` needs the ERC-8004↔Aqua join |
+| Live Studio data | subgraph v0.4.0, API-keyed, no mocks anywhere |
+| Meaningful work | agent queries → analyses → decides → executes |
+| Open source + README | README.md with runnable quickstart |
+| Start Fresh | declared in README; no pre-existing project code |
+
 ## Credentials status
 
 | Item | Status | Needed for |
@@ -73,7 +90,7 @@ Plus our differentiator beat:
 | `GRAPH_DEPLOY_KEY` | ✅ in `.env` | subgraph deploy |
 | `GRAPH_API_KEY` | ✅ in `.env` | gateway queries |
 | GitHub repo | ✅ `Aman035/proof-of-fill` (private) | submission |
-| **Funded deployer key / mnemonic** | ❌ **BLOCKER** | all deployment (Phase 2+) |
-| **`BASESCAN_API_KEY`** | ❌ needed | contract verification (1inch requirement) |
-| **`ANTHROPIC_API_KEY`** | ❌ needed | LLM layer (Graph requirement) |
+| Funded deployer key / mnemonic | ✅ in `.env` | all deployment |
+| `BASESCAN_API_KEY` | ✅ in `.env` | contract verification |
+| LLM provider key | ⚪ optional | narration only; agent runs fully without it |
 | Repo public | ⏳ before 13 Sep | Graph requirement |
