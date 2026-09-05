@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Blocks committing secrets. Reads live values from .env at runtime so this
+# file itself never contains a secret. Bypass (do not) with --no-verify.
+set -uo pipefail
+fail=0
+
+# 1) never allow .env itself
+if git diff --cached --name-only | grep -qE '(^|/)\.env$'; then
+  echo "❌ BLOCKED: .env is staged. It must never be committed."; fail=1
+fi
+
+# 2) never allow any live secret value from .env to appear in staged content
+if [ -f .env ]; then
+  staged=$(git diff --cached -U0 2>/dev/null || true)
+  while IFS='=' read -r key val; do
+    case "$key" in ''|\#*) continue ;; esac
+    val="${val%\"}"; val="${val#\"}"
+    # Only treat a value as secret if it contains a high-entropy token:
+    # a run of >=20 alphanumerics. This skips public URLs like
+    # https://sepolia.base.org while still catching embedded API keys.
+    token=$(printf '%s' "$val" | grep -oE '[A-Za-z0-9]{20,}' | head -1)
+    [ -z "$token" ] && continue
+    if printf '%s' "$staged" | grep -qF -- "$val"; then
+      echo "❌ BLOCKED: value of \$$key appears in staged changes."; fail=1
+    fi
+  done < .env
+fi
+
+# 3) generic high-signal patterns
+if git diff --cached -U0 | grep -qE '(quiknode\.pro/[a-f0-9]{20,}|alchemy\.com/v2/[A-Za-z0-9_-]{20,}|0x[a-fA-F0-9]{64})'; then
+  echo "❌ BLOCKED: an RPC URL with an embedded key or a raw private key is staged."; fail=1
+fi
+
+[ "$fail" -eq 1 ] && { echo "   Move it to .env and read it via process.env / vm.envString."; exit 1; }
+exit 0
