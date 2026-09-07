@@ -104,8 +104,7 @@ contract FractionalReserveTest is AquaSwapVMTest {
         bool reverted;
         try taker.swap(orders[1], 9000e18, td) returns (uint256, uint256) {
             reverted = false;
-        }
-            catch {
+        } catch {
             reverted = true;
         }
         assertTrue(reverted, "the second taker is failed by the FIRST taker's activity");
