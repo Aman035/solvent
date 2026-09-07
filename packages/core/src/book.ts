@@ -5,7 +5,7 @@
  * agents display or act on this number while the SolvencyFloor and SolvencySkew
  * instructions enforce the on-chain one. Pinned by contracts/test/BookDifferential.t.sol.
  */
-export const UINT32_MAX = 4_294_967_295n;
+import { UINT32_MAX } from "./score.js";
 
 export function computeUtilisationBps(committed: bigint, backing: bigint): number {
   if (committed === 0n) return 0;
