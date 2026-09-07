@@ -1,0 +1,210 @@
+{
+"0x04c0599ae5a44757c0af6f9ec3b93da8976c150a": {
+"decimals": 18,
+"symbol": "weETH"
+},
+"0x0555e30da8f98308edb960aa94c0db47230d2b9c": {
+"decimals": 8,
+"symbol": "WBTC"
+},
+"0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b": {
+"decimals": 18,
+"symbol": "VIRTUAL"
+},
+"0x1111111111166b7fe7bd91427724b487980afc69": {
+"decimals": 18,
+"symbol": "ZORA"
+},
+"0x111123ea4cee28cf010703593a8a2a3bbb91756c": {
+"decimals": 18,
+"symbol": "ARA"
+},
+"0x1bc0c42215582d5a085795f4badbac3ff36d1bcb": {
+"decimals": 18,
+"symbol": "CLANKER"
+},
+"0x22a61fd45ebd3eded219cb279715a18cf85ebb44": {
+"decimals": 18,
+"symbol": "GBM"
+},
+"0x22af33fe49fd1fa80c7149773dde5890d3c76f3b": {
+"decimals": 18,
+"symbol": "BNKR"
+},
+"0x236aa50979d5f3de3bd1eeb40e81137f22ab794b": {
+"decimals": 18,
+"symbol": "tBTC"
+},
+"0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22": {
+"decimals": 18,
+"symbol": "cbETH"
+},
+"0x2b5050f01d64fbb3e4ac44dc07f0732bfb5ecadf": {
+"decimals": 18,
+"symbol": "QR"
+},
+"0x3055913c90fcc1a6ce9a358911721eeb942013a1": {
+"decimals": 18,
+"symbol": "Cake"
+},
+"0x311935cd80b76769bf2ecc9d8ab7635b2139cf82": {
+"decimals": 9,
+"symbol": "SOL"
+},
+"0x368181499736d0c0cc614dbb145e2ec1ac86b8c6": {
+"decimals": 18,
+"symbol": "LUSD"
+},
+"0x3ed03e95dd894235090b3d4a49e0c3239edce59e": {
+"decimals": 18,
+"symbol": "MYRC"
+},
+"0x4200000000000000000000000000000000000006": {
+"decimals": 18,
+"symbol": "WETH"
+},
+"0x4621b7a9c75199271f773ebd9a499dbd165c3191": {
+"decimals": 18,
+"symbol": "DOLA"
+},
+"0x4e65fe4dba92790696d040ac24aa414708f5c0ab": {
+"decimals": 6,
+"symbol": "aBasUSDC"
+},
+"0x50c5725949a6f0c72e6c4a641f24049a917db0cb": {
+"decimals": 18,
+"symbol": "DAI"
+},
+"0x5305ba038217c391af7e79f6f653c8cbc433deba": {
+"decimals": 12,
+"symbol": "ANLOG"
+},
+"0x53f39e5c53ee40bbc3da97c3b47bd2968d110a8d": {
+"decimals": 18,
+"symbol": "ALIGN"
+},
+"0x5ab3d4c385b400f3abb49e80de2faf6a88a7b691": {
+"decimals": 18,
+"symbol": "FLOCK"
+},
+"0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42": {
+"decimals": 6,
+"symbol": "EURC"
+},
+"0x63706e401c06ac8513145b7687a14804d17f814b": {
+"decimals": 18,
+"symbol": "AAVE"
+},
+"0x6985884c4392d348587b19cb9eaaf157f13271cd": {
+"decimals": 18,
+"symbol": "ZRO"
+},
+"0x6bb7a212910682dcfdbd5bcbb3e28fb4e8da10ee": {
+"decimals": 18,
+"symbol": "GHO"
+},
+"0x7afe438411ee3959c7de6f7fb76bf9c769320ba3": {
+"decimals": 18,
+"symbol": "BLOCKTRONICS"
+},
+"0x7d49a065d17d6d4a55dc13649901fdbb98b2afba": {
+"decimals": 18,
+"symbol": "SUSHI"
+},
+"0x820c137fa70c8691f0e44dc420a5e53c168921dc": {
+"decimals": 18,
+"symbol": "USDS"
+},
+"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913": {
+"decimals": 6,
+"symbol": "USDC"
+},
+"0x940181a94a35a4569e4529a3cdfb74e38fd98631": {
+"decimals": 18,
+"symbol": "AERO"
+},
+"0x9b8df6e244526ab5f6e6400d331db28c8fdddb55": {
+"decimals": 18,
+"symbol": "uSOL"
+},
+"0xa53887f7e7c1bf5010b8627f1c1ba94fe7a5d6e0": {
+"decimals": 18,
+"symbol": "RNBW"
+},
+"0xac531eb26ca1d21b85126de8fb87e80e09002dcf": {
+"decimals": 18,
+"symbol": "SAND"
+},
+"0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf": {
+"decimals": 18,
+"symbol": "VVV"
+},
+"0xb2000000000000000000008bc8786b856e61707c": {
+"decimals": 8,
+"symbol": "METAc"
+},
+"0xb200000000000000000000c2e324d24d7eecd1fb": {
+"decimals": 8,
+"symbol": "AAPLc"
+},
+"0xb79dd08ea68a908a97220c76d19a6aa9cbde4376": {
+"decimals": 6,
+"symbol": "USD+"
+},
+"0xbaa5cc21fd487b8fcc2f632f3f4e8d37262a0842": {
+"decimals": 18,
+"symbol": "MORPHO"
+},
+"0xc1cba3fcea344f92d9239c08c0568f6f2f0ee452": {
+"decimals": 18,
+"symbol": "wstETH"
+},
+"0xc3de830ea07524a0761646a6a4e4be0e114a3c83": {
+"decimals": 18,
+"symbol": "UNI"
+},
+"0xc5fecc3a29fb57b5024eec8a2239d4621e111cbe": {
+"decimals": 18,
+"symbol": "1INCH"
+},
+"0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf": {
+"decimals": 8,
+"symbol": "cbBTC"
+},
+"0xd262a4c7108c8139b2b189758e8d17c3dfc91a38": {
+"decimals": 18,
+"symbol": "CYPR"
+},
+"0xd4a0e0b9149bcee3c920d2e00b5de09138fd8bb7": {
+"decimals": 18,
+"symbol": "aBasWETH"
+},
+"0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca": {
+"decimals": 6,
+"symbol": "USDbC"
+},
+"0xeb466342c4d449bc9f53a865d5cb90586f405215": {
+"decimals": 6,
+"symbol": "axlUSDC"
+},
+"0xecac9c5f704e954931349da37f60e39f515c11c1": {
+"decimals": 8,
+"symbol": "LBTC"
+},
+"0xef5997c2cf2f6c138196f8a6203afc335206b3c1": {
+"decimals": 18,
+"symbol": "OWB"
+},
+"0xfca95aeb5bf44ae355806a5ad14659c940dc6bf7": {
+"decimals": 9,
+"symbol": "SHIB"
+},
+"0xfdd22ce6d1f66bc0ec89b20bf16ccb6670f55a5a": {
+"decimals": 6,
+"symbol": "thBILL"
+},
+"0xfde4c96c8593536e31f229ea8f37b2ada2699bb2": {
+"decimals": 6,
+"symbol": "USDT"
+}
+}

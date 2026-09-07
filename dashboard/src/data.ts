@@ -126,3 +126,31 @@ export function ago(ts: string | number) {
   if (s < 86400) return `${Math.floor(s / 3600)}h`;
   return `${Math.floor(s / 86400)}d`;
 }
+
+// ---- maker balance sheets (Solvent) ---------------------------------------
+declare const __SUBGRAPH_URL_BASE__: string;
+export const SUBGRAPH_URL_BASE = __SUBGRAPH_URL_BASE__;
+
+export interface MakerBook {
+  maker: string; token: string;
+  committed: string; backing: string;
+  utilisationBps: string; updatedAtBlock: string;
+}
+export interface BooksSnapshot { books: MakerBook[]; head: number; indexingErrors: boolean }
+
+const BOOKS_QUERY = `{
+  _meta { block { number } hasIndexingErrors }
+  makerBooks(orderBy: committed, orderDirection: desc, first: 200) {
+    maker token committed backing utilisationBps updatedAtBlock
+  }
+}`;
+
+export async function fetchBooks(url: string): Promise<BooksSnapshot> {
+  const r = await fetch(url, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ query: BOOKS_QUERY }),
+  });
+  const j = await r.json();
+  if (j.errors?.length) throw new Error(j.errors[0].message);
+  return { books: j.data.makerBooks, head: j.data._meta.block.number, indexingErrors: j.data._meta.hasIndexingErrors };
+}
