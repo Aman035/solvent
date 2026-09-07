@@ -1,0 +1,81 @@
+{
+  "chain": "base",
+  "chainId": 8453,
+  "aqua": "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a",
+  "analyzedAtBlock": "51001086",
+  "analyzedAt": "2026-09-07T14:35:24.715Z",
+  "deployBlock": "48839900",
+  "events": {
+    "shipped": 443,
+    "docked": 309,
+    "pulled": 3848,
+    "pushed": 2894
+  },
+  "strategies": {
+    "shipped": 443,
+    "active": 134,
+    "decodable": 134
+  },
+  "makers": 2,
+  "books": 5,
+  "underBacked": 5,
+  "severelyUnderBacked": 5,
+  "fullyPhantom": 5,
+  "rows": [
+    {
+      "maker": "0x1a09f7d9b921c93f8fcd4bf04fe448982a3388ec",
+      "token": "0x50c5725949a6f0c72e6c4a641f24049a917db0cb",
+      "symbol": "0x50c572",
+      "decimals": 18,
+      "committed": "59414501741336052",
+      "balance": "0",
+      "allowance": "0",
+      "backing": "0",
+      "ratioBps": 0
+    },
+    {
+      "maker": "0x1a09f7d9b921c93f8fcd4bf04fe448982a3388ec",
+      "token": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "symbol": "0x833589",
+      "decimals": 18,
+      "committed": "19804",
+      "balance": "0",
+      "allowance": "0",
+      "backing": "0",
+      "ratioBps": 0
+    },
+    {
+      "maker": "0x1a09f7d9b921c93f8fcd4bf04fe448982a3388ec",
+      "token": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2",
+      "symbol": "0xfde4c9",
+      "decimals": 18,
+      "committed": "19804",
+      "balance": "0",
+      "allowance": "0",
+      "backing": "0",
+      "ratioBps": 0
+    },
+    {
+      "maker": "0x1a09f7d9b921c93f8fcd4bf04fe448982a3388ec",
+      "token": "0x4200000000000000000000000000000000000006",
+      "symbol": "0x420000",
+      "decimals": 18,
+      "committed": "9902416956889",
+      "balance": "0",
+      "allowance": "0",
+      "backing": "0",
+      "ratioBps": 0
+    },
+    {
+      "maker": "0x76b0340e50bd9883d8b2ca5fd9f52439a9e7cf58",
+      "token": "0x6bb7a212910682dcfdbd5bcbb3e28fb4e8da10ee",
+      "symbol": "0x6bb7a2",
+      "decimals": 18,
+      "committed": "73567379",
+      "balance": "0",
+      "allowance": "0",
+      "backing": "0",
+      "ratioBps": 0
+    }
+  ]
+}

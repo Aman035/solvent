@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-09-07T14:58:33.753Z",
+  "window": {
+    "deployBlock": "48839900",
+    "head": "51001429",
+    "chain": "base"
+  },
+  "events": {
+    "Shipped": 443,
+    "Pushed": 2894,
+    "Pulled": 3848,
+    "Docked": 309
+  },
+  "makers": 115,
+  "coverage": "442/443",
+  "materialFloorUsd": 100,
+  "materialObservations": 630,
+  "materialUnderBacked": 560,
+  "pctUnderBacked": 89,
+  "booksMaterial": 88,
+  "booksUnderBacked": 78,
+  "makersUnderBacked": 45,
+  "worstBooks": [
+    {
+      "k": "0x5500e69d58d8f80b236c8a72fd52c538a5d5237f|0x4200000000000000000000000000000000000006",
+      "usd": 162753.88685161894,
+      "minRatio": 984,
+      "snapshots": 2,
+      "sym": "WETH",
+      "maker": "0x5500e69d58d8f80b236c8a72fd52c538a5d5237f"
+    },
+    {
+      "k": "0x5500e69d58d8f80b236c8a72fd52c538a5d5237f|0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "usd": 96999.27380000001,
+      "minRatio": 1469,
+      "snapshots": 2,
+      "sym": "cbBTC",
+      "maker": "0x5500e69d58d8f80b236c8a72fd52c538a5d5237f"
+    },
+    {
+      "k": "0x7553afc9cf3815ce24e33d14d1431b2918484a55|0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "usd": 51160.557525,
+      "minRatio": 0,
+      "snapshots": 25,
+      "sym": "USDC",
+      "maker": "0x7553afc9cf3815ce24e33d14d1431b2918484a55"
+    },
+    {
+      "k": "0x115caf42fac507278c75047bff9fd7b309fafb9a|0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+      "usd": 44000,
+      "minRatio": 0,
+      "snapshots": 2,
+      "sym": "cbBTC",
+      "maker": "0x115caf42fac507278c75047bff9fd7b309fafb9a"
+    },
+    {
+      "k": "0x7553afc9cf3815ce24e33d14d1431b2918484a55|0xfde4c96c8593536e31f229ea8f37b2ada2699bb2",
+      "usd": 42409.66,
+      "minRatio": 0,
+      "snapshots": 25,
+      "sym": "USDT",
+      "maker": "0x7553afc9cf3815ce24e33d14d1431b2918484a55"
+    }
+  ],
+  "latest": {
+    "block": 51001429,
+    "committed": 148508.88727786345,
+    "covered": 11663.048210901705
+  }
+}
