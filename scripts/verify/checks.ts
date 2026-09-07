@@ -5,6 +5,7 @@ import { formatUnits, formatEther, type Hex } from "viem";
 import {
   readClient, role, allWallets, targetFor, addrs, readManifest, activeChain,
   subgraphHead, gql, computeScore, env, REPO_ROOT, ERC20_ABI,
+  account, buildOrder, buildTakerData, SWAP_ABI,
 } from "@pof/core";
 import { type Check, pass, fail } from "./types.js";
 
@@ -171,6 +172,39 @@ export const checks: Check[] = [
       return (drift.length === 0 ? pass : fail)(
         [`${d.makerBooks.length} books: committed == index, backing == live wallet`, ...drift.slice(0, 4)],
         drift.length ? ["run pnpm attest:books to sync"] : undefined);
+    },
+  },
+  {
+    id: "S5", name: "Vignette books quote their live risk", phase: "Solvent",
+    async run() {
+      // the vignette's maker (wallet 37): its books were shipped with floor 9500 and
+      // skew from 5000; quoting must agree with the on-chain oracle, live
+      const pc = rd();
+      const maker = account(37);
+      const A = addrs();
+      const d = await gql<{ strategies: { id: Hex; program: Hex }[] }>(
+        `{ strategies(where: { maker: "${maker.address.toLowerCase()}", active: true }, first: 5) { id program } }`);
+      if (d.strategies.length === 0) return fail(["no vignette strategies indexed"], ["run pnpm vignette"]);
+      const bookAbi = [{ name: "utilisationBps", type: "function", stateMutability: "view",
+        inputs: [{ type: "address" }, { type: "address" }], outputs: [{ type: "uint32" }] }] as const;
+      const u = await pc.readContract({ address: A.solventBook, abi: bookAbi, functionName: "utilisationBps", args: [maker.address, A.weth] }) as number;
+      const order = await buildOrder({ maker: maker.address, tokenA: A.usdc, tokenB: A.weth, program: d.strategies[0].program });
+      const td = await buildTakerData({ taker: role("bob").address, isAToB: true });
+      let quoted: bigint | null = null;
+      try {
+        const q = await pc.readContract({
+          address: A.router, abi: SWAP_ABI, functionName: "quote",
+          args: [order, 10_000_000n, td] as never, account: role("bob").address,
+        }) as readonly [bigint, bigint, Hex];
+        quoted = q[1];
+      } catch { quoted = null; }
+      const floored = u >= 9_500;
+      const consistent = floored === (quoted === null);
+      return (consistent ? pass : fail)([
+        `book utilisation ${u}bps (floor 9500)`,
+        quoted === null ? "quote declined by SolvencyFloor" : `quote ${formatUnits(quoted, 18)} WETH for 10 USDC`,
+        `oracle and quoter agree: ${consistent}`,
+      ], consistent ? undefined : ["book and router disagree - rerun pnpm attest:books"]);
     },
   },
   {
