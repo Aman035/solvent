@@ -141,6 +141,29 @@ export const checks: Check[] = [
     },
   },
   {
+    id: "S4", name: "On-chain oracle mirrors the index", phase: "Solvent",
+    async run() {
+      const pc = rd();
+      const book = readManifest().contracts.solventBook.address as Hex;
+      const abi = [{ name: "bookOf", type: "function", stateMutability: "view",
+        inputs: [{ type: "address" }, { type: "address" }],
+        outputs: [{ type: "tuple", components: [
+          { type: "uint128", name: "committed" }, { type: "uint128", name: "backing" }, { type: "uint64", name: "updatedAt" }] }] }] as const;
+      const d = await gql<{ makerBooks: { maker: Hex; token: Hex; committed: string; backing: string }[] }>(
+        `{ makerBooks(first: 100) { maker token committed backing } }`);
+      if (d.makerBooks.length === 0) return fail(["no maker books indexed"]);
+      const drift: string[] = [];
+      for (const b of d.makerBooks) {
+        const oc = await pc.readContract({ address: book, abi, functionName: "bookOf", args: [b.maker, b.token] }) as { committed: bigint; backing: bigint };
+        if (oc.committed !== BigInt(b.committed) || oc.backing !== BigInt(b.backing))
+          drift.push(`${b.maker.slice(0, 10)} ${b.token.slice(0, 10)} chain ${oc.committed}/${oc.backing} index ${b.committed}/${b.backing}`);
+      }
+      return (drift.length === 0 ? pass : fail)(
+        [`${d.makerBooks.length} books, chain == index for all`, ...drift.slice(0, 4)],
+        drift.length ? ["run pnpm attest:books to sync"] : undefined);
+    },
+  },
+  {
     id: "C10/11", name: "Fill-and-revert proof + invariants", phase: "2 Contracts",
     async run() {
       const a = sh("cd contracts && forge test --match-contract FillAndRevertTest 2>&1 | tail -2");
