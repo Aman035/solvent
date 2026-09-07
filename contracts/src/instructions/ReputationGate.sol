@@ -1,4 +1,7 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: LicenseRef-Degensoft-SwapVM-1.1
+// This file extends the SwapVM runtime and is therefore licensed under the same terms
+// as the Licensed Work it modifies (SwapVM-1.1 section 3.1). Licence text: LICENSES/.
+// Powered by SwapVM, (c) Degensoft Ltd 2025.
 pragma solidity 0.8.30;
 
 import { Context } from "@1inch/swap-vm/src/libs/VM.sol";
