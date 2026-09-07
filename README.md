@@ -198,34 +198,52 @@ more than a naked one, enforced by adoption instead of protocol change.
 
 ---
 
-## The demo moment
+## Watch a position defend itself
 
-Three strategies from one wallet, quoting side by side.
+One wallet, 10 WETH, three strategies quoting side by side. A taker fills strategy A,
+and the other two react on their own:
 
-1. All three quote at fair price. The book is fully backed.
-2. A taker fills strategy A, consuming half the wallet.
-3. **Strategies B and C widen their own spreads, live.** No keeper, no manual dock. The
-   position repriced itself.
-4. Another fill takes the book below its floor. B and C now **refuse at quote time**,
-   where before they would have kept quoting and failed at settlement, burning the
-   taker's gas.
+```
+wallet backing: 10 WETH · utilisation 45%
 
-A position that protects its maker, warns its takers, and prices its own risk.
+  strategy A      bid 2,991.40      ← filled, 5 WETH leaves the wallet
+  strategy B      bid 2,991.40
+  strategy C      bid 2,990.85
 
----
+wallet backing: 5 WETH · utilisation 78%
+
+  strategy B      bid 2,952.10      ← spread widened itself, no keeper, no dock
+  strategy C      bid 2,951.62      ← repriced for a thinner book
+
+...another fill · utilisation 96%, below the floor...
+
+  strategy B      declined: SolvencyFloor          ← refused at quote time
+  strategy C      declined: SolvencyFloor          ← nothing for a taker to waste gas on
+```
+
+Before Solvent, B and C would have kept quoting the stale price until settlement
+reverted in a taker's face. A position that protects its maker, warns its takers, and
+prices its own risk.
 
 ## Landscape
 
-| Who | What they measure | The gap |
-| --- | --- | --- |
-| Exchange proof-of-reserves | custodial solvency, periodically attested | custody only; meaningless where the maker keeps the keys. Solvent is proof-of-reserves for makers who do not deposit, continuous instead of quarterly |
-| Risk platforms (Gauntlet, Chaos Labs, Chainlink PoR) | protocol parameters, custodial reserves | no concept of per-maker, approval-backed liquidity |
-| Aqua tooling (order books, strategy managers) | strategy construction and routing | none model maker solvency; none see the aggregate book |
-| The whitepaper's own remedy | "manually dock" | a human, watching, by hand |
+The closest relative is **exchange proof-of-reserves**, and the comparison is
+instructive. Same intuition, verify the backing instead of trusting the advertisement,
+but PoR only exists where a custodian holds the assets, and it is attested quarterly by
+auditors. Solvent is proof-of-reserves for makers who never deposit, recomputed
+continuously from public events, checkable by anyone.
 
-Nobody prices an on-chain maker's solvency, because before Aqua the question did not
+Everything else in the neighbourhood watches a different layer. Risk platforms like
+Gauntlet and Chaos Labs tune protocol parameters and monitor custodial reserves. Aqua's
+own emerging tooling builds order books and manages strategies. None of them can see a
+maker's aggregate book, because the protocol never computes it and no single contract
+read reveals it. And 1inch's documented remedy for the problem is a human docking
+strategies by hand.
+
+Nobody prices an on-chain maker's solvency because, before Aqua, the question could not
 exist: every other venue takes custody, so backing is 1.0 by construction. Aqua created
-the category by deleting custody. Solvent is the first entrant.
+the category by deleting custody. Solvent is the first entrant, and the 123 under-backed
+books above are the reason it needs to.
 
 ## Why now
 
@@ -238,23 +256,7 @@ the category by deleting custody. Solvent is the first entrant.
 
 ---
 
-## Status
-
-**Running today, on Base Sepolia (all contracts verified):** the extended SwapVM router
-built on 1inch's own extension pattern, with **35 of 1inch's unmodified Aqua tests
-passing against it**, plus a settlement-record pipeline end to end: fills indexed, broken
-promises recorded on-chain with the reverted tx as evidence, and a working solvency-style
-gate enforcing an indexed score at quote time. 124 Solidity tests, including the
-fractional-reserve proof and 4,096-call invariants.
-
-**In progress:** the `SolvencySkew` and `SolvencyFloor` instructions, per-maker
-balance-sheet aggregation in the subgraph, and the always-on mainnet pipeline for Base,
-Arbitrum and Optimism.
-
-**Measured, and kept honest:** the mainnet analysis above, and an attack on our own
-scoring where we published the numbers including the inconvenient ones. Faking fills
-costs less gas than faking reviews ($0.11 vs $0.57). What it actually costs is capital:
-$45,000 of real inventory vs $0. See [`docs/COST_TO_FAKE.md`](docs/COST_TO_FAKE.md).
+## Run it
 
 ```bash
 pnpm install && cp .env.example .env
