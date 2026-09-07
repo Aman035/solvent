@@ -393,7 +393,7 @@ Do not start Phase 1 until:
 
 ### C7 — `ReputationGate` instruction  ·  **THE 1INCH DELIVERABLE**
 
-**Goal:** A SwapVM instruction that reads the taker's Proof-of-Fill score during execution and proceeds, widens the price, or refuses — the "define your own instructions" hook that 1inch explicitly scores higher.
+**Goal:** A SwapVM instruction that reads the taker's Proof-of-Fill score during execution and proceeds, widens the price, or refuses — the extension point SwapVM's banked opcode space is designed for.
 **Depends on:** V1, V3, V12, C6 · **Risk:** GATE
 
 **Plan:**

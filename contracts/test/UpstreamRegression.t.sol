@@ -8,7 +8,7 @@ import { FeeAquaTest } from "@1inch/swap-vm/test/FeeAqua.t.sol";
 
 import { ProofOfFillSwapVMRouter } from "../src/router/ProofOfFillSwapVMRouter.sol";
 
-/// @notice THE regression proof for the 1inch bounty.
+/// @notice Regression proof that our router is a strict superset of the official one.
 ///
 ///         These suites are 1inch's OWN Aqua tests, imported unmodified from the pinned
 ///         the pinned 1inch swap-vm package. The only thing overridden is `_deployRouter()`, which

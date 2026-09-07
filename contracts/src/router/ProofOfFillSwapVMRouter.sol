@@ -11,8 +11,8 @@ import { ProofOfFillOpcodes } from "../opcodes/ProofOfFillOpcodes.sol";
 /// @title ProofOfFillSwapVMRouter
 /// @notice The official `AquaSwapVMRouter`, with the Proof-of-Fill instructions appended.
 /// @dev Structurally identical to upstream's `AquaSwapVMRouter` and
-///      `AquaSwapVMRouterDebug`; only the opcode mixin differs. This is the
-///      "redeployment of a modified SwapVM" the 1inch bounty permits.
+///      `AquaSwapVMRouterDebug`; only the opcode mixin differs. This is a redeployment of a
+///      modified SwapVM, structurally identical to upstream's own router.
 ///
 /// Powered by SwapVM — © Degensoft Ltd. See LICENSES/.
 contract ProofOfFillSwapVMRouter is Simulator, SwapVM, ProofOfFillOpcodes {
