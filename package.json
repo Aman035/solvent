@@ -28,7 +28,8 @@
     "demo:check": "tsx scripts/demo/check.ts",
     "demo:run": "tsx scripts/demo/run.ts",
     "demo:reset": "tsx scripts/demo/reset.ts",
-    "attest:books": "tsx services/attestor/src/attest-books.ts"
+    "attest:books": "tsx services/attestor/src/attest-books.ts",
+    "vignette": "tsx scripts/demo/vignette.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
