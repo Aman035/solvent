@@ -1,4 +1,4 @@
-import { writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { REPO_ROOT, activeChain } from "@pof/core";
 import { checks } from "./checks.js";
@@ -48,6 +48,7 @@ const md = [
     `| ${x.r.ok ? "✅" : "❌"} | **${x.id}** ${x.name} | ${x.phase} | ${x.r.evidence.map((e) => e.replace(/\|/g, "\\|")).join("<br>")} |`),
   ``,
 ].join("\n");
+mkdirSync(resolve(REPO_ROOT, "internal"), { recursive: true });
 writeFileSync(resolve(REPO_ROOT, "internal/STATUS.md"), md);
 console.log(`  → internal/STATUS.md\n`);
 process.exit(failed.length === 0 ? 0 : 1);

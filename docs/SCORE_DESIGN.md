@@ -1,6 +1,9 @@
 # Proof-of-Fill Score — Design
 
-**Status:** V11 resolved · feeds C6 (`ProofOfFillScore`), C16 (shared TS library), C22 (cost-to-fake), C23 (simulator)
+The settlement-record layer of Solvent: while the maker books answer "can this maker
+settle what it quotes right now", this score answers "has this counterparty delivered
+before". Implemented in `ProofOfFillScore` on-chain, mirrored bit-exactly by the shared
+TS library, and stress-tested by the cost-to-fake harness and the score simulator.
 
 ---
 
@@ -8,7 +11,7 @@
 
 **"How much value has this agent actually delivered, discounted by how often it reneged and by how concentrated its counterparties are."**
 
-It measures **financial reliability** — does this agent honour quotes with real tokens — and nothing else. Not task quality, not correctness, not latency. That narrowness is deliberate (`handover_doc.md` §4.3).
+It measures **financial reliability** — does this agent honour quotes with real tokens — and nothing else. Not task quality, not correctness, not latency. That narrowness is deliberate.
 
 ---
 

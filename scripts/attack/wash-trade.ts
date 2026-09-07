@@ -10,9 +10,9 @@ import {
 /**
  * COST-TO-FAKE: wash trading.
  *
- * The strongest objection to Proof of Fill is "what stops an agent trading with itself?"
- * `handover_doc.md` answers "it costs gas + fees + capital". That is an assertion. This
- * measures it, and reports the number honestly - including the fact that on a testnet
+ * The strongest objection to a settlement-record score is "what stops an agent trading
+ * with itself?" The easy answer is "it costs gas + fees + capital" - but that is an
+ * assertion. This measures it, and reports the number honestly - including the fact that on a testnet
  * gas is free, so the mainnet-equivalent cost is what matters.
  *
  * It also demonstrates the structural defence: the Herfindahl diversity term means a
