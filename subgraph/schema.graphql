@@ -124,3 +124,27 @@ type Review @entity(immutable: true) {
   timestamp: BigInt!
   txHash: Bytes!
 }
+
+"""
+A maker's aggregate balance sheet for one token: everything committed across every
+strategy, against what the wallet actually holds and has approved. The number Aqua
+cannot produce and the SolvencyFloor/SolvencySkew instructions enforce.
+"""
+type MakerBook @entity(immutable: false) {
+  id: Bytes!                 # maker ++ token
+  maker: Bytes!
+  token: Bytes!
+  committed: BigInt!
+  backing: BigInt!           # min(balanceOf, allowance to Aqua) at last touch
+  utilisationBps: BigInt!    # committed * 10000 / backing, saturating
+  updatedAtBlock: BigInt!
+}
+
+"Per-strategy per-token committed amount, so docks can be unwound exactly."
+type StrategyToken @entity(immutable: false) {
+  id: Bytes!                 # strategyHash ++ token
+  strategyHash: Bytes!
+  maker: Bytes!
+  token: Bytes!
+  committed: BigInt!
+}
