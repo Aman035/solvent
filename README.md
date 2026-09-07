@@ -1,237 +1,248 @@
 # Plimsoll
 
-**A load line for shared liquidity.**
+**Market makers that price their own solvency.**
 
-In the 1870s, ship owners sent overloaded vessels to sea knowing some would sink. They were
-insured either way; the crew was not. Samuel Plimsoll's answer was a mark painted on the
-hull — a line anyone could read from the dock that said *this vessel is carrying more than
-it can safely hold.*
+In the 1870s, ship owners routinely sent overloaded vessels to sea. They were insured
+either way; the crews were not. Samuel Plimsoll's fix was not a regulator, an auditor, or
+a registry — it was a **line painted on the hull**. If the water rose above the mark, the
+vessel was carrying more than it could safely bear, and anyone could see it from the dock.
 
-1inch Aqua has the same shape of problem, and no mark.
+1inch Aqua has created the first DeFi venue where positions can be overloaded the same
+way. Plimsoll puts the load line on the position itself.
 
 ---
 
 ## The problem
 
-Aqua is a shared liquidity layer: a market maker commits inventory to a strategy **without
-depositing it**. The tokens stay in the maker's own wallet, and Aqua pulls them only when a
-taker fills. No custody, no vault.
+[Aqua](https://github.com/1inch/aqua) is a shared liquidity layer. A market maker commits
+inventory to a strategy **without depositing it** — tokens stay in the maker's own wallet,
+and Aqua pulls them only at the moment a taker fills. No custody, no vault, no idle
+capital.
 
-The payoff is that **one balance can back many strategies at once**. From the Aqua
-whitepaper: *a $100,000 balance supporting three positions that collectively quote
-$300,000.* That is genuine capital efficiency, and 1inch is right that the maker's exposure
-stays capped by their holdings — nothing is borrowed, and the protocol cannot take on bad
-debt.
+The headline benefit is that **one balance can back many strategies at once**. 1inch's own
+worked example: a $100,000 balance supporting three positions that collectively quote
+$300,000. This is genuine capital efficiency, and the maker's *losses* are indeed capped —
+nothing is borrowed, and the protocol can never take on bad debt.
 
-**But the quotes are not capped.** Also from the whitepaper, emphasis ours:
+But it has a structural consequence:
+
+> **Every Aqua maker is running a fractional-reserve book, and no strategy knows about
+> the others.**
+
+SwapVM — the bytecode VM that executes Aqua strategies — has no concept of the maker's
+aggregate position. Each strategy quotes as if it alone owned the whole wallet. Aqua's
+`ship()` performs no aggregate check: no sum across strategies, no comparison against
+balance or allowance. And the whitepaper is explicit about what happens as commitments
+drift away from backing (emphasis ours):
 
 > *"When a Maker's actual wallet balance falls below their virtual balance commitments,
 > strategies become illiquid — trades cannot execute because pull operations will revert.
 > Importantly, **the AMM continues quoting prices based solely on virtual balances without
-> checking real balances or allowances**, preserving price continuity."*
+> checking real balances or allowances**."*
 
 > *"**While Aqua doesn't automatically pause illiquid positions, Makers are strongly
-> recommended to manually dock** strategies that become chronically underfunded."*
+> recommended to manually dock strategies** that become chronically underfunded to prevent
+> accumulating unfavorable price exposure."*
 
-So a maker can advertise liquidity they cannot deliver, the protocol will keep quoting it,
-and the remedy depends on the maker noticing and acting by hand.
+The venue keeps quoting. The protocol won't pause. The prescribed remedy is a human,
+watching, by hand.
 
-**Plimsoll is that remedy, automated.**
+## Who gets hurt
 
-### It is not hypothetical
+**Makers.** An illiquid strategy keeps quoting through price moves it cannot trade
+against. The whitepaper compares the result to impermanent loss: when liquidity returns,
+*"the first executable trade locks in those adverse price movements."* The recommended
+defence — manual monitoring of a book that was designed to be passive — does not scale
+past a handful of strategies.
 
+**Takers, especially automated ones.** An unbacked quote is indistinguishable from a
+backed one until you spend gas trying to fill it. A human might notice a sketchy maker;
+an agent routing on price will hit the same phantom quote repeatedly. As agents become
+the dominant taker population, "just eyeball it" stops being an answer.
+
+**Aggregators and solvers.** Unbacked quotes are often the *best-priced* quotes — stale
+positions quote through market moves. They win the route, then revert. Fill-rate is the
+metric aggregators live and die by.
+
+**The venue.** None of this is bad debt, but all of it is reputation. A venue where
+quotes can't be trusted pays for it in routing priority.
+
+## Is this pain real today?
+
+Three layers of evidence, from designed-in to live-on-mainnet:
+
+**1. It is designed in.** The whitepaper quotes above are 1inch describing their own
+trade-off: capital efficiency purchased with quote reliability, mitigation left to
+operators.
+
+**2. It is demonstrable on-chain.**
 [`contracts/test/FractionalReserve.t.sol`](contracts/test/FractionalReserve.t.sol) proves
-it on-chain:
+the mechanics against real Aqua contracts:
 
 ```
-one wallet holding 10 WETH, backing three strategies:
+one wallet holding 10 WETH, shipping three strategies:
 
-  strategy A   advertises 10 WETH   ← individually backed ✓
-  strategy B   advertises 10 WETH   ← individually backed ✓
-  strategy C   advertises 10 WETH   ← individually backed ✓
-  ─────────────────────────────────────────────────────────
-  advertised   30 WETH
-  held         10 WETH              ← 33% reserve ratio
+  strategy A   advertises 10 WETH      ← individually backed ✓
+  strategy B   advertises 10 WETH      ← individually backed ✓
+  strategy C   advertises 10 WETH      ← individually backed ✓
+  ──────────────────────────────────────────────────────────
+  advertised   30 WETH   ·   held 10 WETH   ·   reserve 33%
 ```
 
-Every strategy passes a per-strategy backing check. Only the aggregate reveals the
-position. And the second test shows where the cost lands: a taker fills strategy A and
-drains the wallet, then **a taker arriving at strategy B is reverted having done nothing
-wrong**, against a position still advertising 10 WETH it cannot deliver.
+Every strategy passes a per-strategy check; only the aggregate reveals the position. The
+second test shows where the cost lands: a taker fills strategy A and drains the wallet —
+then a taker arriving at strategy B **reverts through no fault of their own**, against a
+position still advertising 10 WETH it cannot deliver.
 
-Not a bug, not an exploit, no bad debt. A deliberate trade — capital efficiency bought with
-quote reliability — where the mitigation was left to operators.
+**3. It is live.** Aqua launched in July 2026 and is deployed at **identical addresses on
+Base, Arbitrum and Optimism**. Sampling its first weeks on Base (~63k blocks): 232
+protocol events — 120 pulls, 87 pushes, 13 ships, 12 docks — from **18 distinct makers**,
+with activity on all three chains. The maker population is early, which is precisely the
+point: the failure mode compounds with adoption, and the load line should exist *before*
+the fleet sails, not after the first sinking.
 
----
-
-## Why nobody can see it
-
-Detecting this means answering one question:
-
-> For maker M and token T, what is the **sum of every virtual balance M has committed across
-> every strategy**, against what M actually holds and has approved?
-
-That is not an RPC call. Aqua stores `_balances[maker][app][strategyHash][token]` — you can
-read one strategy if you already know its hash, but there is no enumeration, no per-maker
-total, and no event carrying the aggregate. `ship()` performs no aggregate check.
-
-The only way to compute it is to index every `Shipped`, `Docked`, `Pulled` and `Pushed`
-event and reconstruct per-maker state. That is why this is built on The Graph rather than
-merely using it.
+There is also a century of precedent for the fix. Professional market makers have skewed
+quotes against their own inventory since long before Avellaneda–Stoikov formalised it in
+2008 — inventory-aware pricing is table stakes everywhere *except* on-chain, where
+strategies are bytecode and, until now, blind to their own balance sheet. Aqua adds a
+dimension TradFi doesn't even have: the same inventory pledged to N books simultaneously.
 
 ---
 
 ## What Plimsoll does
 
-### 1 · Reserve ratio — the pre-trade signal that doesn't exist today
+Plimsoll makes an Aqua position **aware of its own balance sheet**, in bytecode. Three
+parts:
+
+### 1 · `SolvencySkew` — quotes that widen as the book thins
+
+A custom SwapVM instruction. The maker's *utilisation* — total commitments across every
+strategy, divided by what the wallet actually holds and has approved — feeds directly
+into pricing:
 
 ```
-committed(M,T) = Σ virtual balances across all strategies
-backing(M,T)   = min(wallet balance, allowance to Aqua)
-reserveRatio   = backing / committed
+utilisation 40%   →  quote at fair price
+utilisation 80%   →  spread widens          (scarce inventory costs more)
+utilisation 95%   →  spread widens sharply  (you are nearly a phantom)
 ```
 
-Below 1.0, the maker is quoting more than they can deliver. Published live, so a taker or
-aggregator can price that risk **before** spending gas on a quote that will revert.
+This is the economically correct behaviour — the last unit of a shared balance sheet is
+worth more than the first — and it is the standard professional-MM response to inventory
+risk, expressed for the first time as an on-chain instruction.
 
-Proof of reserves is table stakes for exchanges. Nobody had applied it to individual market
-makers, because until Aqua every venue took custody and the ratio was 1 by construction.
+### 2 · `LoadLine` — refuse before you fail
 
-### 2 · Solvency covenants — the automatic pause Aqua doesn't have
+A hard floor. Below a maker-chosen reserve ratio, the strategy **declines at quote time**
+— cheaply, honestly, visibly — instead of failing at settlement after a taker has
+committed gas. This is the automatic pause the whitepaper leaves manual, and because it
+lives in the program bytes, **any taker can verify the covenant before trading**. A maker
+who ships a load line is making a checkable promise: *I stop quoting before I'm
+overloaded.* Those quotes are worth more, and should route better.
 
-A custom SwapVM instruction that **refuses to fill when its own maker's reserve ratio falls
-below a threshold the maker chose**. The whitepaper says makers *"are strongly recommended
-to manually dock"*. This is that, automatically, enforced inside the swap and readable from
-the program bytes at quote time.
+### 3 · The balance-sheet index — the number nothing on-chain can compute
 
-It turns a claim into a commitment: *"I will stop quoting before I am over-extended, and
-you can verify that before you trade."* A maker who publishes it earns better routing,
-because their quotes are worth more.
+Both instructions need one number: the maker's aggregate commitment. **Aqua cannot
+produce it.** Balances are stored per `(maker, app, strategyHash, token)` with no
+enumeration, no per-maker total, and no event carrying the aggregate. The only way to
+know a maker's book is to **replay every `Shipped`, `Docked`, `Pulled` and `Pushed` since
+genesis** and reconstruct it.
 
-### 3 · Proof of Fill — what happened when they were tested
+That is an indexing problem, and it is why Plimsoll is built on The Graph rather than
+merely using it: one subgraph pipeline, deployed **unchanged** against the identical Aqua
+contracts on Base, Arbitrum and Optimism, maintaining every maker's live balance sheet. An
+attestor publishes each maker's aggregate on-chain, where the opcodes read it; anyone can
+recompute the same number from the same public index.
 
-Reserve ratio says whether a maker *can* deliver. It says nothing about whether they *do*.
+One schema, one pipeline, three chains, one query pattern:
+*"show me every maker whose commitments exceed their backing — anywhere."*
 
-```
-reliability = honored / (honored + 3 × failed)
-diversity   = 1 − HHI over counterparties
-score       = usdHonored × reliability × diversity
-```
+### And the settlement record
 
-A maker who only trades with itself has HHI = 1, so diversity 0, so **score exactly 0** —
-however much volume it writes. That is an invariant, proven over 4,096 calls, not a
-heuristic.
+Solvency says whether a maker *can* deliver. The record says whether they *do*: honoured
+fills versus broken promises (a reverted fill destroys its own logs, so Plimsoll re-emits
+failures on-chain, citing the reverted transaction anyone can check), discounted by
+counterparty concentration so self-dealt volume scores zero.
 
-The two signals cover each other's blind spots:
-
-| | Answers | Fakeable | Cold start |
-| --- | --- | --- | --- |
-| **Reserve ratio** | can they deliver *this block*? | no — it is a balance check | works instantly |
-| **Proof of Fill** | do they deliver when tested? | costs real capital | needs history |
-
-A brand-new honest maker has no record but can prove full reserve. A well-capitalised maker
-with a habit of reneging shows a good ratio and a bad record. You want both.
-
-Broken promises are recorded too — a reverted swap destroys its own logs, so the failure is
-re-emitted on-chain citing the real failed transaction hash.
+We also cross-referenced makers against ERC-8004, the on-chain agent reputation standard,
+via a second standardized multi-chain module. Finding: two agents can hold **identical
+five-star reputations** — same rating, same reviewer count — while one has settled
+thousands of dollars and the other has settled nothing. Reviews are free; balance sheets
+are not. That contrast is one query in Plimsoll's schema.
 
 ---
 
-## See it
+## The demo moment
 
-![Settlement ledger](docs/screenshots/ledger.png)
+Three strategies from one wallet, quoting side by side.
 
-Two agents with **identical** ERC-8004 reputations — five stars from the same twenty
-reviewers. The grey ticks are reviews; they look identical because they *are* identical.
-The green is value that actually settled. Only one of them has ever delivered anything.
+1. All three quote at fair price — the book is fully backed.
+2. A taker fills strategy A, consuming half the wallet.
+3. **Strategies B and C widen their own spreads, live** — no keeper, no manual dock; the
+   position repriced itself.
+4. Another fill takes the book below its load line. B and C now **refuse at quote time**
+   — where before Plimsoll, they would have kept quoting and failed at settlement,
+   burning the taker's gas.
+
+A position that protects its maker, warns its takers, and prices its own risk.
 
 ---
 
-## What faking a reputation costs
+## Landscape
 
-Both attacks were executed on-chain. Gas is measured from real receipts, converted to
-mainnet-equivalent.
-
-| | Fake **reviews** | Fake **fills** |
+| Who | What they measure | The gap |
 | --- | --- | --- |
-| Gas | $0.574 | $0.1132 |
-| **Capital required** | **$0** | **$45,000** |
-| Resulting score | **0** | 1780 |
+| Exchange proof-of-reserves | custodial solvency, periodically attested | custody-only; meaningless where the maker keeps the keys. Plimsoll is PoR for makers who *don't* deposit — continuous, not quarterly |
+| Risk platforms (Gauntlet, Chaos Labs, Chainlink PoR) | protocol-level parameters, custodial reserves | no concept of per-maker, approval-backed liquidity |
+| Aqua tooling (order books, strategy managers) | strategy construction and routing | none model maker solvency; none touch the aggregate book |
+| ERC-8004 reputation scorers | free-form review aggregation | measures claims; 90.6% of reviewers on Base show coordinated Sybil patterns (arXiv:2606.26028) |
+| The whitepaper's own remedy | "manually dock" | a human, watching, by hand |
 
-**Gas is not the defence** — faking fills is *cheaper* in gas than faking reviews. Capital
-is. Reviews are free speech; fills are collateralised speech.
+Nobody prices an on-chain maker's solvency, because before Aqua the question didn't
+exist: every other venue takes custody, so backing is 1.0 by construction. **Aqua created
+the category by deleting custody. Plimsoll is the first entrant.**
 
-We do not claim faking is impossible. The measured limits, including the inconvenient ones,
-are in [`docs/COST_TO_FAKE.md`](docs/COST_TO_FAKE.md).
+## Why now
+
+1. **The venue is weeks old** and already multichain at identical addresses. The primitive
+   should exist before the maker population scales.
+2. **The remedy is documented as manual** by the protocol's own authors.
+3. **The takers are becoming machines.** Agents can't eyeball counterparty risk; they need
+   it priced into the quote or published in the index. Both is better.
 
 ---
 
-## Run it
+## Where this stands
+
+Plimsoll v3 is a live rebuild of a working system (previously "Proof of Fill"). Honest
+status:
+
+**Running today, on Base Sepolia (all contracts verified):** the extended SwapVM router
+built on 1inch's own extension pattern — with **35 of 1inch's unmodified Aqua tests
+passing against it** — plus the settlement-record pipeline end to end: fills indexed,
+broken promises recorded on-chain with the reverted tx as evidence, scores derived from
+the index and enforced by a working gate instruction at quote time. 124 Solidity tests,
+including the fractional-reserve proof and score invariants over 4,096 fuzzed calls.
+
+**Being built now (the v3 core):** the `SolvencySkew` and `LoadLine` instructions,
+per-maker balance-sheet aggregation in the subgraph, and the mainnet pipeline against
+real Aqua on Base, Arbitrum and Optimism.
+
+**Measured, and kept honest:** we attacked our own scoring system and published the
+numbers, including the inconvenient ones — faking fills costs *less gas* than faking
+reviews ($0.11 vs $0.57); what it actually costs is **capital** ($45,000 of real
+inventory vs $0). See [`docs/COST_TO_FAKE.md`](docs/COST_TO_FAKE.md).
 
 ```bash
-pnpm install
-cp .env.example .env      # an RPC, a Graph API key, a funded key
-pnpm verify:all           # 15 checks against the live deployment
-pnpm dash                 # the ledger
+pnpm install && cp .env.example .env
+pnpm verify:all        # 15 live checks against the deployment
+pnpm dash              # the ledger
+pnpm alice status      # a maker's promised vs held — the proto load line
+pnpm demo:run          # honoured fill · quote-time refusal · broken promise
 ```
-
-| | |
-| --- | --- |
-| `pnpm bob 500` | taker agent: read the index → analyse → decide → swap |
-| `pnpm alice status` | what a maker has promised vs what it actually holds |
-| `pnpm alice betray` | move the committed inventory away, and break a promise |
-| `pnpm attest` | derive scores from the index, write them on-chain |
-| `pnpm attest:failures` | find reverted swaps and put them back on the record |
-| `pnpm attack:all` | measure what a fake reputation costs |
-| `pnpm demo:run` | the three scenarios end to end |
-
----
-
-## Live on Base Sepolia
-
-| | | |
-| --- | --- | --- |
-| **SwapVM router** | [`0x06ac5984d1bdd04aefd3e4e33312f30ce058462e`](https://sepolia.basescan.org/address/0x06ac5984d1bdd04aefd3e4e33312f30ce058462e#code) | official router + our instructions |
-| Aqua | [`0x525bebb9c5b4dad791402923e344b360bf6ab6a2`](https://sepolia.basescan.org/address/0x525bebb9c5b4dad791402923e344b360bf6ab6a2#code) | official source, unmodified |
-| ProofOfFillScore | [`0x95908bb174224f085b0f30d6236a46b27c7a6711`](https://sepolia.basescan.org/address/0x95908bb174224f085b0f30d6236a46b27c7a6711#code) | what the opcode reads |
-| ProofOfFillRecorder | [`0x1b6439b8f19e32e806d5a3cac67fdb1d9a91b1c7`](https://sepolia.basescan.org/address/0x1b6439b8f19e32e806d5a3cac67fdb1d9a91b1c7#code) | makes broken promises indexable |
-| ReputationRegistryAdapter | [`0x0e673c4a4534da45652ee4c7972fd9824e507eee`](https://sepolia.basescan.org/address/0x0e673c4a4534da45652ee4c7972fd9824e507eee#code) | score by ERC-8004 agent id |
-| ERC-8004 Identity / Reputation / Validation | [`0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33`](https://sepolia.basescan.org/address/0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33#code) · [`0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d`](https://sepolia.basescan.org/address/0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d#code) · [`0x26f213094e835ea8428fc35b27a144ab0d23563e`](https://sepolia.basescan.org/address/0x26f213094e835ea8428fc35b27a144ab0d23563e#code) | reference implementation, CC0 |
-
-All verified. Subgraph: [Studio](https://thegraph.com/studio/subgraph/proof-of-fill) ·
-[endpoint](https://api.studio.thegraph.com/query/42912/proof-of-fill/v0.4.0)
-
-The router follows 1inch's own extension pattern — override `_runOpcode`, fall through to
-`super` — using reserved free slots in SwapVM's banked opcode space, so no official opcode
-index moves. To prove that,
-[`contracts/test/UpstreamRegression.t.sol`](contracts/test/UpstreamRegression.t.sol) imports
-**1inch's own Aqua test suites unmodified** and swaps in our router. All 35 pass.
-
----
-
-## What to be sceptical about
-
-- **We run on Base Sepolia, not mainnet.** Aqua is deployed on Base mainnet but is a
-  developer preview: sampling its event history shows activity clustered around launch and
-  effectively none since. There is no live maker population to monitor yet, so we
-  demonstrate against makers we control and say so. The system is chain-agnostic —
-  `TARGET_CHAIN=base` is a config change, not a rewrite.
-- **The attestor is a trusted updater.** Everything it writes is re-derivable from the
-  public index, and every failure it records cites a real reverted transaction anyone can
-  check. It is still a trusted component.
-- **USD valuation uses fixed documented prices.** There is no testnet oracle.
-- The reputation gate scores `msg.sender`, so a taker routing through an aggregator is
-  scored as that contract, not the end user.
-- Mainnet Aqua restricts execution to verified resolvers. Our redeploy does not, and we do
-  not claim that benefit.
-- Proof of Fill measures **financial reliability only** — whether an agent delivers what it
-  quotes. Not task quality. That narrowness is deliberate.
-
-Full reasoning: [`docs/POSITIONING.md`](docs/POSITIONING.md) ·
-[`docs/SCORE_DESIGN.md`](docs/SCORE_DESIGN.md)
 
 ## Attribution
 
-Powered by Aqua — © Degensoft Ltd. Powered by SwapVM — © Degensoft Ltd. Upstream licences in
-`LICENSES/`. ERC-8004 reference implementation:
-[ChaosChain/trustless-agents-erc-ri](https://github.com/ChaosChain/trustless-agents-erc-ri), CC0.
+Powered by Aqua and SwapVM — © Degensoft Ltd; licences preserved in `LICENSES/`.
+ERC-8004 reference implementation:
+[ChaosChain/trustless-agents-erc-ri](https://github.com/ChaosChain/trustless-agents-erc-ri) (CC0).
+Load line concept: Samuel Plimsoll, 1876. It worked.
