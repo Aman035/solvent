@@ -1,4 +1,4 @@
-import { Bytes } from "@graphprotocol/graph-ts";
+import { Address, Bytes } from "@graphprotocol/graph-ts";
 import { Shipped, Docked, Pulled, Pushed } from "../generated/Aqua/Aqua";
 import { Strategy } from "../generated/schema";
 import { loadAgent, ZERO } from "./shared";
@@ -106,6 +106,6 @@ export function handleDocked(event: Docked): void {
 
   let toks = s.tokens;
   for (let i = 0; i < toks.length; i++) {
-    release(event.params.maker, event.params.strategyHash, toks[i], event.block);
+    release(event.address, event.params.maker, event.params.strategyHash, Address.fromBytes(toks[i]), event.block);
   }
 }

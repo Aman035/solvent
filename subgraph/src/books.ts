@@ -73,8 +73,15 @@ export function touch(
   book.committed = book.committed.plus(current).minus(prev);
   if (book.committed.lt(BigInt.zero())) book.committed = BigInt.zero();
 
-  // backing = min(balance, allowance to Aqua): a revoked allowance is exactly as
-  // unfillable as an empty wallet
+  refreshBacking(book, maker, token, aquaAddr, block);
+}
+
+/**
+ * backing = min(balance, allowance to Aqua): a revoked allowance is exactly as
+ * unfillable as an empty wallet. Every path that stamps updatedAtBlock re-reads
+ * backing so all book fields describe the same block.
+ */
+function refreshBacking(book: MakerBook, maker: Address, token: Address, aquaAddr: Address, block: ethereum.Block): void {
   let erc = ERC20.bind(token);
   let bal = erc.try_balanceOf(maker);
   let alw = erc.try_allowance(maker, aquaAddr);
@@ -88,7 +95,7 @@ export function touch(
 }
 
 /** Zero a strategy-token after a dock and fold the release into the book. */
-export function release(maker: Bytes, hash: Bytes, token: Bytes, block: ethereum.Block): void {
+export function release(aquaAddr: Address, maker: Address, hash: Bytes, token: Address, block: ethereum.Block): void {
   let st = StrategyToken.load(stId(hash, token));
   if (st == null || st.committed.isZero()) {
     if (st != null) {
@@ -101,9 +108,8 @@ export function release(maker: Bytes, hash: Bytes, token: Bytes, block: ethereum
   if (book != null) {
     book.committed = book.committed.minus(st.committed);
     if (book.committed.lt(BigInt.zero())) book.committed = BigInt.zero();
-    book.utilisationBps = utilisationBps(book.committed, book.backing);
-    book.updatedAtBlock = block.number;
-    book.save();
+    // a dock is a touch: re-read backing so the book is consistent at this block
+    refreshBacking(book, maker, token, aquaAddr, block);
   }
   st.committed = BigInt.zero();
   st.save();
