@@ -27,7 +27,8 @@
     "shoot": "tsx scripts/shoot.ts",
     "demo:check": "tsx scripts/demo/check.ts",
     "demo:run": "tsx scripts/demo/run.ts",
-    "demo:reset": "tsx scripts/demo/reset.ts"
+    "demo:reset": "tsx scripts/demo/reset.ts",
+    "attest:books": "tsx services/attestor/src/attest-books.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
