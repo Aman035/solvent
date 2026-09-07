@@ -265,3 +265,5 @@ pnpm exec tsx scripts/analyze-history.ts # rebuild the mainnet analysis yourself
 pnpm dash                                # the ledger
 pnpm demo:run                            # honoured fill · quote-time refusal · broken promise
 ```
+
+<sub>Built on 1inch Aqua. Powered by SwapVM, © Degensoft Ltd 2025. Upstream licences preserved in <code>LICENSES/</code>.</sub>
