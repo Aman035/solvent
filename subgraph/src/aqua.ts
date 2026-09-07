@@ -1,7 +1,8 @@
 import { Bytes } from "@graphprotocol/graph-ts";
-import { Shipped, Docked } from "../generated/Aqua/Aqua";
+import { Shipped, Docked, Pulled, Pushed } from "../generated/Aqua/Aqua";
 import { Strategy } from "../generated/schema";
 import { loadAgent, ZERO } from "./shared";
+import { touch, release, tokensFromShipInput } from "./books";
 
 /**
  * Extract the raw SwapVM program from Aqua's `strategy` blob.
@@ -57,11 +58,42 @@ export function handleShipped(event: Shipped): void {
   s.hasReputationGate = programHasOpcode(prog, 0x21);
   s.hasPriceAdjuster = programHasOpcode(prog, 0xb3);
 
-  s.tokens = [];
+  // learn the token list from the ship calldata (wrapper ships are picked up lazily
+  // on their first pull/push instead) and initialise the maker's book from chain state
+  let shippedTokens = tokensFromShipInput(event.transaction.input);
+  let tokenBytes: Array<Bytes> = [];
+  for (let i = 0; i < shippedTokens.length; i++) {
+    tokenBytes.push(shippedTokens[i]);
+    touch(event.address, event.params.maker, event.params.app, event.params.strategyHash, shippedTokens[i], event.block);
+  }
+  s.tokens = tokenBytes;
   s.committed = [];
   s.active = true;
   s.shippedAtBlock = event.block.number;
   s.shippedTx = event.transaction.hash;
+  s.save();
+}
+
+export function handlePulled(event: Pulled): void {
+  trackStrategyToken(event.params.strategyHash, event.params.token);
+  touch(event.address, event.params.maker, event.params.app, event.params.strategyHash, event.params.token, event.block);
+}
+
+export function handlePushed(event: Pushed): void {
+  trackStrategyToken(event.params.strategyHash, event.params.token);
+  touch(event.address, event.params.maker, event.params.app, event.params.strategyHash, event.params.token, event.block);
+}
+
+/** Keep Strategy.tokens complete even for wrapper ships discovered lazily. */
+function trackStrategyToken(hash: Bytes, token: Bytes): void {
+  let s = Strategy.load(hash);
+  if (s == null) return;
+  let toks = s.tokens;
+  for (let i = 0; i < toks.length; i++) {
+    if (toks[i].equals(token)) return;
+  }
+  toks.push(token);
+  s.tokens = toks;
   s.save();
 }
 
@@ -71,4 +103,9 @@ export function handleDocked(event: Docked): void {
   s.active = false;
   s.dockedAtBlock = event.block.number;
   s.save();
+
+  let toks = s.tokens;
+  for (let i = 0; i < toks.length; i++) {
+    release(event.params.maker, event.params.strategyHash, toks[i], event.block);
+  }
 }

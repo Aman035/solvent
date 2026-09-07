@@ -15,15 +15,21 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
-      entities: [Agent, Strategy, Fill, Counterparty, Global]
+      entities: [Agent, Strategy, Fill, Counterparty, Global, MakerBook, StrategyToken]
       abis:
         - name: Aqua
           file: ./abis/Aqua.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: Shipped(address,address,bytes32,bytes)
           handler: handleShipped
         - event: Docked(address,address,bytes32)
           handler: handleDocked
+        - event: Pulled(address,address,bytes32,address,uint256)
+          handler: handlePulled
+        - event: Pushed(address,address,bytes32,address,uint256)
+          handler: handlePushed
       file: ./src/aqua.ts
 
   - kind: ethereum
