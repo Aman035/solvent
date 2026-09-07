@@ -200,30 +200,40 @@ more than a naked one, enforced by adoption instead of protocol change.
 
 ## Watch a position defend itself
 
-One wallet, 10 WETH, three strategies quoting side by side. A taker fills strategy A,
-and the other two react on their own:
+One wallet, 10 WETH, three strategies quoting side by side. Every number below is from
+a live run on Base Sepolia (`pnpm vignette`), flowing through the full production loop:
+chain, The Graph, attestor, SolventBook, quote.
 
 ```
-wallet backing: 10 WETH · utilisation 45%
+wallet 10.00 WETH · committed 4.50 WETH · utilisation 45%
 
-  strategy A      bid 2,991.40      ← filled, 5 WETH leaves the wallet
-  strategy B      bid 2,991.40
-  strategy C      bid 2,990.85
+  strategy A      bid 3,106.67
+  strategy B      bid 3,106.67
+  strategy C      bid 3,106.67
 
-wallet backing: 5 WETH · utilisation 78%
+a taker fills A for 500 USDC - fills are healthy business
 
-  strategy B      bid 2,952.10      ← spread widened itself, no keeper, no dock
-  strategy C      bid 2,951.62      ← repriced for a thinner book
+  strategy A      bid 3,809.89      ← repriced its own inventory
+  strategy B      bid 3,106.67      ← untouched, and correctly so
+  strategy C      bid 3,106.67
 
-...another fill · utilisation 96%, below the floor...
+the maker redeploys half the wallet to another venue · utilisation 87%
 
-  strategy B      declined: SolvencyFloor          ← refused at quote time
+  strategy B      bid 3,202.86      ← spread widened itself, no keeper, no dock
+  strategy C      bid 3,201.23      ← repriced for a thinner book
+
+the maker keeps going, past the floor · utilisation 99%
+
+  strategy A      declined: SolvencyFloor          ← refused at quote time
+  strategy B      declined: SolvencyFloor
   strategy C      declined: SolvencyFloor          ← nothing for a taker to waste gas on
 ```
 
-Before Solvent, B and C would have kept quoting the stale price until settlement
-reverted in a taker's face. A position that protects its maker, warns its takers, and
-prices its own risk.
+The fill only moved the book that was filled. What moved B and C was the wallet
+draining underneath them, which emits no Aqua event at all: the index catches it, the
+attestor writes it on-chain, and the quotes react. Before Solvent these books would
+quote the stale price until settlement reverted in a taker's face. Here they priced
+the risk, then refused it.
 
 ## Landscape
 
@@ -260,7 +270,8 @@ books above are the reason it needs to.
 
 ```bash
 pnpm install && cp .env.example .env
-pnpm verify:all                          # 15 live checks against the deployment
+pnpm verify:all                          # live checks against the deployment
+pnpm vignette                            # the sequence above, live on Base Sepolia
 pnpm exec tsx scripts/analyze-history.ts # rebuild the mainnet analysis yourself
 pnpm dash                                # the ledger
 pnpm demo:run                            # honoured fill · quote-time refusal · broken promise
