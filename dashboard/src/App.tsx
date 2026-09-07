@@ -6,13 +6,26 @@ import {
 import costWash from "../../docs/cost-to-fake.json";
 import costRev from "../../docs/cost-to-fake-reviews.json";
 import manifest from "../../deployments/84532.json";
+import { SepoliaBooks, MainnetBooks, registerSepoliaTokens } from "./Solvency";
 
 registerNames({
   [manifest.contracts["agentId.alice"]?.address ?? ""]: "Alice",
   [manifest.contracts["agentId.bob"]?.address ?? ""]: "Bob",
   [manifest.contracts["agentId.mallory"]?.address ?? ""]: "Mallory",
   [costWash.attacker]: "Wash trader",
+  "0xcf66abc4e23809135f349c36625b5bf41af0df01": "Solvent maker",
 });
+registerSepoliaTokens({
+  [manifest.contracts.weth.address]: { symbol: "WETH", decimals: 18 },
+  [manifest.contracts.usdc.address]: { symbol: "USDC", decimals: 6 },
+});
+
+type Tab = "books" | "mainnet" | "ledger";
+const TABS: { id: Tab; name: string; tag: string }[] = [
+  { id: "books", name: "Balance sheets", tag: "Base Sepolia · quotes read these" },
+  { id: "mainnet", name: "Mainnet", tag: "1inch Aqua on Base · live" },
+  { id: "ledger", name: "Settlement ledger", tag: "claimed vs delivered" },
+];
 
 const POLL_MS = 6000;
 
@@ -243,13 +256,20 @@ export default function App() {
   const lag = snap ? snap.chainHead - snap.head : 0;
   const opened = snap?.agents.find((a) => a.id === open) ?? null;
 
+  const [tab, setTab] = useState<Tab>("books");
+
   return (
     <div className="shell">
       <div className="rail">
-        <span className="mark">Proof of Fill</span>
-        <span className="tag">Settlement ledger · Base Sepolia</span>
+        <span className="mark">Solvent</span>
+        <span className="tag">{TABS.find((t) => t.id === tab)!.tag}</span>
+        <nav className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={tab === t.id ? "on" : ""} onClick={() => setTab(t.id)}>{t.name}</button>
+          ))}
+        </nav>
         <span className="spacer" />
-        {snap && (
+        {tab === "ledger" && snap && (
           <>
             <span className="stat"><span className="label">Cleared</span><b>{snap.global?.totalHonored ?? 0}</b></span>
             <span className="stat"><span className="label">Returned</span>
@@ -264,10 +284,13 @@ export default function App() {
         <a href={STUDIO} target="_blank" rel="noreferrer">The Graph ↗</a>
       </div>
 
-      {err && <div className="err">Subgraph unreachable — {err}. Check SUBGRAPH_URL in .env, then reload.</div>}
-      {!snap && !err && <div className="empty" style={{ padding: 80 }}>Reading the ledger…</div>}
+      {tab === "books" && <SepoliaBooks />}
+      {tab === "mainnet" && <MainnetBooks />}
 
-      {snap && (
+      {tab === "ledger" && err && <div className="err">Subgraph unreachable — {err}. Check SUBGRAPH_URL in .env, then reload.</div>}
+      {tab === "ledger" && !snap && !err && <div className="empty" style={{ padding: 80 }}>Reading the ledger…</div>}
+
+      {tab === "ledger" && snap && (
         <>
           <div className="statement-head">
             <div className="hed">Agent<span className="sub">ERC-8004 identity</span></div>
