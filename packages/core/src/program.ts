@@ -19,10 +19,12 @@ export const OPCODE = {
   Deadline: 0x20,
   /** ours - conditions & access guards bank */
   ReputationGate: 0x21,
+  SolvencyFloor: 0x22,
   XYCSwap: 0x50,
   FeeFlatIn: 0x70,
   /** ours - rates tuning bank */
   ReputationPriceAdjuster: 0xb3,
+  SolvencySkew: 0xb5,
 } as const;
 
 /** Instructions that compute swap amounts. Guards and wrappers must precede these. */
@@ -65,6 +67,22 @@ export const I = {
     };
   },
 
+  /** [address book][uint32 maxUtilisationBps] */
+  solvencyFloor: (book: Hex, maxUtilisationBps: number): Instruction => ({
+    opcode: OPCODE.SolvencyFloor, name: "SolvencyFloor",
+    bytes: ins(OPCODE.SolvencyFloor, concatHex([pad(book, { size: 20 }), u(maxUtilisationBps, 4)])),
+  }),
+
+  /** [address book][uint32 startBps][uint24 maxWidenBps]  (widen denominated 1e7) */
+  solvencySkew: (book: Hex, startBps: number, maxWidenBps: number): Instruction => {
+    if (startBps >= 10_000 || maxWidenBps >= 1e7) throw new Error(`skew params out of range`);
+    return {
+      opcode: OPCODE.SolvencySkew, name: "SolvencySkew",
+      bytes: ins(OPCODE.SolvencySkew,
+        concatHex([pad(book, { size: 20 }), u(startBps, 4), u(maxWidenBps, 3)])),
+    };
+  },
+
   xycSwap: (): Instruction => ({ opcode: OPCODE.XYCSwap, name: "XYCSwap", bytes: ins(OPCODE.XYCSwap) }),
 
   /** feeBps denominated in 1e7, matching upstream FeeFlatIn */
@@ -82,7 +100,10 @@ export class ProgramBuilder {
     // calls ctx.runLoop(); both are meaningless (or wrong) after the pricing instruction
     // has already computed amounts. Upstream warns instruction order is security-critical,
     // so this is enforced at build time rather than left to the caller.
-    if (i.opcode === OPCODE.ReputationGate || i.opcode === OPCODE.ReputationPriceAdjuster) {
+    if (
+      i.opcode === OPCODE.ReputationGate || i.opcode === OPCODE.ReputationPriceAdjuster ||
+      i.opcode === OPCODE.SolvencyFloor || i.opcode === OPCODE.SolvencySkew
+    ) {
       if (this.parts.some((p) => PRICING_OPCODES.includes(p.opcode))) {
         throw new ProgramOrderError(
           `${i.name} must be placed BEFORE the pricing instruction; found it after ` +
@@ -95,6 +116,8 @@ export class ProgramBuilder {
   }
 
   gate(scoreOracle: Hex, floor: number) { return this.add(I.reputationGate(scoreOracle, floor)); }
+  solvencyFloor(book: Hex, maxUtilisationBps: number) { return this.add(I.solvencyFloor(book, maxUtilisationBps)); }
+  solvencySkew(book: Hex, startBps: number, maxWidenBps: number) { return this.add(I.solvencySkew(book, startBps, maxWidenBps)); }
   widen(scoreOracle: Hex, minScore: number, widenBps: number) { return this.add(I.reputationPriceAdjuster(scoreOracle, minScore, widenBps)); }
   xyc() { return this.add(I.xycSwap()); }
   fee(feeBps: number) { return this.add(I.feeFlatIn(feeBps)); }

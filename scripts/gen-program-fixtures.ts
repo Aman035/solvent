@@ -14,6 +14,8 @@ const fixtures = {
   feeOnly: program().fee(30_000).encode(),
   saltOnly: program().salt(12_345n).encode(),
   deadlineOnly: program().deadline(1_800_000_000).encode(),
+  solvencyFloorOnly: program().solvencyFloor(ORACLE, 9_000).encode(),
+  solventStack: program().solvencyFloor(ORACLE, 9_500).solvencySkew(ORACLE, 7_000, 500_000).xyc().fee(30_000).encode(),
 };
 
 const out = resolve(REPO_ROOT, "contracts/test/fixtures/programs.json");

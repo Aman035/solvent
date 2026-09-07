@@ -10,6 +10,8 @@ import { Salt, Deadline } from "@1inch/swap-vm/src/instructions/Controls.sol";
 
 import { ReputationGate } from "../src/instructions/ReputationGate.sol";
 import { ReputationPriceAdjuster } from "../src/instructions/ReputationPriceAdjuster.sol";
+import { SolvencyFloor } from "../src/instructions/SolvencyFloor.sol";
+import { SolvencySkew } from "../src/instructions/SolvencySkew.sol";
 
 /// @notice C9 - the cross-language contract.
 ///
@@ -67,6 +69,24 @@ contract ProgramRoundTripTest is Test {
             _ts("gateThenXyc"),
             bytes.concat(ReputationGate.build(oracle, 100), XYCSwap.build()),
             "composed encoding diverged"
+        );
+    }
+
+    function test_SolvencyFloorOnly() public view {
+        assertEq(_ts("solvencyFloorOnly"), SolvencyFloor.build(oracle, 9000), "floor encoding diverged");
+    }
+
+    /// The exact program shape the vignette ships.
+    function test_SolventStack() public view {
+        assertEq(
+            _ts("solventStack"),
+            bytes.concat(
+                SolvencyFloor.build(oracle, 9500),
+                SolvencySkew.build(oracle, 7000, 500_000),
+                XYCSwap.build(),
+                FeeFlatIn.build(30_000)
+            ),
+            "solvent stack encoding diverged"
         );
     }
 
