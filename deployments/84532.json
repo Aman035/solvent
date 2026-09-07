@@ -1,7 +1,7 @@
 {
   "chainId": 84532,
   "chainKey": "base-sepolia",
-  "updatedAt": "2026-09-07T15:36:59.625Z",
+  "updatedAt": "2026-09-07T15:42:20.728Z",
   "contracts": {
     "aqua": {
       "address": "0x525bebb9c5b4dad791402923e344b360bf6ab6a2",
@@ -17,14 +17,6 @@
       "txHash": "0x5597921577add1fb3235b5feb3f25a0d85ea800e21ce0a11685dff1ae322e77f",
       "verifiedUrl": "https://sepolia.basescan.org/address/0x95908bb174224f085b0f30d6236a46b27c7a6711#code",
       "note": "Score cache. Attestor writes; ReputationGate reads. Formula: docs/SCORE_DESIGN.md"
-    },
-    "router": {
-      "address": "0x06ac5984d1bdd04aefd3e4e33312f30ce058462e",
-      "deployBlock": 46430248,
-      "txHash": "0xf54d8579bfff29cc2ccf3d7569ef3a20c9b9f62a4f0dd0fdddc7a46ac6e5a869",
-      "verifiedUrl": "https://sepolia.basescan.org/address/0x06ac5984d1bdd04aefd3e4e33312f30ce058462e#code",
-      "sourceCommit": "f09a41e689240adc645934f965c8061749397cd2",
-      "note": "Official AquaSwapVMRouter shape + ReputationGate (0x21) and ReputationPriceAdjuster (0xb3). Permitted 'modified SwapVM redeploy'."
     },
     "weth": {
       "address": "0x3ac3f85cdbd1ce973cce3e67bc3cf75b79c525c7",
@@ -95,6 +87,20 @@
       "address": "0xe0acc7a4c35a1a1c37d5dbaee1bdedc2ff48e9de",
       "deployBlock": 46513565,
       "txHash": "0xb127cad800aa58e76e29d14309d58369a409bcb0994335790ab53a2c514ca691"
+    },
+    "routerV1": {
+      "address": "0x06ac5984d1bdd04aefd3e4e33312f30ce058462e",
+      "deployBlock": 46430248,
+      "txHash": "0xf54d8579bfff29cc2ccf3d7569ef3a20c9b9f62a4f0dd0fdddc7a46ac6e5a869",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x06ac5984d1bdd04aefd3e4e33312f30ce058462e#code",
+      "sourceCommit": "f09a41e689240adc645934f965c8061749397cd2",
+      "note": "settlement-record era router (ReputationGate/Adjuster); superseded by SolventRouter"
+    },
+    "router": {
+      "address": "0xff00bcc12a34864a3b6e411100bf839ab441c608",
+      "deployBlock": 46513725,
+      "txHash": "0xcc9b6c03af9db663cb4824d756e853fcee97861b1754b9d5ec5dc1fb6d09916a",
+      "sourceCommit": "f09a41e689240adc645934f965c8061749397cd2"
     }
   }
 }

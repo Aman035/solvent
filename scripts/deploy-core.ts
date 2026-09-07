@@ -54,8 +54,8 @@ const score = await deploy("proofOfFillScore", "ProofOfFillScore.sol", "ProofOfF
   [deployer.address, attestor.address]);
 
 // 3. Official AquaSwapVMRouter shape + our two instructions.
-const router = await deploy("router", "ProofOfFillSwapVMRouter.sol", "ProofOfFillSwapVMRouter",
-  [aqua, "0x0000000000000000000000000000000000000000", deployer.address, "ProofOfFillSwapVM", "1.0.0"],
+const router = await deploy("router", "SolventRouter.sol", "SolventRouter",
+  [aqua, "0x0000000000000000000000000000000000000000", deployer.address, "SolventSwapVM", "1.0.0"],
   SWAP_VM_COMMIT);
 
 // 4. Demo tokens (open-mint faucet, so the demo never depends on testnet liquidity).
