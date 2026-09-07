@@ -8,7 +8,10 @@ build/
 cache/
 dashboard/dist/
 dist/
+docs/mainnet-events*.json
+docs/mainnet-raw.json
 generated/
+internal/
 node_modules/
 out/
 subgraph/build/
