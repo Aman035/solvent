@@ -6,32 +6,32 @@ import { XYCSwapAquaTest } from "@1inch/swap-vm/test/XYCSwapAqua.t.sol";
 import { ControlsAquaTest } from "@1inch/swap-vm/test/ControlsAqua.t.sol";
 import { FeeAquaTest } from "@1inch/swap-vm/test/FeeAqua.t.sol";
 
-import { ProofOfFillSwapVMRouter } from "../src/router/ProofOfFillSwapVMRouter.sol";
+import { SolventRouter } from "../src/router/SolventRouter.sol";
 
 /// @notice Regression proof that our router is a strict superset of the official one.
 ///
 ///         These suites are 1inch's OWN Aqua tests, imported unmodified from the pinned
 ///         the pinned 1inch swap-vm package. The only thing overridden is `_deployRouter()`, which
-///         substitutes ProofOfFillSwapVMRouter for the stock AquaSwapVMRouter.
+///         substitutes SolventRouter for the stock AquaSwapVMRouter.
 ///
-///         If appending ReputationGate (_21) or ReputationPriceAdjuster (_b3) disturbed
+///         If appending any of the four Solvent instructions (_21, _22, _b3, _b5) disturbed
 ///         any official opcode, changed any pricing path, or altered any accounting
 ///         behaviour, these would fail. They are the evidence that our router is a
 ///         strict superset of the official one, not a fork.
-contract PoF_XYCSwapAqua_Regression is XYCSwapAquaTest {
+contract Solvent_XYCSwapAqua_Regression is XYCSwapAquaTest {
     function _deployRouter() internal override returns (SwapVM) {
-        return new ProofOfFillSwapVMRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
+        return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 }
 
-contract PoF_ControlsAqua_Regression is ControlsAquaTest {
+contract Solvent_ControlsAqua_Regression is ControlsAquaTest {
     function _deployRouter() internal override returns (SwapVM) {
-        return new ProofOfFillSwapVMRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
+        return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 }
 
-contract PoF_FeeAqua_Regression is FeeAquaTest {
+contract Solvent_FeeAqua_Regression is FeeAquaTest {
     function _deployRouter() internal override returns (SwapVM) {
-        return new ProofOfFillSwapVMRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
+        return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 }
