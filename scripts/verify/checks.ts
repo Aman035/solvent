@@ -149,17 +149,27 @@ export const checks: Check[] = [
         inputs: [{ type: "address" }, { type: "address" }],
         outputs: [{ type: "tuple", components: [
           { type: "uint128", name: "committed" }, { type: "uint128", name: "backing" }, { type: "uint64", name: "updatedAt" }] }] }] as const;
-      const d = await gql<{ makerBooks: { maker: Hex; token: Hex; committed: string; backing: string }[] }>(
-        `{ makerBooks(first: 100) { maker token committed backing } }`);
+      const aqua = readManifest().contracts.aqua.address as Hex;
+      const erc = [
+        { name: "balanceOf", type: "function", stateMutability: "view", inputs: [{ type: "address" }], outputs: [{ type: "uint256" }] },
+        { name: "allowance", type: "function", stateMutability: "view", inputs: [{ type: "address" }, { type: "address" }], outputs: [{ type: "uint256" }] },
+      ] as const;
+      const d = await gql<{ makerBooks: { maker: Hex; token: Hex; committed: string }[] }>(
+        `{ makerBooks(first: 100) { maker token committed } }`);
       if (d.makerBooks.length === 0) return fail(["no maker books indexed"]);
+      // committed must match the index exactly; backing must match a live chain read,
+      // because the attestor refreshes backing at write time (wallets drain without events)
       const drift: string[] = [];
       for (const b of d.makerBooks) {
         const oc = await pc.readContract({ address: book, abi, functionName: "bookOf", args: [b.maker, b.token] }) as { committed: bigint; backing: bigint };
-        if (oc.committed !== BigInt(b.committed) || oc.backing !== BigInt(b.backing))
-          drift.push(`${b.maker.slice(0, 10)} ${b.token.slice(0, 10)} chain ${oc.committed}/${oc.backing} index ${b.committed}/${b.backing}`);
+        const bal = await pc.readContract({ address: b.token, abi: erc, functionName: "balanceOf", args: [b.maker] }) as bigint;
+        const alw = await pc.readContract({ address: b.token, abi: erc, functionName: "allowance", args: [b.maker, aqua] }) as bigint;
+        const live = bal < alw ? bal : alw;
+        if (oc.committed !== BigInt(b.committed) || oc.backing !== live)
+          drift.push(`${b.maker.slice(0, 10)} ${b.token.slice(0, 10)} chain ${oc.committed}/${oc.backing} vs index ${b.committed} live ${live}`);
       }
       return (drift.length === 0 ? pass : fail)(
-        [`${d.makerBooks.length} books, chain == index for all`, ...drift.slice(0, 4)],
+        [`${d.makerBooks.length} books: committed == index, backing == live wallet`, ...drift.slice(0, 4)],
         drift.length ? ["run pnpm attest:books to sync"] : undefined);
     },
   },
