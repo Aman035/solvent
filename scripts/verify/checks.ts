@@ -75,26 +75,6 @@ export const checks: Check[] = [
     },
   },
   {
-    id: "C7", name: "Custom opcodes live on-chain", phase: "2 Contracts",
-    async run() {
-      const pc = rd();
-      const A = addrs();
-      const n = await pc.readContract({
-        address: A.router, abi: [{ name: "PROOF_OF_FILL_OPCODE_COUNT", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] }] as const,
-        functionName: "PROOF_OF_FILL_OPCODE_COUNT",
-      }) as bigint;
-      const aqua = await pc.readContract({
-        address: A.router, abi: [{ name: "AQUA", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "address" }] }] as const,
-        functionName: "AQUA",
-      }) as Hex;
-      const linked = aqua.toLowerCase() === A.aqua.toLowerCase();
-      return (n === 2n && linked ? pass : fail)([
-        `PROOF_OF_FILL_OPCODE_COUNT = ${n} (ReputationGate 0x21, ReputationPriceAdjuster 0xb3)`,
-        `router.AQUA ${linked ? "→ our Aqua ✓" : `MISLINKED ${aqua}`}`,
-      ]);
-    },
-  },
-  {
     id: "C8", name: "agentId → score adapter", phase: "2 Contracts",
     async run() {
       const pc = rd();
@@ -110,6 +90,39 @@ export const checks: Check[] = [
         } catch (e) { return fail([...ev, `agentId ${id} threw`]); }
       }
       return pass(ev);
+    },
+  },
+  {
+    id: "S1", name: "SolventBook oracle live", phase: "Solvent",
+    async run() {
+      const pc = rd();
+      const m = readManifest().contracts;
+      const book = m.solventBook?.address as Hex | undefined;
+      if (!book) return fail(["solventBook not deployed"]);
+      const abi = [{ name: "computeUtilisationBps", type: "function", stateMutability: "pure",
+        inputs: [{ type: "uint128" }, { type: "uint128" }], outputs: [{ type: "uint32" }] }] as const;
+      const u = await pc.readContract({ address: book, abi, functionName: "computeUtilisationBps", args: [300000n, 100000n] }) as number;
+      return (u === 30_000 ? pass : fail)([`whitepaper 3x case reads ${u} bps on-chain`]);
+    },
+  },
+  {
+    id: "S2", name: "Solvent router with 4 instructions", phase: "Solvent",
+    async run() {
+      const pc = rd();
+      const m = readManifest().contracts;
+      const r = m.router?.address as Hex | undefined;
+      if (!r) return fail(["router not deployed"]);
+      const abi = [{ name: "SOLVENT_OPCODE_COUNT", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] }] as const;
+      const n = await pc.readContract({ address: r, abi, functionName: "SOLVENT_OPCODE_COUNT" }) as bigint;
+      const aquaAbi = [{ name: "AQUA", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "address" }] }] as const;
+      const aqua = await pc.readContract({ address: r, abi: aquaAbi, functionName: "AQUA" }) as string;
+      const linked = aqua.toLowerCase() === (m.aqua.address as string).toLowerCase();
+      const out = sh("cd contracts && forge test --match-contract SolvencyInstructionsTest 2>&1 | tail -2");
+      return (n === 4n && linked && /0 failed/.test(out) ? pass : fail)([
+        `SOLVENT_OPCODE_COUNT = ${n} (floor 0x22, skew 0xb5, gate 0x21, adjuster 0xb3)`,
+        `router.AQUA ${linked ? "linked to our Aqua" : "MISLINKED " + aqua}`,
+        out.split("\n").filter(Boolean).pop()?.trim() ?? "?",
+      ]);
     },
   },
   {

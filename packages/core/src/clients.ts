@@ -12,10 +12,12 @@ import type { HDAccount } from "viem/accounts";
  * write redundancy, where a stale read cannot silently corrupt a conclusion.
  */
 export function readClient(c: ChainConfig = activeChain): PublicClient {
-  return createPublicClient({
-    chain: c.chain,
-    transport: http(c.rpc, { timeout: 30_000, retryCount: 3 }),
-  }) as PublicClient;
+  // Ordered failover: the primary is always preferred (consistency, archive depth),
+  // the public fallback only serves reads while the primary is unreachable. Without
+  // this, a primary outage fails every chain-touching check at once.
+  const transports = [http(c.rpc, { timeout: 25_000, retryCount: 2 })];
+  if (c.rpcFallback) transports.push(http(c.rpcFallback, { timeout: 25_000, retryCount: 2 }));
+  return createPublicClient({ chain: c.chain, transport: fallback(transports, { rank: false }) }) as PublicClient;
 }
 
 /** Public client with automatic RPC failover (R8). Use for writes and receipts. */
