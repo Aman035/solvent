@@ -80,6 +80,9 @@ if (identity) {
   console.log(`  ! reputationRegistryAdapter skipped - deploy ERC-8004 first`);
 }
 
+// 8. The maker balance-sheet oracle the SolvencyFloor and SolvencySkew read.
+await deploy("solventBook", "SolventBook.sol", "SolventBook", [deployer.address, attestor.address]);
+
 console.log(`\n  remaining: ${formatEther(await pc.getBalance({ address: deployer.address }))} ETH`);
 console.log(`  manifest : deployments/${activeChain.chainId}.json`);
 console.log(`  router   : ${explorerAddr(router)}\n`);

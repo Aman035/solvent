@@ -1,7 +1,7 @@
 {
   "chainId": 84532,
   "chainKey": "base-sepolia",
-  "updatedAt": "2026-09-05T18:29:53.075Z",
+  "updatedAt": "2026-09-07T15:36:59.625Z",
   "contracts": {
     "aqua": {
       "address": "0x525bebb9c5b4dad791402923e344b360bf6ab6a2",
@@ -90,6 +90,11 @@
       "address": "0x0e673c4a4534da45652ee4c7972fd9824e507eee",
       "deployBlock": 46432353,
       "txHash": "0xd464b77faf6f2e50342668c9a3fe373e79939f670058ffb2c6d76dfd5729c6ba"
+    },
+    "solventBook": {
+      "address": "0xe0acc7a4c35a1a1c37d5dbaee1bdedc2ff48e9de",
+      "deployBlock": 46513565,
+      "txHash": "0xb127cad800aa58e76e29d14309d58369a409bcb0994335790ab53a2c514ca691"
     }
   }
 }
