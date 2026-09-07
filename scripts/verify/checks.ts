@@ -208,6 +208,24 @@ export const checks: Check[] = [
     },
   },
   {
+    id: "S6", name: "Dashboard builds on live data", phase: "Solvent",
+    async run() {
+      const out = sh("cd dashboard && pnpm exec vite build 2>&1 | tail -1");
+      const built = /built in/.test(out);
+      const url = env.SUBGRAPH_URL_BASE;
+      if (!url) return fail(["SUBGRAPH_URL_BASE not set"]);
+      const r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ query: "{ makerBooks(first: 100) { id } _meta { hasIndexingErrors } }" }) });
+      const j = await r.json() as { data: { makerBooks: { id: string }[]; _meta: { hasIndexingErrors: boolean } } };
+      const n = j.data.makerBooks.length;
+      const ok = built && n > 0 && !j.data._meta.hasIndexingErrors;
+      return (ok ? pass : fail)([
+        out.trim(),
+        `solvent-base serving ${n} live maker books, errors ${j.data._meta.hasIndexingErrors}`,
+      ]);
+    },
+  },
+  {
     id: "C10/11", name: "Fill-and-revert proof + invariants", phase: "2 Contracts",
     async run() {
       const a = sh("cd contracts && forge test --match-contract FillAndRevertTest 2>&1 | tail -2");
