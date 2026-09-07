@@ -73,3 +73,28 @@ jobs:
           npm install --no-audit --no-fund
           npx graph codegen
           npx graph build
+      - name: Build mainnet manifests
+        run: |
+          cd subgraph
+          for m in subgraph.base.yaml subgraph.arbitrum.yaml subgraph.optimism.yaml; do
+            npx graph build "$m"
+          done
+
+  dashboard:
+    name: Dashboard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck and build
+        run: |
+          cd dashboard
+          pnpm exec tsc --noEmit
+          pnpm exec vite build
