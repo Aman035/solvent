@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Solvent">
+  <defs>
+    <clipPath id="below"><rect x="6" y="37" width="52" height="24"/></clipPath>
+  </defs>
+  <path d="M32 5 C 32 5, 13 28.5, 13 41 A 19 19 0 0 0 51 41 C 51 28.5, 32 5, 32 5 Z"
+        fill="none" stroke="#77828c" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M32 5 C 32 5, 13 28.5, 13 41 A 19 19 0 0 0 51 41 C 51 28.5, 32 5, 32 5 Z"
+        fill="#2fbf8f" clip-path="url(#below)"/>
+  <line x1="14.5" y1="37" x2="49.5" y2="37" stroke="#3fd39b" stroke-width="2.4"/>
+</svg>

@@ -1,0 +1,59 @@
+[
+  {
+    "chain": "base",
+    "events": {
+      "Shipped": 443,
+      "Pushed": 2894,
+      "Pulled": 3848,
+      "Docked": 309
+    },
+    "makers": 115,
+    "materialBooks": 89,
+    "underBackedBooks": 79,
+    "makersUnderBacked": 45,
+    "worst": {
+      "maker": "0x5500e69d58d8f80b236c8a72fd52c538a5d5237f",
+      "symbol": "WETH",
+      "usd": 162754,
+      "ratioPct": 9.8
+    }
+  },
+  {
+    "chain": "arbitrum",
+    "events": {
+      "Shipped": 158,
+      "Pushed": 665,
+      "Pulled": 634,
+      "Docked": 128
+    },
+    "makers": 47,
+    "materialBooks": 47,
+    "underBackedBooks": 42,
+    "makersUnderBacked": 21,
+    "worst": {
+      "maker": "0x00aad85125f452dfa462a1d86403ced36c00275f",
+      "symbol": "WETH",
+      "usd": 142576,
+      "ratioPct": 50
+    }
+  },
+  {
+    "chain": "optimism",
+    "events": {
+      "Shipped": 24,
+      "Pushed": 119,
+      "Docked": 16,
+      "Pulled": 124
+    },
+    "makers": 8,
+    "materialBooks": 2,
+    "underBackedBooks": 2,
+    "makersUnderBacked": 1,
+    "worst": {
+      "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+      "symbol": "WBTC",
+      "usd": 753,
+      "ratioPct": 39
+    }
+  }
+]

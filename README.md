@@ -1,6 +1,11 @@
-# Solvent
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/graphics/logo-dark.svg">
+    <img src="docs/graphics/logo-light.svg" width="280" alt="Solvent">
+  </picture>
+</p>
 
-**On-chain market making that never quotes more than it can settle.**
+<p align="center"><b>On-chain market making that never quotes more than it can settle.</b></p>
 
 In options, selling what you do not hold is called writing naked. On
 [1inch Aqua](https://github.com/1inch/aqua), every quote can be naked, and neither the
@@ -80,6 +85,16 @@ The worst offenders are not dust:
 That second book advertised roughly $50,000 of USDC while holding effectively nothing,
 continuously, for weeks. Every taker who tried it got a revert. Every aggregator that
 routed to it wasted its users' gas.
+
+The same pipeline, pointed unchanged at the identical Aqua contracts on the other chains,
+finds the same disease everywhere:
+
+| Chain | Makers | Material books | Under-backed books | Worst observed |
+| --- | ---: | ---: | ---: | --- |
+| Base | 115 | 89 | **79** | WETH book of ~$162,754 at 9.8% backing |
+| Arbitrum | 47 | 47 | **42** | WETH book of ~$142,576 at 50% backing |
+| Optimism | 8 | 2 | **2** | WBTC book of ~$753 at 39% backing |
+| **Total** | **170** | **138** | **123** | |
 
 Method notes, for the skeptical: USD figures use a fixed indicative price table for major
 tokens and exist only to rank materiality; backing is `min(balance, allowance)`, because

@@ -1,0 +1,814 @@
+{
+ "chain": "optimism",
+ "aqua": "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a",
+ "deployBlock": "154434383",
+ "head": "156597334",
+ "analyzedAt": "2026-09-07T15:12:11.512Z",
+ "eventCounts": {
+  "Shipped": 24,
+  "Pushed": 119,
+  "Docked": 16,
+  "Pulled": 124
+ },
+ "shipCalldataDecoded": 24,
+ "shipTotal": 24,
+ "makers": 8,
+ "snapshots": 34,
+ "tokens": {
+  "0x4200000000000000000000000000000000000006": {
+   "symbol": "WETH",
+   "decimals": 18
+  },
+  "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58": {
+   "symbol": "USDT",
+   "decimals": 6
+  },
+  "0x0b2c639c533813f4aa9d7837caf62653d097ff85": {
+   "symbol": "USDC",
+   "decimals": 6
+  },
+  "0x6ab707aca953edaefbc4fd23ba73294241490620": {
+   "symbol": "aOptUSDT",
+   "decimals": 6
+  },
+  "0x38d693ce1df5aadf7bc62595a37d667ad57922e5": {
+   "symbol": "0x38d693",
+   "decimals": 6
+  },
+  "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6": {
+   "symbol": "LINK",
+   "decimals": 18
+  },
+  "0x68f180fcce6836688e9084f035309e29bf0a2095": {
+   "symbol": "WBTC",
+   "decimals": 8
+  },
+  "0xc55e93c62874d8100dbd2dfe307edc1036ad5434": {
+   "symbol": "mooBIFI",
+   "decimals": 18
+  }
+ },
+ "observations": [
+  {
+   "block": "154499383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "1197440269138485",
+   "ratioBps": 5000,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154499383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "1552206",
+   "backing": "3154588",
+   "ratioBps": 20323,
+   "committedUsd": null
+  },
+  {
+   "block": "154499383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "1839998",
+   "backing": "3739476",
+   "ratioBps": 20323,
+   "committedUsd": null
+  },
+  {
+   "block": "154564383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "1197440269138485",
+   "ratioBps": 5000,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154564383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "1572206",
+   "backing": "3174588",
+   "ratioBps": 20191,
+   "committedUsd": null
+  },
+  {
+   "block": "154564383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "1819987",
+   "backing": "3719465",
+   "ratioBps": 20436,
+   "committedUsd": null
+  },
+  {
+   "block": "154629383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "1197440269138485",
+   "ratioBps": 5000,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154629383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "1572206",
+   "backing": "3174588",
+   "ratioBps": 20191,
+   "committedUsd": null
+  },
+  {
+   "block": "154629383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "1819987",
+   "backing": "3719465",
+   "ratioBps": 20436,
+   "committedUsd": null
+  },
+  {
+   "block": "154694383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "1186525982269561",
+   "ratioBps": 4954,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154694383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "1572206",
+   "backing": "3174588",
+   "ratioBps": 20191,
+   "committedUsd": null
+  },
+  {
+   "block": "154694383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "1819987",
+   "backing": "3719465",
+   "ratioBps": 20436,
+   "committedUsd": null
+  },
+  {
+   "block": "154759383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "1186525982269561",
+   "ratioBps": 4954,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154759383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "1819987",
+   "backing": "3719465",
+   "ratioBps": 20436,
+   "committedUsd": null
+  },
+  {
+   "block": "154824383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "0",
+   "ratioBps": 0,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154824383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "4730178",
+   "backing": "3174588",
+   "ratioBps": 6711,
+   "committedUsd": null
+  },
+  {
+   "block": "154824383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "5519985",
+   "backing": "3719465",
+   "ratioBps": 6738,
+   "committedUsd": null
+  },
+  {
+   "block": "154824383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "154889383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "0",
+   "ratioBps": 0,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "154889383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6430176",
+   "backing": "3174588",
+   "ratioBps": 4937,
+   "committedUsd": null
+  },
+  {
+   "block": "154889383",
+   "maker": "0x441c99204633f1664ac31fdf6b3fdda3e907c1cc",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "75890204",
+   "backing": "37956457",
+   "ratioBps": 5001,
+   "committedUsd": null
+  },
+  {
+   "block": "154889383",
+   "maker": "0x441c99204633f1664ac31fdf6b3fdda3e907c1cc",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "75979998",
+   "backing": "38977079",
+   "ratioBps": 5129,
+   "committedUsd": null
+  },
+  {
+   "block": "154954383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6430176",
+   "backing": "3174588",
+   "ratioBps": 4937,
+   "committedUsd": null
+  },
+  {
+   "block": "154954383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7511769",
+   "backing": "3719465",
+   "ratioBps": 4951,
+   "committedUsd": null
+  },
+  {
+   "block": "155019383",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "2394880538276970",
+   "backing": "0",
+   "ratioBps": 0,
+   "committedUsd": 7.184641614830911
+  },
+  {
+   "block": "155214383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7511769",
+   "backing": "3719465",
+   "ratioBps": 4951,
+   "committedUsd": null
+  },
+  {
+   "block": "155409383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x6ab707aca953edaefbc4fd23ba73294241490620",
+   "symbol": "aOptUSDT",
+   "committed": "1199981826",
+   "backing": "600311543",
+   "ratioBps": 5002,
+   "committedUsd": null
+  },
+  {
+   "block": "155539383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6501599",
+   "backing": "3246011",
+   "ratioBps": 4992,
+   "committedUsd": null
+  },
+  {
+   "block": "155604383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6501599",
+   "backing": "3246011",
+   "ratioBps": 4992,
+   "committedUsd": null
+  },
+  {
+   "block": "155604383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7440295",
+   "backing": "3647991",
+   "ratioBps": 4903,
+   "committedUsd": null
+  },
+  {
+   "block": "155604383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "155604383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "6513885210240123839",
+   "backing": "54650127557439",
+   "ratioBps": 0,
+   "committedUsd": null
+  },
+  {
+   "block": "155604383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "225730690934972034",
+   "backing": "120793237710516522",
+   "ratioBps": 5351,
+   "committedUsd": 677.192072804916
+  },
+  {
+   "block": "155604383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "596100",
+   "backing": "378948",
+   "ratioBps": 6357,
+   "committedUsd": null
+  },
+  {
+   "block": "155669383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6501599",
+   "backing": "3246011",
+   "ratioBps": 4992,
+   "committedUsd": null
+  },
+  {
+   "block": "155669383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7440295",
+   "backing": "3647991",
+   "ratioBps": 4903,
+   "committedUsd": null
+  },
+  {
+   "block": "155669383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "155669383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "5584426665319451069",
+   "backing": "8983375206119287477",
+   "ratioBps": 16086,
+   "committedUsd": null
+  },
+  {
+   "block": "155669383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "230134942334746106",
+   "backing": "130070323227448219",
+   "ratioBps": 5651,
+   "committedUsd": 690.4048270042383
+  },
+  {
+   "block": "155669383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "596100",
+   "backing": "393724",
+   "ratioBps": 6604,
+   "committedUsd": null
+  },
+  {
+   "block": "155734383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6501599",
+   "backing": "3246011",
+   "ratioBps": 4992,
+   "committedUsd": null
+  },
+  {
+   "block": "155734383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "5424969788797149993",
+   "backing": "5823918329596986401",
+   "ratioBps": 10735,
+   "committedUsd": null
+  },
+  {
+   "block": "155734383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "230920233782568447",
+   "backing": "117785059576122281",
+   "ratioBps": 5100,
+   "committedUsd": 692.7607013477053
+  },
+  {
+   "block": "155734383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "596100",
+   "backing": "288437",
+   "ratioBps": 4838,
+   "committedUsd": null
+  },
+  {
+   "block": "155799383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6501599",
+   "backing": "3246011",
+   "ratioBps": 4992,
+   "committedUsd": null
+  },
+  {
+   "block": "155799383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7440295",
+   "backing": "3647991",
+   "ratioBps": 4903,
+   "committedUsd": null
+  },
+  {
+   "block": "155799383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "155799383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "6045145710776271287",
+   "backing": "1412977597816435232",
+   "ratioBps": 2337,
+   "committedUsd": null
+  },
+  {
+   "block": "155799383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "202132723798814705",
+   "backing": "74291569445186263",
+   "ratioBps": 3675,
+   "committedUsd": 606.3981713964441
+  },
+  {
+   "block": "155799383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "677150",
+   "backing": "290254",
+   "ratioBps": 4286,
+   "committedUsd": null
+  },
+  {
+   "block": "155864383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "155864383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "217182839248298607",
+   "backing": "64719608551543796",
+   "ratioBps": 2979,
+   "committedUsd": 651.5485177448959
+  },
+  {
+   "block": "155929383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7423313",
+   "backing": "3631009",
+   "ratioBps": 4891,
+   "committedUsd": null
+  },
+  {
+   "block": "155929383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "155929383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "645084",
+   "backing": "347854",
+   "ratioBps": 5392,
+   "committedUsd": null
+  },
+  {
+   "block": "155994383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6788565",
+   "backing": "3532977",
+   "ratioBps": 5204,
+   "committedUsd": null
+  },
+  {
+   "block": "155994383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "155994383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "6154363437688539990",
+   "backing": "3155017251415067479",
+   "ratioBps": 5126,
+   "committedUsd": null
+  },
+  {
+   "block": "155994383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "209667560041299755",
+   "backing": "83823685004130649",
+   "ratioBps": 3997,
+   "committedUsd": 629.0026801238993
+  },
+  {
+   "block": "155994383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "651529",
+   "backing": "371949",
+   "ratioBps": 5708,
+   "committedUsd": null
+  },
+  {
+   "block": "156059383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "213350589179948919",
+   "backing": "87506714142779813",
+   "ratioBps": 4101,
+   "committedUsd": 640.0517675398468
+  },
+  {
+   "block": "156124383",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7153225",
+   "backing": "3360921",
+   "ratioBps": 4698,
+   "committedUsd": null
+  },
+  {
+   "block": "156124383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "156124383",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "6225370297781977625",
+   "backing": "3226024111508505114",
+   "ratioBps": 5182,
+   "committedUsd": null
+  },
+  {
+   "block": "156189383",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "156597334",
+   "maker": "0xca4b6c0e99755c9dc4c73b3e9bf11e1142f2166f",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "23520000",
+   "backing": "3520000",
+   "ratioBps": 1496,
+   "committedUsd": null
+  },
+  {
+   "block": "154503474",
+   "maker": "0xbc6538407c1da2218da2f12d26cd843c6ac2d60e",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "4789761076553940",
+   "backing": "1197440269138485",
+   "ratioBps": 2500,
+   "committedUsd": 14.369283229661821
+  },
+  {
+   "block": "155981553",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "6788565",
+   "backing": "3532977",
+   "ratioBps": 5204,
+   "committedUsd": null
+  },
+  {
+   "block": "154833311",
+   "maker": "0x410326e60d9c4ca5bd1a5846b7c41b21fc9e83b1",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "7511769",
+   "backing": "3719465",
+   "ratioBps": 4951,
+   "committedUsd": null
+  },
+  {
+   "block": "154810871",
+   "maker": "0x787cc3ee565e1c35d951d641d300ee815c9546ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "2260000",
+   "backing": "1137374",
+   "ratioBps": 5032,
+   "committedUsd": null
+  },
+  {
+   "block": "154871802",
+   "maker": "0x441c99204633f1664ac31fdf6b3fdda3e907c1cc",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "75890204",
+   "backing": "37956457",
+   "ratioBps": 5001,
+   "committedUsd": null
+  },
+  {
+   "block": "154871802",
+   "maker": "0x441c99204633f1664ac31fdf6b3fdda3e907c1cc",
+   "token": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+   "symbol": "USDT",
+   "committed": "75979998",
+   "backing": "38977079",
+   "ratioBps": 5129,
+   "committedUsd": null
+  },
+  {
+   "block": "155022716",
+   "maker": "0x49da97c4caa96138d9d7d9492b0cb96febf771ab",
+   "token": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+   "symbol": "USDC",
+   "committed": "4379982",
+   "backing": "1100000",
+   "ratioBps": 2511,
+   "committedUsd": null
+  },
+  {
+   "block": "155022716",
+   "maker": "0x49da97c4caa96138d9d7d9492b0cb96febf771ab",
+   "token": "0x4200000000000000000000000000000000000006",
+   "symbol": "WETH",
+   "committed": "413924830307664",
+   "backing": "208861470691893",
+   "ratioBps": 5045,
+   "committedUsd": 1.241774490922992
+  },
+  {
+   "block": "155384293",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+   "symbol": "LINK",
+   "committed": "7056766536616212777",
+   "backing": "3056766602716006142",
+   "ratioBps": 4331,
+   "committedUsd": null
+  },
+  {
+   "block": "155787458",
+   "maker": "0x27d9ad548c2de460e12ef18d0c19713ade59f141",
+   "token": "0x68f180fcce6836688e9084f035309e29bf0a2095",
+   "symbol": "WBTC",
+   "committed": "684675",
+   "backing": "267014",
+   "ratioBps": 3899,
+   "committedUsd": null
+  }
+ ],
+ "underBacked": 65
+}

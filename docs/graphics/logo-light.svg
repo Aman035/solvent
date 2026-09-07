@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 344 64" role="img" aria-label="Solvent">
+  <g transform="translate(0,0) scale(0.98)">
+  <defs>
+    <clipPath id="below"><rect x="6" y="37" width="52" height="24"/></clipPath>
+  </defs>
+  <path d="M32 5 C 32 5, 13 28.5, 13 41 A 19 19 0 0 0 51 41 C 51 28.5, 32 5, 32 5 Z"
+        fill="none" stroke="#59626c" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M32 5 C 32 5, 13 28.5, 13 41 A 19 19 0 0 0 51 41 C 51 28.5, 32 5, 32 5 Z"
+        fill="#2fbf8f" clip-path="url(#below)"/>
+  <line x1="14.5" y1="37" x2="49.5" y2="37" stroke="#3fd39b" stroke-width="2.4"/></g>
+  <text x="72" y="45" font-family="ui-sans-serif,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+        font-size="38" font-weight="650" letter-spacing="-0.5" fill="#1c2126">Solvent</text>
+</svg>

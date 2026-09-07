@@ -15,25 +15,40 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { createPublicClient, http, parseAbi, decodeFunctionData, formatUnits, type Hex } from "viem";
-import { base } from "viem/chains";
+import { base, arbitrum, optimism } from "viem/chains";
 import { REPO_ROOT } from "@pof/core";
 
-const AQUA = "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a" as Hex;
-const SCAN_RPC = "https://mainnet.base.org";          // fast for logs
-const scan = createPublicClient({ chain: base, transport: http(SCAN_RPC, { timeout: 30_000, retryCount: 3 }) });
+const AQUA = "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a" as Hex;   // same on every chain (CREATE3)
+
+const CHAINS = {
+  base: {
+    chain: base, scanRpc: "https://mainnet.base.org",
+    archive: ["https://base.drpc.org", "https://base.llamarpc.com", "https://base-mainnet.public.blastapi.io", "https://base.meowrpc.com", "https://1rpc.io/base"],
+    step: 65_000n,          // ~1.5 days at 2s blocks
+  },
+  arbitrum: {
+    chain: arbitrum, scanRpc: "https://arb1.arbitrum.io/rpc",
+    archive: ["https://arbitrum.drpc.org", "https://arb1.arbitrum.io/rpc", "https://arbitrum-one.public.blastapi.io", "https://1rpc.io/arb"],
+    step: 500_000n,         // ~1.45 days at 0.25s blocks
+  },
+  optimism: {
+    chain: optimism, scanRpc: "https://mainnet.optimism.io",
+    archive: ["https://optimism.drpc.org", "https://optimism.llamarpc.com", "https://optimism-mainnet.public.blastapi.io", "https://1rpc.io/op"],
+    step: 65_000n,
+  },
+} as const;
+type ChainKey = keyof typeof CHAINS;
+const KEY = (process.argv[2] ?? "base") as ChainKey;
+const CFG = CHAINS[KEY];
+if (!CFG) { console.error(`unknown chain ${KEY}`); process.exit(2); }
+console.log(`═══ chain: ${KEY} ═══`);
+const scan = createPublicClient({ chain: CFG.chain, transport: http(CFG.scanRpc, { timeout: 30_000, retryCount: 3 }) });
 
 /**
  * Historical state needs an archive node. Free archive endpoints rate-limit hard, so
  * rotate across several with global pacing and per-call failover.
  */
-const ARCHIVE_URLS = [
-  "https://base.drpc.org",
-  "https://base.llamarpc.com",
-  "https://base-mainnet.public.blastapi.io",
-  "https://base.meowrpc.com",
-  "https://1rpc.io/base",
-];
-const archives = ARCHIVE_URLS.map((u) => createPublicClient({ chain: base, transport: http(u, { timeout: 25_000, retryCount: 0 }) }));
+const archives = CFG.archive.map((u) => createPublicClient({ chain: CFG.chain, transport: http(u, { timeout: 25_000, retryCount: 0 }) }));
 let rr = 0; let lastCall = 0;
 async function archived<T>(fn: (c: typeof archives[number]) => Promise<T>): Promise<T> {
   const wait = 120 - (Date.now() - lastCall);        // ~8 req/s globally
@@ -48,6 +63,7 @@ async function archived<T>(fn: (c: typeof archives[number]) => Promise<T>): Prom
   throw err;
 }
 const state = { readContract: (args: any) => archived((c) => c.readContract(args)) } as any;
+void state;
 
 const EVENTS = parseAbi([
   "event Shipped(address maker, address app, bytes32 strategyHash, bytes strategy)",
@@ -75,7 +91,7 @@ async function pool<T, R>(items: T[], n: number, fn: (t: T) => Promise<R>): Prom
 
 // ── 1. full event log (cached) ────────────────────────────────────────────
 interface Ev { name: string; block: string; logIndex: number; tx: Hex; args: Record<string, string> }
-const CACHE = resolve(REPO_ROOT, "docs/mainnet-events.json");
+const CACHE = resolve(REPO_ROOT, KEY === "base" ? "docs/mainnet-events.json" : `docs/mainnet-events.${KEY}.json`);
 let events: Ev[]; let deployBlock: bigint; let head: bigint;
 
 if (existsSync(CACHE)) {
@@ -87,22 +103,31 @@ if (existsSync(CACHE)) {
   let lo = 0n, hi = head;
   while (lo < hi) {
     const mid = (lo + hi) / 2n;
-    const code = await scan.getBytecode({ address: AQUA, blockNumber: mid }).catch(() => undefined);
+    // must run on archive nodes; an RPC failure here must throw, never read as "no code"
+    const code = await archived((c) => c.getBytecode({ address: AQUA, blockNumber: mid }));
     if (code && code.length > 2) hi = mid; else lo = mid + 1n;
   }
   deployBlock = lo;
   events = [];
-  const CHUNK = 9_000n;
-  for (let from = deployBlock; from <= head; from += CHUNK + 1n) {
-    const to = from + CHUNK > head ? head : from + CHUNK;
-    const logs = await scan.getLogs({ address: AQUA, events: EVENTS, fromBlock: from, toBlock: to })
-      .catch(async () => { await new Promise((r) => setTimeout(r, 1500)); return scan.getLogs({ address: AQUA, events: EVENTS, fromBlock: from, toBlock: to }); });
-    for (const lg of logs) {
-      const args: Record<string, string> = {};
-      for (const [k, v] of Object.entries(lg.args as object)) args[k] = String(v);
-      events.push({ name: lg.eventName!, block: lg.blockNumber!.toString(), logIndex: lg.logIndex!, tx: lg.transactionHash!, args });
+  // adaptive ranges: try wide, halve on provider errors, floor at 9k
+  let chunk = 200_000n;
+  let from = deployBlock;
+  while (from <= head) {
+    const to = from + chunk > head ? head : from + chunk;
+    try {
+      const logs = await scan.getLogs({ address: AQUA, events: EVENTS, fromBlock: from, toBlock: to });
+      for (const lg of logs) {
+        const args: Record<string, string> = {};
+        for (const [k, v] of Object.entries(lg.args as object)) args[k] = String(v);
+        events.push({ name: lg.eventName!, block: lg.blockNumber!.toString(), logIndex: lg.logIndex!, tx: lg.transactionHash!, args });
+      }
+      from = to + 1n;
+      if (chunk < 200_000n) chunk *= 2n;
+    } catch {
+      if (chunk > 9_000n) { chunk /= 2n; continue; }
+      await new Promise((r) => setTimeout(r, 1500));
     }
-    if ((from - deployBlock) % 400_000n < CHUNK) process.stdout.write(`\r  scanning ${(from - deployBlock).toLocaleString()} blocks…`);
+    if ((from - deployBlock) % 1_000_000n < chunk) process.stdout.write(`\r  scanning ${(from - deployBlock).toLocaleString()} / ${(head - deployBlock).toLocaleString()} blocks…`);
   }
   writeFileSync(CACHE, JSON.stringify({ deployBlock: deployBlock.toString(), head: head.toString(), events }, null, 0) + "\n");
   console.log(`\r  scanned: ${events.length} events cached`);
@@ -180,7 +205,7 @@ function bump(hash: string, token: string, delta: bigint, block: string) {
   if (!p || agg > p.committed) peak.set(bk, { committed: agg, block });
 }
 
-const STEP = 65_000n;                                // snapshot every ~1.5 days
+const STEP = CFG.step;                               // ~1.5 days per chain
 let nextSnap = deployBlock + STEP;
 interface Snap { block: string; books: { maker: Hex; token: Hex; committed: string }[] }
 const snaps: Snap[] = [];
@@ -291,11 +316,11 @@ for (const o of under.slice(0, 12)) {
   console.log(`   ‼ block ${o.block}  ${o.maker.slice(0, 12)}  ${o.symbol.padEnd(8)} committed ${f(o.committed).padStart(14)} (~$${(o.committedUsd ?? 0).toFixed(0).padStart(8)})  backing ${f(o.backing).padStart(14)}  ${(o.ratioBps / 100).toFixed(1)}%`);
 }
 
-writeFileSync(resolve(REPO_ROOT, "docs/mainnet-history.json"), JSON.stringify({
-  chain: "base", aqua: AQUA, deployBlock: deployBlock.toString(), head: head.toString(),
+writeFileSync(resolve(REPO_ROOT, KEY === "base" ? "docs/mainnet-history.json" : `docs/mainnet-history.${KEY}.json`), JSON.stringify({
+  chain: KEY, aqua: AQUA, deployBlock: deployBlock.toString(), head: head.toString(),
   analyzedAt: new Date().toISOString(), eventCounts: counts,
   shipCalldataDecoded: shipInit.size, shipTotal: shipEvents.length,
   makers: makers.size, snapshots: snaps.length,
   tokens: Object.fromEntries(meta), observations, underBacked: under.length,
 }, null, 1) + "\n");
-console.log(`  → docs/mainnet-history.json`);
+console.log(`  → docs/mainnet-history${KEY === "base" ? "" : "." + KEY}.json`);
