@@ -126,6 +126,21 @@ export const checks: Check[] = [
     },
   },
   {
+    id: "S3", name: "Maker books indexed live", phase: "Solvent",
+    async run() {
+      const d = await gql<{ makerBooks: { maker: string; token: string; committed: string; backing: string; utilisationBps: string }[] }>(
+        `{ makerBooks(orderBy: utilisationBps, orderDirection: desc, first: 20) { maker token committed backing utilisationBps } }`);
+      if (d.makerBooks.length === 0) return fail(["no maker books indexed"], ["redeploy subgraph or run seed scripts"]);
+      const ev = d.makerBooks.slice(0, 6).map((b) =>
+        `${b.maker.slice(0, 10)} ${b.token.slice(0, 10)} committed ${b.committed} backing ${b.backing} util ${b.utilisationBps}bps`);
+      // sanity: utilisation must equal the TS formula for every row
+      const { computeUtilisationBps } = await import("@pof/core");
+      const bad = d.makerBooks.filter((b) => String(computeUtilisationBps(BigInt(b.committed), BigInt(b.backing))) !== b.utilisationBps);
+      return (bad.length === 0 ? pass : fail)([`${d.makerBooks.length} books`, ...ev],
+        bad.length ? [`${bad.length} books disagree with computeUtilisationBps`] : undefined);
+    },
+  },
+  {
     id: "C10/11", name: "Fill-and-revert proof + invariants", phase: "2 Contracts",
     async run() {
       const a = sh("cd contracts && forge test --match-contract FillAndRevertTest 2>&1 | tail -2");
