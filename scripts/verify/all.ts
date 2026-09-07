@@ -48,6 +48,6 @@ const md = [
     `| ${x.r.ok ? "✅" : "❌"} | **${x.id}** ${x.name} | ${x.phase} | ${x.r.evidence.map((e) => e.replace(/\|/g, "\\|")).join("<br>")} |`),
   ``,
 ].join("\n");
-writeFileSync(resolve(REPO_ROOT, "docs/STATUS.md"), md);
-console.log(`  → docs/STATUS.md\n`);
+writeFileSync(resolve(REPO_ROOT, "internal/STATUS.md"), md);
+console.log(`  → internal/STATUS.md\n`);
 process.exit(failed.length === 0 ? 0 : 1);
