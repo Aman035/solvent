@@ -1,4 +1,4 @@
-import { agentFills, type AgentRow, type FillRow, reliabilityBps } from "@pof/core";
+import { agentFills, type AgentRow, type FillRow, reliabilityBps } from "@solvent/core";
 
 /**
  * Risk analysis over LIVE Graph data.
@@ -34,7 +34,7 @@ export interface Assessment {
 export async function assess(a: AgentRow): Promise<Assessment> {
   const flags: Flag[] = [];
   const honoredUsd = Number(a.honoredValueUsd6) / 1e6;
-  const score = BigInt(a.proofOfFillScore);
+  const score = BigInt(a.settlementScore);
   const stars = a.reviewAvgBps / 10000;
 
   if (a.honoredCount === 0) {

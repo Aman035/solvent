@@ -6,7 +6,7 @@ import {
   readClient, role, allWallets, targetFor, addrs, readManifest, activeChain,
   subgraphHead, gql, computeScore, env, REPO_ROOT, ERC20_ABI,
   account, buildOrder, buildTakerData, SWAP_ABI,
-} from "@pof/core";
+} from "@solvent/core";
 import { type Check, pass, fail } from "./types.js";
 
 const rd = () => readClient();
@@ -135,7 +135,7 @@ export const checks: Check[] = [
       const ev = d.makerBooks.slice(0, 6).map((b) =>
         `${b.maker.slice(0, 10)} ${b.token.slice(0, 10)} committed ${b.committed} backing ${b.backing} util ${b.utilisationBps}bps`);
       // sanity: utilisation must equal the TS formula for every row
-      const { computeUtilisationBps } = await import("@pof/core");
+      const { computeUtilisationBps } = await import("@solvent/core");
       const bad = d.makerBooks.filter((b) => String(computeUtilisationBps(BigInt(b.committed), BigInt(b.backing))) !== b.utilisationBps);
       return (bad.length === 0 ? pass : fail)([`${d.makerBooks.length} books`, ...ev],
         bad.length ? [`${bad.length} books disagree with computeUtilisationBps`] : undefined);
@@ -308,7 +308,7 @@ export const checks: Check[] = [
     async run() {
       const pc = rd();
       const A = addrs();
-      const d = await gql<{ agents: any[] }>(`{ agents(where:{honoredCount_gt:0}){ id honoredValueUsd6 honoredCount failedCount diversityBps proofOfFillScore } }`);
+      const d = await gql<{ agents: any[] }>(`{ agents(where:{honoredCount_gt:0}){ id honoredValueUsd6 honoredCount failedCount diversityBps settlementScore } }`);
       const ev: string[] = [];
       let stale = 0;
       for (const a of d.agents) {
@@ -339,12 +339,12 @@ export const checks: Check[] = [
   {
     id: "C20", name: "Claimed vs delivered separation", phase: "5 Services",
     async run() {
-      const d = await gql<{ agents: any[] }>(`{ agents(where:{reviewCount_gte:20}){ id reviewCount reviewAvgBps honoredCount proofOfFillScore } }`);
+      const d = await gql<{ agents: any[] }>(`{ agents(where:{reviewCount_gte:20}){ id reviewCount reviewAvgBps honoredCount settlementScore } }`);
       if (d.agents.length < 2) return fail([`only ${d.agents.length} reviewed agents`]);
       const sameReviews = new Set(d.agents.map((a) => `${a.reviewCount}:${a.reviewAvgBps}`)).size === 1;
       const differentDelivery = new Set(d.agents.map((a) => a.honoredCount > 0)).size > 1;
       return (sameReviews && differentDelivery ? pass : fail)([
-        ...d.agents.map((a) => `${a.id.slice(0, 10)} ★${(a.reviewAvgBps / 10000).toFixed(2)} (${a.reviewCount}) · ${a.honoredCount} fills · score ${a.proofOfFillScore}`),
+        ...d.agents.map((a) => `${a.id.slice(0, 10)} ★${(a.reviewAvgBps / 10000).toFixed(2)} (${a.reviewCount}) · ${a.honoredCount} fills · score ${a.settlementScore}`),
         sameReviews ? "identical on reviews ✓" : "reviews differ ✗",
         differentDelivery ? "separated by delivery ✓" : "delivery identical ✗",
       ]);

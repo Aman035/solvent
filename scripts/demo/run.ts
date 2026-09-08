@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import { REPO_ROOT } from "@pof/core";
+import { REPO_ROOT } from "@solvent/core";
 
 /**
  * The three scenarios, in the order the video tells them.

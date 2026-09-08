@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
 import { formatUnits } from "viem";
-import { readClient, role, addrs, ERC20_ABI, REPO_ROOT } from "@pof/core";
+import { readClient, role, addrs, ERC20_ABI, REPO_ROOT } from "@solvent/core";
 
 /**
  * Return the ledger to the state the video opens from.

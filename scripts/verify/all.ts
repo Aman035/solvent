@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { REPO_ROOT, activeChain } from "@pof/core";
+import { REPO_ROOT, activeChain } from "@solvent/core";
 import { checks } from "./checks.js";
 import type { CheckResult } from "./types.js";
 

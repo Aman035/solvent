@@ -1,9 +1,9 @@
-import { gql, role } from "@pof/core";
+import { gql, role } from "@solvent/core";
 
 interface Row {
   id: string; agentId: string | null; reviewCount: number; reviewAvgBps: number;
   honoredCount: number; failedCount: number; honoredValueUsd6: string;
-  distinctTakers: number; proofOfFillScore: string; onChainScore: string;
+  distinctTakers: number; settlementScore: string; onChainScore: string;
 }
 
 const names: Record<string, string> = {
@@ -15,7 +15,7 @@ const names: Record<string, string> = {
 const { agents } = await gql<{ agents: Row[] }>(`{
   agents(where: { reviewCount_gt: 0 }, orderBy: reviewCount, orderDirection: desc) {
     id agentId reviewCount reviewAvgBps honoredCount failedCount
-    honoredValueUsd6 distinctTakers proofOfFillScore onChainScore
+    honoredValueUsd6 distinctTakers settlementScore onChainScore
   } }`);
 
 const bar = (frac: number, width = 22, ch = "█") =>
@@ -38,7 +38,7 @@ for (const a of agents) {
   console.log(`  ${" ".repeat(9)}claimed   ${bar(stars / 5, 18, "░")}`.padEnd(41) +
     `delivered ${bar(usd / maxUsd, 18)}`);
   console.log(`  ${" ".repeat(9)}agentId ${a.agentId ?? "-"}`.padEnd(41) +
-    `${a.distinctTakers} counterparties · score ${a.proofOfFillScore} (on-chain ${a.onChainScore})\n`);
+    `${a.distinctTakers} counterparties · score ${a.settlementScore} (on-chain ${a.onChainScore})\n`);
 }
 
 const alice = agents.find((a) => names[a.id.toLowerCase()] === "Alice");

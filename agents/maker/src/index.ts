@@ -2,7 +2,7 @@ import { formatUnits, parseUnits, type Hex } from "viem";
 import {
   readClient, role, addrs, program, buildOrder, orderHash, encodeStrategy,
   tx, ensureApproval, strategyBalances, ERC20_ABI, AQUA_ABI, explorerAddr,
-} from "@pof/core";
+} from "@solvent/core";
 
 /**
  * Alice - the maker agent.

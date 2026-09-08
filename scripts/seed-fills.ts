@@ -2,7 +2,7 @@ import { formatUnits, parseUnits, decodeEventLog, parseAbi, type Hex } from "vie
 import {
   readClient, role, extraTaker, program, addrs, buildOrder, buildTakerData,
   encodeStrategy, orderHash, tx, ensureApproval, ERC20_ABI, AQUA_ABI, SWAP_ABI,
-} from "@pof/core";
+} from "@solvent/core";
 
 const pc = readClient();
 const A = addrs();

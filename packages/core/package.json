@@ -1,1 +1,1 @@
-{ "name": "@pof/core", "private": true, "version": "0.1.0", "type": "module", "main": "src/index.ts" }
+{ "name": "@solvent/core", "private": true, "version": "0.1.0", "type": "module", "main": "src/index.ts" }

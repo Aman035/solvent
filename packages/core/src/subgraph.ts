@@ -7,7 +7,7 @@ export interface AgentRow {
   honoredValueUsd6: string;
   distinctTakers: number;
   diversityBps: number;
-  proofOfFillScore: string;
+  settlementScore: string;
   onChainScore: string;
   reviewCount: number;
   reviewAvgBps: number;
@@ -44,7 +44,7 @@ export async function gql<T>(query: string, variables: Record<string, unknown> =
 
 const AGENT_FIELDS = `
   id honoredCount failedCount honoredValueUsd6 distinctTakers diversityBps
-  proofOfFillScore onChainScore reviewCount reviewAvgBps
+  settlementScore onChainScore reviewCount reviewAvgBps
 `;
 
 /** Health: how far behind chain head is the index? */
@@ -67,7 +67,7 @@ export async function agentsWithHistory(): Promise<AgentRow[]> {
 /** Candidate makers for a pair - the query Bob reasons over. */
 export async function candidates(): Promise<AgentRow[]> {
   const d = await gql<{ agents: AgentRow[] }>(
-    `{ agents(orderBy: proofOfFillScore, orderDirection: desc) {
+    `{ agents(orderBy: settlementScore, orderDirection: desc) {
         ${AGENT_FIELDS}
         strategies(where: { active: true }) { id hasReputationGate hasPriceAdjuster shippedTx }
       } }`);

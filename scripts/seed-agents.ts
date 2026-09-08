@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { decodeEventLog, parseAbi, type Hex } from "viem";
 import {
   readClient, role, allSybils, addrs, readManifest, tx, REPO_ROOT, explorerAddr, writeEntry,
-} from "@pof/core";
+} from "@solvent/core";
 
 const rd = readClient();
 const m = readManifest().contracts;

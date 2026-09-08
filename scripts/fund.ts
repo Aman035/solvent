@@ -2,7 +2,7 @@ import { parseEther, formatEther } from "viem";
 import {
   publicClient, walletClient, role, allWallets, targetFor,
   activeChain, explorerAddr, SYBIL_START,
-} from "@pof/core";
+} from "@solvent/core";
 
 const pc = publicClient();
 const deployer = role("deployer");

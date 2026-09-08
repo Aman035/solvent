@@ -2,7 +2,7 @@ import { formatUnits, parseUnits, decodeErrorResult, parseAbi, type Hex } from "
 import {
   readClient, role, addrs, program, buildOrder, buildTakerData, encodeStrategy,
   orderHash, tx, ensureApproval, strategyBalances, ERC20_ABI, AQUA_ABI, SWAP_ABI, explorerTx,
-} from "@pof/core";
+} from "@solvent/core";
 
 const pc = readClient();
 const A = addrs();

@@ -31,7 +31,7 @@ export const TAKER_COUNT = 5;
  * Attacker wallets at 31..36 - one wash-trading maker plus five sock-puppet takers.
  *
  * Used ONLY by the cost-to-fake harness (scripts/attack/), which measures what it
- * actually costs to manufacture a Proof-of-Fill score, rather than asserting that it
+ * actually costs to manufacture a settlement score, rather than asserting that it
  * is expensive. See docs/COST_TO_FAKE.md.
  */
 export const ATTACKER_START = 31;

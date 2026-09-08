@@ -13,7 +13,7 @@
  */
 import { createPublicClient, http, parseAbi } from "viem";
 import { base, arbitrum, optimism } from "viem/chains";
-import { computeUtilisationBps } from "@pof/core";
+import { computeUtilisationBps } from "@solvent/core";
 
 const AQUA = "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a" as const;
 const PER_CHAIN = 10;

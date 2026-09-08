@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { REPO_ROOT, computeScore, diversityBpsFrom } from "@pof/core";
+import { REPO_ROOT, computeScore, diversityBpsFrom } from "@solvent/core";
 
 const j = (f: string) => JSON.parse(readFileSync(resolve(REPO_ROOT, "docs", f), "utf8"));
 for (const f of ["cost-to-fake.json", "cost-to-fake-reviews.json"]) {
@@ -36,7 +36,7 @@ real one.
 
 ## The two attacks, side by side
 
-| | Fake **reviews** (ERC-8004) | Fake **fills** (Proof of Fill) |
+| | Fake **reviews** (ERC-8004) | Fake **fills** (Solvent) |
 | --- | --- | --- |
 | What it buys | ★5.00 from ${rev.reviewers} reviewers | $${wash.volumeFakedUsd.toLocaleString()} of "delivered" volume |
 | Transactions | ${rev.feedbackEvents} | ${wash.transactions} |
@@ -45,7 +45,7 @@ real one.
 | **Capital required** | **$0** | **$${wash.capitalRequiredUsd.toLocaleString()}** |
 | Prior interaction required | none | a real, settled trade per fill |
 | Stake required | none | the entire inventory, held throughout |
-| Resulting Proof-of-Fill score | **0** | ${wash.scoreAchieved} |
+| Resulting settlement score | **0** | ${wash.scoreAchieved} |
 
 ### The finding
 
@@ -93,7 +93,7 @@ real inventory routed through each — while only partially lifting the cap.
 4. **Capital is recoverable.** A wash trader gets its inventory back, minus fees and gas.
    The cost is opportunity cost and exposure, not destruction.
 
-The honest claim is narrow and defensible: **Proof of Fill moves the cost of a fake
+The honest claim is narrow and defensible: **Solvent moves the cost of a fake
 reputation from approximately zero to approximately the capital you must genuinely put at
 risk — and it makes the shape of a fake (counterparty concentration) directly measurable.**
 `;

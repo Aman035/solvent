@@ -1,7 +1,7 @@
 import { decodeFunctionData, type Hex } from "viem";
 import {
   readClient, addrs, role, tx, SWAP_ABI, orderHash, explorerTx, type Order,
-} from "@pof/core";
+} from "@solvent/core";
 
 /**
  * Failure scanner.

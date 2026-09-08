@@ -1,5 +1,5 @@
 import { formatEther } from "viem";
-import { publicClient, allWallets, targetFor, activeChain, explorerAddr } from "@pof/core";
+import { publicClient, allWallets, targetFor, activeChain, explorerAddr } from "@solvent/core";
 
 const pc = publicClient();
 const rows = allWallets();

@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { program, REPO_ROOT } from "@pof/core";
+import { program, REPO_ROOT } from "@solvent/core";
 
 const ORACLE = "0x95908bb174224f085b0f30d6236a46b27c7a6711";
 

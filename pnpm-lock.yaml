@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      '@pof/core':
+      '@solvent/core':
         specifier: workspace:*
         version: link:packages/core
       dotenv:

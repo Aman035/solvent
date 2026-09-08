@@ -1,5 +1,5 @@
 import { type Hex } from "viem";
-import { readClient, role, addrs, gql, tx, explorerAddr, activeChain } from "@pof/core";
+import { readClient, role, addrs, gql, tx, explorerAddr, activeChain } from "@solvent/core";
 
 /**
  * Book attestation: write every maker's balance sheet into SolventBook, the on-chain
@@ -33,7 +33,7 @@ export async function attestBooks(): Promise<number> {
   const A = addrs();
   const attestor = role("attestor");
   const book = (A as any).solventBook ?? undefined;
-  const bookAddr = book ?? (await import("@pof/core")).readManifest().contracts.solventBook.address as Hex;
+  const bookAddr = book ?? (await import("@solvent/core")).readManifest().contracts.solventBook.address as Hex;
 
   const d = await gql<{ makerBooks: IndexedBook[] }>(
     `{ makerBooks(first: 500) { maker token committed backing utilisationBps } }`);

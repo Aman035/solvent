@@ -64,7 +64,7 @@ export function addrs() {
   const c = readManifest().contracts;
   return {
     aqua: c.aqua.address as Hex, router: c.router.address as Hex,
-    score: c.proofOfFillScore.address as Hex, helper: c.helper.address as Hex,
+    score: c.score.address as Hex, helper: c.helper.address as Hex,
     recorder: c.recorder.address as Hex,
     solventBook: c.solventBook.address as Hex,
     usdc: c.usdc.address as Hex, weth: c.weth.address as Hex,

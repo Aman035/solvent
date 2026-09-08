@@ -2,12 +2,12 @@ import { formatUnits, type Hex } from "viem";
 import {
   readClient, role, addrs, agentsWithHistory, subgraphHead, computeScore,
   diversityBpsFrom, tx, explorerAddr, activeChain, readManifest,
-} from "@pof/core";
+} from "@solvent/core";
 
 /**
  * The attestor.
  *
- * Reads delivery history from the subgraph, derives each agent's Proof-of-Fill score,
+ * Reads delivery history from the subgraph, derives each agent's settlement score,
  * and writes it to the on-chain cache the ReputationGate opcode reads. This is the step
  * that closes the loop: without it the gate has nothing to enforce.
  *
@@ -88,7 +88,7 @@ async function tick(): Promise<number> {
   return accounts.length;
 }
 
-console.log(`\n═══ PROOF OF FILL — ATTESTOR ═══`);
+console.log(`\n═══ SOLVENT — ATTESTOR ═══`);
 console.log(`  chain    ${activeChain.key} (${activeChain.chainId})`);
 console.log(`  score    ${explorerAddr(A.score)}`);
 console.log(`  attestor ${attestor.address}`);

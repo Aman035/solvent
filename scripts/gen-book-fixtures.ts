@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { computeUtilisationBps, REPO_ROOT } from "@pof/core";
+import { computeUtilisationBps, REPO_ROOT } from "@solvent/core";
 
 let seed = 0x51e17;
 const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 0x100000000; };

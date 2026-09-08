@@ -2,7 +2,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { formatUnits } from "viem";
-import { REPO_ROOT } from "@pof/core";
+import { REPO_ROOT } from "@solvent/core";
 
 const PRICE: Record<string, number> = {
   USDC: 1, USDT: 1, "USD₮0": 1, DAI: 1, USDS: 1, USDbC: 1,

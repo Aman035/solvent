@@ -2,7 +2,7 @@ import { formatEther } from "viem";
 import {
   readClient, publicClient, role, allWallets, targetFor, addrs, readManifest,
   subgraphHead, gql, activeChain, env,
-} from "@pof/core";
+} from "@solvent/core";
 
 /**
  * Pre-flight. Run this immediately before hitting record.
@@ -37,7 +37,7 @@ try {
 // 3. the cast must be on stage
 try {
   const d = await gql<{ agents: any[]; global: any }>(
-    `{ agents(where:{reviewCount_gte:20}){ id honoredCount reviewCount proofOfFillScore }
+    `{ agents(where:{reviewCount_gte:20}){ id honoredCount reviewCount settlementScore }
        global(id:"global"){ totalHonored totalFailed } }`);
   const withDelivery = d.agents.filter((a) => a.honoredCount > 0).length;
   const without = d.agents.filter((a) => a.honoredCount === 0).length;
@@ -77,7 +77,7 @@ try {
 
 // 7. contracts
 const m = readManifest().contracts;
-const missing = ["aqua", "router", "proofOfFillScore", "recorder", "identityRegistry"].filter((k) => !m[k]);
+const missing = ["aqua", "router", "settlementScore", "recorder", "identityRegistry"].filter((k) => !m[k]);
 if (missing.length) bad("Contracts", `missing ${missing.join(", ")}`);
 else ok("Contracts", `${Object.keys(m).filter((k) => !k.startsWith("agentId.")).length} deployed`);
 

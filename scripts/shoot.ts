@@ -1,6 +1,6 @@
 import { chromium } from "playwright";
 import { resolve } from "node:path";
-import { REPO_ROOT } from "@pof/core";
+import { REPO_ROOT } from "@solvent/core";
 
 const URL = process.env.DASH_URL ?? "http://localhost:4173";
 const out = resolve(REPO_ROOT, "docs/screenshots");
