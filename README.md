@@ -12,7 +12,7 @@ cross-chain index of every maker's true backing.
 
 ---
 
-## The problem
+# The problem
 
 Aqua is a shared liquidity layer. A market maker commits inventory to a strategy
 **without depositing it**. Tokens stay in the maker's wallet, and Aqua pulls them only at
@@ -46,7 +46,7 @@ drift away from backing (emphasis ours):
 The venue keeps quoting. The protocol will not pause. The prescribed remedy is a human,
 watching, by hand.
 
-## The pain, measured on mainnet
+## Measured on mainnet
 
 We reconstructed **every maker's balance sheet in Aqua's entire history on Base**, at
 event resolution, from primary data: each strategy's tokens and amounts decoded from its
@@ -119,6 +119,8 @@ Fill rate is the metric aggregators live and die by.
 quotes cannot be trusted pays for it in routing priority.
 
 ---
+
+# The solution
 
 ## What Solvent does
 
@@ -260,6 +262,8 @@ books above are the reason it needs to.
    need it priced into the quote or published in the index. Solvent does both.
 
 ---
+
+# Project details
 
 ## Project structure
 
