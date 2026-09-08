@@ -1,4 +1,4 @@
-import { readClient, activeChain, explorerAddr, addrs } from "@solvent/core";
+import { readClient, activeChain, explorerAddr, addrs } from "@aqua-solvent/core";
 import { scanForFailures, recordFailures } from "./failures.js";
 
 const LOOKBACK = Number(process.argv[2] ?? 400);

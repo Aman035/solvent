@@ -2,7 +2,7 @@ import { parseEther, formatEther } from "viem";
 import {
   publicClient, walletClient, role, allWallets, targetFor,
   activeChain, explorerAddr, SYBIL_START,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 const pc = publicClient();
 const deployer = role("deployer");

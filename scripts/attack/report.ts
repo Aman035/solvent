@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { REPO_ROOT, computeScore, diversityBpsFrom } from "@solvent/core";
+import { REPO_ROOT, computeScore, diversityBpsFrom } from "@aqua-solvent/core";
 
 const j = (f: string) => JSON.parse(readFileSync(resolve(REPO_ROOT, "docs", f), "utf8"));
 for (const f of ["cost-to-fake.json", "cost-to-fake-reviews.json"]) {

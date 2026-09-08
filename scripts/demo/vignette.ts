@@ -16,7 +16,7 @@ import {
   readClient, publicClient, walletClient, role, account, addrs, program, buildOrder, buildTakerData,
   encodeStrategy, orderHash, tx, ensureApproval, strategyBalances, gql,
   ERC20_ABI, AQUA_ABI, SWAP_ABI, type Order,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 import { attestBooks } from "../../services/attestor/src/books.js";
 
 const pc = readClient();

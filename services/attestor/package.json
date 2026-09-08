@@ -1,2 +1,2 @@
-{ "name": "@solvent/attestor", "private": true, "version": "0.1.0", "type": "module",
+{ "name": "@aqua-solvent/attestor", "private": true, "version": "0.1.0", "type": "module",
   "scripts": { "once": "tsx src/index.ts --once", "watch": "tsx src/index.ts" } }

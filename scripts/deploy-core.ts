@@ -4,7 +4,7 @@ import { formatEther } from "viem";
 import {
   publicClient, walletClient, role, activeChain, explorerAddr,
   writeEntry, readManifest, REPO_ROOT,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 const SWAP_VM_COMMIT = "f09a41e689240adc645934f965c8061749397cd2";
 const AQUA_COMMIT = "9c5c42e5840e8741fba3597c48456c9510212b66";

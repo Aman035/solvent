@@ -1,7 +1,7 @@
 /** Embed the Base Sepolia deployment manifest into the SDK (regenerate after deploys). */
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { REPO_ROOT } from "@solvent/core";
+import { REPO_ROOT } from "@aqua-solvent/core";
 
 const m = JSON.parse(readFileSync(resolve(REPO_ROOT, "deployments/84532.json"), "utf8"));
 const pick = (k: string) => m.contracts[k].address as string;

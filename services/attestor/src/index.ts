@@ -2,7 +2,7 @@ import { formatUnits, type Hex } from "viem";
 import {
   readClient, role, addrs, agentsWithHistory, subgraphHead, computeScore,
   diversityBpsFrom, tx, explorerAddr, activeChain, readManifest,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 /**
  * The attestor.

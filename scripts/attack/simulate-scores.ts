@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { computeScore, diversityBpsFrom, reliabilityBps, REPO_ROOT } from "@solvent/core";
+import { computeScore, diversityBpsFrom, reliabilityBps, REPO_ROOT } from "@aqua-solvent/core";
 
 /**
  * C23 - score simulator.

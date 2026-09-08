@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { computeScore, REPO_ROOT } from "@solvent/core";
+import { computeScore, REPO_ROOT } from "@aqua-solvent/core";
 
 // Deterministic PRNG so the fixture set is reproducible across runs and machines.
 let seed = 0x9e3779b9;

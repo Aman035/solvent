@@ -1,5 +1,5 @@
 {
-  "name": "@solvent/contracts",
+  "name": "@aqua-solvent/contracts",
   "private": true,
   "version": "0.1.0",
   "dependencies": {

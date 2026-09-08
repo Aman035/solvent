@@ -1,7 +1,7 @@
 /** Distill docs/mainnet-history.json into headline stats and an SVG chart. */
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { REPO_ROOT } from "@solvent/core";
+import { REPO_ROOT } from "@aqua-solvent/core";
 
 const H = JSON.parse(readFileSync(resolve(REPO_ROOT, "docs/mainnet-history.json"), "utf8"));
 type Obs = { block: string; maker: string; token: string; symbol: string; committed: string; backing: string; ratioBps: number; committedUsd: number | null };

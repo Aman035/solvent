@@ -1,5 +1,5 @@
 import { formatEther } from "viem";
-import { publicClient, allWallets, targetFor, activeChain, explorerAddr } from "@solvent/core";
+import { publicClient, allWallets, targetFor, activeChain, explorerAddr } from "@aqua-solvent/core";
 
 const pc = publicClient();
 const rows = allWallets();

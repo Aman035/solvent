@@ -1,4 +1,4 @@
-import { activeChain, addrs, explorerAddr, readManifest } from "@solvent/core";
+import { activeChain, addrs, explorerAddr, readManifest } from "@aqua-solvent/core";
 import { attestBooks } from "./books.js";
 
 console.log(`\n═══ ATTESTOR: MAKER BOOKS -> SOLVENT BOOK ═══`);

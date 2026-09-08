@@ -1,7 +1,7 @@
 import { writeFileSync, readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { type Hex } from "viem";
-import { readClient, readManifest, allSybils, gql, REPO_ROOT } from "@solvent/core";
+import { readClient, readManifest, allSybils, gql, REPO_ROOT } from "@aqua-solvent/core";
 
 /**
  * COST-TO-FAKE: the review attack.

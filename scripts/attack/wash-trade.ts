@@ -5,7 +5,7 @@ import {
   readClient, role, attackerMaker, attackerPuppet, addrs, program, buildOrder,
   buildTakerData, encodeStrategy, orderHash, tx, ensureApproval, strategyBalances,
   diversityBpsFrom, computeScore, ERC20_ABI, AQUA_ABI, SWAP_ABI, REPO_ROOT, explorerAddr,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 /**
  * COST-TO-FAKE: wash trading.

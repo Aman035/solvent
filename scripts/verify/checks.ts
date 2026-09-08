@@ -6,7 +6,7 @@ import {
   readClient, role, allWallets, targetFor, addrs, readManifest, activeChain,
   subgraphHead, gql, computeScore, env, REPO_ROOT, ERC20_ABI,
   account, buildOrder, buildTakerData, SWAP_ABI,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 import { type Check, pass, fail } from "./types.js";
 
 const rd = () => readClient();
@@ -135,7 +135,7 @@ export const checks: Check[] = [
       const ev = d.makerBooks.slice(0, 6).map((b) =>
         `${b.maker.slice(0, 10)} ${b.token.slice(0, 10)} committed ${b.committed} backing ${b.backing} util ${b.utilisationBps}bps`);
       // sanity: utilisation must equal the TS formula for every row
-      const { computeUtilisationBps } = await import("@solvent/core");
+      const { computeUtilisationBps } = await import("@aqua-solvent/core");
       const bad = d.makerBooks.filter((b) => String(computeUtilisationBps(BigInt(b.committed), BigInt(b.backing))) !== b.utilisationBps);
       return (bad.length === 0 ? pass : fail)([`${d.makerBooks.length} books`, ...ev],
         bad.length ? [`${bad.length} books disagree with computeUtilisationBps`] : undefined);

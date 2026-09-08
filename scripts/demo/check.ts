@@ -2,7 +2,7 @@ import { formatEther } from "viem";
 import {
   readClient, publicClient, role, allWallets, targetFor, addrs, readManifest,
   subgraphHead, gql, activeChain, env,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 /**
  * Pre-flight. Run this immediately before hitting record.

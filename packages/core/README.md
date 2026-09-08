@@ -1,4 +1,4 @@
-# @solvent/core
+# @aqua-solvent/core
 
 SDK for [Solvent](https://github.com/Aman035/solvent): solvency-aware market making
 on 1inch Aqua. Query every Aqua maker's live balance sheet on four chains, build
@@ -7,13 +7,13 @@ SwapVM programs that price their own solvency risk, and read the settlement scor
 ## Install
 
 ```bash
-npm i @solvent/core
+npm i @aqua-solvent/core
 ```
 
 ## Read any maker's balance sheet (no keys, no config)
 
 ```ts
-import { createSolvent, SolventChain } from "@solvent/core";
+import { createSolvent, SolventChain } from "@aqua-solvent/core";
 
 const solvent = createSolvent({ chain: SolventChain.Base });
 

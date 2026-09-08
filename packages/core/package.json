@@ -1,5 +1,5 @@
 {
-  "name": "@solvent/core",
+  "name": "@aqua-solvent/core",
   "version": "0.1.0",
   "description": "SDK for Solvent: solvency-aware market making on 1inch Aqua. Maker balance sheets on four chains, SwapVM program building, and the settlement score.",
   "license": "MIT",

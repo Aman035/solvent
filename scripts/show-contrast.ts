@@ -1,4 +1,4 @@
-import { gql, role } from "@solvent/core";
+import { gql, role } from "@aqua-solvent/core";
 
 interface Row {
   id: string; agentId: string | null; reviewCount: number; reviewAvgBps: number;

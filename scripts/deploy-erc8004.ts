@@ -4,7 +4,7 @@ import { formatEther } from "viem";
 import {
   readClient, publicClient, walletClient, role, activeChain, explorerAddr,
   writeEntry, readManifest, REPO_ROOT, nextNonce,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 const ERC8004_COMMIT = "2e5e79d";  // ChaosChain/trustless-agents-erc-ri v1.2.0, CC0
 

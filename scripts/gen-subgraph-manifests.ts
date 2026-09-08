@@ -4,7 +4,7 @@
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { REPO_ROOT } from "@solvent/core";
+import { REPO_ROOT } from "@aqua-solvent/core";
 
 const AQUA = "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a";
 const deployBlockOf = (file: string, fallback: number) => {

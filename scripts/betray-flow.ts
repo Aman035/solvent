@@ -2,7 +2,7 @@ import { formatUnits, parseUnits, type Hex } from "viem";
 import {
   readClient, publicClient, walletClient, role, addrs, program, buildOrder, buildTakerData,
   orderHash, ensureApproval, nextNonce, ERC20_ABI, SWAP_ABI, explorerTx, tx,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 const rd = readClient();
 const pc = publicClient();

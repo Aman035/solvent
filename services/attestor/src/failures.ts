@@ -1,7 +1,7 @@
 import { decodeFunctionData, type Hex } from "viem";
 import {
   readClient, addrs, role, tx, SWAP_ABI, orderHash, explorerTx, type Order,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 
 /**
  * Failure scanner.

@@ -1,5 +1,5 @@
 {
-  "name": "@solvent/subgraph",
+  "name": "@aqua-solvent/subgraph",
   "private": true,
   "scripts": {
     "codegen": "graph codegen",

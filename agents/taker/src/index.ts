@@ -2,7 +2,7 @@ import { formatUnits, parseUnits, decodeErrorResult, parseAbi, type Hex } from "
 import {
   readClient, role, addrs, candidates, subgraphHead, program, buildOrder, buildTakerData,
   orderHash, tx, ensureApproval, strategyBalances, ERC20_ABI, SWAP_ABI, explorerTx, env,
-} from "@solvent/core";
+} from "@aqua-solvent/core";
 import { assess, selectCounterparty, type Assessment } from "./analyst.js";
 import { narrate, llmConfig } from "./llm.js";
 

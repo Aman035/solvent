@@ -1,4 +1,4 @@
-import { agentFills, type AgentRow, type FillRow, reliabilityBps } from "@solvent/core";
+import { agentFills, type AgentRow, type FillRow, reliabilityBps } from "@aqua-solvent/core";
 
 /**
  * Risk analysis over LIVE Graph data.
