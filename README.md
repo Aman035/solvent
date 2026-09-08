@@ -266,26 +266,28 @@ books above are the reason it needs to.
 
 ---
 
-## What's in the box
+## Project structure
 
 ```
-contracts/          SolventBook, the instructions, the router, and the proofs
-  src/instructions/   SolvencyFloor & SolvencySkew (plus the reputation pair)
-  src/opcodes/        SolventOpcodes: the banked-opcode SwapVM extension
-  test/               differential, invariant, and upstream 1inch regression suites
-subgraph/           one schema, four deployments: Sepolia + Base, Arbitrum, Optimism
-packages/core/      shared TS library: program encoder, book and score math,
-                    bit-exact against the contracts (1009-case differentials)
-services/attestor/  reads the index, writes SolventBook and the score on-chain
-agents/             demo maker and taker: quote, pick a counterparty from the
-                    index, fill
-dashboard/          the console: balance sheets, live mainnet makers, ledger
-scripts/            deploy, seed, the vignette, the mainnet analyzer
-  verify/             20 live checks, incl. the wei-exact mainnet parity gate
-  attack/             cost-to-fake: measured wash-trade and sybil-review attacks
-docs/               score design, cost-to-fake, mainnet analysis data, graphics
-deployments/        Base Sepolia manifest: addresses, tx hashes, verification
-LICENSES/           upstream 1inch licences, preserved
+.
+├── agents/              demo maker and taker: quote, pick a counterparty, fill
+├── contracts/
+│   ├── src/
+│   │   ├── instructions/   SolvencyFloor and SolvencySkew (plus the reputation pair)
+│   │   └── opcodes/        SolventOpcodes: the banked-opcode SwapVM extension
+│   └── test/            differential, invariant, and upstream 1inch regression suites
+├── dashboard/           the console: balance sheets, live mainnet makers, ledger
+├── deployments/         Base Sepolia manifest: addresses, tx hashes, verification
+├── docs/                score design, cost-to-fake, mainnet analysis data, graphics
+├── LICENSES/            upstream 1inch licences, preserved
+├── packages/
+│   └── core/            shared TS: program encoder, book and score math, bit-exact
+├── scripts/             deploy, seed, the vignette, the mainnet analyzer
+│   ├── attack/          cost-to-fake: measured wash-trade and sybil-review attacks
+│   └── verify/          20 live checks, incl. the wei-exact mainnet parity gate
+├── services/
+│   └── attestor/        reads the index, writes SolventBook and the score on-chain
+└── subgraph/            one schema, four deployments: Sepolia + Base, Arbitrum, Optimism
 ```
 
 ## Run it
