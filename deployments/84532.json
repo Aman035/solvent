@@ -108,22 +108,30 @@
     "score": {
       "address": "0x401b52d106906cc71c31bf96a278c3cefdf18e4d",
       "deployBlock": 46560760,
-      "txHash": "0xdc2beed74c8e167957df727d545865d73c5aa9b98f80d3b9c6a2e4de34b5e240"
+      "txHash": "0xdc2beed74c8e167957df727d545865d73c5aa9b98f80d3b9c6a2e4de34b5e240",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x401b52d106906cc71c31bf96a278c3cefdf18e4d#code",
+      "note": "SolventScore: score cache. Attestor writes; ReputationGate reads."
     },
     "helper": {
       "address": "0x6fd4df8c52f952269437b22c0fa9b63f1b048144",
       "deployBlock": 46560761,
-      "txHash": "0x2779c39fc20e180d78299630f21259d78d16a6bf5b05cbd3428493075547aae2"
+      "txHash": "0x2779c39fc20e180d78299630f21259d78d16a6bf5b05cbd3428493075547aae2",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x6fd4df8c52f952269437b22c0fa9b63f1b048144#code",
+      "note": "SolventHelper: read-only order encoder."
     },
     "recorder": {
       "address": "0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b",
       "deployBlock": 46560762,
-      "txHash": "0xcf04762c1ec37108008af82382228279d89c7bfbac82d6973370d5984c54b3b4"
+      "txHash": "0xcf04762c1ec37108008af82382228279d89c7bfbac82d6973370d5984c54b3b4",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b#code",
+      "note": "SolventRecorder: makes broken promises indexable."
     },
     "reputationRegistryAdapter": {
       "address": "0x52042cf2a100c2b8cc506cbf400737b3c5147566",
       "deployBlock": 46560763,
-      "txHash": "0x15044399e9723b41a8d86c89d34430467b1747506bbb4926126db97d43845c17"
+      "txHash": "0x15044399e9723b41a8d86c89d34430467b1747506bbb4926126db97d43845c17",
+      "verifiedUrl": "https://sepolia.basescan.org/address/0x52042cf2a100c2b8cc506cbf400737b3c5147566#code",
+      "note": "Reads the score by ERC-8004 agentId."
     }
   }
 }
