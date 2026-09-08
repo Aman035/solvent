@@ -337,7 +337,7 @@ contracts land on Base mainnet, they become the oracle feed.
 
 | Component | Kind | Run with | Notes |
 | --- | --- | --- | --- |
-| Dashboard | frontend (Vite + React) | `pnpm dash` | localhost:5173; read-only, works with the default `.env` |
+| Dashboard | frontend (Vite + React) | `pnpm dash`, or use the [hosted console](https://aman035.github.io/solvent/) | quote desk, balance sheets, live mainnet makers, ledger |
 | Attestor | backend keeper | `pnpm attest` · `attest:books` · `attest:failures` | bridges the index into SolventBook and SolventScore; needs the funded mnemonic |
 | Demo agents | scripted maker + taker | `pnpm demo:run` | the three scenarios; `pnpm vignette` for the solvency arc |
 | @aqua-solvent/core | shared TS package | nothing to run | program encoder and book/score math, used by everything above |
