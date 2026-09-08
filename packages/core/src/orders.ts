@@ -117,7 +117,7 @@ export function encodeStrategy(order: Order): Hex {
   return encodeAbiParameters(parseAbiParameters(ORDER_SIG), [order] as never);
 }
 
-export async function orderHash(order: Order, pc = readClient()): Promise<Hex> {
+export async function orderHash(order: Order, pc: PublicClient = readClient()): Promise<Hex> {
   return await pc.readContract({
     address: addrs().router, abi: SWAP_ABI, functionName: "hash", args: [order] as never,
   }) as Hex;

@@ -1,1 +1,51 @@
-{ "name": "@solvent/core", "private": true, "version": "0.1.0", "type": "module", "main": "src/index.ts" }
+{
+  "name": "@solvent/core",
+  "version": "0.1.0",
+  "description": "SDK for Solvent: solvency-aware market making on 1inch Aqua. Maker balance sheets on four chains, SwapVM program building, and the settlement score.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aman035/solvent.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/Aman035/solvent#readme",
+  "keywords": [
+    "solvent",
+    "1inch",
+    "aqua",
+    "swapvm",
+    "market-making",
+    "thegraph",
+    "defi"
+  ],
+  "type": "module",
+  "main": "src/index.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "pnpm build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "viem": "^2.21.55",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

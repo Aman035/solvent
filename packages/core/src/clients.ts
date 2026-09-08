@@ -1,4 +1,4 @@
-import { createPublicClient, createWalletClient, http, fallback, type PublicClient } from "viem";
+import { createPublicClient, createWalletClient, http, fallback, type PublicClient, type WalletClient, type Transport, type Chain} from "viem";
 import { activeChain, type ChainConfig } from "./chains.js";
 import type { HDAccount } from "viem/accounts";
 
@@ -27,7 +27,7 @@ export function publicClient(c: ChainConfig = activeChain): PublicClient {
   return createPublicClient({ chain: c.chain, transport: fallback(transports) }) as PublicClient;
 }
 
-export function walletClient(account: HDAccount, c: ChainConfig = activeChain) {
+export function walletClient(account: HDAccount, c: ChainConfig = activeChain): WalletClient<Transport, Chain, HDAccount> {
   const transports = [http(c.rpc, { timeout: 20_000, retryCount: 3 })];
   if (c.rpcFallback) transports.push(http(c.rpcFallback, { timeout: 20_000, retryCount: 2 }));
   return createWalletClient({ account, chain: c.chain, transport: fallback(transports) });

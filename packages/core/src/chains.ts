@@ -40,7 +40,7 @@ const CHAINS: Record<ChainKey, ChainConfig> = {
     rpc: env.BASE_MAINNET_RPC ?? "https://mainnet.base.org",
     explorer: "https://basescan.org",
     subgraphNetwork: "base",
-    officialAqua: "0x499943e74fb0ce105688beee8ef2abec5d936d31",
+    officialAqua: "0x1111113ccf1426a8e30e2bff5e005d929bf6a90a",
     erc8004: {
       identity: "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
       reputation: "0x8004BAa17C55a88189AE136b182e5fdA19dE9b63",

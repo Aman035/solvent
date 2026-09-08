@@ -16,3 +16,4 @@ node_modules/
 out/
 subgraph/build/
 subgraph/generated/
+packages/core/dist/

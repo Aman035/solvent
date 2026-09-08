@@ -53,6 +53,7 @@ export function allExtraTakers(): HDAccount[] {
 }
 
 export function account(index: number): HDAccount {
+  if (!env.MNEMONIC) throw new Error("MNEMONIC is not set - wallets need it; read-only SDK use does not");
   return mnemonicToAccount(env.MNEMONIC, { addressIndex: index });
 }
 export function role(r: NamedRole): HDAccount { return account(WALLET_INDEX[r]); }
