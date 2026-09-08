@@ -8,6 +8,7 @@ import costRev from "../../docs/cost-to-fake-reviews.json";
 import manifest from "../../deployments/84532.json";
 import { SepoliaBooks, MainnetBooks, registerSepoliaTokens } from "./Solvency";
 import { Desk } from "./Desk";
+import { Landing } from "./Landing";
 
 registerNames({
   [manifest.contracts["agentId.alice"]?.address ?? ""]: "Alice",
@@ -258,14 +259,16 @@ export default function App() {
   const lag = snap ? snap.chainHead - snap.head : 0;
   const opened = snap?.agents.find((a) => a.id === open) ?? null;
 
-  const [net, setNet] = useState<Net>("testnet");
+  const [net, setNet] = useState<Net | null>(null);
   const [view, setView] = useState<View>("desk");
   const tab = net === "mainnet" ? "mainnet" : view;
+
+  if (net === null) return <Landing onExplore={setNet} />;
 
   return (
     <div className="shell">
       <div className="rail">
-        <span className="mark">Solvent</span>
+        <button className="mark markbtn" onClick={() => setNet(null)}>Solvent</button>
         <nav className="tabs nets">
           <button className={net === "testnet" ? "on" : ""} onClick={() => setNet("testnet")}>Testnet</button>
           <button className={net === "mainnet" ? "on" : ""} onClick={() => setNet("mainnet")}>Mainnet</button>

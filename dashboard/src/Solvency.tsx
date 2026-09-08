@@ -39,13 +39,15 @@ function utilLabel(b: MakerBook): string {
 
 function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; floorBps: number | null }) {
   const meta = tokenMeta(b.token);
-  const committed = Number(b.committed) / 10 ** meta.decimals;
-  const backing = Number(b.backing) / 10 ** meta.decimals;
-  const track = Math.max(committed, backing, 1e-12);
-  const covered = Math.min(committed, backing) / track;
-  const phantom = committed > backing ? (committed - backing) / track : 0;
-  const spare = backing > committed ? (backing - committed) / track : 0;
   const u = Number(b.utilisationBps);
+  const inf = u === 0xffffffff;
+  // log scale: the 100% waterline sits at 30% of the track; 3 decades of
+  // over-commitment (10000%+) fill the rest, so 659% and 505,727% finally differ
+  const TICK = 0.30;
+  const frac = u <= 10_000
+    ? (u / 10_000) * TICK
+    : inf ? 1 : Math.min(TICK + (Math.log10(u / 10_000) / 3.2) * (1 - TICK), 1);
+  const over = u > 10_000;
   const pastFloor = floorBps !== null && u >= floorBps;
 
   return (
@@ -55,13 +57,12 @@ function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; fl
       </a>
       <span className="book-token">{meta.symbol}</span>
       <div className="book-bar" title={`promised ${fmt(b.committed, meta.decimals)} · wallet can settle ${fmt(b.backing, meta.decimals)}`}>
-        <i className="seg covered" style={{ width: `${covered * 100}%` }} />
-        {phantom > 0 && <i className="seg phantom" style={{ width: `${phantom * 100}%` }} />}
-        {spare > 0 && <i className="seg spare" style={{ width: `${spare * 100}%` }} />}
+        <i className={`seg ${over ? "phantom" : "covered"}`} style={{ width: `${(frac * 100).toFixed(2)}%` }} />
+        <i className="tick100" />
       </div>
-      <span className="num book-amt">{fmt(b.committed, meta.decimals)}<span className="dim"> promised</span></span>
-      <span className="num book-amt">{fmt(b.backing, meta.decimals)}<span className="dim"> backed</span></span>
-      <span className={`num book-util${u > 10_000 ? " over" : ""}${pastFloor ? " floored" : ""}`}>
+      <span className="num book-amt">{fmt(b.committed, meta.decimals)}</span>
+      <span className="num book-amt">{fmt(b.backing, meta.decimals)}</span>
+      <span className={`num book-util${over ? " over" : ""}${pastFloor ? " floored" : ""}`}>
         {utilLabel(b)}{pastFloor && <em> · past floor</em>}
       </span>
     </div>
@@ -118,10 +119,10 @@ function BookHeader() {
     <div className="book book-cols">
       <span className="label">Maker</span>
       <span className="label">Token</span>
-      <span className="label">Promise vs wallet</span>
+      <span className="label">Utilisation · the line is 100%</span>
       <span className="label" style={{ textAlign: "right" }}>Promised</span>
-      <span className="label" style={{ textAlign: "right" }}>Backed</span>
-      <span className="label" style={{ textAlign: "right" }}>Utilisation</span>
+      <span className="label" style={{ textAlign: "right" }}>Can settle</span>
+      <span className="label" style={{ textAlign: "right" }}>&nbsp;</span>
     </div>
   );
 }

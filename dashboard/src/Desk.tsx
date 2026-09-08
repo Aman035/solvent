@@ -24,9 +24,10 @@ function Vessel({ committed, live, value, onChange }: {
   committed: bigint; live: bigint; value: bigint; onChange: (b: bigint) => void;
 }) {
   const ref = useRef<SVGSVGElement>(null);
-  const H = 320, W = 190, top = 24, bot = H - 28;
-  // scale: 0 .. 1.5x committed, so the 100% promise line sits at 2/3 height
-  const cap = committed + committed / 2n;
+  const H = 340, W = 190, top = 30, bot = H - 30;
+  // scale so the healthy live level, the promise, and the floor all fit with air
+  const floorBacking = (committed * 10_000n) / 9_500n;
+  const cap = (bigMax(live, bigMax(committed, floorBacking)) * 23n) / 20n;
   const yFor = (b: bigint) => bot - Number((b > cap ? cap : b) * BigInt(bot - top)) / Number(cap);
   const bFor = (y: number) => {
     const t = Math.min(Math.max((bot - y) / (bot - top), 0), 1);
@@ -34,7 +35,6 @@ function Vessel({ committed, live, value, onChange }: {
   };
   const yLiquid = yFor(value);
   const yPromise = yFor(committed);
-  const floorBacking = (committed * 10_000n) / 9_500n; // backing level where util hits the 95% floor
   const yFloor = yFor(floorBacking);
   const u = utilisationBps(committed, value);
 
@@ -49,27 +49,25 @@ function Vessel({ committed, live, value, onChange }: {
       onPointerDown={(e) => { (e.target as Element).setPointerCapture?.(e.pointerId); drag(e); }}
       onPointerMove={drag} role="slider" aria-label="wallet backing"
       aria-valuenow={Number(formatUnits(value, 18))}>
-      <rect x="30" y={top - 6} width={W - 60} height={bot - top + 12} rx="14"
-        fill="var(--ink-800)" stroke="var(--rule-lit)" strokeWidth="2" />
+      <rect x="34" y={top - 8} width={W - 68} height={bot - top + 16} rx="12"
+        fill="var(--ink-800)" stroke="var(--rule-lit)" strokeWidth="1.5" />
       {/* liquid */}
-      <rect x="33" y={yLiquid} width={W - 66} height={bot + 6 - yLiquid} rx="10" fill="var(--delivered-dim)" />
-      <rect x="33" y={yLiquid} width={W - 66} height="3.5" fill="var(--delivered)" />
-      {/* the promise line: what the books quote against */}
-      <line x1="18" x2={W - 18} y1={yPromise} y2={yPromise} stroke="var(--claimed)" strokeDasharray="5 4" strokeWidth="1.4" />
-      <text x={W - 14} y={yPromise - 5} textAnchor="end" className="vessel-label">promised</text>
-      {/* the floor: below this level the books refuse */}
-      <line x1="18" x2={W - 18} y1={yFloor} y2={yFloor} stroke="var(--returned)" strokeWidth="1.4" />
-      <text x={W - 14} y={yFloor + 13} textAnchor="end" className="vessel-label floor">95% floor</text>
+      <rect x="37" y={yLiquid} width={W - 74} height={Math.max(bot + 8 - yLiquid, 0)} rx="8" fill="var(--delivered-dim)" />
+      <rect x="37" y={yLiquid} width={W - 74} height="2.5" fill="var(--delivered)" />
+      {/* floor: refuse below this level */}
+      <line x1="16" x2={W - 16} y1={yFloor} y2={yFloor} stroke="var(--returned)" strokeWidth="1.3" />
+      <text x="16" y={yFloor - 6} className="v-label red">floor · refuse below</text>
+      {/* the promise */}
+      <line x1="16" x2={W - 16} y1={yPromise} y2={yPromise} stroke="var(--claimed)" strokeDasharray="5 4" strokeWidth="1.2" />
+      <text x={W - 16} y={yPromise + 14} textAnchor="end" className="v-label">promised</text>
       {/* live marker */}
-      <path d={`M 20 ${yFor(live)} l 8 -5 v 10 z`} fill="var(--link)" />
+      <path d={`M 18 ${yFor(live)} l 9 -5.5 v 11 z`} fill="var(--link)" />
       {/* drag handle */}
       <circle cx={W / 2} cy={yLiquid} r="9" fill="var(--ink-900)" stroke="var(--delivered)" strokeWidth="2.5" className="vessel-handle" />
-      <text x={W / 2} y={bot + 22} textAnchor="middle" className="vessel-read">
-        {fmtWeth(value)} WETH · {utilLabel(u)} utilised
-      </text>
     </svg>
   );
 }
+const bigMax = (a: bigint, b: bigint) => (a > b ? a : b);
 
 // ── wallet: the optional "take it" path ─────────────────────────────────────
 type Eip1193 = { request: (a: { method: string; params?: unknown[] }) => Promise<unknown> };
@@ -161,8 +159,12 @@ export function Desk() {
   return (
     <section className="desk">
       <div className="desk-side">
-        <div className="label" style={{ marginBottom: 8 }}>The maker's wallet · drag the liquid</div>
+        <div className="label" style={{ marginBottom: 8 }}>The maker's wallet</div>
         <Vessel committed={book.committed} live={book.backing} value={backing} onChange={setDragged} />
+        <div className="vessel-readout">
+          <b className={simUtil >= 9_500 ? "bad" : ""}>{utilLabel(simUtil)}</b>
+          <span className="label">utilised · {fmtWeth(backing)} WETH</span>
+        </div>
         <div className="desk-legend">
           <span><i className="sw live" /> live level {fmtWeth(book.backing)} WETH</span>
           {dragged !== null && <button className="linkish" onClick={() => setDragged(null)}>reset to live</button>}
@@ -179,7 +181,7 @@ export function Desk() {
             {strategies.map((s, i) => (
               <button key={s.hash} className={`chip${i === sel ? " on" : ""}`} onClick={() => setSel(i)}>
                 <b>strategy {s.key}</b>
-                <span>fee {(s.feeBps1e7 / 1e5).toFixed(2)}% · widens from {(s.skewStartBps / 100).toFixed(0)}% · floor {(s.floorBps / 100).toFixed(0)}%</span>
+                <span>fee {(s.feeBps1e7 / 1e5).toFixed(2)}% · widens from {(s.skewStartBps / 100).toFixed(0)}%</span>
               </button>
             ))}
           </div>
@@ -206,9 +208,11 @@ export function Desk() {
                 </>
               )}
             </div>
-            <div className={`qcell sim${sim && !sim.ok ? " declined" : ""}`}>
-              <span className="label">If the wallet drained to {fmtWeth(backing)} · same formulas, simulated</span>
-              {!sim ? <b className="q">…</b> : sim.ok ? (
+            <div className={`qcell sim${dragged !== null && sim && !sim.ok ? " declined" : ""}`}>
+              <span className="label">{dragged === null ? "What if the wallet drained" : `At ${fmtWeth(backing)} WETH · same formulas, simulated`}</span>
+              {dragged === null ? (
+                <span className="qsub" style={{ margin: "auto 0" }}>drag the wallet level on the left - the quote recomputes with the contract's own formulas</span>
+              ) : !sim ? <b className="q">…</b> : sim.ok ? (
                 <>
                   <b className="q">{fmtWeth(sim.amountOut)} WETH</b>
                   <span className="qsub">
@@ -231,7 +235,7 @@ export function Desk() {
                 {taker.state === "busy" ? "working…" : "Take this quote"}
               </button>
             ) : (
-              <span className="note">Install a wallet to take the quote for real (demo USDC is an open faucet - you only need Base Sepolia gas).</span>
+              <span className="note">With a browser wallet and a little Base Sepolia ETH you can take this quote for real; the demo USDC faucet is open.</span>
             )}
             {taker.msg && <span className={`note${taker.state === "error" ? " warn" : ""}`}>{taker.msg}</span>}
             {taker.tx && <a href={`https://sepolia.basescan.org/tx/${taker.tx}`} target="_blank" rel="noreferrer">view fill ↗</a>}
