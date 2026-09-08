@@ -21,12 +21,12 @@ registerSepoliaTokens({
   [manifest.contracts.usdc.address]: { symbol: "USDC", decimals: 6 },
 });
 
-type Tab = "desk" | "books" | "mainnet" | "ledger";
-const TABS: { id: Tab; name: string; tag: string }[] = [
-  { id: "desk", name: "Quote desk", tag: "pull a real quote · drain the wallet · watch it refuse" },
-  { id: "books", name: "Balance sheets", tag: "Base Sepolia · quotes read these" },
-  { id: "mainnet", name: "Mainnet", tag: "1inch Aqua on Base · live" },
-  { id: "ledger", name: "Settlement ledger", tag: "claimed vs delivered" },
+type Net = "testnet" | "mainnet";
+type View = "desk" | "books" | "ledger";
+const VIEWS: { id: View; name: string }[] = [
+  { id: "desk", name: "Quote desk" },
+  { id: "books", name: "Balance sheets" },
+  { id: "ledger", name: "Settlement ledger" },
 ];
 
 const POLL_MS = 6000;
@@ -258,31 +258,26 @@ export default function App() {
   const lag = snap ? snap.chainHead - snap.head : 0;
   const opened = snap?.agents.find((a) => a.id === open) ?? null;
 
-  const [tab, setTab] = useState<Tab>("desk");
+  const [net, setNet] = useState<Net>("testnet");
+  const [view, setView] = useState<View>("desk");
+  const tab = net === "mainnet" ? "mainnet" : view;
 
   return (
     <div className="shell">
       <div className="rail">
         <span className="mark">Solvent</span>
-        <span className="tag">{TABS.find((t) => t.id === tab)!.tag}</span>
-        <nav className="tabs">
-          {TABS.map((t) => (
-            <button key={t.id} className={tab === t.id ? "on" : ""} onClick={() => setTab(t.id)}>{t.name}</button>
-          ))}
+        <nav className="tabs nets">
+          <button className={net === "testnet" ? "on" : ""} onClick={() => setNet("testnet")}>Testnet</button>
+          <button className={net === "mainnet" ? "on" : ""} onClick={() => setNet("mainnet")}>Mainnet</button>
         </nav>
-        <span className="spacer" />
-        {tab === "ledger" && snap && (
-          <>
-            <span className="stat"><span className="label">Cleared</span><b>{snap.global?.totalHonored ?? 0}</b></span>
-            <span className="stat"><span className="label">Returned</span>
-              <b style={{ color: (snap.global?.totalFailed ?? 0) > 0 ? "var(--returned)" : undefined }}>{snap.global?.totalFailed ?? 0}</b></span>
-            <span className="stat"><span className="label">Block</span><b>{snap.head.toLocaleString()}</b></span>
-            <span className="stat">
-              <span className={`pulse${lag > 50 || snap.indexingErrors ? " stale" : ""}`} />
-              <b>{lag <= 50 ? `${lag} behind` : `${lag} behind — stale`}</b>
-            </span>
-          </>
+        {net === "testnet" && (
+          <nav className="tabs">
+            {VIEWS.map((t) => (
+              <button key={t.id} className={view === t.id ? "on" : ""} onClick={() => setView(t.id)}>{t.name}</button>
+            ))}
+          </nav>
         )}
+        <span className="spacer" />
         <a href={STUDIO} target="_blank" rel="noreferrer">The Graph ↗</a>
       </div>
 
@@ -295,6 +290,12 @@ export default function App() {
 
       {tab === "ledger" && snap && (
         <>
+          <div className="ledger-stats">
+            <span className="stat"><span className="label">Cleared</span><b>{snap.global?.totalHonored ?? 0}</b></span>
+            <span className="stat"><span className="label">Returned</span>
+              <b style={{ color: (snap.global?.totalFailed ?? 0) > 0 ? "var(--returned)" : undefined }}>{snap.global?.totalFailed ?? 0}</b></span>
+            <span className="stat"><span className="label">Indexed to</span><b>{snap.head.toLocaleString()}</b></span>
+          </div>
           <div className="statement-head">
             <div className="hed">Agent<span className="sub">ERC-8004 identity</span></div>
             <div className="hed">Claimed against delivered<span className="sub">reviews are free · fills cost inventory</span></div>

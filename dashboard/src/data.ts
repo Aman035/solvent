@@ -129,7 +129,11 @@ export function ago(ts: string | number) {
 
 // ---- maker balance sheets (Solvent) ---------------------------------------
 declare const __SUBGRAPH_URL_BASE__: string;
+declare const __SUBGRAPH_URL_ARBITRUM__: string;
+declare const __SUBGRAPH_URL_OPTIMISM__: string;
 export const SUBGRAPH_URL_BASE = __SUBGRAPH_URL_BASE__;
+export const SUBGRAPH_URL_ARBITRUM = __SUBGRAPH_URL_ARBITRUM__;
+export const SUBGRAPH_URL_OPTIMISM = __SUBGRAPH_URL_OPTIMISM__;
 
 export interface MakerBook {
   maker: string; token: string;

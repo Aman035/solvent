@@ -13,6 +13,8 @@ export default defineConfig(({ mode }) => {
     define: {
       __SUBGRAPH_URL__: JSON.stringify(env.SUBGRAPH_URL ?? ""),
       __SUBGRAPH_URL_BASE__: JSON.stringify(env.SUBGRAPH_URL_BASE ?? ""),
+      __SUBGRAPH_URL_ARBITRUM__: JSON.stringify(env.SUBGRAPH_URL_ARBITRUM ?? ""),
+      __SUBGRAPH_URL_OPTIMISM__: JSON.stringify(env.SUBGRAPH_URL_OPTIMISM ?? ""),
       // public RPC only: this value is baked into a published bundle, never a keyed URL
       __RPC_URL__: JSON.stringify(env.DASH_RPC ?? "https://sepolia.base.org"),
       __EXPLORER__: JSON.stringify("https://sepolia.basescan.org"),

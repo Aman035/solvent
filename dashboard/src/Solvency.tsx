@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, type BooksSnapshot, type MakerBook } from "./data";
+import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, type BooksSnapshot, type MakerBook } from "./data";
 import baseTokens from "./base-tokens.json";
 
 /**
@@ -127,39 +127,47 @@ function BookHeader() {
 }
 
 export function MainnetBooks() {
-  const { snap, err } = useBooks(SUBGRAPH_URL_BASE, 30_000);
+  const CHAINS = [
+    { key: "Base", url: SUBGRAPH_URL_BASE, explorer: "https://basescan.org" },
+    { key: "Arbitrum", url: SUBGRAPH_URL_ARBITRUM, explorer: "https://arbiscan.io" },
+    { key: "Optimism", url: SUBGRAPH_URL_OPTIMISM, explorer: "https://optimistic.etherscan.io" },
+  ];
+  const [ci, setCi] = useState(0);
+  const chain = CHAINS[ci];
+  const { snap, err } = useBooks(chain.url, 30_000);
   const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty), [snap]);
   const over = books.filter((b) => Number(b.utilisationBps) > 10_000);
   const makers = new Set(books.map((b) => b.maker)).size;
-  const worst = [...books].sort(byUtilThenSize).slice(0, 25);
+  const worst = [...books].sort(byUtilThenSize).slice(0, 20);
 
   return (
     <section className="books">
-      {err && <div className="err">Base subgraph unreachable - {err}</div>}
+      <div className="soon-bar">
+        Solvent's contracts run on Base Sepolia today; the mainnet deployment is coming.
+        What you see here is read-only: the live balance sheet of every real 1inch Aqua
+        maker, maintained by our index on three chains.
+      </div>
       <div className="books-head">
-        <div className="hed">
-          1inch Aqua on Base, right now
-          <span className="sub">real makers, real books, indexed live at block {snap ? snap.head.toLocaleString() : "…"}</span>
-        </div>
+        <nav className="chainswitch">
+          {CHAINS.map((c, i) => (
+            <button key={c.key} className={i === ci ? "on" : ""} onClick={() => setCi(i)}>{c.key}</button>
+          ))}
+        </nav>
         {snap && (
           <div className="books-stats">
             <span className="stat"><span className="label">Makers</span><b>{makers}</b></span>
             <span className="stat"><span className="label">Books</span><b>{books.length}</b></span>
-            <span className="stat"><span className="label">Quoting more than they hold</span>
+            <span className="stat"><span className="label">Over-committed</span>
               <b style={{ color: over.length ? "var(--returned)" : undefined }}>{over.length}</b></span>
+            <span className="stat"><span className="label">Indexed to</span><b>{snap.head.toLocaleString()}</b></span>
           </div>
         )}
       </div>
+      {err && <div className="err">{chain.key} subgraph unreachable - {err}</div>}
       <BookHeader />
       {worst.map((b) => (
-        <BookRow key={b.maker + b.token} b={b} explorer="https://basescan.org" floorBps={null} />
+        <BookRow key={b.maker + b.token} b={b} explorer={chain.explorer} floorBps={null} />
       ))}
-      <p className="cost note" style={{ marginTop: 22, maxWidth: 760 }}>
-        Nothing here is a demo. These are live Aqua strategies on Base mainnet, their promised
-        virtual balances read from ship calldata and rawBalances, their backing read from the
-        maker's actual wallet at every touch. Red is liquidity that is advertised and cannot
-        settle - the gap Solvent's instructions price at quote time.
-      </p>
     </section>
   );
 }

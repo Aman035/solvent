@@ -242,3 +242,24 @@
   .desk-side { position: static; max-width: 260px; margin: 0 auto; }
   .quote-grid { grid-template-columns: 1fr; }
 }
+
+/* ---- two-level nav + mainnet bar ----------------------------------------- */
+.tabs.nets { margin-left: 26px; }
+.tabs.nets button { font-size: 11px; padding: 6px 14px; }
+.soon-bar {
+  font-family: var(--mono); font-size: 11px; line-height: 1.6; color: var(--text-2);
+  background: var(--ink-800); border: 1px solid var(--rule-lit); border-left: 3px solid var(--delivered);
+  border-radius: 3px; padding: 10px 14px; margin: 18px 0 4px;
+}
+.chainswitch { display: flex; gap: 2px; }
+.chainswitch button {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  background: none; border: 1px solid var(--rule); color: var(--text-3);
+  padding: 6px 14px; cursor: pointer;
+}
+.chainswitch button:first-child { border-radius: 3px 0 0 3px; }
+.chainswitch button:last-child { border-radius: 0 3px 3px 0; }
+.chainswitch button.on { color: var(--text); background: var(--ink-700); border-color: var(--rule-lit); }
+.ledger-stats { display: flex; gap: 26px; padding: 16px 0 4px; }
+.ledger-stats .stat { display: flex; flex-direction: column; gap: 2px; }
+.ledger-stats b { font-family: var(--mono); font-size: 15px; }
