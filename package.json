@@ -29,7 +29,9 @@
     "demo:run": "tsx scripts/demo/run.ts",
     "demo:reset": "tsx scripts/demo/reset.ts",
     "attest:books": "tsx services/attestor/src/attest-books.ts",
-    "vignette": "tsx scripts/demo/vignette.ts"
+    "vignette": "tsx scripts/demo/vignette.ts",
+    "seed:agents": "tsx scripts/seed-agents.ts",
+    "seed:fills": "tsx scripts/seed-fills.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
