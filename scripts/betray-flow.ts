@@ -55,7 +55,7 @@ console.log(`  status ${rc.status}  gas used ${rc.gasUsed}`);
 console.log(`  logs   ${rc.logs.length}   ← a full revert destroys every log`);
 console.log(`\n  ${rc.status === "reverted" ? "⛔ ALICE FAILED TO DELIVER — recorded on-chain forever" : "❌ unexpectedly succeeded"}`);
 console.log(`\n  Nothing in this transaction is indexable by a subgraph.`);
-console.log(`  That is exactly the gap ProofOfFillRecorder closes.\n`);
+console.log(`  That is exactly the gap SolventRecorder closes.\n`);
 
 // hand the failure to the attestor
 const out = { failedTxHash: hash, strategyHash: sh, maker: alice.address, taker: bob.address, tokenOut: A.weth, amountOut: q[1].toString() };

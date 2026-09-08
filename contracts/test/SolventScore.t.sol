@@ -3,21 +3,21 @@ pragma solidity 0.8.30;
 
 import { Test } from "forge-std/Test.sol";
 import { IAccessControl } from "@openzeppelin/contracts/access/IAccessControl.sol";
-import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
+import { SolventScore } from "../src/SolventScore.sol";
 
-contract ProofOfFillScoreTest is Test {
-    ProofOfFillScore internal score;
+contract SolventScoreTest is Test {
+    SolventScore internal score;
     address internal admin = address(0xA11CE);
     address internal attestor = address(0xA77E5);
     address internal alice = address(0x1);
     address internal outsider = address(0xBAD);
 
     function setUp() public {
-        score = new ProofOfFillScore(admin, attestor);
+        score = new SolventScore(admin, attestor);
     }
 
-    function _s(uint128 usd6, uint32 h, uint32 f, uint16 div) internal pure returns (ProofOfFillScore.Score memory) {
-        return ProofOfFillScore.Score({
+    function _s(uint128 usd6, uint32 h, uint32 f, uint16 div) internal pure returns (SolventScore.Score memory) {
+        return SolventScore.Score({
             honoredValueUsd6: usd6, honoredCount: h, failedCount: f, diversityBps: div, updatedAt: 0
         });
     }
@@ -75,7 +75,7 @@ contract ProofOfFillScoreTest is Test {
         // NOTE: resolve the role BEFORE prank/expectRevert - score.ATTESTOR_ROLE() is
         // itself an external call and would consume the prank.
         bytes32 roleId = score.ATTESTOR_ROLE();
-        ProofOfFillScore.Score memory s = _s(1e6, 1, 0, 10_000);
+        SolventScore.Score memory s = _s(1e6, 1, 0, 10_000);
 
         vm.prank(outsider);
         vm.expectRevert(
@@ -86,14 +86,14 @@ contract ProofOfFillScoreTest is Test {
 
     function test_RejectsDiversityAboveBps() public {
         vm.prank(attestor);
-        vm.expectRevert(abi.encodeWithSelector(ProofOfFillScore.DiversityOutOfRange.selector, uint16(10_001)));
+        vm.expectRevert(abi.encodeWithSelector(SolventScore.DiversityOutOfRange.selector, uint16(10_001)));
         score.setScore(alice, _s(1e6, 1, 0, 10_001));
     }
 
     function test_SetAndReadRoundTrip() public {
         _set(alice, 31_240e6, 12, 0, 8320);
         assertEq(score.scoreOf(alice), 25_991);
-        ProofOfFillScore.Score memory got = score.rawScoreOf(alice);
+        SolventScore.Score memory got = score.rawScoreOf(alice);
         assertEq(got.honoredValueUsd6, 31_240e6);
         assertEq(got.honoredCount, 12);
         assertEq(got.diversityBps, 8320);
@@ -104,7 +104,7 @@ contract ProofOfFillScoreTest is Test {
         address[] memory who = new address[](2);
         who[0] = alice;
         who[1] = outsider;
-        ProofOfFillScore.Score[] memory ss = new ProofOfFillScore.Score[](2);
+        SolventScore.Score[] memory ss = new SolventScore.Score[](2);
         ss[0] = _s(1000e6, 5, 0, 10_000);
         ss[1] = _s(2000e6, 4, 1, 10_000);
         vm.prank(attestor);

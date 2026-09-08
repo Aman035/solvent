@@ -3,7 +3,7 @@ pragma solidity 0.8.30;
 
 import { Test } from "forge-std/Test.sol";
 import { stdJson } from "forge-std/StdJson.sol";
-import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
+import { SolventScore } from "../src/SolventScore.sol";
 
 /// @notice C16 - the TypeScript port of computeScore must be bit-identical to Solidity.
 ///
@@ -16,10 +16,10 @@ import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
 contract ScoreDifferentialTest is Test {
     using stdJson for string;
 
-    ProofOfFillScore internal score;
+    SolventScore internal score;
 
     function setUp() public {
-        score = new ProofOfFillScore(address(this), address(this));
+        score = new SolventScore(address(this), address(this));
     }
 
     function test_TypescriptAndSolidityAgree() public view {
@@ -29,7 +29,7 @@ contract ScoreDifferentialTest is Test {
 
         for (uint256 i = 0; i < n; ++i) {
             string memory base = string.concat(".cases[", vm.toString(i), "]");
-            ProofOfFillScore.Score memory s = ProofOfFillScore.Score({
+            SolventScore.Score memory s = SolventScore.Score({
                 honoredValueUsd6: uint128(json.readUint(string.concat(base, ".honoredValueUsd6"))),
                 honoredCount: uint32(json.readUint(string.concat(base, ".honoredCount"))),
                 failedCount: uint32(json.readUint(string.concat(base, ".failedCount"))),

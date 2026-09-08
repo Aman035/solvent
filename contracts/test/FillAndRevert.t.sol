@@ -7,7 +7,7 @@ import { SwapVM } from "@1inch/swap-vm/src/SwapVM.sol";
 import { ISwapVM } from "@1inch/swap-vm/src/interfaces/ISwapVM.sol";
 
 import { SolventRouter } from "../src/router/SolventRouter.sol";
-import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
+import { SolventScore } from "../src/SolventScore.sol";
 import { ReputationGate } from "../src/instructions/ReputationGate.sol";
 
 /// @notice C10 - an executable proof that BOTH outcomes exist on-chain.
@@ -18,7 +18,7 @@ import { ReputationGate } from "../src/instructions/ReputationGate.sol";
 ///         This test asserts both against real Aqua accounting, so the argument rests on
 ///         tested behaviour rather than narrative.
 contract FillAndRevertTest is AquaSwapVMTest {
-    ProofOfFillScore internal pofScore;
+    SolventScore internal solventScore;
     address internal attestor = address(0xA77E5);
 
     /// 1inch SafeERC20 normalises every failed transferFrom to this selector.
@@ -28,7 +28,7 @@ contract FillAndRevertTest is AquaSwapVMTest {
     bytes32 internal constant PULLED_SIG = keccak256("Pulled(address,address,bytes32,address,uint256)");
 
     function _deployRouter() internal override returns (SwapVM) {
-        pofScore = new ProofOfFillScore(address(this), attestor);
+        solventScore = new SolventScore(address(this), attestor);
         return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 
@@ -134,7 +134,7 @@ contract FillAndRevertTest is AquaSwapVMTest {
     }
 
     /// THE INDEXING PROBLEM: a full revert destroys every log, so the failure is
-    /// invisible to a subgraph. This is why ProofOfFillRecorder exists.
+    /// invisible to a subgraph. This is why SolventRecorder exists.
     function test_RevertDestroysAllLogs() public {
         MakerSetup memory s = _setup();
         ISwapVM.Order memory order = createStrategy(s);

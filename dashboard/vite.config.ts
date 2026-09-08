@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
       __SUBGRAPH_URL_BASE__: JSON.stringify(env.SUBGRAPH_URL_BASE ?? ""),
       __RPC_URL__: JSON.stringify(env.BASE_SEPOLIA_RPC ?? "https://sepolia.base.org"),
       __EXPLORER__: JSON.stringify("https://sepolia.basescan.org"),
-      __STUDIO__: JSON.stringify("https://thegraph.com/studio/subgraph/proof-of-fill"),
+      __STUDIO__: JSON.stringify("https://thegraph.com/studio/subgraph/solvent-sepolia"),
     },
   };
 });

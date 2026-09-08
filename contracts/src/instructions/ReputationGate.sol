@@ -10,7 +10,7 @@ import { MemoryPtr, MemoryPtrLib } from "@1inch/swap-vm/src/libs/MemoryPtr.sol";
 import { InstructionBuilder } from "@1inch/swap-vm/src/libs/InstructionBuilder.sol";
 import { InstructionArgs } from "@1inch/swap-vm/src/libs/InstructionArgs.sol";
 
-import { IProofOfFillScore } from "../interfaces/IProofOfFillScore.sol";
+import { ISolventScore } from "../interfaces/ISolventScore.sol";
 
 /// @notice ReputationGate opcode — refuse takers whose Proof-of-Fill score is below a floor.
 ///
@@ -64,7 +64,7 @@ library ReputationGate {
 
     function exec(Context memory ctx, bytes calldata args) internal view {
         (address scoreOracle, uint32 floor) = parse(args);
-        uint32 score = IProofOfFillScore(scoreOracle).scoreOf(ctx.query.taker);
+        uint32 score = ISolventScore(scoreOracle).scoreOf(ctx.query.taker);
         require(score >= floor, TakerBelowReputationFloor(ctx.query.taker, score, floor));
     }
 }

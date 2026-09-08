@@ -12,7 +12,7 @@ import {
  *
  * This scans for `status == 0` receipts targeting the router, decodes the attempted
  * swap to recover the maker and strategy, and re-emits the failure through
- * ProofOfFillRecorder citing the real failed transaction hash. Anyone can check the
+ * SolventRecorder citing the real failed transaction hash. Anyone can check the
  * citation; the attestor cannot invent a failure the chain does not corroborate.
  */
 

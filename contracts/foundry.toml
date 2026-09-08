@@ -14,8 +14,8 @@ optimizer_runs = 700
 via_ir         = true
 fs_permissions = [{ access = "read-write", path = "../deployments" }, { access = "read", path = "./test/fixtures" }]
 
-# Fast iteration for contracts that do NOT import SwapVM (e.g. ProofOfFillScore).
-# Usage: FOUNDRY_PROFILE=fast forge test --match-contract ProofOfFillScoreTest
+# Fast iteration for contracts that do NOT import SwapVM (e.g. SolventScore).
+# Usage: FOUNDRY_PROFILE=fast forge test --match-contract SolventScoreTest
 [profile.fast]
 via_ir         = false
 optimizer      = true

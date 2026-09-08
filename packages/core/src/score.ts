@@ -1,5 +1,5 @@
 /**
- * TypeScript port of ProofOfFillScore.computeScore.
+ * TypeScript port of SolventScore.computeScore.
  *
  * MUST stay bit-identical to the Solidity implementation - the dashboard, the attestor
  * and Bob all display or act on this number, and a divergence would mean the UI showing

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.30;
 
-import { IProofOfFillScore } from "./interfaces/IProofOfFillScore.sol";
+import { ISolventScore } from "./interfaces/ISolventScore.sol";
 
 interface IIdentityRegistryMin {
     function ownerOf(uint256 tokenId) external view returns (address);
@@ -26,13 +26,13 @@ interface IIdentityRegistryMin {
 ///      which is where its fills actually settle.
 contract ReputationRegistryAdapter {
     IIdentityRegistryMin public immutable IDENTITY;
-    IProofOfFillScore public immutable SCORE;
+    ISolventScore public immutable SCORE;
 
     error AgentDoesNotExist(uint256 agentId);
 
     constructor(address identityRegistry, address proofOfFillScore) {
         IDENTITY = IIdentityRegistryMin(identityRegistry);
-        SCORE = IProofOfFillScore(proofOfFillScore);
+        SCORE = ISolventScore(proofOfFillScore);
     }
 
     /// @notice The wallet whose delivery record represents this agent.

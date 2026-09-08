@@ -12,7 +12,7 @@ import { MemoryPtr, MemoryPtrLib } from "@1inch/swap-vm/src/libs/MemoryPtr.sol";
 import { InstructionBuilder } from "@1inch/swap-vm/src/libs/InstructionBuilder.sol";
 import { InstructionArgs } from "@1inch/swap-vm/src/libs/InstructionArgs.sol";
 
-import { IProofOfFillScore } from "../interfaces/IProofOfFillScore.sol";
+import { ISolventScore } from "../interfaces/ISolventScore.sol";
 
 /// @notice ReputationPriceAdjuster opcode — widen the quote for takers below a score
 ///         threshold, instead of refusing them outright.
@@ -84,7 +84,7 @@ library ReputationPriceAdjuster {
     function exec(Context memory ctx, bytes calldata args) internal {
         (address scoreOracle, uint32 minScore, uint24 widenBps) = parse(args);
 
-        uint32 score = IProofOfFillScore(scoreOracle).scoreOf(ctx.query.taker);
+        uint32 score = ISolventScore(scoreOracle).scoreOf(ctx.query.taker);
         if (score >= minScore) {
             ctx.runLoop(); // qualified taker: provably identical to a program without this instruction
             return;

@@ -50,7 +50,7 @@ async function deploy(
 const aqua = await deploy("aqua", "Aqua.sol", "Aqua", [], AQUA_COMMIT);
 
 // 2. Score cache (attestor writes, ReputationGate reads).
-const score = await deploy("score", "ProofOfFillScore.sol", "ProofOfFillScore",
+const score = await deploy("score", "SolventScore.sol", "SolventScore",
   [deployer.address, attestor.address]);
 
 // 3. Official AquaSwapVMRouter shape + our two instructions.
@@ -59,14 +59,14 @@ const router = await deploy("router", "SolventRouter.sol", "SolventRouter",
   SWAP_VM_COMMIT);
 
 // 4. Demo tokens (open-mint faucet, so the demo never depends on testnet liquidity).
-const weth = await deploy("weth", "DemoToken.sol", "DemoToken", ["Solvent WETH", "pofWETH", 18]);
-const usdc = await deploy("usdc", "DemoToken.sol", "DemoToken", ["Solvent USDC", "pofUSDC", 6]);
+const weth = await deploy("weth", "DemoToken.sol", "DemoToken", ["Solvent WETH", "sWETH", 18]);
+const usdc = await deploy("usdc", "DemoToken.sol", "DemoToken", ["Solvent USDC", "sUSDC", 6]);
 
 // 5. Read-only encoder: lets the TS agents build orders with the OFFICIAL libraries.
-await deploy("helper", "ProofOfFillHelper.sol", "ProofOfFillHelper", []);
+await deploy("helper", "SolventHelper.sol", "SolventHelper", []);
 
 // 6. Makes broken promises indexable - a reverted swap destroys its own logs.
-await deploy("recorder", "ProofOfFillRecorder.sol", "ProofOfFillRecorder",
+await deploy("recorder", "SolventRecorder.sol", "SolventRecorder",
   [deployer.address, attestor.address]);
 
 // 7. Reads the score by ERC-8004 agentId instead of by wallet, so any consumer can

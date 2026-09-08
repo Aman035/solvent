@@ -75,9 +75,9 @@ dataSources:
     name: Score
     network: base-sepolia
     source:
-      address: "0x95908bb174224f085b0f30d6236a46b27c7a6711"
+      address: "0x401b52d106906cc71c31bf96a278c3cefdf18e4d"
       abi: Score
-      startBlock: 46430246
+      startBlock: 46560760
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -135,9 +135,9 @@ dataSources:
     name: Recorder
     network: base-sepolia
     source:
-      address: "0x1b6439b8f19e32e806d5a3cac67fdb1d9a91b1c7"
+      address: "0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b"
       abi: Recorder
-      startBlock: 46431765
+      startBlock: 46560762
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

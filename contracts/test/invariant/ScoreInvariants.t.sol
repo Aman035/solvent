@@ -2,12 +2,12 @@
 pragma solidity 0.8.30;
 
 import { Test } from "forge-std/Test.sol";
-import { ProofOfFillScore } from "../../src/ProofOfFillScore.sol";
+import { SolventScore } from "../../src/SolventScore.sol";
 
 /// @notice Stateful handler: drives the score contract through random attestor updates,
 ///         so the invariants below hold over sequences of writes, not just single calls.
 contract ScoreHandler is Test {
-    ProofOfFillScore public immutable SCORE;
+    SolventScore public immutable SCORE;
     address public constant ATTESTOR = address(0xA77E5);
 
     address[] public agents;
@@ -15,7 +15,7 @@ contract ScoreHandler is Test {
 
     uint256 public maxScoreSeen;
 
-    constructor(ProofOfFillScore score_) {
+    constructor(SolventScore score_) {
         SCORE = score_;
     }
 
@@ -33,7 +33,7 @@ contract ScoreHandler is Test {
         vm.prank(ATTESTOR);
         SCORE.setScore(
             agent,
-            ProofOfFillScore.Score({
+            SolventScore.Score({
                 honoredValueUsd6: usd6,
                 honoredCount: honored,
                 failedCount: failed,
@@ -59,11 +59,11 @@ contract ScoreHandler is Test {
 ///         broken, the score is not a trustworthy signal and the ReputationGate opcode
 ///         is enforcing something meaningless.
 contract ScoreInvariantsTest is Test {
-    ProofOfFillScore internal score;
+    SolventScore internal score;
     ScoreHandler internal handler;
 
     function setUp() public {
-        score = new ProofOfFillScore(address(this), address(0xA77E5));
+        score = new SolventScore(address(this), address(0xA77E5));
         handler = new ScoreHandler(score);
         targetContract(address(handler));
     }
@@ -74,7 +74,7 @@ contract ScoreInvariantsTest is Test {
         uint256 n = handler.agentCount();
         for (uint256 i; i < n; ++i) {
             address a = handler.agents(i);
-            ProofOfFillScore.Score memory s = score.rawScoreOf(a);
+            SolventScore.Score memory s = score.rawScoreOf(a);
             uint256 base = uint256(s.honoredValueUsd6) / 1e6;
             if (base > type(uint32).max) {
                 base = type(uint32).max;

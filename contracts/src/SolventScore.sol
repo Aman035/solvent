@@ -3,7 +3,7 @@ pragma solidity 0.8.30;
 
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
-/// @title ProofOfFillScore
+/// @title SolventScore
 /// @notice On-chain cache of each agent's Proof-of-Fill score, cheap enough for the
 ///         ReputationGate opcode to read during a quote.
 /// @dev Formula and rationale: docs/SCORE_DESIGN.md
@@ -17,7 +17,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 ///      because it needs per-counterparty values. It is fully re-derivable from public
 ///      data by anyone. A maker that only ever trades with itself has HHI = 1, hence
 ///      diversityBps = 0, hence score = 0 — self-dealing is defeated structurally.
-contract ProofOfFillScore is AccessControl {
+contract SolventScore is AccessControl {
     bytes32 public constant ATTESTOR_ROLE = keccak256("ATTESTOR_ROLE");
 
     uint16 internal constant _BPS = 10_000;

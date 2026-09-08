@@ -13,7 +13,7 @@ import { TakerTraitsLib } from "@1inch/swap-vm/src/libs/TakerTraits.sol";
 ///      means the agents and the contracts can never disagree about an encoding - and it
 ///      keeps a whole class of bug (a hand-rolled traits packer drifting from upstream)
 ///      out of the project entirely.
-contract ProofOfFillHelper {
+contract SolventHelper {
     function buildOrder(MakerTraitsLib.Args calldata args) external pure returns (ISwapVM.Order memory) {
         return MakerTraitsLib.build(args);
     }

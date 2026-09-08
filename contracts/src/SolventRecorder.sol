@@ -3,7 +3,7 @@ pragma solidity 0.8.30;
 
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
-/// @title ProofOfFillRecorder
+/// @title SolventRecorder
 /// @notice Makes a BROKEN PROMISE indexable.
 ///
 /// @dev THE PROBLEM. When an Aqua maker cannot deliver, `Aqua.pull` reverts with
@@ -31,7 +31,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 ///
 ///      Neither path can fabricate a failure that the chain does not corroborate:
 ///      `failedTxHash` always points at a real reverted transaction.
-contract ProofOfFillRecorder is AccessControl {
+contract SolventRecorder is AccessControl {
     bytes32 public constant RECORDER_ROLE = keccak256("RECORDER_ROLE");
 
     /// @param source 0 = attestor-observed, 1 = taker self-reported

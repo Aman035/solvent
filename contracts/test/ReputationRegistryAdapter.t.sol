@@ -3,7 +3,7 @@ pragma solidity 0.8.30;
 
 import { Test } from "forge-std/Test.sol";
 import { ReputationRegistryAdapter } from "../src/ReputationRegistryAdapter.sol";
-import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
+import { SolventScore } from "../src/SolventScore.sol";
 
 /// Minimal stand-in for the ERC-8004 IdentityRegistry (which is solc 0.8.19 + OZ v4,
 /// so it cannot be compiled into this project's build - see contracts/erc8004-artifacts).
@@ -31,7 +31,7 @@ contract MockIdentity {
 
 contract ReputationRegistryAdapterTest is Test {
     MockIdentity internal identity;
-    ProofOfFillScore internal score;
+    SolventScore internal score;
     ReputationRegistryAdapter internal adapter;
 
     address internal attestor = address(0xA77E5);
@@ -40,7 +40,7 @@ contract ReputationRegistryAdapterTest is Test {
 
     function setUp() public {
         identity = new MockIdentity();
-        score = new ProofOfFillScore(address(this), attestor);
+        score = new SolventScore(address(this), attestor);
         adapter = new ReputationRegistryAdapter(address(identity), address(score));
     }
 
@@ -48,7 +48,7 @@ contract ReputationRegistryAdapterTest is Test {
         vm.prank(attestor);
         score.setScore(
             who,
-            ProofOfFillScore.Score({
+            SolventScore.Score({
                 honoredValueUsd6: usd6, honoredCount: h, failedCount: 0, diversityBps: div, updatedAt: 0
             })
         );

@@ -5,7 +5,7 @@ import { AquaSwapVMTest } from "@1inch/swap-vm/test/base/AquaSwapVMTest.sol";
 import { SwapVM } from "@1inch/swap-vm/src/SwapVM.sol";
 import { ISwapVM } from "@1inch/swap-vm/src/interfaces/ISwapVM.sol";
 import { SolventRouter } from "../src/router/SolventRouter.sol";
-import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
+import { SolventScore } from "../src/SolventScore.sol";
 
 /// @notice Is FRACTIONAL RESERVE possible on Aqua?
 ///
@@ -18,10 +18,10 @@ import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
 ///         This test exists to establish whether that is real before anything is built
 ///         on top of it.
 contract FractionalReserveTest is AquaSwapVMTest {
-    ProofOfFillScore internal pofScore;
+    SolventScore internal solventScore;
 
     function _deployRouter() internal override returns (SwapVM) {
-        pofScore = new ProofOfFillScore(address(this), address(0xA77E5));
+        solventScore = new SolventScore(address(this), address(0xA77E5));
         return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 
