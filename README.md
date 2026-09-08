@@ -232,34 +232,44 @@ attestor writes it on-chain, and the quotes react. Before Solvent these books wo
 quote the stale price until settlement reverted in a taker's face. Here they priced
 the risk, then refused it.
 
-## Landscape
+## Competitors
 
-The closest relative is **exchange proof-of-reserves**, and the comparison is
-instructive. Same intuition, verify the backing instead of trusting the advertisement,
-but PoR only exists where a custodian holds the assets, and it is attested quarterly by
-auditors. Solvent is proof-of-reserves for makers who never deposit, recomputed
-continuously from public events, checkable by anyone.
+No product prices an on-chain maker's solvency today, and that is not an oversight.
+Before Aqua the question could not exist: every other venue takes custody, so backing
+is 100% by construction. Aqua created the category by deleting custody. What exists
+around it watches other layers:
 
-Everything else in the neighbourhood watches a different layer. Risk platforms like
-Gauntlet and Chaos Labs tune protocol parameters and monitor custodial reserves. Aqua's
-own emerging tooling builds order books and manages strategies. None of them can see a
-maker's aggregate book, because the protocol never computes it and no single contract
-read reveals it. And 1inch's documented remedy for the problem is a human docking
-strategies by hand.
+| Who | What they watch | Why they miss this |
+| --- | --- | --- |
+| Exchange proof-of-reserves | custodial balances, attested quarterly by auditors | only works where a custodian holds the assets; Aqua makers never deposit |
+| Risk platforms (Gauntlet, Chaos Labs) | protocol parameters, custodial reserve health | tune the protocol, not individual maker wallets |
+| Aqua-native tooling | order books, strategy management | no view of a maker's aggregate book, because the protocol never computes it and no single contract read reveals it |
+| 1inch's own remedy | the whitepaper's advice | "manually dock strategies": a human, watching, by hand |
 
-Nobody prices an on-chain maker's solvency because, before Aqua, the question could not
-exist: every other venue takes custody, so backing is 1.0 by construction. Aqua created
-the category by deleting custody. Solvent is the first entrant, and the 123 under-backed
-books above are the reason it needs to.
+The closest relative is exchange proof-of-reserves, and the comparison is the pitch:
+same intuition, verify the backing instead of trusting the advertisement. PoR is
+quarterly, custodial, and auditor-attested. Solvent is proof-of-reserves for makers
+who never deposit: recomputed continuously from public events, checkable by anyone,
+and enforced in the quote itself. First entrant in a category the venue just created.
 
-## Why now
+## Product demand
 
-1. **The venue is weeks old** and already multichain at identical addresses, with
-   115 real makers, 45 of them already caught quoting
-   more than they held. The fix should exist before the population scales.
-2. **The remedy is documented as manual** by the protocol's own authors.
-3. **The takers are becoming machines.** Agents cannot eyeball counterparty risk. They
-   need it priced into the quote or published in the index. Solvent does both.
+Demand here is not projected, it is already on-chain, measured:
+
+1. **Makers are already doing the thing.** 115 real makers within weeks of launch, 45
+   of them already caught quoting more than they held. Running one wallet across many
+   strategies is the whitepaper's own capital-efficiency pitch; every maker who takes
+   it needs solvency management, and today their only tool is watching a wallet by hand.
+2. **The protocol asks for it.** The documented remedy is manual docking by the maker.
+   A venue whose own authors prescribe a human process is a venue asking for
+   automation.
+3. **Takers are becoming machines.** Agent-driven flow cannot eyeball counterparty
+   risk mid-route. It needs risk either priced into the quote or published in an
+   index it can query. Solvent does both, which is what makes declines visible at
+   quote time instead of as a wasted, reverted transaction.
+4. **The window is now.** The venue is multichain at identical addresses and growing.
+   The fix should exist before the population scales, not after the first
+   taker-visible insolvency event.
 
 ---
 
