@@ -92,7 +92,8 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 5000);
 
-        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
@@ -104,7 +105,8 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 0);
 
-        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
@@ -121,7 +123,8 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(this), 0);
 
-        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
 
         // resolve asView() first: it is its own external call and would consume expectRevert
         ISwapVM v = swapVM.asView();
@@ -139,7 +142,8 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(this), 5000);
 
-        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
         (, uint256 amountOut) = quote(_prog(100e18), o);
         assertEq(amountOut, _expectedXycOut(s, 100e18));
     }
@@ -148,7 +152,8 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 100); // exactly at the floor
 
-        ISwapVM.Order memory o = _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
+        ISwapVM.Order memory o =
+            _ship(bytes.concat(ReputationGate.build(address(solventScore), 100), buildProgram(s)), s);
         SwapProgram memory p = _prog(100e18);
         _fund(p);
         (uint256 amountIn, uint256 amountOut) = swap(p, o);
@@ -161,8 +166,9 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 5000);
 
-        ISwapVM.Order memory o =
-            _ship(bytes.concat(ReputationPriceAdjuster.build(address(solventScore), 1000, 300_000), buildProgram(s)), s);
+        ISwapVM.Order memory o = _ship(
+            bytes.concat(ReputationPriceAdjuster.build(address(solventScore), 1000, 300_000), buildProgram(s)), s
+        );
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
@@ -174,8 +180,9 @@ contract ReputationGateTest is AquaSwapVMTest {
         MakerSetup memory s = _setup();
         _setScore(address(taker), 10); // below threshold
 
-        ISwapVM.Order memory o =
-            _ship(bytes.concat(ReputationPriceAdjuster.build(address(solventScore), 1000, 300_000), buildProgram(s)), s);
+        ISwapVM.Order memory o = _ship(
+            bytes.concat(ReputationPriceAdjuster.build(address(solventScore), 1000, 300_000), buildProgram(s)), s
+        );
         SwapProgram memory p = _prog(100e18);
         _fund(p);
 
