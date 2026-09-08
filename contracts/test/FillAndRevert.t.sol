@@ -6,7 +6,7 @@ import { AquaSwapVMTest } from "@1inch/swap-vm/test/base/AquaSwapVMTest.sol";
 import { SwapVM } from "@1inch/swap-vm/src/SwapVM.sol";
 import { ISwapVM } from "@1inch/swap-vm/src/interfaces/ISwapVM.sol";
 
-import { ProofOfFillSwapVMRouter } from "../src/router/ProofOfFillSwapVMRouter.sol";
+import { SolventRouter } from "../src/router/SolventRouter.sol";
 import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
 import { ReputationGate } from "../src/instructions/ReputationGate.sol";
 
@@ -29,7 +29,7 @@ contract FillAndRevertTest is AquaSwapVMTest {
 
     function _deployRouter() internal override returns (SwapVM) {
         pofScore = new ProofOfFillScore(address(this), attestor);
-        return new ProofOfFillSwapVMRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
+        return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 
     function _setup() internal pure returns (MakerSetup memory) {

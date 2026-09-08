@@ -4,7 +4,7 @@ pragma solidity 0.8.30;
 import { AquaSwapVMTest } from "@1inch/swap-vm/test/base/AquaSwapVMTest.sol";
 import { SwapVM } from "@1inch/swap-vm/src/SwapVM.sol";
 import { ISwapVM } from "@1inch/swap-vm/src/interfaces/ISwapVM.sol";
-import { ProofOfFillSwapVMRouter } from "../src/router/ProofOfFillSwapVMRouter.sol";
+import { SolventRouter } from "../src/router/SolventRouter.sol";
 import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
 
 /// @notice Is FRACTIONAL RESERVE possible on Aqua?
@@ -22,7 +22,7 @@ contract FractionalReserveTest is AquaSwapVMTest {
 
     function _deployRouter() internal override returns (SwapVM) {
         pofScore = new ProofOfFillScore(address(this), address(0xA77E5));
-        return new ProofOfFillSwapVMRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
+        return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 
     function _setup(uint256 a, uint256 b) internal pure returns (MakerSetup memory) {

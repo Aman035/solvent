@@ -6,7 +6,7 @@ import { SwapVM } from "@1inch/swap-vm/src/SwapVM.sol";
 import { ISwapVM } from "@1inch/swap-vm/src/interfaces/ISwapVM.sol";
 import { Opcode } from "@1inch/swap-vm/src/libs/OpcodeList.sol";
 
-import { ProofOfFillSwapVMRouter } from "../src/router/ProofOfFillSwapVMRouter.sol";
+import { SolventRouter } from "../src/router/SolventRouter.sol";
 import { ProofOfFillScore } from "../src/ProofOfFillScore.sol";
 import { ReputationGate } from "../src/instructions/ReputationGate.sol";
 import { ReputationPriceAdjuster } from "../src/instructions/ReputationPriceAdjuster.sol";
@@ -17,7 +17,7 @@ contract ReputationGateTest is AquaSwapVMTest {
 
     function _deployRouter() internal override returns (SwapVM) {
         pofScore = new ProofOfFillScore(address(this), attestor);
-        return new ProofOfFillSwapVMRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
+        return new SolventRouter(address(aqua), address(0), address(this), "SwapVM", "1.0.0");
     }
 
     function _setScore(address who, uint32 raw) internal {

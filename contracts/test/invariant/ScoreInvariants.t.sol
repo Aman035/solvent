@@ -53,7 +53,7 @@ contract ScoreHandler is Test {
     }
 }
 
-/// @notice C11 - invariants of the Proof-of-Fill score.
+/// @notice C11 - invariants of the settlement score.
 ///
 ///         These are the properties the whole design depends on. If any of them can be
 ///         broken, the score is not a trustworthy signal and the ReputationGate opcode
