@@ -206,20 +206,20 @@
 .linkish { background: none; border: none; color: var(--link); cursor: pointer; font-size: 11px; padding: 0; }
 .linkish:hover { text-decoration: underline; }
 
-.ticket { background: var(--ink-800); border: 1px solid var(--rule-lit); border-radius: 4px; padding: 20px 22px; }
+.ticket { background: var(--ink-800); border: 1px solid var(--rule); border-radius: 4px; padding: 20px 22px; box-shadow: 0 1px 2px rgba(26,33,43,0.06), 0 8px 24px rgba(26,33,43,0.05); }
 .ticket-row { display: flex; align-items: center; gap: 12px; }
 .strat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
 .chip { display: flex; flex-direction: column; gap: 3px; text-align: left; background: var(--ink-700);
   border: 1px solid transparent; border-radius: 3px; padding: 8px 12px; color: var(--text-2); cursor: pointer; }
 .chip span { font-family: var(--mono); font-size: 9.5px; color: var(--text-3); }
-.chip.on { border-color: var(--delivered-dim); color: var(--text); background: var(--ink-600); }
-.amt { font-family: var(--mono); font-size: 22px; width: 150px; background: var(--ink-900);
+.chip.on { border-color: var(--delivered); color: var(--text); background: #fff; box-shadow: 0 1px 3px rgba(26,33,43,0.08); }
+.amt { font-family: var(--mono); font-size: 22px; width: 150px; background: #fff;
   border: 1px solid var(--rule-lit); border-radius: 3px; color: var(--text); padding: 6px 10px; }
 .amt:focus { outline: none; border-color: var(--delivered-dim); }
 .unit { font-family: var(--mono); color: var(--text-3); font-size: 13px; }
 
 .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 6px; }
-.qcell { background: var(--ink-900); border: 1px solid var(--rule); border-radius: 3px; padding: 14px 16px;
+.qcell { background: #fff; border: 1px solid var(--rule); border-radius: 3px; padding: 14px 16px;
   display: flex; flex-direction: column; gap: 6px; min-height: 96px; }
 .qcell.sim { border-style: dashed; }
 .qcell .q { font-family: var(--mono); font-size: 21px; letter-spacing: -0.01em; }
@@ -229,9 +229,9 @@
 
 .take-row { margin-top: 14px; }
 .take { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
-  background: var(--delivered-dim); color: var(--text); border: 1px solid var(--delivered);
+  background: var(--delivered); color: #fff; border: 1px solid var(--delivered);
   border-radius: 3px; padding: 9px 18px; cursor: pointer; }
-.take:hover:not(:disabled) { background: var(--delivered); color: var(--ink-900); }
+.take:hover:not(:disabled) { background: #0b7a4d; }
 .take:disabled { opacity: 0.45; cursor: default; }
 .note.warn { color: var(--returned); }
 

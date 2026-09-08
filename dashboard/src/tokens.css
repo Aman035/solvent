@@ -1,32 +1,34 @@
 /*
- * Solvent — settlement ledger
+ * Solvent — the chart room.
  *
- * One rule governs the palette: DELIVERED VALUE is the only saturated thing on the
- * page. Claimed reputation is rendered deliberately dull, because that is the argument.
+ * A balance sheet is a printed document: cool paper, ink, hairline rules. One deep
+ * green for what is actually backed, one oxide red for what is promised beyond it.
+ * The waterline habit carries through: red is always "past the line".
  */
 :root {
-  /* surfaces — graphite, not near-black */
-  --ink-900: #14181c;
-  --ink-800: #1e2329;
-  --ink-700: #272d34;
-  --ink-600: #2f363e;
+  /* paper and raised surfaces (names kept from the dark system: 900 = ground) */
+  --ink-900: #eef0eb;   /* the page */
+  --ink-800: #f7f8f5;   /* raised card */
+  --ink-700: #e6e9e3;   /* inset fill */
+  --ink-600: #dbdfd8;   /* stronger fill */
 
-  --rule: #2f363e;
-  --rule-lit: #3a424b;
+  --rule: #d5dad2;
+  --rule-lit: #c2c8bf;
 
-  --text: #eef1f4;
-  --text-2: #a7b0ba;
-  --text-3: #6c7681;
+  --text: #1a212b;
+  --text-2: #46515c;
+  --text-3: #7d8781;
 
-  /* the only saturated colour */
-  --delivered: #3fd39b;
-  --delivered-dim: #1f6b52;
+  /* backed: deep emerald, printed not lit */
+  --delivered: #0e8f5b;
+  --delivered-dim: #cfe7da;
 
-  --returned: #f0626b;
-  --returned-dim: #7a3339;
+  /* past the line */
+  --returned: #c2434f;
+  --returned-dim: #efd7d9;
 
-  --claimed: #8b94a0;   /* deliberately muted */
-  --link: #8fb6ff;
+  --claimed: #94a0a8;
+  --link: #2c5fb8;
 
   --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
@@ -49,10 +51,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Every number in this interface is a ledger amount: tabular, always. */
 .num { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 
-/* Field labels use the register of a printed statement. */
 .label {
   font-family: var(--mono);
   font-size: 9.5px;

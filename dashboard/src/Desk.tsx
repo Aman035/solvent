@@ -63,7 +63,7 @@ function Vessel({ committed, live, value, onChange }: {
       {/* live marker */}
       <path d={`M 18 ${yFor(live)} l 9 -5.5 v 11 z`} fill="var(--link)" />
       {/* drag handle */}
-      <circle cx={W / 2} cy={yLiquid} r="9" fill="var(--ink-900)" stroke="var(--delivered)" strokeWidth="2.5" className="vessel-handle" />
+      <circle cx={W / 2} cy={yLiquid} r="9" fill="var(--ink-800)" stroke="var(--delivered)" strokeWidth="2.5" className="vessel-handle" />
     </svg>
   );
 }
