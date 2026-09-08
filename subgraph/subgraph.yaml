@@ -1,6 +1,5 @@
 specVersion: 1.0.0
-description: Proof of Fill - reputation you had to pay for
-repository: https://github.com/Aman035/proof-of-fill
+description: Solvent - maker balance sheets and the settlement record
 schema:
   file: ./schema.graphql
 dataSources:
@@ -37,7 +36,7 @@ dataSources:
     network: base-sepolia
     source:
       address: "0x06ac5984d1bdd04aefd3e4e33312f30ce058462e"
-      abi: ProofOfFillSwapVMRouter
+      abi: SwapVMRouter
       startBlock: 46430248
     mapping:
       kind: ethereum/events
@@ -45,19 +44,39 @@ dataSources:
       language: wasm/assemblyscript
       entities: [Agent, Strategy, Fill, Counterparty, Global]
       abis:
-        - name: ProofOfFillSwapVMRouter
-          file: ./abis/ProofOfFillSwapVMRouter.json
+        - name: SwapVMRouter
+          file: ./abis/SwapVMRouter.json
       eventHandlers:
         - event: Swapped(bytes32,address,address,address,address,uint256,uint256)
           handler: handleSwapped
       file: ./src/router.ts
 
   - kind: ethereum
-    name: ProofOfFillScore
+    name: SolventRouter
+    network: base-sepolia
+    source:
+      address: "0xff00bcc12a34864a3b6e411100bf839ab441c608"
+      abi: SwapVMRouter
+      startBlock: 46513725
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: [Agent, Strategy, Fill, Counterparty, Global]
+      abis:
+        - name: SwapVMRouter
+          file: ./abis/SwapVMRouter.json
+      eventHandlers:
+        - event: Swapped(bytes32,address,address,address,address,uint256,uint256)
+          handler: handleSwapped
+      file: ./src/router.ts
+
+  - kind: ethereum
+    name: Score
     network: base-sepolia
     source:
       address: "0x95908bb174224f085b0f30d6236a46b27c7a6711"
-      abi: ProofOfFillScore
+      abi: Score
       startBlock: 46430246
     mapping:
       kind: ethereum/events
@@ -65,8 +84,8 @@ dataSources:
       language: wasm/assemblyscript
       entities: [Agent, ScoreSnapshot]
       abis:
-        - name: ProofOfFillScore
-          file: ./abis/ProofOfFillScore.json
+        - name: Score
+          file: ./abis/Score.json
       eventHandlers:
         - event: ScoreUpdated(indexed address,uint128,uint32,uint32,uint16,uint32)
           handler: handleScoreUpdated
@@ -113,11 +132,11 @@ dataSources:
       file: ./src/erc8004.ts
 
   - kind: ethereum
-    name: ProofOfFillRecorder
+    name: Recorder
     network: base-sepolia
     source:
       address: "0x1b6439b8f19e32e806d5a3cac67fdb1d9a91b1c7"
-      abi: ProofOfFillRecorder
+      abi: Recorder
       startBlock: 46431765
     mapping:
       kind: ethereum/events
@@ -125,8 +144,8 @@ dataSources:
       language: wasm/assemblyscript
       entities: [Agent, Fill, Global]
       abis:
-        - name: ProofOfFillRecorder
-          file: ./abis/ProofOfFillRecorder.json
+        - name: Recorder
+          file: ./abis/Recorder.json
       eventHandlers:
         - event: FillFailed(indexed bytes32,indexed address,indexed address,address,uint256,bytes4,bytes32,uint8)
           handler: handleFillFailed

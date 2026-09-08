@@ -1,5 +1,5 @@
 {
-  "name": "@pof/subgraph",
+  "name": "@solvent/subgraph",
   "private": true,
   "scripts": {
     "codegen": "graph codegen",

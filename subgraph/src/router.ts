@@ -1,5 +1,5 @@
 import { Bytes } from "@graphprotocol/graph-ts";
-import { Swapped } from "../generated/Router/ProofOfFillSwapVMRouter";
+import { Swapped } from "../generated/Router/SwapVMRouter";
 import { Fill, Strategy, Counterparty } from "../generated/schema";
 import { loadAgent, loadGlobal, counterpartyId, recomputeScore, toUsd6, ZERO } from "./shared";
 

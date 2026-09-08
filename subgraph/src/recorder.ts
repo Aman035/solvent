@@ -1,5 +1,5 @@
 import { Bytes, BigInt } from "@graphprotocol/graph-ts";
-import { FillFailed } from "../generated/ProofOfFillRecorder/ProofOfFillRecorder";
+import { FillFailed } from "../generated/Recorder/Recorder";
 import { Fill, Strategy, Counterparty } from "../generated/schema";
 import { loadAgent, loadGlobal, recomputeScore, toUsd6, ZERO } from "./shared";
 
@@ -7,7 +7,7 @@ import { loadAgent, loadGlobal, recomputeScore, toUsd6, ZERO } from "./shared";
  * A BROKEN PROMISE.
  *
  * A reverted swap destroys its own logs, so the failure cannot be indexed from the
- * transaction itself. ProofOfFillRecorder re-emits it - either self-reported by a
+ * transaction itself. the recorder re-emits it - either self-reported by a
  * taker contract, or observed by the attestor scanning status==0 receipts - always
  * citing the real reverted transaction.
  *

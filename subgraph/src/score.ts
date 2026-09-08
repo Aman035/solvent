@@ -1,4 +1,4 @@
-import { ScoreUpdated } from "../generated/ProofOfFillScore/ProofOfFillScore";
+import { ScoreUpdated } from "../generated/Score/Score";
 import { ScoreSnapshot } from "../generated/schema";
 import { loadAgent } from "./shared";
 

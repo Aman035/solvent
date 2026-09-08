@@ -3,7 +3,7 @@ import { Agent, Counterparty, Global } from "../generated/schema";
 
 export const ZERO = BigInt.fromI32(0);
 export const BPS = BigInt.fromI32(10000);
-/** Failures weigh 3x in the reliability term. Mirrors ProofOfFillScore._FAILURE_WEIGHT. */
+/** Failures weigh 3x in the reliability term. Mirrors the score contract's _FAILURE_WEIGHT. */
 export const FAILURE_WEIGHT = BigInt.fromI32(3);
 
 /**
@@ -41,7 +41,7 @@ export function loadAgent(addr: Address, block: ethereum.Block): Agent {
     a.honoredValueUsd6 = ZERO;
     a.distinctTakers = 0;
     a.diversityBps = 0;
-    a.proofOfFillScore = ZERO;
+    a.settlementScore = ZERO;
     a.onChainScore = ZERO;
     a.reviewCount = 0;
     a.reviewSum = ZERO;
@@ -57,20 +57,20 @@ export function counterpartyId(maker: Address, taker: Address): Bytes {
 }
 
 /**
- * Recompute the agent's Herfindahl-based diversity and Proof-of-Fill score.
+ * Recompute the agent's Herfindahl-based diversity and settlement score.
  *
  *   HHI       = sum over counterparties of (share_i)^2
  *   diversity = 1 - HHI          (a single counterparty => 0 => score 0)
  *   score     = usdHonored * honored/(honored + 3*failed) * diversity
  *
  * A maker that only ever trades with itself scores ZERO, structurally.
- * Mirrors ProofOfFillScore.computeScore - see docs/SCORE_DESIGN.md.
+ * Mirrors the score contract's computeScore - see docs/SCORE_DESIGN.md.
  */
 export function recomputeScore(agent: Agent, counterpartyIds: Bytes[]): void {
   let total = agent.honoredValueUsd6;
   if (total.equals(ZERO) || counterpartyIds.length == 0) {
     agent.diversityBps = 0;
-    agent.proofOfFillScore = ZERO;
+    agent.settlementScore = ZERO;
     return;
   }
 
@@ -90,10 +90,10 @@ export function recomputeScore(agent: Agent, counterpartyIds: Bytes[]): void {
   let honored = BigInt.fromI32(agent.honoredCount);
   let failed = BigInt.fromI32(agent.failedCount);
   let denom = honored.plus(FAILURE_WEIGHT.times(failed));
-  if (denom.equals(ZERO)) { agent.proofOfFillScore = ZERO; return; }
+  if (denom.equals(ZERO)) { agent.settlementScore = ZERO; return; }
 
   let base = total.div(BigInt.fromI32(1000000));
-  agent.proofOfFillScore = base.times(honored).times(diversityBps).div(denom.times(BPS));
+  agent.settlementScore = base.times(honored).times(diversityBps).div(denom.times(BPS));
 }
 
 export const GLOBAL_ID = "global";

@@ -1,4 +1,4 @@
-# Proof of Fill subgraph.
+# Solvent subgraph: the settlement record and maker balance sheets.
 #
 # The join that makes The Graph load-bearing: an Agent's CLAIMED reputation
 # (ERC-8004 reviews) sits beside its DELIVERED record (Aqua fills). Neither side
@@ -14,7 +14,7 @@ type Agent @entity(immutable: false) {
   honoredValueUsd6: BigInt!        # USD, 6dp
   distinctTakers: Int!
   diversityBps: Int!               # 10000 - HHI, recomputed on every fill
-  proofOfFillScore: BigInt!        # derived off-chain, mirrors ProofOfFillScore.computeScore
+  settlementScore: BigInt!         # derived in-mapping, mirrors the score contract's computeScore
   onChainScore: BigInt!            # last value the attestor actually wrote on-chain
   "--- claimed: ERC-8004 identity + reviews ---"
   agentId: BigInt
