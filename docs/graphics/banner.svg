@@ -1,4 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-28 34 740 194">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" role="img" aria-label="Solvent">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#161b20"/>
+      <stop offset="1" stop-color="#12161a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.52" r="0.55">
+      <stop offset="0" stop-color="#3fd39b" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#3fd39b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="320" rx="10" fill="url(#bg)"/>
+  <rect width="1280" height="320" rx="10" fill="url(#glow)"/>
+  <clipPath id="clip"><rect width="1280" height="320" rx="10"/></clipPath>
+  <g clip-path="url(#clip)">
+    <rect x="0" y="135.0" width="1280" height="185.0" fill="#3fd39b" opacity="0.035"/>
+    <line x1="0" y1="135.0" x2="1280" y2="135.0" stroke="#3fd39b" stroke-width="1.4" opacity="0.28"/>
+  </g>
+  <g transform="translate(428.0 42) scale(0.62)">
   <path transform="translate(0 0)" d="M55.1 105.8L53.3 104.5L51.5 103.3L49.6 102.3L47.6 101.5L45.5 100.9L43.3 100.4L41.2 100.1L39.0 100.0L36.8 100.1L34.7 100.4L32.5 100.9L30.4 101.5L28.4 102.3L26.5 103.3L24.7 104.5L22.9 105.8L21.3 107.3L19.8 108.9L18.5 110.7L17.3 112.5L16.3 114.4L15.5 116.4L14.9 118.5L14.4 120.7L14.1 122.8L14.0 125.0L14.1 127.2L14.4 129.3L14.9 131.5L15.5 133.6L16.3 135.6L17.3 137.5L18.5 139.3L19.8 141.1L21.3 142.7L22.9 144.2L24.7 145.5L26.5 146.7L28.4 147.7L30.4 148.5L32.5 149.1L34.7 149.6L36.8 149.9L39.0 150.0L39.0 150.0L41.2 150.1L43.3 150.4L45.4 150.8L47.5 151.5L49.5 152.3L51.4 153.3L53.2 154.4L54.9 155.7L56.6 157.2L58.0 158.8L59.4 160.5L60.5 162.3L61.5 164.2L62.4 166.2L63.1 168.2L63.6 170.3L63.9 172.5L64.0 174.6L63.9 176.8L63.7 179.0L63.3 181.1L62.6 183.1L61.8 185.2L60.9 187.1L59.8 188.9L58.5 190.7L57.1 192.3L55.5 193.8L53.8 195.1L52.0 196.3L50.1 197.4L48.1 198.3L46.1 199.0L44.0 199.5L41.9 199.8L39.7 200.0L37.6 200.0L35.4 199.7L33.3 199.3L31.2 198.8L29.2 198.0L27.2 197.1L25.4 196.0L23.6 194.7" fill="none" stroke="#eef1f4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
 
   <path d="M190.6 150.0L190.4 152.8L190.1 155.7L189.5 158.4L188.6 161.1L187.5 163.8L186.2 166.3L184.7 168.7L182.9 170.9L181.0 173.0L178.9 174.9L176.7 176.7L174.3 178.2L171.8 179.5L169.1 180.6L166.4 181.5L163.7 182.1L160.8 182.4L158.0 182.6L155.2 182.4L152.3 182.1L149.6 181.5L146.9 180.6L144.2 179.5L141.7 178.2L139.3 176.7L137.1 174.9L135.0 173.0L133.1 170.9L131.3 168.7L129.8 166.3L128.5 163.8L127.4 161.1L126.5 158.4L125.9 155.7L125.6 152.8L125.4 150.0Z" fill="#3fd39b"/>
@@ -13,4 +31,8 @@
   <path transform="translate(516 0)" d="M11.0 140.0L11.1 137.5L11.4 135.0L12.0 132.5L12.7 130.1L13.7 127.7L14.9 125.5L16.2 123.4L17.8 121.4L19.5 119.5L21.4 117.8L23.4 116.2L25.5 114.9L27.7 113.7L30.1 112.7L32.5 112.0L35.0 111.4L37.5 111.1L40.0 111.0L42.5 111.1L45.0 111.4L47.5 112.0L49.9 112.7L52.3 113.7L54.5 114.9L56.6 116.2L58.6 117.8L60.5 119.5L62.2 121.4L63.8 123.4L65.1 125.5L66.3 127.7L67.3 130.1L68.0 132.5L68.6 135.0L68.9 137.5L69.0 140.0L69.0 200.0" fill="none" stroke="#eef1f4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
   <path transform="translate(626 0)" d="M26.0 73.0L26.0 196.0" fill="none" stroke="#eef1f4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
   <path transform="translate(626 0)" d="M2.0 116.0L54.0 116.0" fill="none" stroke="#eef1f4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="640" y="272" text-anchor="middle"
+    font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, monospace"
+    font-size="16.5" letter-spacing="0.04em" fill="#a7b0ba">On-chain market making that never quotes more than it can settle.</text>
 </svg>
