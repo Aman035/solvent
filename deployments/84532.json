@@ -85,7 +85,7 @@
       "deployBlock": 46430246,
       "txHash": "0x5597921577add1fb3235b5feb3f25a0d85ea800e21ce0a11685dff1ae322e77f",
       "verifiedUrl": "https://sepolia.basescan.org/address/0x95908bb174224f085b0f30d6236a46b27c7a6711#code",
-      "note": "Score cache. Attestor writes; ReputationGate reads. Formula: docs/SCORE_DESIGN.md Deployed and verified under its original class name ProofOfFillScore. Superseded by the Solvent-named redeployment."
+      "note": "First-generation score cache, superseded by the SolventScore redeployment."
     },
     "recorderV1": {
       "address": "0x1b6439b8f19e32e806d5a3cac67fdb1d9a91b1c7",

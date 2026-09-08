@@ -2,7 +2,7 @@
 
 The settlement-record layer of Solvent: while the maker books answer "can this maker
 settle what it quotes right now", this score answers "has this counterparty delivered
-before". Implemented in `ProofOfFillScore` on-chain, mirrored bit-exactly by the shared
+before". Implemented in `SolventScore` on-chain, mirrored bit-exactly by the shared
 TS library, and stress-tested by the cost-to-fake harness and the score simulator.
 
 ---

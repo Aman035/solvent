@@ -48,7 +48,7 @@
       {
         "name": "s",
         "type": "tuple",
-        "internalType": "struct ProofOfFillScore.Score",
+        "internalType": "struct SolventScore.Score",
         "components": [
           {
             "name": "honoredValueUsd6",
@@ -162,7 +162,7 @@
       {
         "name": "",
         "type": "tuple",
-        "internalType": "struct ProofOfFillScore.Score",
+        "internalType": "struct SolventScore.Score",
         "components": [
           {
             "name": "honoredValueUsd6",
@@ -261,7 +261,7 @@
       {
         "name": "s",
         "type": "tuple",
-        "internalType": "struct ProofOfFillScore.Score",
+        "internalType": "struct SolventScore.Score",
         "components": [
           {
             "name": "honoredValueUsd6",
@@ -306,7 +306,7 @@
       {
         "name": "ss",
         "type": "tuple[]",
-        "internalType": "struct ProofOfFillScore.Score[]",
+        "internalType": "struct SolventScore.Score[]",
         "components": [
           {
             "name": "honoredValueUsd6",

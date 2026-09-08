@@ -19,7 +19,7 @@ function agentURI(name: string, desc: string, wallet: string) {
     type: "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
     name, description: desc,
     agentWallet: wallet,
-    service: [{ type: "AquaMarketMaker", endpoint: "https://proof-of-fill.example/agent" }],
+    service: [{ type: "AquaMarketMaker", endpoint: "https://solvent.example/agent" }],
   };
   return `data:application/json;base64,${Buffer.from(JSON.stringify(doc)).toString("base64")}`;
 }
