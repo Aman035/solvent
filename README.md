@@ -1,11 +1,6 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/graphics/logo-dark.svg">
-    <img src="docs/graphics/logo-light.svg" width="280" alt="Solvent">
-  </picture>
+  <img src="docs/graphics/banner.svg" alt="Solvent. On-chain market making that never quotes more than it can settle." width="100%">
 </p>
-
-<p align="center"><b>On-chain market making that never quotes more than it can settle.</b></p>
 
 In options, selling what you do not hold is called writing naked. On
 [1inch Aqua](https://github.com/1inch/aqua), every quote can be naked, and neither the
@@ -301,4 +296,4 @@ pnpm dash                                # the ledger
 pnpm demo:run                            # honoured fill · quote-time refusal · broken promise
 ```
 
-<sub>Built on 1inch Aqua. Powered by SwapVM, © Degensoft Ltd 2025. Upstream licences preserved in <code>LICENSES/</code>.</sub>
+<sub>Powered by SwapVM — © Degensoft Ltd 2025. Upstream licences preserved in <code>LICENSES/</code>.</sub>
