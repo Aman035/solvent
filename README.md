@@ -263,9 +263,9 @@ books above are the reason it needs to.
 
 ---
 
-# Project details
+# Project outline
 
-## Project structure
+## Structure
 
 ```
 .
@@ -289,15 +289,71 @@ books above are the reason it needs to.
 └── subgraph/            one schema, four deployments: Sepolia + Base, Arbitrum, Optimism
 ```
 
-## Run it
+## Components
+
+Everything the demo needs is either already deployed or runs locally with one command.
+There is no server to host.
+
+### Contracts, live on Base Sepolia (mainnet coming soon)
+
+All verified on Basescan; full details with tx hashes in
+[`deployments/84532.json`](deployments/84532.json).
+
+| Contract | Address | What it does |
+| --- | --- | --- |
+| SolventRouter | [`0xff00…c608`](https://sepolia.basescan.org/address/0xff00bcc12a34864a3b6e411100bf839ab441c608#code) | SwapVM router carrying the four Solvent instructions; quotes and settles |
+| SolventBook | [`0xe0ac…e9de`](https://sepolia.basescan.org/address/0xe0acc7a4c35a1a1c37d5dbaee1bdedc2ff48e9de#code) | the balance-sheet oracle SolvencyFloor and SolvencySkew read at quote time |
+| SolventScore | [`0x401b…8e4d`](https://sepolia.basescan.org/address/0x401b52d106906cc71c31bf96a278c3cefdf18e4d#code) | settlement-score cache; ReputationGate reads it |
+| SolventRecorder | [`0xffed…1b43b`](https://sepolia.basescan.org/address/0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b#code) | re-emits reverted fills, which destroy their own logs, so the index can see them |
+| Aqua | [`0x525b…b6a2`](https://sepolia.basescan.org/address/0x525bebb9c5b4dad791402923e344b360bf6ab6a2#code) | pinned deployment of official 1inch Aqua, unmodified |
+| SolventHelper | [`0x6fd4…8144`](https://sepolia.basescan.org/address/0x6fd4df8c52f952269437b22c0fa9b63f1b048144#code) | read-only order encoder for the TS clients |
+| ERC-8004 registries | [identity](https://sepolia.basescan.org/address/0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33#code) · [reputation](https://sepolia.basescan.org/address/0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d#code) · [adapter](https://sepolia.basescan.org/address/0x52042cf2a100c2b8cc506cbf400737b3c5147566#code) | agent identity and reviews; the adapter reads the score by agentId |
+| Demo WETH / USDC | [WETH](https://sepolia.basescan.org/address/0x3ac3f85cdbd1ce973cce3e67bc3cf75b79c525c7#code) · [USDC](https://sepolia.basescan.org/address/0x097b80a3a5e9a82c65ef934c3ea402502cdea1af#code) | open-mint faucet tokens, so the demo never depends on testnet liquidity |
+
+### Indexes, live on The Graph
+
+| Subgraph | Watches | Endpoint |
+| --- | --- | --- |
+| solvent-sepolia | the full Sepolia stack: fills, agents, scores, maker books | [query](https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0) |
+| solvent-base | official Aqua on Base mainnet, live maker balance sheets | [query](https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0) |
+| solvent-arbitrum | official Aqua on Arbitrum One | [query](https://api.studio.thegraph.com/query/42912/solvent-arbitrum/v0.2.0) |
+| solvent-optimism | official Aqua on Optimism | [query](https://api.studio.thegraph.com/query/42912/solvent-optimism/v0.2.0) |
+
+The three mainnet indexes are observation-only today: they maintain every real maker's
+promise-vs-backing sheet from ship calldata, rawBalances, and wallet state. When the
+contracts land on Base mainnet, they become the oracle feed.
+
+### Local processes, one command each
+
+| Component | Kind | Run with | Notes |
+| --- | --- | --- | --- |
+| Dashboard | frontend (Vite + React) | `pnpm dash` | localhost:5173; read-only, works with the default `.env` |
+| Attestor | backend keeper | `pnpm attest` · `attest:books` · `attest:failures` | bridges the index into SolventBook and SolventScore; needs the funded mnemonic |
+| Demo agents | scripted maker + taker | `pnpm demo:run` | the three scenarios; `pnpm vignette` for the solvency arc |
+| @solvent/core | shared TS package | nothing to run | program encoder and book/score math, used by everything above |
+| Verify harness | test rig | `pnpm verify:all` | 20 live checks against everything in this table |
+
+## Set up and run locally
+
+Prerequisites: Node 22+, pnpm 9, and Foundry if you want the contract tests.
 
 ```bash
-pnpm install && cp .env.example .env
-pnpm verify:all                          # live checks against the deployment
-pnpm vignette                            # the sequence above, live on Base Sepolia
-pnpm exec tsx scripts/analyze-history.ts # rebuild the mainnet analysis yourself
-pnpm dash                                # the ledger
-pnpm demo:run                            # honoured fill · quote-time refusal · broken promise
+git clone https://github.com/Aman035/solvent && cd solvent
+pnpm install
+cp .env.example .env    # defaults are enough for the dashboard and all read-only paths
 ```
 
-<sub>Built on 1inch Aqua. Upstream licences preserved in <code>LICENSES/</code>. Powered by SwapVM — © Degensoft Ltd 2025.</sub>
+```bash
+pnpm dash                                # the console, on live data
+pnpm exec tsx scripts/analyze-history.ts # rebuild the mainnet analysis yourself
+pnpm test && cd contracts && forge test  # 1009-case differentials, upstream 1inch suites
+```
+
+Sending transactions (the vignette, the demos, the attestor) additionally needs a
+funded Base Sepolia wallet: set `MNEMONIC` in `.env` and run `pnpm fund`.
+
+```bash
+pnpm vignette   # the "watch a position defend itself" sequence, live
+pnpm demo:run   # honoured fill · quote-time refusal · broken promise
+pnpm verify:all # 20 live checks against the deployment
+```
