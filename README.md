@@ -296,4 +296,4 @@ pnpm dash                                # the ledger
 pnpm demo:run                            # honoured fill · quote-time refusal · broken promise
 ```
 
-<sub>Powered by SwapVM — © Degensoft Ltd 2025. Upstream licences preserved in <code>LICENSES/</code>.</sub>
+<sub>Built on 1inch Aqua. Upstream licences preserved in <code>LICENSES/</code>. Powered by SwapVM — © Degensoft Ltd 2025.</sub>
