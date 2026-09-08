@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "types": ["node"],
     "baseUrl": ".",
-    "paths": { "@pof/core": ["packages/core/src/index.ts"] }
+    "paths": { "@solvent/core": ["packages/core/src/index.ts"] }
   },
   "include": ["packages/**/*.ts", "scripts/**/*.ts", "agents/**/*.ts", "services/**/*.ts"]
 }
