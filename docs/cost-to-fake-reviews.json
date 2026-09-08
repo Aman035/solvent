@@ -13,14 +13,14 @@
       "reviewCount": 20,
       "reviewAvgBps": 50000,
       "honoredCount": 0,
-      "proofOfFillScore": "0"
+      "settlementScore": "0"
     },
     {
       "id": "0xccd3ec4f9f4def07ac4a99b28b253e2aec115882",
       "reviewCount": 20,
       "reviewAvgBps": 50000,
       "honoredCount": 14,
-      "proofOfFillScore": "4942"
+      "settlementScore": "4942"
     }
   ],
   "assumptions": {

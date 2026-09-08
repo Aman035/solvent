@@ -13,7 +13,7 @@ real one.
 
 ## The two attacks, side by side
 
-| | Fake **reviews** (ERC-8004) | Fake **fills** (Proof of Fill) |
+| | Fake **reviews** (ERC-8004) | Fake **fills** (Solvent) |
 | --- | --- | --- |
 | What it buys | ★5.00 from 20 reviewers | $2,675 of "delivered" volume |
 | Transactions | 40 | 15 |
@@ -22,7 +22,7 @@ real one.
 | **Capital required** | **$0** | **$45,000** |
 | Prior interaction required | none | a real, settled trade per fill |
 | Stake required | none | the entire inventory, held throughout |
-| Resulting Proof-of-Fill score | **0** | 1780 |
+| Resulting settlement score | **0** | 1780 |
 
 ### The finding
 
@@ -74,6 +74,6 @@ real inventory routed through each — while only partially lifting the cap.
 4. **Capital is recoverable.** A wash trader gets its inventory back, minus fees and gas.
    The cost is opportunity cost and exposure, not destruction.
 
-The honest claim is narrow and defensible: **Proof of Fill moves the cost of a fake
+The honest claim is narrow and defensible: **Solvent moves the cost of a fake
 reputation from approximately zero to approximately the capital you must genuinely put at
 risk — and it makes the shape of a fake (counterparty concentration) directly measurable.**

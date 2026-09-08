@@ -113,7 +113,7 @@ function Row({ a, maxUsd, onOpen }: { a: Agent; maxUsd: number; onOpen: () => vo
         <div className="sub">
           {a.honoredCount} cleared{a.failedCount > 0 && <span className="bad"> · {a.failedCount} returned</span>}
         </div>
-        <div className="score">score <b>{Number(a.proofOfFillScore).toLocaleString()}</b></div>
+        <div className="score">score <b>{Number(a.settlementScore).toLocaleString()}</b></div>
       </div>
       <Stamp a={a} />
     </div>
@@ -168,7 +168,7 @@ function Drawer({ a, onClose }: { a: Agent; onClose: () => void }) {
             <div>Fills returned</div><div style={{ color: a.failedCount ? "var(--returned)" : undefined }}>{a.failedCount}</div>
             <div>Distinct counterparties</div><div>{a.distinctTakers}</div>
             <div>Counterparty diversity</div><div>{(a.diversityBps / 100).toFixed(2)}%</div>
-            <div>Proof-of-Fill score</div><div>{a.proofOfFillScore}</div>
+            <div>Settlement score</div><div>{a.settlementScore}</div>
             <div>On-chain score</div><div>{a.onChainScore}</div>
           </div>
         </section>

@@ -41,7 +41,7 @@ export interface Agent {
   reviewCount: number; reviewAvgBps: number;
   honoredCount: number; failedCount: number; honoredValueUsd6: string;
   distinctTakers: number; diversityBps: number;
-  proofOfFillScore: string; onChainScore: string;
+  settlementScore: string; onChainScore: string;
   reviews: Review[]; counterparties: Counterparty[]; strategies: Strategy[];
 }
 export interface Fill {
@@ -61,9 +61,9 @@ export interface Snapshot {
 const QUERY = `{
   _meta { block { number } hasIndexingErrors }
   global(id: "global") { totalFills totalHonored totalFailed totalValueUsd6 lastBlock }
-  agents(where: { or: [{ reviewCount_gt: 0 }, { honoredCount_gt: 0 }] }, orderBy: proofOfFillScore, orderDirection: desc) {
+  agents(where: { or: [{ reviewCount_gt: 0 }, { honoredCount_gt: 0 }] }, orderBy: settlementScore, orderDirection: desc) {
     id agentId reviewCount reviewAvgBps honoredCount failedCount honoredValueUsd6
-    distinctTakers diversityBps proofOfFillScore onChainScore
+    distinctTakers diversityBps settlementScore onChainScore
     reviews(first: 40) { id reviewer value txHash }
     counterparties(first: 40) { taker fillCount valueUsd6 }
     strategies(where: { active: true }, first: 5) { id active hasReputationGate hasPriceAdjuster shippedTx program }

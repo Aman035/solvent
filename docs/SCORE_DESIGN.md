@@ -1,4 +1,4 @@
-# Proof-of-Fill Score — Design
+# The settlement score
 
 The settlement-record layer of Solvent: while the maker books answer "can this maker
 settle what it quotes right now", this score answers "has this counterparty delivered
