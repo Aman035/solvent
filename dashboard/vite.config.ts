@@ -6,12 +6,15 @@ export default defineConfig(({ mode }) => {
   // read the repo-root .env so the dashboard uses the same live endpoints as the agents
   const env = loadEnv(mode, resolve(__dirname, ".."), "");
   return {
+    // GitHub Pages serves the app under /solvent/
+    base: env.DASH_BASE ?? "/",
     plugins: [react()],
     server: { port: 5173 },
     define: {
       __SUBGRAPH_URL__: JSON.stringify(env.SUBGRAPH_URL ?? ""),
       __SUBGRAPH_URL_BASE__: JSON.stringify(env.SUBGRAPH_URL_BASE ?? ""),
-      __RPC_URL__: JSON.stringify(env.BASE_SEPOLIA_RPC ?? "https://sepolia.base.org"),
+      // public RPC only: this value is baked into a published bundle, never a keyed URL
+      __RPC_URL__: JSON.stringify(env.DASH_RPC ?? "https://sepolia.base.org"),
       __EXPLORER__: JSON.stringify("https://sepolia.basescan.org"),
       __STUDIO__: JSON.stringify("https://thegraph.com/studio/subgraph/solvent-sepolia"),
     },

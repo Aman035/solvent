@@ -7,6 +7,7 @@ import costWash from "../../docs/cost-to-fake.json";
 import costRev from "../../docs/cost-to-fake-reviews.json";
 import manifest from "../../deployments/84532.json";
 import { SepoliaBooks, MainnetBooks, registerSepoliaTokens } from "./Solvency";
+import { Desk } from "./Desk";
 
 registerNames({
   [manifest.contracts["agentId.alice"]?.address ?? ""]: "Alice",
@@ -20,8 +21,9 @@ registerSepoliaTokens({
   [manifest.contracts.usdc.address]: { symbol: "USDC", decimals: 6 },
 });
 
-type Tab = "books" | "mainnet" | "ledger";
+type Tab = "desk" | "books" | "mainnet" | "ledger";
 const TABS: { id: Tab; name: string; tag: string }[] = [
+  { id: "desk", name: "Quote desk", tag: "pull a real quote · drain the wallet · watch it refuse" },
   { id: "books", name: "Balance sheets", tag: "Base Sepolia · quotes read these" },
   { id: "mainnet", name: "Mainnet", tag: "1inch Aqua on Base · live" },
   { id: "ledger", name: "Settlement ledger", tag: "claimed vs delivered" },
@@ -256,7 +258,7 @@ export default function App() {
   const lag = snap ? snap.chainHead - snap.head : 0;
   const opened = snap?.agents.find((a) => a.id === open) ?? null;
 
-  const [tab, setTab] = useState<Tab>("books");
+  const [tab, setTab] = useState<Tab>("desk");
 
   return (
     <div className="shell">
@@ -284,6 +286,7 @@ export default function App() {
         <a href={STUDIO} target="_blank" rel="noreferrer">The Graph ↗</a>
       </div>
 
+      {tab === "desk" && <Desk />}
       {tab === "books" && <SepoliaBooks />}
       {tab === "mainnet" && <MainnetBooks />}
 
