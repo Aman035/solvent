@@ -7,6 +7,7 @@ import costWash from "../../docs/cost-to-fake.json";
 import costRev from "../../docs/cost-to-fake-reviews.json";
 import manifest from "../../deployments/84532.json";
 import { SepoliaBooks, MainnetBooks, registerSepoliaTokens } from "./Solvency";
+import { useAccount } from "wagmi";
 import { Desk } from "./Desk";
 import { HowItWorks } from "./HowItWorks";
 import { Landing } from "./Landing";
@@ -204,6 +205,8 @@ function Drawer({ a, onClose }: { a: Agent; onClose: () => void }) {
 }
 
 function Fills({ fills, seen }: { fills: Fill[]; seen: Set<string> }) {
+  const { address } = useAccount();
+  const you = address?.toLowerCase();
   if (fills.length === 0) return <div className="empty">No settlement activity yet.</div>;
   return (
     <>
@@ -211,7 +214,7 @@ function Fills({ fills, seen }: { fills: Fill[]; seen: Set<string> }) {
         <div key={f.id} className={`fill ${f.status === "HONORED" ? "honored" : "failed"}${seen.has(f.id) ? "" : " new"}`}>
           <span className="t">{ago(f.timestamp)}</span>
           <span>
-            {nameOf(f.maker.id)} <span style={{ color: "var(--text-3)" }}>→</span> {nameOf(f.taker.id)}
+            {nameOf(f.maker.id)} <span style={{ color: "var(--text-3)" }}>→</span> {you && f.taker.id.toLowerCase() === you ? <b>you</b> : nameOf(f.taker.id)}
           </span>
           <span className="amt">
             {f.status === "HONORED" ? `$${usd(f.valueUsd6, 0)}` : "—"}

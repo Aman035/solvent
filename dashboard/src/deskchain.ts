@@ -80,7 +80,7 @@ export function explainRevert(e: unknown): string {
     if (typeof c.data === "string" && c.data.startsWith("0x") && c.data.length >= 10) data = c.data;
   if (data) {
     try {
-      const d = decodeErrorResult({ abi: KNOWN_ERRS, data: data as Hex });
+      const d = decodeErrorResult({ abi: KNOWN_ERRS, data: data as Hex }) as unknown as { errorName: string; args?: readonly unknown[] };
       if (d.errorName === "MakerBeyondSolvencyFloor")
         return `declined by SolvencyFloor: book ${(Number(d.args![2]) / 100).toFixed(1)}% utilised, floor ${(Number(d.args![3]) / 100).toFixed(0)}%`;
       if (d.errorName === "TakerBelowReputationFloor")
