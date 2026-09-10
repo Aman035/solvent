@@ -624,3 +624,19 @@ html { scroll-behavior: smooth; }
 .table-dim { opacity: 0.4; pointer-events: none; transition: opacity 0.25s ease; }
 .ago { font-family: var(--mono); font-size: 10.5px; color: var(--text-3); display: inline-flex; align-items: center; gap: 7px; }
 @media (prefers-reduced-motion: reduce) { .loadbar::after { animation: none; width: 100%; left: 0; } }
+
+/* ---- the guided story ------------------------------------------------------ */
+.flowline { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 4px 0 14px; }
+.flowline span { font-size: 10.5px; letter-spacing: 0.05em; border: 1px solid var(--rule-lit); border-radius: 999px; padding: 5px 12px; color: var(--text-2); background: #fff; }
+.flowline i { font-style: normal; color: var(--text-3); }
+.scenes { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.scenes button {
+  font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: pointer;
+  background: #fff; border: 1px solid var(--rule); border-radius: 999px; padding: 9px 18px;
+  color: var(--text-3); transition: all .18s;
+}
+.scenes button:hover { color: var(--text); border-color: var(--rule-lit); }
+.scenes button.on { background: var(--text); border-color: var(--text); color: #fff; }
+.scene-cap { max-width: 74ch; font-size: 13.5px; line-height: 1.65; color: var(--text-2); margin: 0 0 16px; min-height: 3.2em; }
+/* the vessel breathes between scenes */
+.vessel rect, .vessel circle, .vessel line, .vessel path { transition: all 0.65s var(--ease-out); }

@@ -56,10 +56,10 @@ function Vessel({ committed, live, value, onChange }: {
       <rect x="37" y={yLiquid} width={W - 74} height="2.5" fill="var(--delivered)" />
       {/* floor: refuse below this level */}
       <line x1="16" x2={W - 16} y1={yFloor} y2={yFloor} stroke="var(--returned)" strokeWidth="1.3" />
-      <text x="16" y={yFloor - 6} className="v-label red">floor · refuse below</text>
+      <text x={W - 16} y={yFloor - 7} textAnchor="end" className="v-label red">floor · refuse below</text>
       {/* the promise */}
       <line x1="16" x2={W - 16} y1={yPromise} y2={yPromise} stroke="var(--claimed)" strokeDasharray="5 4" strokeWidth="1.2" />
-      <text x={W - 16} y={yPromise + 14} textAnchor="end" className="v-label">promised</text>
+      <text x="16" y={yPromise + 14} className="v-label">promised</text>
       {/* live marker */}
       <path d={`M 18 ${yFor(live)} l 9 -5.5 v 11 z`} fill="var(--link)" />
       {/* drag handle */}
@@ -148,6 +148,15 @@ export function Desk() {
     return () => { alive = false; };
   }, [strategy, usdcIn, book]);
 
+  const [scene, setScene] = useState<number | null>(0);
+  const backingForUtil = (utilBps: bigint) => book ? (book.committed * 10_000n) / utilBps : 0n;
+  const pickScene = (i: number) => {
+    setScene(i);
+    if (!book) return;
+    if (i === 0) setDragged(null);
+    if (i === 1) setDragged(backingForUtil(8_700n));
+    if (i === 2) setDragged(backingForUtil(9_900n));
+  };
   const backing = dragged ?? book?.backing ?? 0n;
   const sim = strategy && book && usdcIn > 0n ? simulateQuote(strategy, usdcIn, backing, book.committed) : null;
   const simUtil = book ? utilisationBps(book.committed, backing) : 0;
@@ -161,16 +170,19 @@ export function Desk() {
     <div className="mainnet-intro">
       <h2>Drain the wallet. Watch the book say no.</h2>
       <p>
-        Three live strategies on Base Sepolia share one maker wallet. The quote on the
-        right comes from the deployed router while you watch. Drag the wallet level
-        down and the same book widens its spread on its own, then refuses past the
-        floor - the exact failure mainnet makers have today, defended automatically.
+        The setup: one maker wallet on Base Sepolia backs three quoting strategies at
+        once, exactly how real Aqua makers run. The wallet's balance sheet flows into
+        every quote:
       </p>
+      <div className="flowline num">
+        <span>maker wallet</span><i>→</i><span>The Graph index</span><i>→</i><span>on-chain oracle</span><i>→</i><span>every quote</span>
+      </div>
+      <p>Step through what happens as that wallet drains, or drag it yourself:</p>
     </div>
     <section className="desk">
       <div className="desk-side">
         <div className="label" style={{ marginBottom: 8 }}>The maker's wallet</div>
-        <Vessel committed={book.committed} live={book.backing} value={backing} onChange={setDragged} />
+        <Vessel committed={book.committed} live={book.backing} value={backing} onChange={(b) => { setScene(null); setDragged(b); }} />
         <div className="vessel-readout">
           <b className={simUtil >= 9_500 ? "bad" : ""}>{utilLabel(simUtil)}</b>
           <span className="label">utilised · {fmtWeth(backing)} WETH</span>
@@ -186,6 +198,17 @@ export function Desk() {
       </div>
 
       <div className="desk-main">
+        <div className="scenes">
+          {["1 · Healthy", "2 · The wallet drains", "3 · Past the floor"].map((t, i) => (
+            <button key={t} className={scene === i ? "on" : ""} onClick={() => pickScene(i)}>{t}</button>
+          ))}
+        </div>
+        <p className="scene-cap">
+          {scene === 0 && `The wallet holds ${fmtWeth(book.backing)} WETH against ${fmtWeth(book.committed)} WETH promised across the three books. Plenty of backing, so the router quotes the normal price.`}
+          {scene === 1 && "The maker moves inventory elsewhere. Aqua itself would not notice - the quote would stay frozen at the stale price. Solvent's oracle sees the thinner wallet, and the same book widens its own spread: compare the two quotes below."}
+          {scene === 2 && "Past the 95% floor the book stops quoting entirely, with a reason. A taker or aggregator sees the refusal for free, instead of paying gas to discover an empty wallet."}
+          {scene === null && "Sandbox: you set the wallet level. LIVE is the router's real answer at the current on-chain level; the right cell recomputes the quote at your hypothetical level with the contract's own formulas."}
+        </p>
         <div className="ticket">
           <div className="ticket-row strat-row">
             {strategies.map((s, i) => (
