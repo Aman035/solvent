@@ -2,7 +2,7 @@ name: Attest books
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 concurrency:
@@ -23,8 +23,13 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Sync maker books into SolventBook
-        run: pnpm attest:books
+      - name: Sync maker books into SolventBook (4x, ~every 60s)
+        # GitHub's cron floor is 5 minutes; looping inside the job gives ~1-minute freshness
+        run: |
+          for i in 1 2 3 4; do
+            pnpm attest:books
+            [ "$i" != "4" ] && sleep 60
+          done
         env:
           # the attestor's own key - ATTESTOR_ROLE only, cannot touch any other wallet
           ATTESTOR_PK: ${{ secrets.ATTESTOR_PK }}
