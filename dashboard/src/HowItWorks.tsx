@@ -45,44 +45,56 @@ function Lane({ title, sub, nodes, narrow }: { title: string; sub: string; nodes
 export function HowItWorks() {
   return (
     <section className="arch">
-      <div className="mainnet-intro">
-        <h2>What is actually deployed.</h2>
-        <p>
-          Two loops make the product. A pipeline keeps a live balance sheet for every
-          maker; two instructions read it inside every quote. Every box below is real:
-          contracts link to verified source, services to their public logs.
-        </p>
+      <div className="arch-head">
+        <div className="mainnet-intro">
+          <h2>What is actually deployed.</h2>
+          <p>
+            Solvent is two loops around one oracle. A continuous pipeline maintains a
+            live balance sheet for every maker; a pair of SwapVM instructions read that
+            sheet inside every quote. Nothing here is a diagram of intent: each
+            component links to its verified source or its public logs.
+          </p>
+        </div>
+        <aside className="legend">
+          <span className="label">Reading the map</span>
+          <div className="legend-row"><span className="gtag onchain">on-chain</span><span>a deployed contract, source verified on Basescan</span></div>
+          <div className="legend-row"><span className="gtag service">service</span><span>off-chain infrastructure with public, auditable logs</span></div>
+          <div className="legend-row"><span className="gtag actor">actor</span><span>any wallet; no permission or registration required</span></div>
+          <div className="legend-row"><i className="legend-pivot" /><span>green border marks the shared oracle, written by one loop and read by the other</span></div>
+        </aside>
       </div>
 
       <Lane
-        title="The pipeline · keeping the oracle honest"
-        sub="continuous · about once a minute"
+        title="Maintaining the oracle"
+        sub="continuous · roughly once a minute"
         nodes={[
-          { name: "Maker wallet", role: "holds the tokens; never deposits", kind: "actor" },
-          { name: "1inch Aqua", role: "records the promises · ship, pull, push, dock", kind: "onchain", addr: C.aqua.address },
-          { name: "The Graph index", role: "rebuilds each maker's book from events", kind: "service", href: `${SUBGRAPH_URL}/graphql`, tag: "playground" },
-          { name: "Keeper", role: "re-reads every wallet, writes only what changed", kind: "service", href: "https://github.com/Aman035/solvent/actions/workflows/attest.yml", tag: "public runs" },
-          { name: "SolventBook", role: "the on-chain balance-sheet oracle", kind: "onchain", addr: C.solventBook.address, pivot: true },
+          { name: "Maker wallet", role: "holds all inventory; nothing is ever deposited", kind: "actor" },
+          { name: "1inch Aqua", role: "registers each strategy's promised balances", kind: "onchain", addr: C.aqua.address },
+          { name: "The Graph index", role: "reconstructs every maker's book from primary events", kind: "service", href: `${SUBGRAPH_URL}/graphql`, tag: "query playground" },
+          { name: "Keeper", role: "verifies each wallet against the chain, writes only the differences", kind: "service", href: "https://github.com/Aman035/solvent/actions/workflows/attest.yml", tag: "run history" },
+          { name: "SolventBook", role: "the balance-sheet oracle: promised and settleable, per maker, per token", kind: "onchain", addr: C.solventBook.address, pivot: true },
         ]}
       />
 
       <Lane
-        title="The quote · where the oracle bites"
-        sub="at call time · one eth_call, no trust needed"
-        narrow
+        title="Serving the quote"
+        sub="per call · a single eth_call, trustless"
         nodes={[
-          { name: "Taker", role: "asks the router for a price", kind: "actor" },
-          { name: "SolventRouter", role: "runs the strategy's SwapVM program", kind: "onchain", addr: C.router.address },
-          { name: "Floor + Skew", role: "read SolventBook: widen the spread, or refuse with a reason", kind: "onchain", addr: C.router.address, pivot: true },
-          { name: "Settlement", role: "Aqua pulls tokens straight from the maker's wallet", kind: "onchain", addr: C.aqua.address },
+          { name: "Taker", role: "requests a price; an EOA, a bot, or an aggregator route", kind: "actor" },
+          { name: "SolventRouter", role: "executes the strategy's SwapVM program instruction by instruction", kind: "onchain", addr: C.router.address },
+          { name: "SolvencyFloor + Skew", role: "consult the oracle mid-program: widen the spread, or decline with a stated reason", kind: "onchain", addr: C.router.address, pivot: true },
+          { name: "Settlement", role: "on execution, Aqua pulls tokens directly from the maker's wallet", kind: "onchain", addr: C.aqua.address },
         ]}
       />
 
-      <p className="arch-foot">
-        The green nodes are the same contract: the oracle the pipeline maintains is the
-        oracle every quote reads. Break the link anywhere and quotes simply refuse -
-        the failure mode is a declined quote, never a phantom fill.
-      </p>
+      <div className="arch-foot">
+        <span className="label">Failure mode</span>
+        <p>
+          The system fails closed. If the pipeline stalls anywhere, protected books read
+          a stale sheet and err toward refusal: <b>the worst outcome is a declined
+          quote, never a phantom fill.</b>
+        </p>
+      </div>
     </section>
   );
 }
