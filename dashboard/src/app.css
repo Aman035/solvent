@@ -546,3 +546,32 @@ html { scroll-behavior: smooth; }
   .exhibit-wrap { transform: none; }
   .timeline { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---- the three causes ------------------------------------------------------ */
+.causes { margin-top: 24px; }
+.cause { display: flex; gap: 16px; align-items: baseline; padding: 13px 2px; border-top: 1px solid var(--rule); }
+.cause:last-child { border-bottom: 1px solid var(--rule); }
+.cause i { font-style: normal; font-size: 11px; color: var(--text-3); flex: none; }
+.cause span { font-size: 13.5px; line-height: 1.6; color: var(--text-2); }
+.cause b { color: var(--text); font-weight: 600; }
+
+/* exhibit: caption sub, staggered row deal-in, straighten on hover */
+.exhibit-head { display: flex; flex-direction: column; gap: 3px; padding-bottom: 12px; }
+.exhibit-sub { font-size: 11px; color: var(--text-3); }
+.exhibit-wrap { transition: transform 0.45s var(--ease-out); }
+.exhibit-wrap:hover { transform: rotate(0deg); }
+.exhibit > .exhibit-row:not(.head), .exhibit > .exhibit-sum, .exhibit > .exhibit-live {
+  opacity: 0; transform: translateX(16px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.reveal.in .exhibit > .exhibit-row:nth-child(3) { transition-delay: 0.25s; }
+.reveal.in .exhibit > .exhibit-row:nth-child(4) { transition-delay: 0.4s; }
+.reveal.in .exhibit > .exhibit-row:nth-child(5) { transition-delay: 0.55s; }
+.reveal.in .exhibit > .exhibit-sum { transition-delay: 0.75s; }
+.reveal.in .exhibit > .exhibit-live { transition-delay: 0.95s; }
+.reveal.in .exhibit > .exhibit-row:not(.head), .reveal.in .exhibit > .exhibit-sum, .reveal.in .exhibit > .exhibit-live {
+  opacity: 1; transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .exhibit > * { opacity: 1 !important; transform: none !important; }
+}

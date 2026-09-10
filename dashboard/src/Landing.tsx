@@ -203,19 +203,21 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
           <h2>One wallet, many promises, and nothing checking.</h2>
           <p>
             1inch Aqua lets makers quote without depositing: strategies promise virtual
-            balances while the tokens stay in the maker's wallet. Nothing sums those
-            promises, and quoting never reads the wallet. So the wallet drains, the
+            balances while the tokens stay in the maker's wallet. The wallet drains, the
             quotes hold still, and the first taker to trust one buys a revert.
           </p>
-          <p>
-            We rebuilt every maker's balance sheet in Aqua's history, on three chains,
-            from primary events. The worst offenders were not dust, and they were not
-            brief.
-          </p>
+          <div className="causes">
+            <div className="cause"><i className="num">01</i><span><b>Nothing sums the promises.</b> One wallet quietly backs many strategies at once.</span></div>
+            <div className="cause"><i className="num">02</i><span><b>Quotes never read the wallet.</b> Prices stand still while the backing walks away.</span></div>
+            <div className="cause"><i className="num">03</i><span><b>The remedy is manual.</b> The prescribed fix is a maker watching, and docking by hand.</span></div>
+          </div>
         </Reveal>
         <Reveal className="exhibit-wrap" delay={0.15}>
           <figure className="exhibit">
-            <figcaption className="exhibit-head label">Exhibit · Aqua mainnet, six weeks</figcaption>
+            <figcaption className="exhibit-head">
+              <span className="label">Exhibit · Aqua mainnet, six weeks</span>
+              <span className="exhibit-sub">rebuilt from primary events, on three chains</span>
+            </figcaption>
             <div className="exhibit-row head label">
               <span>maker</span><span>book</span><span>advertised</span><span>held</span>
             </div>
