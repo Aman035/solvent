@@ -59,7 +59,7 @@ function utilLabel(b: MakerBook): string {
   return `${(u / 100).toFixed(1)}%`;
 }
 
-function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; floorBps: number | null }) {
+function BookRow({ b, explorer, floorBps, index = 0 }: { b: MakerBook; explorer: string; floorBps: number | null; index?: number }) {
   const meta = tokenMeta(b.token);
   const u = Number(b.utilisationBps);
   const inf = u === 0xffffffff;
@@ -69,7 +69,7 @@ function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; fl
   const pastFloor = floorBps !== null && u >= floorBps;
 
   return (
-    <div className="book">
+    <div className="book row-in" style={{ "--i": index } as never}>
       <a className="book-maker" href={`${explorer}/address/${b.maker}`} target="_blank" rel="noreferrer">
         {nameOf(b.maker)}
       </a>
@@ -130,21 +130,29 @@ export function SepoliaBooks() {
     <section className="books">
       {err && <div className="err">Subgraph unreachable - {err}</div>}
       <div className="mainnet-intro">
-        <h2>The balance sheet the quotes read.</h2>
+        <h2>Every maker, measured.</h2>
         <p>
-          Every maker on our Sepolia deployment, promised against what their wallet can
-          settle. The attestor writes these sheets into the on-chain oracle, and the
-          SolvencySkew and SolvencyFloor instructions read them inside every quote.
+          The sheets below are the quote desk's source of truth: each maker's promises
+          against what their wallet can settle, kept live by the index and written
+          on-chain by the attestor. When a quote widened or refused on the desk, this
+          is the number it read.
         </p>
       </div>
       <div className="books-head">
-        <Ago t={updatedAt} />
+        <div className="books-stats">
+          <span className="stat"><span className="label">Makers</span><b>{new Set(books.map((x) => x.maker)).size}</b></span>
+          <span className="stat"><span className="label">Books</span><b>{books.length}</b></span>
+          <span className="stat"><span className="label">Over-committed</span>
+            <b style={{ color: books.some((x) => Number(x.utilisationBps) > 10_000) ? "var(--returned)" : undefined }}>
+              {books.filter((x) => Number(x.utilisationBps) > 10_000).length}</b></span>
+          <Ago t={updatedAt} />
+        </div>
       </div>
       {loading && <div className="loadbar" />}
       <div className={loading ? "table-dim" : undefined}>
         <BookHeader />
-        {books.map((b) => (
-          <BookRow key={b.maker + b.token} b={b} explorer="https://sepolia.basescan.org" floorBps={9_500} />
+        {books.map((b, i) => (
+          <BookRow key={b.maker + b.token} b={b} index={i} explorer="https://sepolia.basescan.org" floorBps={9_500} />
         ))}
       </div>
       {snap && books.length === 0 && <div className="empty" style={{ padding: 40 }}>No books yet - run pnpm vignette.</div>}
@@ -223,8 +231,8 @@ export function MainnetBooks() {
       {err && <div className="err">{chain.key} subgraph unreachable - {err}</div>}
       <div className={loading ? "table-dim" : undefined}>
         <BookHeader />
-        {worst.map((b) => (
-          <BookRow key={b.maker + b.token} b={b} explorer={chain.explorer} floorBps={null} />
+        {worst.map((b, i) => (
+          <BookRow key={b.maker + b.token} b={b} index={i} explorer={chain.explorer} floorBps={null} />
         ))}
       </div>
     </section>

@@ -177,12 +177,15 @@ export async function liveQuote(s: DeskStrategy, usdcIn: bigint, taker: Hex = PR
   }
 }
 
-/** The maker's live WETH book from the on-chain oracle. */
-export async function liveBook(): Promise<{ committed: bigint; backing: bigint }> {
-  const b = await pc.readContract({
-    address: ADDR.book, abi: BOOK_ABI, functionName: "bookOf", args: [MAKER, ADDR.weth],
-  }) as { committed: bigint; backing: bigint };
-  return { committed: b.committed, backing: b.backing };
+/** The maker's WETH book: oracle numbers plus the wallet's balance read live. */
+export async function liveBook(): Promise<{ committed: bigint; backing: bigint; wallet: bigint }> {
+  const [b, wallet] = await Promise.all([
+    pc.readContract({
+      address: ADDR.book, abi: BOOK_ABI, functionName: "bookOf", args: [MAKER, ADDR.weth],
+    }) as Promise<{ committed: bigint; backing: bigint }>,
+    pc.readContract({ address: ADDR.weth, abi: ERC20_ABI, functionName: "balanceOf", args: [MAKER] }),
+  ]);
+  return { committed: b.committed, backing: b.backing, wallet };
 }
 
 // ── the mirror math: bit-exact ports of the contract formulas ────────────────

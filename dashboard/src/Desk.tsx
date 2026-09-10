@@ -5,6 +5,9 @@ import {
   simulateQuote, utilisationBps, widenFor, U32_MAX, type DeskStrategy, type QuoteResult,
 } from "./deskchain";
 import { short } from "./data";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useWalletClient, useSwitchChain } from "wagmi";
+import { baseSepolia } from "wagmi/chains";
 
 /**
  * The quote desk: pull real quotes out of the deployed router with no wallet, and
@@ -20,8 +23,8 @@ const px = (usdcIn: bigint, out: bigint) =>
 function utilLabel(u: number) { return u === U32_MAX ? "∞" : `${(u / 100).toFixed(1)}%`; }
 
 // ── the vessel: drag the liquid, drain the wallet ───────────────────────────
-function Vessel({ committed, live, value, onChange }: {
-  committed: bigint; live: bigint; value: bigint; onChange: (b: bigint) => void;
+function Vessel({ committed, live, value, onChange, glide }: {
+  committed: bigint; live: bigint; value: bigint; onChange: (b: bigint) => void; glide: boolean;
 }) {
   const ref = useRef<SVGSVGElement>(null);
   const H = 340, W = 190, top = 30, bot = H - 30;
@@ -45,7 +48,7 @@ function Vessel({ committed, live, value, onChange }: {
   }, [onChange]);
 
   return (
-    <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className="vessel"
+    <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={`vessel${glide ? " glide" : ""}`}
       onPointerDown={(e) => { (e.target as Element).setPointerCapture?.(e.pointerId); drag(e); }}
       onPointerMove={drag} role="slider" aria-label="wallet backing"
       aria-valuenow={Number(formatUnits(value, 18))}>
@@ -69,53 +72,54 @@ function Vessel({ committed, live, value, onChange }: {
 }
 const bigMax = (a: bigint, b: bigint) => (a > b ? a : b);
 
-// ── wallet: the optional "take it" path ─────────────────────────────────────
-type Eip1193 = { request: (a: { method: string; params?: unknown[] }) => Promise<unknown> };
-declare global { interface Window { ethereum?: Eip1193 } }
-
+// ── wallet: the "take it" path, through the connected wallet ───────────────
 function useTaker(strategy: DeskStrategy | null, usdcIn: bigint, onDone: () => void) {
+  const { address, chainId, isConnected } = useAccount();
+  const { data: wc } = useWalletClient();
+  const { switchChainAsync } = useSwitchChain();
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
   const [msg, setMsg] = useState("");
   const [tx, setTx] = useState<string | null>(null);
 
+  const [myUsdc, setMyUsdc] = useState<bigint | null>(null);
+  useEffect(() => {
+    let alive = true;
+    if (!address) { setMyUsdc(null); return; }
+    const load = () => pc.readContract({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "balanceOf", args: [address] })
+      .then((b) => alive && setMyUsdc(b)).catch(() => {});
+    load();
+    const h = setInterval(load, 12_000);
+    return () => { alive = false; clearInterval(h); };
+  }, [address, state]);
+
   const take = async () => {
-    if (!window.ethereum || !strategy) return;
+    if (!wc || !address || !strategy) return;
     setState("busy"); setTx(null);
     try {
-      const eth = window.ethereum;
-      const [from] = await eth.request({ method: "eth_requestAccounts" }) as string[];
-      try {
-        await eth.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x14a34" }] });
-      } catch {
-        await eth.request({ method: "wallet_addEthereumChain", params: [{
-          chainId: "0x14a34", chainName: "Base Sepolia",
-          nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-          rpcUrls: ["https://sepolia.base.org"], blockExplorerUrls: ["https://sepolia.basescan.org"],
-        }] });
+      if (chainId !== baseSepolia.id) {
+        setMsg("switching to Base Sepolia…");
+        await switchChainAsync({ chainId: baseSepolia.id });
       }
-      const send = async (to: Hex, data: Hex, label: string) => {
+      const send = async (req: Parameters<typeof wc.writeContract>[0], label: string) => {
         setMsg(label);
-        const h = await eth.request({ method: "eth_sendTransaction", params: [{ from, to, data }] }) as Hex;
+        const h = await wc.writeContract(req);
         await pc.waitForTransactionReceipt({ hash: h });
         return h;
       };
-      const { encodeFunctionData } = await import("viem");
-      const bal = await pc.readContract({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "balanceOf", args: [from as Hex] });
+      const bal = await pc.readContract({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "balanceOf", args: [address] });
       if (bal < usdcIn)
-        await send(ADDR.usdc, encodeFunctionData({ abi: ERC20_ABI, functionName: "mint", args: [from as Hex, usdcIn] }), "minting demo USDC (open faucet)…");
-      const alw = await pc.readContract({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "allowance", args: [from as Hex, ADDR.router] });
+        await send({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "mint", args: [address, usdcIn], chain: baseSepolia, account: address }, "minting demo USDC (open faucet)…");
+      const alw = await pc.readContract({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "allowance", args: [address, ADDR.router] });
       if (alw < usdcIn)
-        await send(ADDR.usdc, encodeFunctionData({ abi: ERC20_ABI, functionName: "approve", args: [ADDR.router, usdcIn] }), "approving the router…");
-      const td = await takerData(from as Hex);
-      const h = await send(ADDR.router,
-        encodeFunctionData({ abi: ROUTER_ABI, functionName: "swap", args: [strategy.order, usdcIn, td] as never }),
-        "swapping…");
+        await send({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "approve", args: [ADDR.router, usdcIn], chain: baseSepolia, account: address }, "approving the router…");
+      const td = await takerData(address);
+      const h = await send({ address: ADDR.router, abi: ROUTER_ABI, functionName: "swap", args: [strategy.order, usdcIn, td] as never, chain: baseSepolia, account: address }, "swapping…");
       setTx(h); setState("done"); setMsg("filled - WETH pulled straight from the maker's wallet"); onDone();
     } catch (e) {
-      setState("error"); setMsg((e as Error).message?.slice(0, 90) ?? "failed");
+      setState("error"); setMsg((e as Error).message?.split("\n")[0]?.slice(0, 90) ?? "failed");
     }
   };
-  return { take, state, msg, tx, available: typeof window !== "undefined" && !!window.ethereum };
+  return { take, state, msg, tx, connected: isConnected, myUsdc };
 }
 
 // ── the desk ────────────────────────────────────────────────────────────────
@@ -123,7 +127,7 @@ export function Desk() {
   const [strategies, setStrategies] = useState<DeskStrategy[]>([]);
   const [sel, setSel] = useState(0);
   const [amount, setAmount] = useState("500");
-  const [book, setBook] = useState<{ committed: bigint; backing: bigint } | null>(null);
+  const [book, setBook] = useState<{ committed: bigint; backing: bigint; wallet: bigint } | null>(null);
   const [dragged, setDragged] = useState<bigint | null>(null);
   const [live, setLive] = useState<QuoteResult | null>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -149,21 +153,33 @@ export function Desk() {
   }, [strategy, usdcIn, book]);
 
   const [scene, setScene] = useState<number | null>(0);
+  const [glide, setGlide] = useState(false);
   const backingForUtil = (utilBps: bigint) => book ? (book.committed * 10_000n) / utilBps : 0n;
   const pickScene = (i: number) => {
-    setScene(i);
+    setScene(i); setGlide(true);
     if (!book) return;
     if (i === 0) setDragged(null);
     if (i === 1) setDragged(backingForUtil(8_700n));
     if (i === 2) setDragged(backingForUtil(9_900n));
   };
-  const backing = dragged ?? book?.backing ?? 0n;
+  const backing = dragged ?? book?.wallet ?? 0n;
   const sim = strategy && book && usdcIn > 0n ? simulateQuote(strategy, usdcIn, backing, book.committed) : null;
   const simUtil = book ? utilisationBps(book.committed, backing) : 0;
   const taker = useTaker(strategy, usdcIn, refresh);
 
   if (err) return <div className="err">Base Sepolia unreachable - {err}</div>;
-  if (!book || strategies.length === 0) return <div className="empty" style={{ padding: 80 }}>Reading the desk…{strategies.length === 0 && book ? " no active vignette strategies - run pnpm vignette" : ""}</div>;
+  if (!book || strategies.length === 0) return (
+    <div className="desk-loading">
+      <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+        <circle cx="36" cy="36" r="26" fill="none" stroke="var(--rule-lit)" strokeWidth="9" />
+        <clipPath id="dl"><circle cx="36" cy="36" r="21" /></clipPath>
+        <rect className="dl-liquid" x="10" y="36" width="52" height="40" fill="var(--delivered)" clipPath="url(#dl)" />
+        <circle cx="36" cy="36" r="26" fill="none" stroke="var(--text)" strokeWidth="9" opacity="0.9" />
+      </svg>
+      <span className="label">Pulling live quotes from Base Sepolia</span>
+      <span className="dl-sub">strategies, books and the router's own answers - all read from the chain</span>
+    </div>
+  );
 
   return (
     <>
@@ -182,13 +198,13 @@ export function Desk() {
     <section className="desk">
       <div className="desk-side">
         <div className="label" style={{ marginBottom: 8 }}>The maker's wallet</div>
-        <Vessel committed={book.committed} live={book.backing} value={backing} onChange={(b) => { setScene(null); setDragged(b); }} />
+        <Vessel committed={book.committed} live={book.wallet} value={backing} glide={glide} onChange={(b) => { setScene(null); setGlide(false); setDragged(b); }} />
         <div className="vessel-readout">
           <b className={simUtil >= 9_500 ? "bad" : ""}>{utilLabel(simUtil)}</b>
           <span className="label">utilised · {fmtWeth(backing)} WETH</span>
         </div>
         <div className="desk-legend">
-          <span><i className="sw live" /> live level {fmtWeth(book.backing)} WETH</span>
+          <span><i className="sw live" /> wallet balance, live: {fmtWeth(book.wallet)} WETH</span>
           {dragged !== null && <button className="linkish" onClick={() => setDragged(null)}>reset to live</button>}
         </div>
         <p className="note">
@@ -204,7 +220,7 @@ export function Desk() {
           ))}
         </div>
         <p className="scene-cap">
-          {scene === 0 && `The wallet holds ${fmtWeth(book.backing)} WETH against ${fmtWeth(book.committed)} WETH promised across the three books. Plenty of backing, so the router quotes the normal price.`}
+          {scene === 0 && `The wallet holds ${fmtWeth(book.wallet)} WETH against ${fmtWeth(book.committed)} WETH promised across the three books. Plenty of backing, so the router quotes the normal price.`}
           {scene === 1 && "The maker moves inventory elsewhere. Aqua itself would not notice - the quote would stay frozen at the stale price. Solvent's oracle sees the thinner wallet, and the same book widens its own spread: compare the two quotes below."}
           {scene === 2 && "Past the 95% floor the book stops quoting entirely, with a reason. A taker or aggregator sees the refusal for free, instead of paying gas to discover an empty wallet."}
           {scene === null && "Sandbox: you set the wallet level. LIVE is the router's real answer at the current on-chain level; the right cell recomputes the quote at your hypothetical level with the contract's own formulas."}
@@ -221,7 +237,7 @@ export function Desk() {
 
           <div className="ticket-row">
             <span className="label">Sell</span>
-            <input className="amt" value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="decimal" />
+            <input className="sellamt" value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="decimal" />
             <span className="unit">USDC</span>
             <span className="label" style={{ marginLeft: "auto" }}>for WETH · maker {short(MAKER)}</span>
           </div>
@@ -263,12 +279,16 @@ export function Desk() {
           </div>
 
           <div className="ticket-row take-row">
-            {taker.available ? (
-              <button className="take" disabled={taker.state === "busy" || !live?.ok} onClick={taker.take}>
-                {taker.state === "busy" ? "working…" : "Take this quote"}
-              </button>
+            <ConnectButton chainStatus="icon" showBalance={false} accountStatus="address" />
+            {taker.connected ? (
+              <>
+                <button className="take" disabled={taker.state === "busy" || !live?.ok} onClick={taker.take}>
+                  {taker.state === "busy" ? "working…" : "Take this quote"}
+                </button>
+                {taker.myUsdc !== null && <span className="note num">your demo USDC: {Number(formatUnits(taker.myUsdc, 6)).toLocaleString("en-US", { maximumFractionDigits: 2 })}</span>}
+              </>
             ) : (
-              <span className="note">With a browser wallet and a little Base Sepolia ETH you can take this quote for real; the demo USDC faucet is open.</span>
+              <span className="note">Connect a wallet to take this quote for real - the demo USDC faucet is open, you only need Base Sepolia gas.</span>
             )}
             {taker.msg && <span className={`note${taker.state === "error" ? " warn" : ""}`}>{taker.msg}</span>}
             {taker.tx && <a href={`https://sepolia.basescan.org/tx/${taker.tx}`} target="_blank" rel="noreferrer">view fill ↗</a>}
