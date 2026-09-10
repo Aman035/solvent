@@ -20,6 +20,8 @@ const schema = z.object({
   SUBGRAPH_SLUG: z.string().optional(),
   BASESCAN_API_KEY: z.string().min(16).optional(),
   MNEMONIC: z.string().min(20).optional(),
+  /** CI keeper override: the attestor's own key, so CI never holds the mnemonic. */
+  ATTESTOR_PK: z.string().regex(/^0x[0-9a-fA-F]{64}$/).optional(),
   TARGET_CHAIN: z.enum(["base-sepolia", "base"]).default("base-sepolia"),
 });
 

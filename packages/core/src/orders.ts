@@ -1,5 +1,5 @@
 import { encodeAbiParameters, parseAbiParameters, type Hex, type PublicClient } from "viem";
-import type { HDAccount } from "viem/accounts";
+import type { LocalAccount } from "viem/accounts";
 import { publicClient, readClient, walletClient, nextNonce } from "./clients.js";
 import { readManifest } from "./manifest.js";
 import { explorerTx } from "./chains.js";
@@ -124,7 +124,7 @@ export async function orderHash(order: Order, pc: PublicClient = readClient()): 
 }
 
 /** Send a write with explicit nonce management; returns the receipt. */
-export async function tx(account: HDAccount, label: string, req: any, quiet = false) {
+export async function tx(account: LocalAccount, label: string, req: any, quiet = false) {
   const pc = publicClient();
   const wc = walletClient(account);
   const nonce = await nextNonce(pc, account.address);
@@ -145,7 +145,7 @@ export async function tx(account: HDAccount, label: string, req: any, quiet = fa
 }
 
 /** Approve only if the current allowance is insufficient. */
-export async function ensureApproval(account: HDAccount, token: Hex, spender: Hex, label: string) {
+export async function ensureApproval(account: LocalAccount, token: Hex, spender: Hex, label: string) {
   const pc = readClient();
   const cur = await pc.readContract({ address: token, abi: ERC20_ABI, functionName: "allowance", args: [account.address, spender] }) as bigint;
   if (cur > MAX_UINT / 2n) return false;

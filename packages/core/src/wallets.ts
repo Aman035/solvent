@@ -1,4 +1,4 @@
-import { mnemonicToAccount, type HDAccount } from "viem/accounts";
+import { mnemonicToAccount, privateKeyToAccount, type HDAccount, type LocalAccount } from "viem/accounts";
 import { env } from "./env.js";
 
 /** Fixed derivation indices. Never renumber - addresses are referenced in docs and on-chain. */
@@ -56,7 +56,10 @@ export function account(index: number): HDAccount {
   if (!env.MNEMONIC) throw new Error("MNEMONIC is not set - wallets need it; read-only SDK use does not");
   return mnemonicToAccount(env.MNEMONIC, { addressIndex: index });
 }
-export function role(r: NamedRole): HDAccount { return account(WALLET_INDEX[r]); }
+export function role(r: NamedRole): LocalAccount {
+  if (r === "attestor" && env.ATTESTOR_PK) return privateKeyToAccount(env.ATTESTOR_PK as `0x${string}`);
+  return account(WALLET_INDEX[r]);
+}
 export function sybil(i: number): HDAccount {
   if (i < 0 || i >= SYBIL_COUNT) throw new Error(`sybil index out of range: ${i}`);
   return account(SYBIL_START + i);
@@ -65,7 +68,7 @@ export function allSybils(): HDAccount[] {
   return Array.from({ length: SYBIL_COUNT }, (_, i) => sybil(i));
 }
 /** Every wallet the project uses, in derivation order. */
-export function allWallets(): { label: string; index: number; account: HDAccount }[] {
+export function allWallets(): { label: string; index: number; account: LocalAccount }[] {
   const named = (Object.keys(WALLET_INDEX) as NamedRole[]).map((r) => ({
     label: r, index: WALLET_INDEX[r], account: role(r),
   }));
