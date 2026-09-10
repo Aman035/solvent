@@ -268,20 +268,23 @@ export default function App() {
   return (
     <div className="shell">
       <div className="rail">
-        <button className="mark markbtn" onClick={() => setNet(null)}>Solvent</button>
-        <nav className="tabs nets">
+        <button className="markbtn" onClick={() => setNet(null)} aria-label="back to the landing">
+          <img src={`${import.meta.env.BASE_URL}wordmark.svg`} alt="Solvent" height="22" />
+        </button>
+        <nav className="netseg">
           <button className={net === "testnet" ? "on" : ""} onClick={() => setNet("testnet")}>Testnet</button>
           <button className={net === "mainnet" ? "on" : ""} onClick={() => setNet("mainnet")}>Mainnet</button>
         </nav>
         {net === "testnet" && (
-          <nav className="tabs">
+          <nav className="pills">
             {VIEWS.map((t) => (
               <button key={t.id} className={view === t.id ? "on" : ""} onClick={() => setView(t.id)}>{t.name}</button>
             ))}
           </nav>
         )}
         <span className="spacer" />
-        <a href={STUDIO} target="_blank" rel="noreferrer">The Graph ↗</a>
+        <a className="rail-link" href={STUDIO} target="_blank" rel="noreferrer">Live index ↗</a>
+        <a className="rail-link" href="https://github.com/Aman035/solvent" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
 
       {tab === "desk" && <Desk />}
@@ -344,7 +347,7 @@ export default function App() {
 
           <p className="cost note" style={{ marginTop: 26, maxWidth: 760 }}>
             Every figure is read live from a Graph subgraph indexing ERC-8004 reputation
-            alongside 1inch Aqua settlement. <a href={SUBGRAPH_URL} target="_blank" rel="noreferrer">Query it directly ↗</a>
+            alongside 1inch Aqua settlement. <a href={STUDIO} target="_blank" rel="noreferrer">Query it directly ↗</a>
           </p>
         </>
       )}

@@ -1,17 +1,40 @@
 /* ── shell ──────────────────────────────────────────────────────────────── */
 .shell { max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter) 56px; }
 
-/* ── status rail ────────────────────────────────────────────────────────── */
+/* ── app navbar: the landing's language ─────────────────────────────────── */
 .rail {
-  display: flex; align-items: baseline; gap: 22px;
-  padding: 14px 0 13px; border-bottom: 1px solid var(--rule);
-  position: sticky; top: 0; z-index: 20;
-  background: color-mix(in srgb, var(--ink-900) 94%, transparent);
+  display: flex; align-items: center; gap: 18px;
+  padding: 18px 0; position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--ink-900) 92%, transparent);
   backdrop-filter: blur(8px);
 }
-.rail .mark { font-weight: 700; font-size: 14px; letter-spacing: -0.015em; }
-.rail .tag { color: var(--text-3); font-size: 12px; }
 .rail .spacer { flex: 1; }
+.rail-link { font-family: var(--mono); font-size: 11.5px; color: var(--text-2); }
+.rail-link:hover { color: var(--text); text-decoration: none; }
+
+/* segmented Testnet | Mainnet */
+.netseg {
+  display: flex; gap: 3px; padding: 3px;
+  background: #fff; border: 1px solid var(--rule); border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(26,33,43,0.04);
+}
+.netseg button {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600; cursor: pointer;
+  background: none; border: none; border-radius: 999px; padding: 7px 16px;
+  color: var(--text-3); transition: color .15s, background .15s;
+}
+.netseg button:hover { color: var(--text); }
+.netseg button.on { background: var(--text); color: #fff; }
+
+/* view pills */
+.pills { display: flex; gap: 4px; }
+.pills button {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600; cursor: pointer;
+  background: none; border: 1px solid transparent; border-radius: 999px; padding: 7px 15px;
+  color: var(--text-3); transition: color .15s, background .15s, border-color .15s;
+}
+.pills button:hover { color: var(--text); }
+.pills button.on { color: var(--text); background: #fff; border-color: var(--rule); box-shadow: 0 1px 2px rgba(26,33,43,0.05); }
 .rail .stat { display: flex; align-items: baseline; gap: 7px; }
 .rail .stat b { font-family: var(--mono); font-weight: 500; font-size: 12px; color: var(--text-2); }
 
@@ -154,14 +177,7 @@
 .err { border: 1px solid var(--returned-dim); color: var(--returned); padding: 13px 16px; border-radius: 3px; margin: 20px 0; font-family: var(--mono); font-size: 12.5px; }
 
 /* ---- Solvent: tabs and balance sheets ------------------------------------ */
-.tabs { display: flex; gap: 2px; margin-left: 18px; }
-.tabs button {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-  background: none; border: 1px solid transparent; color: var(--text-3);
-  padding: 5px 10px; cursor: pointer; border-radius: 2px;
-}
-.tabs button:hover { color: var(--text-2); }
-.tabs button.on { color: var(--text); border-color: var(--rule-lit); background: var(--ink-800); }
+
 
 .books { margin-top: 8px; }
 .books-head { display: flex; align-items: flex-end; justify-content: space-between; padding: 18px 0 12px; }
@@ -242,22 +258,24 @@
 }
 
 /* ---- two-level nav + mainnet bar ----------------------------------------- */
-.tabs.nets { margin-left: 26px; }
-.tabs.nets button { font-size: 11px; padding: 6px 14px; }
 .soon-bar {
-  font-family: var(--mono); font-size: 11px; line-height: 1.6; color: var(--text-2);
-  background: var(--ink-800); border: 1px solid var(--rule-lit); border-left: 3px solid var(--delivered);
-  border-radius: 3px; padding: 10px 14px; margin: 18px 0 4px;
+  font-size: 13px; line-height: 1.65; color: var(--text-2);
+  background: #fff; border: 1px solid var(--rule); border-radius: 12px;
+  padding: 14px 18px; margin: 16px 0 6px;
+  box-shadow: 0 1px 3px rgba(26,33,43,0.04);
 }
-.chainswitch { display: flex; gap: 2px; }
+.chainswitch {
+  display: flex; gap: 3px; padding: 3px;
+  background: #fff; border: 1px solid var(--rule); border-radius: 999px; width: max-content;
+  box-shadow: 0 1px 2px rgba(26,33,43,0.04);
+}
 .chainswitch button {
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-  background: none; border: 1px solid var(--rule); color: var(--text-3);
-  padding: 6px 14px; cursor: pointer;
+  font-family: var(--sans); font-size: 12.5px; font-weight: 600; cursor: pointer;
+  background: none; border: none; border-radius: 999px; padding: 7px 16px;
+  color: var(--text-3); transition: color .15s, background .15s;
 }
-.chainswitch button:first-child { border-radius: 3px 0 0 3px; }
-.chainswitch button:last-child { border-radius: 0 3px 3px 0; }
-.chainswitch button.on { color: var(--text); background: var(--ink-700); border-color: var(--rule-lit); }
+.chainswitch button:hover { color: var(--text); }
+.chainswitch button.on { background: var(--text); color: #fff; }
 .ledger-stats { display: flex; gap: 26px; padding: 16px 0 4px; }
 .ledger-stats .stat { display: flex; flex-direction: column; gap: 2px; }
 .ledger-stats b { font-family: var(--mono); font-size: 15px; }
@@ -449,3 +467,10 @@ html { scroll-behavior: smooth; }
   .hl, .rise, .float, .reveal, .scroll-cue { opacity: 1 !important; transform: none !important; animation-delay: 0s !important; }
   .float { transform: rotate(var(--rot, 0deg)) !important; }
 }
+
+.markbtn { appearance: none; -webkit-appearance: none; background: none; border: none; cursor: pointer; padding: 0; display: flex; }
+.markbtn img { display: block; }
+
+.vessel-readout { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 6px; }
+.vessel-readout b { font-family: var(--mono); font-size: 24px; letter-spacing: -0.01em; }
+.vessel-readout b.bad { color: var(--returned); }

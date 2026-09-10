@@ -294,8 +294,8 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
           </Reveal>
         </div>
         <div className="story-cta">
-          <button className="cta" onClick={() => onExplore("testnet")}>Watch a book defend itself</button>
-          <button className="cta ghost" onClick={() => onExplore("mainnet")}>See the mainnet evidence</button>
+          <button className="cta" onClick={() => onExplore("testnet")}>Explore testnet</button>
+          <button className="cta ghost" onClick={() => onExplore("mainnet")}>Explore mainnet</button>
         </div>
       </section>
     </div>
