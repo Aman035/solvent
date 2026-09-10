@@ -139,9 +139,21 @@ export function MainnetBooks() {
 
   return (
     <section className="books">
-      <div className="ro-strip">
-        <span className="ro-badge">Read-only</span>
-        <span>Every real Aqua maker's balance sheet, indexed live on three chains. Contracts are live on Base Sepolia; mainnet is next.</span>
+      <div className="mainnet-intro">
+        <h2>Naked quoting, live.</h2>
+        <p>
+          Every row below is a real 1inch Aqua maker, right now. The capsule is what they
+          advertise; the green is what their wallet can actually settle. Where it runs
+          empty, takers are being quoted liquidity that does not exist, and the venue
+          will keep quoting it until someone pays gas to find out.
+        </p>
+        <p className="mainnet-solves">
+          Solvent's instruments decline exactly these books at quote time.
+          <span className="status-chips">
+            <span className="ro-badge">Live on Base Sepolia</span>
+            <span className="soon">mainnet coming soon</span>
+          </span>
+        </p>
       </div>
       <div className="books-head">
         <nav className="chainswitch">
