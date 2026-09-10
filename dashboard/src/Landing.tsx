@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM } from "./data";
 import baseTokens from "./base-tokens.json";
 
@@ -10,6 +10,70 @@ import baseTokens from "./base-tokens.json";
  */
 
 const TOKENS: Record<string, { symbol: string; decimals: number }> = baseTokens as never;
+
+/** Adds .in when the element scrolls into view - drives the reveal transitions. */
+function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } },
+      { threshold: 0.25 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className={`reveal${seen ? " in" : ""} ${className}`} style={{ "--rd": `${delay}s` } as never}>
+      {children}
+    </div>
+  );
+}
+
+/** Counts up once when started - the printed-meter effect for the stat cards. */
+function useCountUp(target: number, started: boolean, ms = 900): number {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (!started) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { setV(target); return; }
+    let raf = 0; const t0 = performance.now();
+    const tick = (t: number) => {
+      const k = Math.min((t - t0) / ms, 1);
+      setV(Math.round(target * (1 - Math.pow(1 - k, 3))));
+      if (k < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, started, ms]);
+  return v;
+}
+
+function StatCards({ over }: { over: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(el); return () => io.disconnect();
+  }, []);
+  const a = useCountUp(123, seen), b = useCountUp(51_161, seen, 1100), c = useCountUp(over, seen, 1300);
+  return (
+    <div className="story-stats" ref={ref}>
+      <div className={`stat-card reveal${seen ? " in" : ""}`} style={{ "--rd": "0s" } as never}>
+        <b className="num">{a} <span>of 138</span></b>
+        <span className="stat-what">material books ran under-backed, across Base, Arbitrum and Optimism</span>
+      </div>
+      <div className={`stat-card reveal${seen ? " in" : ""}`} style={{ "--rd": "0.12s" } as never}>
+        <b className="num">${b.toLocaleString("en-US")}</b>
+        <span className="stat-what">of USDC advertised at 0.0% backing, continuously, for weeks - every taker reverted</span>
+      </div>
+      <div className={`stat-card reveal${seen ? " in" : ""}`} style={{ "--rd": "0.24s" } as never}>
+        <b className="num red">{c}</b>
+        <span className="stat-what">books quoting more than they hold at this moment, read live from our indexes on three chains</span>
+      </div>
+    </div>
+  );
+}
 
 function fmtAmt(v: bigint, dec: number) {
   const n = Number(v) / 10 ** dec;
@@ -86,6 +150,7 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
 
   return (
     <div className="landing">
+      <div className="hero-wrap">
       <header className="landing-top">
         <img src={`${import.meta.env.BASE_URL}wordmark.svg`} alt="Solvent" height="24" />
         <nav className="landing-links">
@@ -98,23 +163,23 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
         <div className="hero-grid">
           <div className="hero-copy">
             <h1>
-              <span>Never quote</span><br />
-              <span>more than you</span><br />
-              <em>can settle.</em>
+              <span className="hl" style={{ "--hd": "0s" } as never}>Never quote</span><br />
+              <span className="hl" style={{ "--hd": "0.09s" } as never}>more than you</span><br />
+              <em className="hl" style={{ "--hd": "0.18s" } as never}>can settle.</em>
             </h1>
-            <p className="hero-sub2">
+            <p className="hero-sub2 rise" style={{ "--hd": "0.34s" } as never}>
               Solvent gives every 1inch Aqua position a live balance sheet: spreads that
               widen as the wallet thins, a floor where books refuse, and an index of every
               maker's true backing on three chains.
             </p>
-            <div className="cta-row">
+            <div className="cta-row rise" style={{ "--hd": "0.46s" } as never}>
               <button className="cta" onClick={() => onExplore("testnet")}>Explore testnet</button>
               <button className="cta ghost" onClick={() => onExplore("mainnet")}>Explore mainnet</button>
             </div>
           </div>
 
           {/* the functional widget: a real quote, pulled while you look at it */}
-          <aside className="widget float" style={{ "--rot": "0deg", "--d": "0.4s" } as never}>
+          <aside className="widget float" style={{ "--rot": "0deg", "--pd": "0.5s", "--d": "1.3s" } as never}>
             <div className="widget-head">
               <span>Strategy A<br /><small>USDC → WETH · Base Sepolia</small></span>
               <i className="livedot" />
@@ -143,27 +208,27 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
         </div>
 
         {/* ── artifacts on the chart table ── */}
-        <div className="float f-note" style={{ "--rot": "-4deg", "--d": "1.4s" } as never}>
+        <div className="float f-note" style={{ "--rot": "-4deg", "--pd": "0.66s", "--d": "1.5s" } as never}>
           <span className="label">SolvencySkew</span>
           <b className="num">+0.96%</b>
           <span>spread widened itself · book 87% utilised · no keeper, no dock</span>
         </div>
 
-        <div className="float f-tile" style={{ "--rot": "5deg", "--d": "0.8s" } as never}>
+        <div className="float f-tile" style={{ "--rot": "5deg", "--pd": "0.58s", "--d": "1.4s" } as never}>
           <VesselTile />
         </div>
 
-        <div className="float f-stamp" style={{ "--rot": "-7deg", "--d": "2s" } as never}>
+        <div className="float f-stamp" style={{ "--rot": "-7deg", "--pd": "0.82s", "--d": "1.7s" } as never}>
           <b>DECLINED</b>
           <span className="num">SolvencyFloor · 99.0% &gt; 95%</span>
         </div>
 
-        <span className="hero-ticker label">
+        <span className="hero-ticker label fade" style={{ "--hd": "0.9s" } as never}>
           indexed live on Base, Arbitrum and Optimism · {stats.makers} makers with open books · <em>{stats.over} quoting more than they hold</em>
         </span>
 
         {worst && wMeta && (
-          <div className="float f-worst" style={{ "--rot": "3deg", "--d": "1s" } as never}>
+          <div className="float f-worst" style={{ "--rot": "3deg", "--pd": "0.74s", "--d": "1.6s" } as never}>
             <span className="label">indexed live on {worst.chain} mainnet</span>
             <b className="num">{Math.round(worst.utilBps / 100).toLocaleString("en-US")}%</b>
             <span className="num f-worst-sub">
@@ -171,11 +236,14 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
             </span>
           </div>
         )}
+        <button className="scroll-cue" aria-label="scroll to the problem"
+          onClick={() => document.getElementById("problem")?.scrollIntoView({ behavior: "smooth" })}>↓</button>
       </main>
+      </div>
 
       {/* ── the problem, measured ── */}
-      <section className="story">
-        <div className="story-copy">
+      <section className="story" id="problem">
+        <Reveal className="story-copy">
           <span className="label">The problem</span>
           <h2>On Aqua, every book can be naked.</h2>
           <p>
@@ -190,26 +258,13 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
             We rebuilt every maker's balance sheet in Aqua's history on three chains,
             at event resolution, from primary data. This is not a hypothesis:
           </p>
-        </div>
-        <div className="story-stats">
-          <div className="stat-card">
-            <b className="num">123 <span>of 138</span></b>
-            <span className="stat-what">material books ran under-backed, across Base, Arbitrum and Optimism</span>
-          </div>
-          <div className="stat-card">
-            <b className="num">$51,161</b>
-            <span className="stat-what">of USDC advertised at 0.0% backing, continuously, for weeks - every taker reverted</span>
-          </div>
-          <div className="stat-card">
-            <b className="num red">{stats.over}</b>
-            <span className="stat-what">books quoting more than they hold at this moment, read live from our indexes on three chains</span>
-          </div>
-        </div>
+        </Reveal>
+        <StatCards over={stats.over} />
       </section>
 
       {/* ── what solvent does ── */}
       <section className="story">
-        <div className="story-copy">
+        <Reveal className="story-copy">
           <span className="label">What Solvent solves</span>
           <h2>Books that defend themselves.</h2>
           <p>
@@ -217,26 +272,26 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
             wallet can actually settle - and puts it where it changes behaviour: inside
             the quote itself.
           </p>
-        </div>
+        </Reveal>
         <div className="feature-row">
-          <div className="feature">
+          <Reveal className="feature" delay={0}>
             <span className="label">01 · SolvencySkew</span>
             <h3>Spreads that price the risk</h3>
             <p>As the wallet thins past a threshold, every quote widens on its own - a linear ramp the maker tunes per strategy. Thin books get expensive before they get dangerous.</p>
             <div className="feature-foot num">bid 3,106.67 → 3,202.86 <em>at 87% utilised</em></div>
-          </div>
-          <div className="feature">
+          </Reveal>
+          <Reveal className="feature" delay={0.12}>
             <span className="label">02 · SolvencyFloor</span>
             <h3>Refusal instead of failure</h3>
             <p>Past a hard floor the book declines at quote time, with a reason. Takers and aggregators see the refusal before spending gas, not a revert after.</p>
             <div className="feature-foot num"><em className="red">DECLINED</em> SolvencyFloor · 99.0% &gt; 95%</div>
-          </div>
-          <div className="feature">
+          </Reveal>
+          <Reveal className="feature" delay={0.24}>
             <span className="label">03 · The index</span>
             <h3>Every maker's true backing</h3>
             <p>One subgraph schema on three chains maintains each maker's promise-vs-wallet sheet from primary events - the oracle feed for the instruments, and open to anyone.</p>
             <div className="feature-foot num">Base · Arbitrum · Optimism <em>index live on all three</em></div>
-          </div>
+          </Reveal>
         </div>
         <div className="story-cta">
           <button className="cta" onClick={() => onExplore("testnet")}>Watch a book defend itself</button>
