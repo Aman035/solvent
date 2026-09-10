@@ -661,3 +661,6 @@ html { scroll-behavior: smooth; }
 /* table rows deal in once on mount */
 .row-in { animation: rise-in 0.45s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 36ms); }
 @media (prefers-reduced-motion: reduce) { .row-in { animation: none; } }
+
+.mainnet-intro p b { color: var(--text); font-weight: 600; }
+.redtag { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--returned); }

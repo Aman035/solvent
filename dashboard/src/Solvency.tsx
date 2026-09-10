@@ -133,10 +133,15 @@ export function SepoliaBooks() {
       <div className="mainnet-intro">
         <h2>Every maker, measured.</h2>
         <p>
-          The sheets below are the quote desk's source of truth: each maker's promises
-          against what their wallet can settle, kept live by the index and written
-          on-chain by the attestor. When a quote widened or refused on the desk, this
-          is the number it read.
+          Each row is one maker's book in one token. <b>Promised</b> is what their
+          strategies advertise; <b>can settle</b> is what their wallet holds right now.
+          The capsule fills green exactly as far as the promise is real.
+        </p>
+        <p>
+          Only the Solvent maker's books carry the instruments: cross the floor and
+          they refuse quotes, live - that is what the <em className="redtag">past floor</em> tag
+          means. The others quote unprotected at any level, exactly like the makers on
+          mainnet.
         </p>
       </div>
       <div className="books-head">
@@ -159,9 +164,9 @@ export function SepoliaBooks() {
       </div>
       {snap && books.length === 0 && <div className="empty" style={{ padding: 40 }}>No books yet - run pnpm vignette.</div>}
       <p className="cost note" style={{ marginTop: 22, maxWidth: 760 }}>
-        These books drive quoting directly: the attestor writes each sheet into SolventBook,
-        and every SolvencySkew and SolvencyFloor strategy reads it at quote time. Drain the
-        wallet and the spreads widen on their own; pass the floor and the books refuse.
+        Behind the live stamp: the index watches every Aqua event, a keeper re-reads each
+        wallet about once a minute, and any change lands on-chain in SolventBook - where
+        the very next quote reads it.
       </p>
     </section>
   );
