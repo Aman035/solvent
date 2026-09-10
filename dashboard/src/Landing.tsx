@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SUBGRAPH_URL_BASE } from "./data";
+import { SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM } from "./data";
 import baseTokens from "./base-tokens.json";
 
 /**
@@ -28,7 +28,7 @@ function VesselTile({ size = 64 }: { size?: number }) {
   );
 }
 
-interface Worst { maker: string; token: string; committed: bigint; utilBps: number }
+interface Worst { maker: string; token: string; committed: bigint; utilBps: number; chain: string }
 
 export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet") => void }) {
   const [stats, setStats] = useState({ makers: 59, over: 49 });
@@ -37,20 +37,33 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
 
   useEffect(() => {
     let alive = true;
-    fetch(SUBGRAPH_URL_BASE, {
-      method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ query: `{ makerBooks(first: 1000, where: { committed_gt: "0" }) { maker token committed utilisationBps } }` }),
-    }).then((r) => r.json()).then((j) => {
-      if (!alive || !j.data) return;
-      const books = j.data.makerBooks as { maker: string; token: string; committed: string; utilisationBps: string }[];
-      setStats({
-        makers: new Set(books.map((b) => b.maker)).size,
-        over: books.filter((b) => Number(b.utilisationBps) > 10_000).length,
+    // all three mainnet indexes, aggregated
+    const CHAINS = [
+      { name: "Base", url: SUBGRAPH_URL_BASE },
+      { name: "Arbitrum", url: SUBGRAPH_URL_ARBITRUM },
+      { name: "Optimism", url: SUBGRAPH_URL_OPTIMISM },
+    ];
+    Promise.allSettled(CHAINS.map(async (c) => {
+      const r = await fetch(c.url, {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ query: `{ makerBooks(first: 1000, where: { committed_gt: "0" }) { maker token committed utilisationBps } }` }),
       });
-      const w = books.filter((b) => Number(b.utilisationBps) < 0xffffffff && Number(b.utilisationBps) > 10_000)
-        .sort((a, b) => Number(b.utilisationBps) - Number(a.utilisationBps))[0];
-      if (w) setWorst({ maker: w.maker, token: w.token, committed: BigInt(w.committed), utilBps: Number(w.utilisationBps) });
-    }).catch(() => {});
+      const j = await r.json();
+      return { chain: c.name, books: (j.data?.makerBooks ?? []) as { maker: string; token: string; committed: string; utilisationBps: string }[] };
+    })).then((results) => {
+      if (!alive) return;
+      const ok = results.filter((r): r is PromiseFulfilledResult<{ chain: string; books: { maker: string; token: string; committed: string; utilisationBps: string }[] }> => r.status === "fulfilled").map((r) => r.value);
+      if (ok.length === 0) return;
+      const makers = new Set(ok.flatMap((c) => c.books.map((b) => `${c.chain}:${b.maker}`))).size;
+      const over = ok.reduce((n, c) => n + c.books.filter((b) => Number(b.utilisationBps) > 10_000).length, 0);
+      setStats({ makers, over });
+      const finite = ok.flatMap((c) => c.books
+        .filter((b) => Number(b.utilisationBps) < 0xffffffff && Number(b.utilisationBps) > 10_000)
+        .map((b) => ({ ...b, chain: c.chain })))
+        .sort((a, b) => Number(b.utilisationBps) - Number(a.utilisationBps));
+      const w = finite[0];
+      if (w) setWorst({ maker: w.maker, token: w.token, committed: BigInt(w.committed), utilBps: Number(w.utilisationBps), chain: w.chain });
+    });
     // a real quote for the widget card, while the visitor watches
     import("./deskchain").then(async ({ loadStrategies, liveQuote, liveBook, utilisationBps }) => {
       try {
@@ -131,8 +144,9 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
 
         {/* ── artifacts on the chart table ── */}
         <div className="float f-note" style={{ "--rot": "-4deg", "--d": "1.4s" } as never}>
-          <i className="pin" />
-          <span>the whitepaper's remedy: "makers are strongly recommended to manually dock strategies"</span>
+          <span className="label">SolvencySkew</span>
+          <b className="num">+0.96%</b>
+          <span>spread widened itself · book 87% utilised · no keeper, no dock</span>
         </div>
 
         <div className="float f-tile" style={{ "--rot": "5deg", "--d": "0.8s" } as never}>
@@ -145,12 +159,12 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
         </div>
 
         <span className="hero-ticker label">
-          live on Base · {stats.makers} makers with open books · <em>{stats.over} quoting more than they hold</em>
+          indexed live on Base, Arbitrum and Optimism · {stats.makers} makers with open books · <em>{stats.over} quoting more than they hold</em>
         </span>
 
         {worst && wMeta && (
           <div className="float f-worst" style={{ "--rot": "3deg", "--d": "1s" } as never}>
-            <span className="label">live on Base mainnet</span>
+            <span className="label">indexed live on {worst.chain} mainnet</span>
             <b className="num">{Math.round(worst.utilBps / 100).toLocaleString("en-US")}%</b>
             <span className="num f-worst-sub">
               {worst.maker.slice(0, 6)}…{worst.maker.slice(-4)} promises {fmtAmt(worst.committed, wMeta.decimals)} {wMeta.symbol} it does not hold
@@ -158,6 +172,77 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
           </div>
         )}
       </main>
+
+      {/* ── the problem, measured ── */}
+      <section className="story">
+        <div className="story-copy">
+          <span className="label">The problem</span>
+          <h2>On Aqua, every book can be naked.</h2>
+          <p>
+            1inch Aqua lets makers quote without depositing: strategies promise virtual
+            balances while the tokens stay in the maker's wallet. Nothing sums those
+            promises, and quoting never checks the wallet. So one wallet quietly backs
+            many books, the wallet drains through fills and withdrawals, and the quotes
+            stay exactly where they were - until a taker fills one and the settlement
+            reverts in their face.
+          </p>
+          <p>
+            We rebuilt every maker's balance sheet in Aqua's history on three chains,
+            at event resolution, from primary data. This is not a hypothesis:
+          </p>
+        </div>
+        <div className="story-stats">
+          <div className="stat-card">
+            <b className="num">123 <span>of 138</span></b>
+            <span className="stat-what">material books ran under-backed, across Base, Arbitrum and Optimism</span>
+          </div>
+          <div className="stat-card">
+            <b className="num">$51,161</b>
+            <span className="stat-what">of USDC advertised at 0.0% backing, continuously, for weeks - every taker reverted</span>
+          </div>
+          <div className="stat-card">
+            <b className="num red">{stats.over}</b>
+            <span className="stat-what">books quoting more than they hold at this moment, read live from our indexes on three chains</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── what solvent does ── */}
+      <section className="story">
+        <div className="story-copy">
+          <span className="label">What Solvent solves</span>
+          <h2>Books that defend themselves.</h2>
+          <p>
+            Solvent keeps a live balance sheet for every maker - promised against what the
+            wallet can actually settle - and puts it where it changes behaviour: inside
+            the quote itself.
+          </p>
+        </div>
+        <div className="feature-row">
+          <div className="feature">
+            <span className="label">01 · SolvencySkew</span>
+            <h3>Spreads that price the risk</h3>
+            <p>As the wallet thins past a threshold, every quote widens on its own - a linear ramp the maker tunes per strategy. Thin books get expensive before they get dangerous.</p>
+            <div className="feature-foot num">bid 3,106.67 → 3,202.86 <em>at 87% utilised</em></div>
+          </div>
+          <div className="feature">
+            <span className="label">02 · SolvencyFloor</span>
+            <h3>Refusal instead of failure</h3>
+            <p>Past a hard floor the book declines at quote time, with a reason. Takers and aggregators see the refusal before spending gas, not a revert after.</p>
+            <div className="feature-foot num"><em className="red">DECLINED</em> SolvencyFloor · 99.0% &gt; 95%</div>
+          </div>
+          <div className="feature">
+            <span className="label">03 · The index</span>
+            <h3>Every maker's true backing</h3>
+            <p>One subgraph schema on three chains maintains each maker's promise-vs-wallet sheet from primary events - the oracle feed for the instruments, and open to anyone.</p>
+            <div className="feature-foot num">Base · Arbitrum · Optimism <em>index live on all three</em></div>
+          </div>
+        </div>
+        <div className="story-cta">
+          <button className="cta" onClick={() => onExplore("testnet")}>Watch a book defend itself</button>
+          <button className="cta ghost" onClick={() => onExplore("mainnet")}>See the mainnet evidence</button>
+        </div>
+      </section>
     </div>
   );
 }
