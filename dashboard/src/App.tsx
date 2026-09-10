@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  fetchSnapshot, registerNames, nameOf, usd, stars, short, txUrl, addrUrl, ago,
+  fetchSnapshot, nameOf, usd, stars, short, txUrl, addrUrl, ago,
   STUDIO, SUBGRAPH_URL, decodeProgram, type Snapshot, type Agent, type Fill,
 } from "./data";
 import costWash from "../../docs/cost-to-fake.json";
@@ -10,13 +10,6 @@ import { SepoliaBooks, MainnetBooks, registerSepoliaTokens } from "./Solvency";
 import { Desk } from "./Desk";
 import { Landing } from "./Landing";
 
-registerNames({
-  [manifest.contracts["agentId.alice"]?.address ?? ""]: "Alice",
-  [manifest.contracts["agentId.bob"]?.address ?? ""]: "Bob",
-  [manifest.contracts["agentId.mallory"]?.address ?? ""]: "Mallory",
-  [costWash.attacker]: "Wash trader",
-  "0xcf66abc4e23809135f349c36625b5bf41af0df01": "Solvent maker",
-});
 registerSepoliaTokens({
   [manifest.contracts.weth.address]: { symbol: "WETH", decimals: 18 },
   [manifest.contracts.usdc.address]: { symbol: "USDC", decimals: 6 },
