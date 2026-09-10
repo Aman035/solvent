@@ -66,6 +66,34 @@ export const ERC20_ABI = parseAbi([
 const FLOOR_ERR = parseAbi([
   "error MakerBeyondSolvencyFloor(address maker, address token, uint32 utilisationBps, uint32 maxUtilisationBps)"]);
 
+const KNOWN_ERRS = parseAbi([
+  "error MakerBeyondSolvencyFloor(address maker, address token, uint32 utilisationBps, uint32 maxUtilisationBps)",
+  "error TakerBelowReputationFloor(address taker, uint32 score, uint32 floor)",
+  "error SafeTransferFromFailed()",
+  "error SafeTransferFailed()",
+]);
+
+/** Turn any viem revert into one legible line: decoded custom error, reason string, or raw selector. */
+export function explainRevert(e: unknown): string {
+  let data: string | undefined;
+  for (let c = e as { data?: string; cause?: unknown } | undefined; c && !data; c = c.cause as never)
+    if (typeof c.data === "string" && c.data.startsWith("0x") && c.data.length >= 10) data = c.data;
+  if (data) {
+    try {
+      const d = decodeErrorResult({ abi: KNOWN_ERRS, data: data as Hex });
+      if (d.errorName === "MakerBeyondSolvencyFloor")
+        return `declined by SolvencyFloor: book ${(Number(d.args![2]) / 100).toFixed(1)}% utilised, floor ${(Number(d.args![3]) / 100).toFixed(0)}%`;
+      if (d.errorName === "TakerBelowReputationFloor")
+        return `declined by ReputationGate: score ${d.args![1]} below floor ${d.args![2]}`;
+      if (d.errorName === "SafeTransferFromFailed" || d.errorName === "SafeTransferFailed")
+        return "token transfer failed: check balance and allowance (the maker's or yours)";
+      return `${d.errorName}(${(d.args ?? []).join(", ")})`;
+    } catch { return `reverted with ${data.slice(0, 10)} (unrecognised error)`; }
+  }
+  const msg = ((e as { shortMessage?: string }).shortMessage ?? (e as Error).message ?? "failed");
+  return msg.replace(/\s*\n+\s*/g, " · ").slice(0, 180);
+}
+
 export interface Order { maker: Hex; traits: bigint; data: Hex }
 
 export interface DeskStrategy {

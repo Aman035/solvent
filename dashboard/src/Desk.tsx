@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatUnits, parseUnits, type Hex } from "viem";
 import {
-  ADDR, MAKER, ERC20_ABI, ROUTER_ABI, pc, loadStrategies, liveQuote, liveBook, takerData,
+  ADDR, MAKER, ERC20_ABI, ROUTER_ABI, pc, loadStrategies, liveQuote, liveBook, takerData, explainRevert,
   simulateQuote, utilisationBps, widenFor, U32_MAX, type DeskStrategy, type QuoteResult,
 } from "./deskchain";
 import { short } from "./data";
@@ -113,10 +113,13 @@ function useTaker(strategy: DeskStrategy | null, usdcIn: bigint, onDone: () => v
       if (alw < usdcIn)
         await send({ address: ADDR.usdc, abi: ERC20_ABI, functionName: "approve", args: [ADDR.router, usdcIn], chain: baseSepolia, account: address }, "approving the router…");
       const td = await takerData(address);
+      // free pre-flight: if the swap would revert, learn why without spending gas
+      setMsg("simulating the swap…");
+      await pc.simulateContract({ address: ADDR.router, abi: ROUTER_ABI, functionName: "swap", args: [strategy.order, usdcIn, td] as never, account: address });
       const h = await send({ address: ADDR.router, abi: ROUTER_ABI, functionName: "swap", args: [strategy.order, usdcIn, td] as never, chain: baseSepolia, account: address }, "swapping…");
       setTx(h); setState("done"); setMsg("filled - WETH pulled straight from the maker's wallet"); onDone();
     } catch (e) {
-      setState("error"); setMsg((e as Error).message?.split("\n")[0]?.slice(0, 90) ?? "failed");
+      setState("error"); setMsg(explainRevert(e));
     }
   };
   return { take, state, msg, tx, connected: isConnected, myUsdc };
