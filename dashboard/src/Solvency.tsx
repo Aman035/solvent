@@ -76,7 +76,7 @@ function BookRow({ b, explorer, floorBps, index = 0 }: { b: MakerBook; explorer:
       </a>
       <span className="book-token">{meta.symbol}</span>
       <div className={`cov${over ? " short" : ""}`}
-        title={`promised ${fmt(b.committed, meta.decimals)} · wallet can settle ${fmt(b.backing, meta.decimals)}`}>
+        title={`promised ${fmt(b.committed, meta.decimals)} · could settle ${fmt(b.backing, meta.decimals)} at block ${Number(b.updatedAtBlock).toLocaleString()} (its last Aqua touch) · wallets often drain further between touches`}>
         <i style={{ width: `${Math.max(coverage * 100, coverage > 0 ? 1.5 : 0).toFixed(1)}%` }} />
       </div>
       <span className="num book-amt">{fmt(b.committed, meta.decimals)}</span>
@@ -204,10 +204,11 @@ export function MainnetBooks() {
       <div className="mainnet-intro">
         <h2>Naked quoting, live.</h2>
         <p>
-          Every row below is a real 1inch Aqua maker, right now. The capsule is what they
-          advertise; the green is what their wallet can actually settle. Where it runs
-          empty, takers are being quoted liquidity that does not exist, and the venue
-          will keep quoting it until someone pays gas to find out.
+          Every row below is a real 1inch Aqua maker. The capsule is what they advertise;
+          the green is what their wallet could settle at the book's last on-chain touch.
+          Wallets often drain further between touches, so reality is usually worse than
+          shown - and the venue keeps quoting either way, until someone pays gas to find
+          out.
         </p>
         <p className="mainnet-solves">
           Solvent's instruments decline exactly these books at quote time.
