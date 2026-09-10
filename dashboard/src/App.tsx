@@ -8,6 +8,7 @@ import costRev from "../../docs/cost-to-fake-reviews.json";
 import manifest from "../../deployments/84532.json";
 import { SepoliaBooks, MainnetBooks, registerSepoliaTokens } from "./Solvency";
 import { Desk } from "./Desk";
+import { HowItWorks } from "./HowItWorks";
 import { Landing } from "./Landing";
 
 registerSepoliaTokens({
@@ -16,9 +17,10 @@ registerSepoliaTokens({
 });
 
 type Net = "testnet" | "mainnet";
-type View = "desk" | "books" | "ledger";
+type View = "desk" | "how" | "books" | "ledger";
 const VIEWS: { id: View; name: string }[] = [
   { id: "desk", name: "Quote desk" },
+  { id: "how", name: "How it works" },
   { id: "books", name: "Balance sheets" },
   { id: "ledger", name: "Settlement ledger" },
 ];
@@ -281,6 +283,7 @@ export default function App() {
       </div>
 
       {tab === "desk" && <Desk />}
+      {tab === "how" && <HowItWorks />}
       {tab === "books" && <SepoliaBooks />}
       {tab === "mainnet" && <MainnetBooks />}
 

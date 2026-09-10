@@ -664,3 +664,29 @@ html { scroll-behavior: smooth; }
 
 .mainnet-intro p b { color: var(--text); font-weight: 600; }
 .redtag { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--returned); }
+
+/* ---- architecture ---------------------------------------------------------- */
+.arch { max-width: 1160px; }
+.lane { margin-bottom: 26px; }
+.lane-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; }
+.lane-head b { font-size: 15px; font-weight: 650; }
+.lane-head span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+.lane-flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 10px 0; }
+.lane-step { display: flex; align-items: center; }
+.lane-arrow { font-style: normal; color: var(--text-3); padding: 0 7px; font-size: 14px; }
+.arch-node {
+  background: #fff; border: 1px solid var(--rule); border-radius: 12px; padding: 13px 16px;
+  display: flex; flex-direction: column; gap: 4px; min-width: 132px; max-width: 196px;
+  box-shadow: 0 1px 3px rgba(26,33,43,0.04), 0 8px 22px rgba(26,33,43,0.05);
+  transition: transform .2s var(--ease-out), border-color .2s;
+}
+.arch-node:hover { transform: translateY(-3px); border-color: var(--delivered); }
+.arch-node b { font-size: 13px; font-weight: 650; }
+.arch-role { font-size: 10.5px; line-height: 1.5; color: var(--text-3); }
+.arch-addr { font-size: 10px; color: var(--link); }
+.arch-side {
+  margin-top: 8px; max-width: 720px; background: #fff; border: 1px solid var(--rule);
+  border-left: 3px solid var(--claimed); border-radius: 0 12px 12px 0; padding: 14px 18px;
+}
+.arch-side b { font-size: 13.5px; }
+.arch-side p { font-size: 12.5px; line-height: 1.7; color: var(--text-2); margin: 6px 0 0; }
