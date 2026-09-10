@@ -216,6 +216,14 @@ export async function liveBook(): Promise<{ committed: bigint; backing: bigint; 
   return { committed: b.committed, backing: b.backing, wallet };
 }
 
+/** One oracle row, for overlaying live truth onto the indexed table. */
+export async function readOracleBook(maker: string, token: string): Promise<{ committed: bigint; backing: bigint }> {
+  const b = await pc.readContract({
+    address: ADDR.book, abi: BOOK_ABI, functionName: "bookOf", args: [maker as Hex, token as Hex],
+  }) as { committed: bigint; backing: bigint };
+  return { committed: b.committed, backing: b.backing };
+}
+
 // ── the mirror math: bit-exact ports of the contract formulas ────────────────
 export const U32_MAX = 0xffffffff;
 export function utilisationBps(committed: bigint, backing: bigint): number {

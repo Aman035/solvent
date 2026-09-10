@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, type BooksSnapshot, type MakerBook } from "./data";
 import baseTokens from "./base-tokens.json";
-import { MAKER as FLOOR_MAKER } from "./deskchain";
+import { MAKER as FLOOR_MAKER, readOracleBook, utilisationBps as calcUtil } from "./deskchain";
 
 /**
  * A maker's balance sheet, drawn to scale.
@@ -126,7 +126,25 @@ const byUtilThenSize = (a: MakerBook, z: MakerBook) => {
 
 export function SepoliaBooks() {
   const { snap, err, loading, updatedAt } = useBooks(SUBGRAPH_URL, 8_000);
-  const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty).sort(byUtilThenSize), [snap]);
+  // the index sees Aqua events; wallets drain without any. Overlay the on-chain
+  // oracle (what quotes actually read) so this table is the live truth.
+  const [orc, setOrc] = useState<Record<string, { committed: bigint; backing: bigint }>>({});
+  useEffect(() => {
+    let alive = true;
+    const rows = (snap?.books ?? []).filter(nonEmpty);
+    if (!rows.length) return;
+    Promise.all(rows.map(async (b) => {
+      const r = await readOracleBook(b.maker, b.token);
+      return [(b.maker + b.token).toLowerCase(), r] as const;
+    })).then((es) => { if (alive) setOrc(Object.fromEntries(es)); }).catch(() => {});
+    return () => { alive = false; };
+  }, [snap]);
+  const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty).map((b) => {
+    const o = orc[(b.maker + b.token).toLowerCase()];
+    if (!o || (o.committed === 0n && o.backing === 0n)) return b;
+    return { ...b, committed: o.committed.toString(), backing: o.backing.toString(),
+      utilisationBps: String(calcUtil(o.committed, o.backing)) };
+  }).sort(byUtilThenSize), [snap, orc]);
   return (
     <section className="books">
       {err && <div className="err">Subgraph unreachable - {err}</div>}
