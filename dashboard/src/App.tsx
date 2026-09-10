@@ -140,7 +140,7 @@ function Drawer({ a, onClose }: { a: Agent; onClose: () => void }) {
         </header>
 
         <section>
-          <div className="label">Claimed — ERC-8004 reputation</div>
+          <div className="label">Claimed · ERC-8004 reputation</div>
           <div className="kv">
             <div>Average rating</div><div>★ {stars(a.reviewAvgBps)}</div>
             <div>Reviewers</div><div>{a.reviewCount}</div>
@@ -148,7 +148,7 @@ function Drawer({ a, onClose }: { a: Agent; onClose: () => void }) {
           </div>
           {a.reviews.length > 0 && (
             <>
-              <div className="label" style={{ marginTop: 14 }}>Every reviewer — click to verify</div>
+              <div className="label" style={{ marginTop: 14 }}>Every reviewer, click to verify</div>
               <div className="revgrid">
                 {a.reviews.map((r) => (
                   <a key={r.id} href={txUrl(r.txHash)} target="_blank" rel="noreferrer" title={`${short(r.reviewer)} · ★${r.value}`} />
@@ -159,7 +159,7 @@ function Drawer({ a, onClose }: { a: Agent; onClose: () => void }) {
         </section>
 
         <section>
-          <div className="label">Delivered — settled on Aqua</div>
+          <div className="label">Delivered · settled on Aqua</div>
           <div className="kv">
             <div>Value honoured</div><div style={{ color: "var(--delivered)" }}>${usd(a.honoredValueUsd6)}</div>
             <div>Fills cleared</div><div>{a.honoredCount}</div>
@@ -186,7 +186,7 @@ function Drawer({ a, onClose }: { a: Agent; onClose: () => void }) {
               running on a redeployed router. Everything else is stock 1inch.
             </p>
             <p className="cost note" style={{ marginTop: 12 }}>
-              Inventory was never deposited. It stays in the wallet until a taker pulls it —
+              Inventory was never deposited. It stays in the wallet until a taker pulls it;
               which is why a maker who moves it away produces a public failure.
             </p>
             <div style={{ marginTop: 10 }}>
@@ -287,7 +287,7 @@ export default function App() {
       {tab === "books" && <SepoliaBooks />}
       {tab === "mainnet" && <MainnetBooks />}
 
-      {tab === "ledger" && err && <div className="err">Subgraph unreachable — {err}. Check SUBGRAPH_URL in .env, then reload.</div>}
+      {tab === "ledger" && err && <div className="err">Subgraph unreachable: {err}. Check SUBGRAPH_URL in .env, then reload.</div>}
       {tab === "ledger" && !snap && !err && <div className="empty" style={{ padding: 80 }}>Reading the ledger…</div>}
 
       {tab === "ledger" && snap && (
@@ -328,22 +328,22 @@ export default function App() {
             </div>
 
             <div className="panel">
-              <header><span className="label">What a reputation costs</span><span className="spacer" />
-                <span className="label">measured on-chain</span></header>
+              <header><span className="label">What faking it costs</span><span className="spacer" />
+                <span className="label">we ran both attacks, on-chain</span></header>
               <div className="cost">
                 <table>
                   <tbody>
-                    <tr><td>Perfect ★5.00 from {costRev.reviewers} reviewers</td><td className="warn">${(costRev.mainnetEquivalentUsdPerReview * costRev.reviewers).toFixed(2)}</td></tr>
-                    <tr><td>…capital required</td><td className="warn">$0</td></tr>
-                    <tr><td>${costWash.volumeFakedUsd.toLocaleString()} of delivered value</td><td>${costWash.gasMainnetEquivalentUsd} gas</td></tr>
-                    <tr><td>…capital required</td><td className="hi">${costWash.capitalRequiredUsd.toLocaleString()}</td></tr>
-                    <tr><td>Same volume, one counterparty</td><td className="hi">score {costWash.scoreWithOnePuppet}</td></tr>
+                    <tr><td>{costRev.reviewers} perfect five-star reviews, via ERC-8004</td><td className="warn">${(costRev.mainnetEquivalentUsdPerReview * costRev.reviewers).toFixed(2)} · no capital</td></tr>
+                    <tr><td>${costWash.volumeFakedUsd.toLocaleString()} of "delivered" volume, gas only</td><td>${costWash.gasMainnetEquivalentUsd}</td></tr>
+                    <tr><td>Inventory it had to move through SolventRouter</td><td className="hi">${costWash.capitalRequiredUsd.toLocaleString()}</td></tr>
+                    <tr><td>Score earned trading only with itself</td><td className="hi">{costWash.scoreWithOnePuppet}</td></tr>
                   </tbody>
                 </table>
                 <p className="note">
-                  Gas is not the defence — faking fills is cheaper in gas than faking reviews.
-                  Capital is. Reviews are free speech; fills are collateralised speech.
-                  A maker that only trades with itself scores zero however much volume it writes.
+                  Both attacks were actually executed against the deployed contracts, and this
+                  is the bill. Reviews are free to fake. Delivered volume is not: every fill
+                  moves real inventory through SolventRouter, and the diversity term scores a
+                  maker that only trades with itself at zero, whatever volume it writes.
                 </p>
               </div>
             </div>

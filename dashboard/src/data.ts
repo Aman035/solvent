@@ -15,12 +15,12 @@ export interface Strategy { id: string; active: boolean; hasReputationGate: bool
 /** SwapVM opcode names, for decoding a shipped program into readable chips. */
 const OPCODES: Record<number, string> = {
   0x00: "Stop", 0x02: "Salt", 0x04: "Extruction", 0x20: "Deadline",
-  0x21: "ReputationGate", 0x50: "XYCSwap", 0x51: "XYCConcentrate",
+  0x21: "ReputationGate", 0x22: "SolvencyFloor", 0x50: "XYCSwap", 0x51: "XYCConcentrate",
   0x58: "PeggedSwap", 0x70: "FeeFlatIn", 0x71: "FeeFlatOut",
-  0x80: "FeeProtocol", 0x9c: "Decay", 0xb0: "RequireMinRate", 0xb3: "ReputationPriceAdjuster",
+  0x80: "FeeProtocol", 0x9c: "Decay", 0xb0: "RequireMinRate", 0xb3: "ReputationPriceAdjuster", 0xb5: "SolvencySkew",
 };
-/** The two instructions this project added to SwapVM. */
-export const OURS = new Set([0x21, 0xb3]);
+/** The four instructions Solvent added to SwapVM. */
+export const OURS = new Set([0x21, 0x22, 0xb3, 0xb5]);
 
 /** Walk the [opcode][argsLen][args] stream. */
 export function decodeProgram(program: string): { opcode: number; name: string; ours: boolean }[] {
