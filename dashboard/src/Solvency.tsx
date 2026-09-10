@@ -18,8 +18,30 @@ export function registerSepoliaTokens(map: Record<string, { symbol: string; deci
   for (const [k, v] of Object.entries(map)) SEPOLIA_TOKENS[k.toLowerCase()] = v;
 }
 
+/** Canonical tokens on the other indexed chains (base-tokens.json covers Base). */
+const EXTRA_TOKENS: Record<string, { symbol: string; decimals: number }> = {
+  // Arbitrum One
+  "0x82af49447d8a07e3bd95bd0d56f35241523fbab1": { symbol: "WETH", decimals: 18 },
+  "0xaf88d065e77c8cc2239327c5edb3a432268e5831": { symbol: "USDC", decimals: 6 },
+  "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9": { symbol: "USDT", decimals: 6 },
+  "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1": { symbol: "DAI", decimals: 18 },
+  "0x5979d7b546e38e414f7e9822514be443a4800529": { symbol: "wstETH", decimals: 18 },
+  "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f": { symbol: "WBTC", decimals: 8 },
+  "0xf97f4df75117a78c1a5a0dbb814af92458539fb4": { symbol: "LINK", decimals: 18 },
+  "0x912ce59144191c1204e64559fe8253a0e49e6548": { symbol: "ARB", decimals: 18 },
+  // Optimism
+  "0x4200000000000000000000000000000000000006": { symbol: "WETH", decimals: 18 },
+  "0x4200000000000000000000000000000000000042": { symbol: "OP", decimals: 18 },
+  "0x0b2c639c533813f4aa9d7837caf62653d097ff85": { symbol: "USDC", decimals: 6 },
+  "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58": { symbol: "USDT", decimals: 6 },
+  "0x68f180fcce6836688e9084f035309e29bf0a2095": { symbol: "WBTC", decimals: 8 },
+  "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6": { symbol: "LINK", decimals: 18 },
+  "0xda10009cbd5d07dd0cecc66161fc93d7c9000da2": { symbol: "DAI", decimals: 18 },
+};
+
 function tokenMeta(addr: string): { symbol: string; decimals: number } {
-  return TOKENS[addr.toLowerCase()] ?? SEPOLIA_TOKENS[addr.toLowerCase()] ?? { symbol: short(addr), decimals: 18 };
+  const a = addr.toLowerCase();
+  return TOKENS[a] ?? EXTRA_TOKENS[a] ?? SEPOLIA_TOKENS[a] ?? { symbol: short(addr), decimals: 18 };
 }
 
 function fmt(amount: string, decimals: number): string {
@@ -65,20 +87,34 @@ function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; fl
   );
 }
 
-function useBooks(url: string, pollMs: number): { snap: BooksSnapshot | null; err: string | null } {
+function useBooks(url: string, pollMs: number) {
   const [snap, setSnap] = useState<BooksSnapshot | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);   // true while the CURRENT url has no fresh data yet
+  const [updatedAt, setUpdatedAt] = useState<number | null>(null);
   useEffect(() => {
     let alive = true;
+    setLoading(true);
     const tick = async () => {
-      try { const s = await fetchBooks(url); if (alive) { setSnap(s); setErr(null); } }
-      catch (e) { if (alive) setErr((e as Error).message); }
+      try {
+        const s = await fetchBooks(url);
+        if (alive) { setSnap(s); setErr(null); setLoading(false); setUpdatedAt(Date.now()); }
+      } catch (e) { if (alive) { setErr((e as Error).message); setLoading(false); } }
     };
     tick();
     const h = setInterval(tick, pollMs);
     return () => { alive = false; clearInterval(h); };
   }, [url, pollMs]);
-  return { snap, err };
+  return { snap, err, loading, updatedAt };
+}
+
+/** "just now" / "14s ago" - re-renders itself so the page visibly breathes. */
+function Ago({ t }: { t: number | null }) {
+  const [, force] = useState(0);
+  useEffect(() => { const h = setInterval(() => force((n) => n + 1), 5_000); return () => clearInterval(h); }, []);
+  if (!t) return null;
+  const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+  return <span className="ago"><i className="livedot" />{s < 8 ? "live · just now" : `live · ${s}s ago`}</span>;
 }
 
 const nonEmpty = (b: MakerBook) => b.committed !== "0" || b.backing !== "0";
@@ -88,18 +124,22 @@ const byUtilThenSize = (a: MakerBook, z: MakerBook) => {
 };
 
 export function SepoliaBooks() {
-  const { snap, err } = useBooks(SUBGRAPH_URL, 8_000);
+  const { snap, err, loading, updatedAt } = useBooks(SUBGRAPH_URL, 8_000);
   const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty).sort(byUtilThenSize), [snap]);
   return (
     <section className="books">
       {err && <div className="err">Subgraph unreachable - {err}</div>}
       <div className="books-head">
         <div className="hed">Maker balance sheets<span className="sub">what each wallet promised vs what it can settle · live from the index</span></div>
+        <Ago t={updatedAt} />
       </div>
-      <BookHeader />
-      {books.map((b) => (
-        <BookRow key={b.maker + b.token} b={b} explorer="https://sepolia.basescan.org" floorBps={9_500} />
-      ))}
+      {loading && <div className="loadbar" />}
+      <div className={loading ? "table-dim" : undefined}>
+        <BookHeader />
+        {books.map((b) => (
+          <BookRow key={b.maker + b.token} b={b} explorer="https://sepolia.basescan.org" floorBps={9_500} />
+        ))}
+      </div>
       {snap && books.length === 0 && <div className="empty" style={{ padding: 40 }}>No books yet - run pnpm vignette.</div>}
       <p className="cost note" style={{ marginTop: 22, maxWidth: 760 }}>
         These books drive quoting directly: the attestor writes each sheet into SolventBook,
@@ -131,7 +171,7 @@ export function MainnetBooks() {
   ];
   const [ci, setCi] = useState(0);
   const chain = CHAINS[ci];
-  const { snap, err } = useBooks(chain.url, 30_000);
+  const { snap, err, loading, updatedAt } = useBooks(chain.url, 15_000);
   const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty), [snap]);
   const over = books.filter((b) => Number(b.utilisationBps) > 10_000);
   const makers = new Set(books.map((b) => b.maker)).size;
@@ -168,14 +208,18 @@ export function MainnetBooks() {
             <span className="stat"><span className="label">Over-committed</span>
               <b style={{ color: over.length ? "var(--returned)" : undefined }}>{over.length}</b></span>
             <span className="stat"><span className="label">Indexed to</span><b>{snap.head.toLocaleString()}</b></span>
+            <Ago t={updatedAt} />
           </div>
         )}
       </div>
+      {loading && <div className="loadbar" />}
       {err && <div className="err">{chain.key} subgraph unreachable - {err}</div>}
-      <BookHeader />
-      {worst.map((b) => (
-        <BookRow key={b.maker + b.token} b={b} explorer={chain.explorer} floorBps={null} />
-      ))}
+      <div className={loading ? "table-dim" : undefined}>
+        <BookHeader />
+        {worst.map((b) => (
+          <BookRow key={b.maker + b.token} b={b} explorer={chain.explorer} floorBps={null} />
+        ))}
+      </div>
     </section>
   );
 }
