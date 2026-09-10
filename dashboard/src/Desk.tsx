@@ -146,7 +146,7 @@ export function Desk() {
       setStrategies(ss); setBook(b); setErr(null);
     } catch (e) { setErr((e as Error).message); }
   }, []);
-  useEffect(() => { refresh(); const h = setInterval(refresh, 20_000); return () => clearInterval(h); }, [refresh]);
+  useEffect(() => { refresh(); const h = setInterval(refresh, 8_000); return () => clearInterval(h); }, [refresh]);
 
   useEffect(() => {
     let alive = true;
