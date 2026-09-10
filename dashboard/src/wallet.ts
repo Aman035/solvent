@@ -1,11 +1,13 @@
 import { connectorsForWallets } from "@rainbow-me/rainbowkit";
-import { injectedWallet, metaMaskWallet, coinbaseWallet, rabbyWallet } from "@rainbow-me/rainbowkit/wallets";
+import { injectedWallet, coinbaseWallet } from "@rainbow-me/rainbowkit/wallets";
 import { createConfig, http } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
 import { RPC_URL } from "./data";
 
 const connectors = connectorsForWallets(
-  [{ groupName: "Wallets", wallets: [injectedWallet, metaMaskWallet, rabbyWallet, coinbaseWallet] }],
+  // installed extensions (MetaMask, Rabby, ...) surface automatically via EIP-6963
+  // and connect through the plain injected path - the SDK connectors can hang the popup
+  [{ groupName: "Wallets", wallets: [injectedWallet, coinbaseWallet] }],
   // the projectId only matters for WalletConnect relays; injected wallets ignore it
   { appName: "Solvent", projectId: "solvent-demo" },
 );
