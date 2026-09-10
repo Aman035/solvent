@@ -2,8 +2,13 @@ name: Attest books
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    # backstop only: restarts the chain if it ever breaks. GitHub cron is
+    # best-effort and can lag; the chain below is what keeps cadence.
+    - cron: "*/15 * * * *"
   workflow_dispatch:
+
+permissions:
+  actions: write
 
 concurrency:
   group: attest
@@ -12,7 +17,7 @@ concurrency:
 jobs:
   attest:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -23,15 +28,19 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Sync maker books into SolventBook (4x, ~every 60s)
-        # GitHub's cron floor is 5 minutes; looping inside the job gives ~1-minute freshness
+      - name: Sync maker books into SolventBook (8x, ~every 60s)
         run: |
-          for i in 1 2 3 4; do
+          for i in 1 2 3 4 5 6 7 8; do
             pnpm attest:books
-            if [ "$i" != "4" ]; then sleep 60; fi
+            if [ "$i" != "8" ]; then sleep 60; fi
           done
         env:
           # the attestor's own key - ATTESTOR_ROLE only, cannot touch any other wallet
           ATTESTOR_PK: ${{ secrets.ATTESTOR_PK }}
           BASE_SEPOLIA_RPC: https://sepolia.base.org
           SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0
+      - name: Chain the next run
+        if: always()
+        run: gh workflow run attest.yml --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
