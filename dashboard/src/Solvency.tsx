@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, type BooksSnapshot, type MakerBook } from "./data";
 import baseTokens from "./base-tokens.json";
+import { MAKER as FLOOR_MAKER } from "./deskchain";
 
 /**
  * A maker's balance sheet, drawn to scale.
@@ -152,7 +153,8 @@ export function SepoliaBooks() {
       <div className={loading ? "table-dim" : undefined}>
         <BookHeader />
         {books.map((b, i) => (
-          <BookRow key={b.maker + b.token} b={b} index={i} explorer="https://sepolia.basescan.org" floorBps={9_500} />
+          <BookRow key={b.maker + b.token} b={b} index={i} explorer="https://sepolia.basescan.org"
+            floorBps={b.maker.toLowerCase() === FLOOR_MAKER.toLowerCase() ? 9_500 : null} />
         ))}
       </div>
       {snap && books.length === 0 && <div className="empty" style={{ padding: 40 }}>No books yet - run pnpm vignette.</div>}
