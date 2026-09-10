@@ -41,12 +41,8 @@ function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; fl
   const meta = tokenMeta(b.token);
   const u = Number(b.utilisationBps);
   const inf = u === 0xffffffff;
-  // log scale: the 100% waterline sits at 30% of the track; 3 decades of
-  // over-commitment (10000%+) fill the rest, so 659% and 505,727% finally differ
-  const TICK = 0.30;
-  const frac = u <= 10_000
-    ? (u / 10_000) * TICK
-    : inf ? 1 : Math.min(TICK + (Math.log10(u / 10_000) / 3.2) * (1 - TICK), 1);
+  // the capsule is the promise; green is the part the wallet can actually settle
+  const coverage = u === 0 ? 1 : inf ? 0 : Math.min(10_000 / u, 1);
   const over = u > 10_000;
   const pastFloor = floorBps !== null && u >= floorBps;
 
@@ -56,9 +52,9 @@ function BookRow({ b, explorer, floorBps }: { b: MakerBook; explorer: string; fl
         {nameOf(b.maker)}
       </a>
       <span className="book-token">{meta.symbol}</span>
-      <div className="book-bar" title={`promised ${fmt(b.committed, meta.decimals)} · wallet can settle ${fmt(b.backing, meta.decimals)}`}>
-        <i className={`seg ${over ? "phantom" : "covered"}`} style={{ width: `${(frac * 100).toFixed(2)}%` }} />
-        <i className="tick100" />
+      <div className={`cov${over ? " short" : ""}`}
+        title={`promised ${fmt(b.committed, meta.decimals)} · wallet can settle ${fmt(b.backing, meta.decimals)}`}>
+        <i style={{ width: `${Math.max(coverage * 100, coverage > 0 ? 1.5 : 0).toFixed(1)}%` }} />
       </div>
       <span className="num book-amt">{fmt(b.committed, meta.decimals)}</span>
       <span className="num book-amt">{fmt(b.backing, meta.decimals)}</span>
@@ -119,10 +115,10 @@ function BookHeader() {
     <div className="book book-cols">
       <span className="label">Maker</span>
       <span className="label">Token</span>
-      <span className="label">Utilisation · the line is 100%</span>
+      <span className="label">The promise, and how much is real</span>
       <span className="label" style={{ textAlign: "right" }}>Promised</span>
       <span className="label" style={{ textAlign: "right" }}>Can settle</span>
-      <span className="label" style={{ textAlign: "right" }}>&nbsp;</span>
+      <span className="label" style={{ textAlign: "right" }}>Utilisation</span>
     </div>
   );
 }
@@ -143,10 +139,9 @@ export function MainnetBooks() {
 
   return (
     <section className="books">
-      <div className="soon-bar">
-        Solvent's contracts run on Base Sepolia today; the mainnet deployment is coming.
-        What you see here is read-only: the live balance sheet of every real 1inch Aqua
-        maker, maintained by our index on three chains.
+      <div className="ro-strip">
+        <span className="ro-badge">Read-only</span>
+        <span>Every real Aqua maker's balance sheet, indexed live on three chains. Contracts are live on Base Sepolia; mainnet is next.</span>
       </div>
       <div className="books-head">
         <nav className="chainswitch">

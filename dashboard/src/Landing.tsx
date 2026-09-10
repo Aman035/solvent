@@ -19,7 +19,7 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } },
-      { threshold: 0.25 });
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -245,34 +245,46 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
             its own, and past the floor the book refuses, before any gas is spent.
           </p>
         </Reveal>
-        <div className="timeline">
+        <div className="bento">
           {[
-            { u: "45%", fill: 0.62, bid: "3,106.67", note: "healthy · base fee only", declined: false },
-            { u: "87%", fill: 0.16, bid: "3,202.86", note: "SolvencySkew widened the spread", declined: false },
-            { u: "94%", fill: 0.08, bid: "3,220.02", note: "climbing toward the floor", declined: false },
-            { u: "99%", fill: 0.02, bid: "DECLINED", note: "SolvencyFloor · refused at quote time", declined: true },
+            { u: "45%", fill: 0.62, bid: "3,106.67", note: "healthy · base fee only" },
+            { u: "87%", fill: 0.16, bid: "3,202.86", note: "SolvencySkew widened the spread" },
+            { u: "94%", fill: 0.08, bid: "3,220.02", note: "climbing toward the floor" },
           ].map((t, i) => (
-            <Reveal key={t.u} className={`tstep${t.declined ? " declined" : ""}`} delay={i * 0.14}>
+            <Reveal key={t.u} className="tstep" delay={i * 0.09}>
               <div className="tstep-head">
                 <span className="num tstep-u">{t.u} <small>utilised</small></span>
                 <svg width="16" height="24" viewBox="0 0 16 24" aria-hidden="true">
                   <rect x="1" y="1" width="14" height="22" rx="4" fill="none" stroke="var(--rule-lit)" strokeWidth="1.5" />
-                  <rect x="3" y={3 + 18 * (1 - t.fill)} width="10" height={18 * t.fill} rx="2"
-                    fill={t.declined ? "var(--returned)" : "var(--delivered)"} />
+                  <rect x="3" y={3 + 18 * (1 - t.fill)} width="10" height={18 * t.fill} rx="2" fill="var(--delivered)" />
                 </svg>
               </div>
-              <b className={`num tstep-bid${t.declined ? " red" : ""}`}>{t.bid}</b>
+              <b className="num tstep-bid">{t.bid}</b>
               <span className="tstep-note">{t.note}</span>
             </Reveal>
           ))}
+          <Reveal className="tstep declined big" delay={0.27}>
+            <div className="tstep-head">
+              <span className="num tstep-u">99% <small>utilised</small></span>
+              <svg width="16" height="24" viewBox="0 0 16 24" aria-hidden="true">
+                <rect x="1" y="1" width="14" height="22" rx="4" fill="none" stroke="var(--rule-lit)" strokeWidth="1.5" />
+                <rect x="3" y="20.6" width="10" height="0.4" rx="0.2" fill="var(--returned)" />
+              </svg>
+            </div>
+            <b className="num tstep-bid red">DECLINED</b>
+            <span className="tstep-sub num">MakerBeyondSolvencyFloor · 99.0% &gt; 95%</span>
+            <span className="tstep-note">Past the floor the book refuses at quote time, with a reason. No stale price, no wasted gas, no revert in a taker's face.</span>
+          </Reveal>
+          <Reveal className="tstep index" delay={0.36}>
+            <span className="label">Behind every quote</span>
+            <b>The index</b>
+            <span className="tstep-note">One subgraph schema maintaining every maker's promise against their wallet, from primary events. The instruments read it on-chain.</span>
+            <span className="chain-chips num">
+              <em>Base</em><em>Arbitrum</em><em>Optimism</em>
+            </span>
+            <a className="tstep-link" href={`${SUBGRAPH_URL_BASE}/graphql`} target="_blank" rel="noreferrer">Query it yourself ↗</a>
+          </Reveal>
         </div>
-        <Reveal className="index-line" delay={0.2}>
-          <p>
-            Behind every quote sits the index: one subgraph schema on Base, Arbitrum and
-            Optimism, maintaining each maker's promise against their wallet from primary
-            events. The instruments read it on-chain; <a href={`${SUBGRAPH_URL_BASE}/graphql`} target="_blank" rel="noreferrer">anyone can query it</a>.
-          </p>
-        </Reveal>
         <div className="story-cta">
           <button className="cta" onClick={() => onExplore("testnet")}>Explore testnet</button>
           <button className="cta ghost" onClick={() => onExplore("mainnet")}>Explore mainnet</button>
