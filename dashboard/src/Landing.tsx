@@ -282,7 +282,6 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
             <span className="chain-chips num">
               <em>Base</em><em>Arbitrum</em><em>Optimism</em>
             </span>
-            <a className="tstep-link" href={`${SUBGRAPH_URL_BASE}/graphql`} target="_blank" rel="noreferrer">Query it yourself ↗</a>
           </Reveal>
         </div>
         <div className="story-cta">
