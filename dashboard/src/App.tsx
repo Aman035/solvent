@@ -19,8 +19,8 @@ registerSepoliaTokens({
 type Net = "testnet" | "mainnet";
 type View = "desk" | "how" | "books" | "ledger";
 const VIEWS: { id: View; name: string }[] = [
-  { id: "desk", name: "Quote desk" },
   { id: "how", name: "How it works" },
+  { id: "desk", name: "Quote desk" },
   { id: "books", name: "Balance sheets" },
   { id: "ledger", name: "Settlement ledger" },
 ];
@@ -255,7 +255,7 @@ export default function App() {
   const opened = snap?.agents.find((a) => a.id === open) ?? null;
 
   const [net, setNet] = useState<Net | null>(null);
-  const [view, setView] = useState<View>("desk");
+  const [view, setView] = useState<View>("how");
   const tab = net === "mainnet" ? "mainnet" : view;
 
   if (net === null) return <Landing onExplore={setNet} />;
