@@ -474,3 +474,45 @@ html { scroll-behavior: smooth; }
 .vessel-readout { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 6px; }
 .vessel-readout b { font-family: var(--mono); font-size: 24px; letter-spacing: -0.01em; }
 .vessel-readout b.bad { color: var(--returned); }
+
+/* ---- the audit exhibit ---------------------------------------------------- */
+.story.problem { display: grid; grid-template-columns: minmax(0, 560px) minmax(320px, 430px); gap: clamp(32px, 5vw, 80px); align-items: center; justify-content: space-between; }
+.exhibit-wrap { transform: rotate(1.2deg); }
+.exhibit {
+  margin: 0; background: #fff; border: 1px solid var(--rule); border-radius: 6px;
+  padding: 20px 22px 16px;
+  box-shadow: 0 2px 5px rgba(26,33,43,0.05), 0 24px 48px rgba(26,33,43,0.10);
+}
+.exhibit-head { padding-bottom: 12px; }
+.exhibit-row { display: grid; grid-template-columns: 1.15fr 1.2fr 0.95fr 1fr; gap: 10px;
+  padding: 9px 0; border-top: 1px solid var(--rule); font-size: 11.5px; color: var(--text-2); }
+.exhibit-row.head { border-top: none; padding: 6px 0; }
+.exhibit-row .red { color: var(--returned); }
+.exhibit-row span:nth-child(3), .exhibit-row span:nth-child(4) { text-align: right; }
+.exhibit-sum { border-top: 2px solid var(--text); margin-top: 2px; padding: 11px 0 9px;
+  font-size: 12px; font-weight: 600; color: var(--text); }
+.exhibit-live { display: flex; align-items: center; gap: 8px; border-top: 1px solid var(--rule);
+  padding-top: 11px; font-size: 11px; color: var(--text-2); }
+
+/* ---- the defence timeline -------------------------------------------------- */
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
+.tstep {
+  background: #fff; border: 1px solid var(--rule); border-radius: 14px; padding: 18px 18px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  box-shadow: 0 1px 3px rgba(26,33,43,0.04), 0 10px 28px rgba(26,33,43,0.06);
+}
+.tstep.declined { border-color: var(--returned); box-shadow: 0 1px 3px rgba(26,33,43,0.04), 0 12px 30px rgba(194,67,79,0.14); }
+.tstep-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.tstep-u { font-size: 15px; font-weight: 600; }
+.tstep-u small { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); font-weight: 500; }
+.tstep-bid { font-size: 21px; letter-spacing: -0.015em; }
+.tstep-bid.red { color: var(--returned); letter-spacing: 0.06em; font-size: 17px; }
+.tstep-note { font-size: 11px; line-height: 1.55; color: var(--text-3); border-top: 1px solid var(--rule); padding-top: 10px; }
+.index-line { max-width: 640px; margin-top: 30px; }
+.index-line p { font-size: 13.5px; line-height: 1.7; color: var(--text-2); margin: 0; }
+
+@media (max-width: 880px) {
+  .story.problem { grid-template-columns: 1fr; }
+  .exhibit-wrap { transform: none; }
+  .timeline { grid-template-columns: 1fr 1fr; }
+}

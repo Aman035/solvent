@@ -30,51 +30,6 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-/** Counts up once when started - the printed-meter effect for the stat cards. */
-function useCountUp(target: number, started: boolean, ms = 900): number {
-  const [v, setV] = useState(0);
-  useEffect(() => {
-    if (!started) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { setV(target); return; }
-    let raf = 0; const t0 = performance.now();
-    const tick = (t: number) => {
-      const k = Math.min((t - t0) / ms, 1);
-      setV(Math.round(target * (1 - Math.pow(1 - k, 3))));
-      if (k < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, started, ms]);
-  return v;
-}
-
-function StatCards({ over }: { over: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [seen, setSeen] = useState(false);
-  useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } }, { threshold: 0.3 });
-    io.observe(el); return () => io.disconnect();
-  }, []);
-  const a = useCountUp(123, seen), b = useCountUp(51_161, seen, 1100), c = useCountUp(over, seen, 1300);
-  return (
-    <div className="story-stats" ref={ref}>
-      <div className={`stat-card reveal${seen ? " in" : ""}`} style={{ "--rd": "0s" } as never}>
-        <b className="num">{a} <span>of 138</span></b>
-        <span className="stat-what">material books ran under-backed, across Base, Arbitrum and Optimism</span>
-      </div>
-      <div className={`stat-card reveal${seen ? " in" : ""}`} style={{ "--rd": "0.12s" } as never}>
-        <b className="num">${b.toLocaleString("en-US")}</b>
-        <span className="stat-what">of USDC advertised at 0.0% backing, continuously, for weeks - every taker reverted</span>
-      </div>
-      <div className={`stat-card reveal${seen ? " in" : ""}`} style={{ "--rd": "0.24s" } as never}>
-        <b className="num red">{c}</b>
-        <span className="stat-what">books quoting more than they hold at this moment, read live from our indexes on three chains</span>
-      </div>
-    </div>
-  );
-}
-
 function fmtAmt(v: bigint, dec: number) {
   const n = Number(v) / 10 ** dec;
   return n >= 1000 ? n.toLocaleString("en-US", { maximumFractionDigits: 0 })
@@ -241,58 +196,83 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
       </main>
       </div>
 
-      {/* ── the problem, measured ── */}
-      <section className="story" id="problem">
+      {/* ── the problem: the audit exhibit ── */}
+      <section className="story problem" id="problem">
         <Reveal className="story-copy">
           <span className="label">The problem</span>
-          <h2>On Aqua, every book can be naked.</h2>
+          <h2>One wallet, many promises, and nothing checking.</h2>
           <p>
             1inch Aqua lets makers quote without depositing: strategies promise virtual
             balances while the tokens stay in the maker's wallet. Nothing sums those
-            promises, and quoting never checks the wallet. So one wallet quietly backs
-            many books, the wallet drains through fills and withdrawals, and the quotes
-            stay exactly where they were - until a taker fills one and the settlement
-            reverts in their face.
+            promises, and quoting never reads the wallet. So the wallet drains, the
+            quotes hold still, and the first taker to trust one buys a revert.
           </p>
           <p>
-            We rebuilt every maker's balance sheet in Aqua's history on three chains,
-            at event resolution, from primary data. This is not a hypothesis:
+            We rebuilt every maker's balance sheet in Aqua's history, on three chains,
+            from primary events. The worst offenders were not dust, and they were not
+            brief.
           </p>
         </Reveal>
-        <StatCards over={stats.over} />
+        <Reveal className="exhibit-wrap" delay={0.15}>
+          <figure className="exhibit">
+            <figcaption className="exhibit-head label">Exhibit · Aqua mainnet, six weeks</figcaption>
+            <div className="exhibit-row head label">
+              <span>maker</span><span>book</span><span>advertised</span><span>held</span>
+            </div>
+            <div className="exhibit-row num">
+              <span>0x5500…237f</span><span>WETH · Base</span><span>$162,754</span><span className="red">9.8%</span>
+            </div>
+            <div className="exhibit-row num">
+              <span>0x00aa…275f</span><span>WETH · Arbitrum</span><span>$142,576</span><span className="red">50%</span>
+            </div>
+            <div className="exhibit-row num">
+              <span>0x7553…4a55</span><span>USDC · Base</span><span>$51,161</span><span className="red">0.0% · weeks</span>
+            </div>
+            <div className="exhibit-sum num">123 of 138 material books ran under-backed</div>
+            <div className="exhibit-live"><i className="livedot" /><span className="num">{stats.over} books over-committed right now, across three chains</span></div>
+          </figure>
+        </Reveal>
       </section>
 
-      {/* ── what solvent does ── */}
+      {/* ── what solvent solves: one book, four moments ── */}
       <section className="story">
         <Reveal className="story-copy">
           <span className="label">What Solvent solves</span>
-          <h2>Books that defend themselves.</h2>
+          <h2>Watch one book defend itself.</h2>
           <p>
-            Solvent keeps a live balance sheet for every maker - promised against what the
-            wallet can actually settle - and puts it where it changes behaviour: inside
-            the quote itself.
+            Solvent keeps a live balance sheet for every maker and puts it inside the
+            quote. Below is the same strategy as its wallet drains: the spread widens on
+            its own, and past the floor the book refuses, before any gas is spent.
           </p>
         </Reveal>
-        <div className="feature-row">
-          <Reveal className="feature" delay={0}>
-            <span className="label">01 · SolvencySkew</span>
-            <h3>Spreads that price the risk</h3>
-            <p>As the wallet thins past a threshold, every quote widens on its own - a linear ramp the maker tunes per strategy. Thin books get expensive before they get dangerous.</p>
-            <div className="feature-foot num">bid 3,106.67 → 3,202.86 <em>at 87% utilised</em></div>
-          </Reveal>
-          <Reveal className="feature" delay={0.12}>
-            <span className="label">02 · SolvencyFloor</span>
-            <h3>Refusal instead of failure</h3>
-            <p>Past a hard floor the book declines at quote time, with a reason. Takers and aggregators see the refusal before spending gas, not a revert after.</p>
-            <div className="feature-foot num"><em className="red">DECLINED</em> SolvencyFloor · 99.0% &gt; 95%</div>
-          </Reveal>
-          <Reveal className="feature" delay={0.24}>
-            <span className="label">03 · The index</span>
-            <h3>Every maker's true backing</h3>
-            <p>One subgraph schema on three chains maintains each maker's promise-vs-wallet sheet from primary events - the oracle feed for the instruments, and open to anyone.</p>
-            <div className="feature-foot num">Base · Arbitrum · Optimism <em>index live on all three</em></div>
-          </Reveal>
+        <div className="timeline">
+          {[
+            { u: "45%", fill: 0.62, bid: "3,106.67", note: "healthy · base fee only", declined: false },
+            { u: "87%", fill: 0.16, bid: "3,202.86", note: "SolvencySkew widened the spread", declined: false },
+            { u: "94%", fill: 0.08, bid: "3,220.02", note: "climbing toward the floor", declined: false },
+            { u: "99%", fill: 0.02, bid: "DECLINED", note: "SolvencyFloor · refused at quote time", declined: true },
+          ].map((t, i) => (
+            <Reveal key={t.u} className={`tstep${t.declined ? " declined" : ""}`} delay={i * 0.14}>
+              <div className="tstep-head">
+                <span className="num tstep-u">{t.u} <small>utilised</small></span>
+                <svg width="16" height="24" viewBox="0 0 16 24" aria-hidden="true">
+                  <rect x="1" y="1" width="14" height="22" rx="4" fill="none" stroke="var(--rule-lit)" strokeWidth="1.5" />
+                  <rect x="3" y={3 + 18 * (1 - t.fill)} width="10" height={18 * t.fill} rx="2"
+                    fill={t.declined ? "var(--returned)" : "var(--delivered)"} />
+                </svg>
+              </div>
+              <b className={`num tstep-bid${t.declined ? " red" : ""}`}>{t.bid}</b>
+              <span className="tstep-note">{t.note}</span>
+            </Reveal>
+          ))}
         </div>
+        <Reveal className="index-line" delay={0.2}>
+          <p>
+            Behind every quote sits the index: one subgraph schema on Base, Arbitrum and
+            Optimism, maintaining each maker's promise against their wallet from primary
+            events. The instruments read it on-chain; <a href={`${SUBGRAPH_URL_BASE}/graphql`} target="_blank" rel="noreferrer">anyone can query it</a>.
+          </p>
+        </Reveal>
         <div className="story-cta">
           <button className="cta" onClick={() => onExplore("testnet")}>Explore testnet</button>
           <button className="cta ghost" onClick={() => onExplore("mainnet")}>Explore mainnet</button>
