@@ -196,44 +196,51 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
       </main>
       </div>
 
-      {/* ── the problem: the audit exhibit ── */}
+      {/* ── the problem: one book, poster scale ── */}
       <section className="story problem" id="problem">
         <Reveal className="story-copy">
           <span className="label">The problem</span>
           <h2>One wallet, many promises, and nothing checking.</h2>
           <p>
-            1inch Aqua lets makers quote without depositing: strategies promise virtual
-            balances while the tokens stay in the maker's wallet. The wallet drains, the
-            quotes hold still, and the first taker to trust one buys a revert.
+            Aqua makers quote without depositing: strategies promise virtual balances
+            while the tokens stay in the wallet. The wallet drains, the quotes stand
+            still. We rebuilt every maker's balance sheet from Aqua's full history on
+            three chains, and one real book looks like this:
           </p>
-          <div className="causes">
-            <div className="cause"><i className="num">01</i><span><b>Nothing sums the promises.</b> One wallet quietly backs many strategies at once.</span></div>
-            <div className="cause"><i className="num">02</i><span><b>Quotes never read the wallet.</b> Prices stand still while the backing walks away.</span></div>
-            <div className="cause"><i className="num">03</i><span><b>The remedy is manual.</b> The prescribed fix is a maker watching, and docking by hand.</span></div>
+        </Reveal>
+
+        <Reveal className="monument" delay={0.12}>
+          <div className="mon-row top">
+            <span><span className="label">advertised</span><b className="num">$51,161 USDC</b></span>
+            <span className="mon-ghost num">0x7553…4a55 · Base mainnet</span>
+          </div>
+          <div className="mon-capsule" role="img" aria-label="a book advertising 51,161 dollars while holding zero" />
+          <div className="mon-row bottom">
+            <span><span className="label">held</span><b className="num red">$0</b></span>
+            <span className="mon-note num">continuously, for weeks · every taker who tried it got a revert</span>
           </div>
         </Reveal>
-        <Reveal className="exhibit-wrap" delay={0.15}>
-          <figure className="exhibit">
-            <figcaption className="exhibit-head">
-              <span className="label">Exhibit · Aqua mainnet, six weeks</span>
-              <span className="exhibit-sub">rebuilt from primary events, on three chains</span>
-            </figcaption>
-            <div className="exhibit-row head label">
-              <span>maker</span><span>book</span><span>advertised</span><span>held</span>
-            </div>
-            <div className="exhibit-row num">
-              <span>0x5500…237f</span><span>WETH · Base</span><span>$162,754</span><span className="red">9.8%</span>
-            </div>
-            <div className="exhibit-row num">
-              <span>0x00aa…275f</span><span>WETH · Arbitrum</span><span>$142,576</span><span className="red">50%</span>
-            </div>
-            <div className="exhibit-row num">
-              <span>0x7553…4a55</span><span>USDC · Base</span><span>$51,161</span><span className="red">0.0% · weeks</span>
-            </div>
-            <div className="exhibit-sum num">123 of 138 material books ran under-backed</div>
-            <div className="exhibit-live"><i className="livedot" /><span className="num">{stats.over} books over-committed right now, across three chains</span></div>
-          </figure>
+
+        <Reveal className="evidence-strip num" delay={0.22}>
+          <span>123 of 138 material books ran under-backed</span>
+          <span>worst WETH book · $162,754 at 9.8% held</span>
+          <span><i className="livedot" />{stats.over} over-committed right now, live</span>
         </Reveal>
+
+        <div className="causes three">
+          <Reveal className="cause" delay={0}>
+            <i className="num">01</i>
+            <span><b>Nothing sums the promises.</b> One wallet quietly backs many strategies at once.</span>
+          </Reveal>
+          <Reveal className="cause" delay={0.1}>
+            <i className="num">02</i>
+            <span><b>Quotes never read the wallet.</b> Prices stand still while the backing walks away.</span>
+          </Reveal>
+          <Reveal className="cause" delay={0.2}>
+            <i className="num">03</i>
+            <span><b>The remedy is manual.</b> The prescribed fix is a maker watching, and docking by hand.</span>
+          </Reveal>
+        </div>
       </section>
 
       {/* ── what solvent solves: one book, four moments ── */}
