@@ -1,5 +1,5 @@
 /* ── shell ──────────────────────────────────────────────────────────────── */
-.shell { max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter) 56px; }
+.shell { max-width: none; margin: 0; padding: 0 clamp(20px, 3vw, 52px) 56px; }
 
 /* ── app navbar: the landing's language ─────────────────────────────────── */
 .rail {
@@ -219,7 +219,7 @@
 }
 
 /* ---- Quote desk ---------------------------------------------------------- */
-.desk { display: grid; grid-template-columns: 240px 1fr; gap: 36px; margin-top: 22px; align-items: start; }
+.desk { display: grid; grid-template-columns: clamp(250px, 20vw, 320px) minmax(0, 1fr); gap: clamp(30px, 4vw, 70px); margin-top: 22px; align-items: start; }
 .desk-side {
   position: sticky; top: 16px;
   background: #fff; border: 1px solid var(--rule); border-radius: 16px; padding: 20px 18px 16px;
@@ -271,7 +271,7 @@
 }
 
 /* ---- two-level nav + mainnet bar ----------------------------------------- */
-.mainnet-intro { max-width: 660px; padding: 26px 2px 6px; }
+.mainnet-intro { max-width: 800px; padding: 26px 2px 6px; }
 .mainnet-intro h2 { font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
 .mainnet-intro p { font-size: 13.5px; line-height: 1.7; color: var(--text-2); margin: 0 0 12px; }
 .mainnet-solves { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--text); font-weight: 500; }
