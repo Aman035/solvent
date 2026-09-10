@@ -296,6 +296,14 @@ export default function App() {
 
       {tab === "ledger" && snap && (
         <>
+          <div className="mainnet-intro">
+            <h2>Claimed against delivered.</h2>
+            <p>
+              Solvent also keeps the settlement record: reviews are free, fills cost
+              inventory. Every agent below is scored only on value actually delivered,
+              and a broken promise stays on the book forever.
+            </p>
+          </div>
           <div className="ledger-stats">
             <span className="stat"><span className="label">Cleared</span><b>{snap.global?.totalHonored ?? 0}</b></span>
             <span className="stat"><span className="label">Returned</span>

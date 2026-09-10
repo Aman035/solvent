@@ -157,6 +157,16 @@ export function Desk() {
   if (!book || strategies.length === 0) return <div className="empty" style={{ padding: 80 }}>Reading the desk…{strategies.length === 0 && book ? " no active vignette strategies - run pnpm vignette" : ""}</div>;
 
   return (
+    <>
+    <div className="mainnet-intro">
+      <h2>Drain the wallet. Watch the book say no.</h2>
+      <p>
+        Three live strategies on Base Sepolia share one maker wallet. The quote on the
+        right comes from the deployed router while you watch. Drag the wallet level
+        down and the same book widens its spread on its own, then refuses past the
+        floor - the exact failure mainnet makers have today, defended automatically.
+      </p>
+    </div>
     <section className="desk">
       <div className="desk-side">
         <div className="label" style={{ marginBottom: 8 }}>The maker's wallet</div>
@@ -250,5 +260,6 @@ export function Desk() {
         </p>
       </div>
     </section>
+    </>
   );
 }

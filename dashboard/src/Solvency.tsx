@@ -129,8 +129,15 @@ export function SepoliaBooks() {
   return (
     <section className="books">
       {err && <div className="err">Subgraph unreachable - {err}</div>}
+      <div className="mainnet-intro">
+        <h2>The balance sheet the quotes read.</h2>
+        <p>
+          Every maker on our Sepolia deployment, promised against what their wallet can
+          settle. The attestor writes these sheets into the on-chain oracle, and the
+          SolvencySkew and SolvencyFloor instructions read them inside every quote.
+        </p>
+      </div>
       <div className="books-head">
-        <div className="hed">Maker balance sheets<span className="sub">what each wallet promised vs what it can settle · live from the index</span></div>
         <Ago t={updatedAt} />
       </div>
       {loading && <div className="loadbar" />}
