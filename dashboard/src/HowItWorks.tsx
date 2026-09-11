@@ -1,5 +1,5 @@
 import manifest from "../../deployments/84532.json";
-import { INDEX_LINK } from "./data";
+import { INDEX_LINK, explorerLink, NETWORK_IDS } from "./data";
 
 /**
  * The system as a numbered pipeline. Every node is a real deployed thing: contracts
@@ -75,6 +75,14 @@ export function HowItWorks() {
           { name: "SolventBook", role: "the balance-sheet oracle: promised and settleable, per maker, per token", kind: "onchain", addr: C.solventBook.address, pivot: true },
         ]}
       />
+
+      <div className="published-row">
+        <span className="label">Published on The Graph Network</span>
+        {([["Base Sepolia", NETWORK_IDS.sepolia], ["Base", NETWORK_IDS.base],
+           ["Arbitrum", NETWORK_IDS.arbitrum], ["Optimism", NETWORK_IDS.optimism]] as const).map(([name, id]) => (
+          <a key={id} className="published-chip" href={explorerLink(id)} target="_blank" rel="noreferrer">{name} ↗</a>
+        ))}
+      </div>
 
       <Lane
         title="Serving the quote"

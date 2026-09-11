@@ -724,3 +724,14 @@ html { scroll-behavior: smooth; }
 }
 
 .livedot.paused { background: var(--claimed); box-shadow: 0 0 0 4px var(--ink-700); }
+
+/* ---- links to the published subgraphs ------------------------------------- */
+.books-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.graph-link { font-family: var(--mono); font-size: 11px; color: var(--link); white-space: nowrap; }
+.published-row { flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 18px 0 30px; position: relative; z-index: 1; }
+.published-row .label { margin-right: 4px; }
+.published-chip {
+  font-family: var(--mono); font-size: 11px; color: var(--link);
+  background: #fff; border: 1px solid var(--rule); border-radius: 999px; padding: 5px 12px;
+}
+.published-chip:hover { border-color: var(--link); text-decoration: none; }

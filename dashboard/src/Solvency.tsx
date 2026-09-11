@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, type BooksSnapshot, type MakerBook } from "./data";
+import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, INDEX_LINK, explorerLink, NETWORK_IDS, type BooksSnapshot, type MakerBook } from "./data";
 import baseTokens from "./base-tokens.json";
 import { startPoll, isIdle } from "./poll";
 import { MAKER as FLOOR_MAKER, readOracleBook, utilisationBps as calcUtil } from "./deskchain";
@@ -167,6 +167,7 @@ export function SepoliaBooks() {
         </p>
       </div>
       <div className="books-head">
+        <a className="graph-link" href={INDEX_LINK} target="_blank" rel="noreferrer">Base Sepolia subgraph on Graph Explorer ↗</a>
         <div className="books-stats">
           <span className="stat"><span className="label">Makers</span><b>{new Set(books.map((x) => x.maker)).size}</b></span>
           <span className="stat"><span className="label">Books</span><b>{books.length}</b></span>
@@ -209,9 +210,9 @@ function BookHeader() {
 
 export function MainnetBooks() {
   const CHAINS = [
-    { key: "Base", url: SUBGRAPH_URL_BASE, explorer: "https://basescan.org" },
-    { key: "Arbitrum", url: SUBGRAPH_URL_ARBITRUM, explorer: "https://arbiscan.io" },
-    { key: "Optimism", url: SUBGRAPH_URL_OPTIMISM, explorer: "https://optimistic.etherscan.io" },
+    { key: "Base", url: SUBGRAPH_URL_BASE, explorer: "https://basescan.org", graph: explorerLink(NETWORK_IDS.base) },
+    { key: "Arbitrum", url: SUBGRAPH_URL_ARBITRUM, explorer: "https://arbiscan.io", graph: explorerLink(NETWORK_IDS.arbitrum) },
+    { key: "Optimism", url: SUBGRAPH_URL_OPTIMISM, explorer: "https://optimistic.etherscan.io", graph: explorerLink(NETWORK_IDS.optimism) },
   ];
   const [ci, setCi] = useState(0);
   const chain = CHAINS[ci];
@@ -241,11 +242,14 @@ export function MainnetBooks() {
         </p>
       </div>
       <div className="books-head">
-        <nav className="chainswitch">
-          {CHAINS.map((c, i) => (
-            <button key={c.key} className={i === ci ? "on" : ""} onClick={() => setCi(i)}>{c.key}</button>
-          ))}
-        </nav>
+        <div className="books-left">
+          <nav className="chainswitch">
+            {CHAINS.map((c, i) => (
+              <button key={c.key} className={i === ci ? "on" : ""} onClick={() => setCi(i)}>{c.key}</button>
+            ))}
+          </nav>
+          <a className="graph-link" href={chain.graph} target="_blank" rel="noreferrer">{chain.key} subgraph on Graph Explorer ↗</a>
+        </div>
         {snap && (
           <div className="books-stats">
             <span className="stat"><span className="label">Makers</span><b>{makers}</b></span>
