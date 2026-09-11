@@ -5,6 +5,7 @@ import {
   simulateQuote, utilisationBps, widenFor, U32_MAX, type DeskStrategy, type QuoteResult,
 } from "./deskchain";
 import { short } from "./data";
+import { startPoll } from "./poll";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useWalletClient, useSwitchChain } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
@@ -140,13 +141,20 @@ export function Desk() {
   }, [amount]);
   const strategy = strategies[sel] ?? null;
 
-  const refresh = useCallback(async () => {
-    try {
-      const [ss, b] = await Promise.all([loadStrategies(), liveBook()]);
-      setStrategies(ss); setBook(b); setErr(null);
-    } catch (e) { setErr((e as Error).message); }
+  // strategies live in the index and rarely change; the book is an RPC read and moves
+  const refreshStrategies = useCallback(async () => {
+    try { setStrategies(await loadStrategies()); setErr(null); }
+    catch (e) { setStrategies((prev) => { if (!prev.length) setErr((e as Error).message); return prev; }); throw e; }
   }, []);
-  useEffect(() => { refresh(); const h = setInterval(refresh, 8_000); return () => clearInterval(h); }, [refresh]);
+  const refresh = useCallback(async () => {
+    try { setBook(await liveBook()); } catch (e) { setBook((prev) => { if (!prev) setErr((e as Error).message); return prev; }); throw e; }
+  }, []);
+  useEffect(() => startPoll(refreshStrategies, 120_000), [refreshStrategies]);
+  useEffect(() => startPoll(refresh, 8_000), [refresh]);
+  // committed only moves on ship / dock / fill - exactly when the strategy set or its
+  // reserves change - so a moved book triggers a strategy refetch, event-driven
+  const committedKey = book?.committed.toString();
+  useEffect(() => { if (committedKey) refreshStrategies().catch(() => {}); }, [committedKey, refreshStrategies]);
 
   useEffect(() => {
     let alive = true;
@@ -168,7 +176,7 @@ export function Desk() {
   const backing = dragged ?? book?.wallet ?? 0n;
   const sim = strategy && book && usdcIn > 0n ? simulateQuote(strategy, usdcIn, backing, book.committed) : null;
   const simUtil = book ? utilisationBps(book.committed, backing) : 0;
-  const taker = useTaker(strategy, usdcIn, refresh);
+  const taker = useTaker(strategy, usdcIn, () => { refresh().catch(() => {}); refreshStrategies().catch(() => {}); });
 
   if (err) return <div className="err">Base Sepolia unreachable - {err}</div>;
   if (!book || strategies.length === 0) return (

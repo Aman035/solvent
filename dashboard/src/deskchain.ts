@@ -9,6 +9,7 @@ import {
 import { baseSepolia } from "viem/chains";
 import manifest from "../../deployments/84532.json";
 import { RPC_URL, SUBGRAPH_URL } from "./data";
+import { postJSON } from "./poll";
 
 const C = manifest.contracts as Record<string, { address: Hex }>;
 export const ADDR = {
@@ -126,11 +127,8 @@ function parseProgram(program: Hex) {
 }
 
 export async function loadStrategies(): Promise<DeskStrategy[]> {
-  const r = await fetch(SUBGRAPH_URL, {
-    method: "POST", headers: { "content-type": "application/json" },
-    body: JSON.stringify({ query: `{ strategies(where: { maker: "${MAKER.toLowerCase()}", active: true }, orderBy: shippedAtBlock, first: 3) { id program } }` }),
-  });
-  const j = await r.json();
+  const j = await postJSON<{ data: { strategies: { id: Hex; program: Hex }[] } }>(SUBGRAPH_URL,
+    { query: `{ strategies(where: { maker: "${MAKER.toLowerCase()}", active: true }, orderBy: shippedAtBlock, first: 3) { id program } }` });
   const out: DeskStrategy[] = [];
   for (const [n, s] of (j.data.strategies as { id: Hex; program: Hex }[]).entries()) {
     const order = await pc.readContract({

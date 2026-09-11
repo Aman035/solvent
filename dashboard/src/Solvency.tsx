@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, type BooksSnapshot, type MakerBook } from "./data";
 import baseTokens from "./base-tokens.json";
+import { startPoll } from "./poll";
 import { MAKER as FLOOR_MAKER, readOracleBook, utilisationBps as calcUtil } from "./deskchain";
 
 /**
@@ -100,11 +101,13 @@ function useBooks(url: string, pollMs: number) {
       try {
         const s = await fetchBooks(url);
         if (alive) { setSnap(s); setErr(null); setLoading(false); setUpdatedAt(Date.now()); }
-      } catch (e) { if (alive) { setErr((e as Error).message); setLoading(false); } }
+      } catch (e) {
+        if (alive) { setSnap((prev) => { if (!prev) setErr((e as Error).message); return prev; }); setLoading(false); }
+        throw e;
+      }
     };
-    tick();
-    const h = setInterval(tick, pollMs);
-    return () => { alive = false; clearInterval(h); };
+    const stop = startPoll(tick, pollMs);
+    return () => { alive = false; stop(); };
   }, [url, pollMs]);
   return { snap, err, loading, updatedAt };
 }
@@ -125,7 +128,7 @@ const byUtilThenSize = (a: MakerBook, z: MakerBook) => {
 };
 
 export function SepoliaBooks() {
-  const { snap, err, loading, updatedAt } = useBooks(SUBGRAPH_URL, 8_000);
+  const { snap, err, loading, updatedAt } = useBooks(SUBGRAPH_URL, 20_000);
   // the index sees Aqua events; wallets drain without any. Overlay the on-chain
   // oracle (what quotes actually read) so this table is the live truth.
   const [orc, setOrc] = useState<Record<string, { committed: bigint; backing: bigint }>>({});
@@ -211,7 +214,7 @@ export function MainnetBooks() {
   ];
   const [ci, setCi] = useState(0);
   const chain = CHAINS[ci];
-  const { snap, err, loading, updatedAt } = useBooks(chain.url, 15_000);
+  const { snap, err, loading, updatedAt } = useBooks(chain.url, 30_000);
   const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty), [snap]);
   const over = books.filter((b) => Number(b.utilisationBps) > 10_000);
   const makers = new Set(books.map((b) => b.maker)).size;

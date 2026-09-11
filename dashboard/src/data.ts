@@ -1,3 +1,4 @@
+import { postJSON } from "./poll";
 declare const __SUBGRAPH_URL__: string;
 declare const __RPC_URL__: string;
 declare const __EXPLORER__: string;
@@ -86,14 +87,8 @@ async function chainHead(): Promise<number> {
 }
 
 export async function fetchSnapshot(): Promise<Snapshot> {
-  const [res, head] = await Promise.all([
-    fetch(SUBGRAPH_URL, {
-      method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ query: QUERY }),
-    }),
-    chainHead(),
-  ]);
-  const j = await res.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [j, head] = await Promise.all([postJSON<any>(SUBGRAPH_URL, { query: QUERY }), chainHead()]);
   if (j.errors?.length) throw new Error(j.errors[0].message);
   return {
     agents: j.data.agents, fills: j.data.fills, global: j.data.global,
@@ -150,11 +145,8 @@ const BOOKS_QUERY = `{
 }`;
 
 export async function fetchBooks(url: string): Promise<BooksSnapshot> {
-  const r = await fetch(url, {
-    method: "POST", headers: { "content-type": "application/json" },
-    body: JSON.stringify({ query: BOOKS_QUERY }),
-  });
-  const j = await r.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const j = await postJSON<any>(url, { query: BOOKS_QUERY });
   if (j.errors?.length) throw new Error(j.errors[0].message);
   return { books: j.data.makerBooks, head: j.data._meta.block.number, indexingErrors: j.data._meta.hasIndexingErrors };
 }

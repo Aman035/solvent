@@ -11,6 +11,7 @@ import { useAccount } from "wagmi";
 import { Desk } from "./Desk";
 import { HowItWorks } from "./HowItWorks";
 import { Landing } from "./Landing";
+import { startPoll } from "./poll";
 
 registerSepoliaTokens({
   [manifest.contracts.weth.address]: { symbol: "WETH", decimals: 18 },
@@ -26,7 +27,7 @@ const VIEWS: { id: View; name: string }[] = [
   { id: "ledger", name: "Settlement ledger" },
 ];
 
-const POLL_MS = 6000;
+const POLL_MS = 15_000;
 
 /** Concentration is the measurable tell of manufactured volume: a maker trading with
  *  very few counterparties has, by construction, a low Herfindahl diversity. */
@@ -234,8 +235,13 @@ export default function App() {
   const [err, setErr] = useState<string | null>(null);
   const [open, setOpen] = useState<string | null>(null);
   const seen = useRef<Set<string>>(new Set());
+  const [net, setNet] = useState<Net | null>(null);
+  const [view, setView] = useState<View>("how");
+  const tab = net === "mainnet" ? "mainnet" : view;
+  const onLedger = tab === "ledger";
 
   useEffect(() => {
+    if (!onLedger) return;           // only the ledger reads this snapshot
     let alive = true;
     const tick = async () => {
       try {
@@ -243,23 +249,21 @@ export default function App() {
         if (!alive) return;
         setSnap((prev) => { if (prev) prev.fills.forEach((f) => seen.current.add(f.id)); return s; });
         setErr(null);
-      } catch (e) { if (alive) setErr((e as Error).message); }
+      } catch (e) {
+        // keep showing the last good ledger; only surface an error if we have nothing
+        if (alive) setSnap((prev) => { if (!prev) setErr((e as Error).message); return prev; });
+        throw e;
+      }
     };
-    tick();
-    const h = setInterval(tick, POLL_MS);
-    return () => { alive = false; clearInterval(h); };
-  }, []);
+    const stop = startPoll(tick, POLL_MS);
+    return () => { alive = false; stop(); };
+  }, [onLedger]);
 
   const maxUsd = useMemo(
     () => Math.max(1, ...(snap?.agents ?? []).map((a) => Number(a.honoredValueUsd6) / 1e6)),
     [snap],
   );
-  const lag = snap ? snap.chainHead - snap.head : 0;
   const opened = snap?.agents.find((a) => a.id === open) ?? null;
-
-  const [net, setNet] = useState<Net | null>(null);
-  const [view, setView] = useState<View>("how");
-  const tab = net === "mainnet" ? "mainnet" : view;
 
   if (net === null) return <Landing onExplore={setNet} />;
 
