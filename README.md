@@ -279,7 +279,6 @@ Demand here is not projected, it is already on-chain, measured:
 
 ```
 .
-├── agents/              demo maker and taker: quote, pick a counterparty, fill
 ├── contracts/
 │   ├── src/
 │   │   ├── instructions/   SolvencyFloor and SolvencySkew (plus the reputation pair)
@@ -291,7 +290,7 @@ Demand here is not projected, it is already on-chain, measured:
 ├── LICENSES/            upstream 1inch licences, preserved
 ├── packages/
 │   └── core/            shared TS: program encoder, book and score math, bit-exact
-├── scripts/             deploy, seed, the vignette, the mainnet analyzer
+├── scripts/             deploy, seed, demo makers, the vignette, the mainnet analyzer
 │   ├── attack/          cost-to-fake: measured wash-trade and sybil-review attacks
 │   └── verify/          20 live checks, incl. the wei-exact mainnet parity gate
 ├── services/
@@ -339,7 +338,7 @@ contracts land on Base mainnet, they become the oracle feed.
 | --- | --- | --- | --- |
 | Dashboard | frontend (Vite + React) | `pnpm dash`, or use the [hosted console](https://aman035.github.io/solvent/) | quote desk, balance sheets, live mainnet makers, ledger |
 | Attestor | backend keeper | `pnpm attest` · `attest:books` · `attest:failures` | bridges the index into SolventBook and SolventScore; needs the funded mnemonic |
-| Demo agents | scripted maker + taker | `pnpm demo:run` | the three scenarios; `pnpm vignette` for the solvency arc |
+| Demo scripts | scripted makers | `pnpm vignette` | the solvency arc end to end: ship, fill, drain, widen, refuse |
 | @aqua-solvent/core | shared TS package | nothing to run | program encoder and book/score math, used by everything above |
 | Verify harness | test rig | `pnpm verify:all` | 20 live checks against everything in this table |
 
@@ -364,6 +363,5 @@ funded Base Sepolia wallet: set `MNEMONIC` in `.env` and run `pnpm fund`.
 
 ```bash
 pnpm vignette   # the "watch a position defend itself" sequence, live
-pnpm demo:run   # honoured fill · quote-time refusal · broken promise
 pnpm verify:all # 20 live checks against the deployment
 ```
