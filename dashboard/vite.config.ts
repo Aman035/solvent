@@ -18,8 +18,8 @@ export default defineConfig(({ mode }) => {
       // public RPC only: this value is baked into a published bundle, never a keyed URL
       __RPC_URL__: JSON.stringify(env.DASH_RPC ?? "https://sepolia.base.org"),
       __EXPLORER__: JSON.stringify("https://sepolia.basescan.org"),
-      // the public GraphiQL playground - viewable by anyone, no login
-      __STUDIO__: JSON.stringify((env.SUBGRAPH_URL ?? "") + "/graphql"),
+      // gateway key for The Graph Network; empty means query Studio directly
+      __GRAPH_GATEWAY_KEY__: JSON.stringify(env.DASH_GRAPH_KEY ?? ""),
     },
   };
 });

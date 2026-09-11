@@ -1,5 +1,5 @@
 import manifest from "../../deployments/84532.json";
-import { SUBGRAPH_URL } from "./data";
+import { INDEX_LINK } from "./data";
 
 /**
  * The system as a numbered pipeline. Every node is a real deployed thing: contracts
@@ -70,7 +70,7 @@ export function HowItWorks() {
         nodes={[
           { name: "Maker wallet", role: "holds all inventory; nothing is ever deposited", kind: "actor" },
           { name: "1inch Aqua", role: "registers each strategy's promised balances", kind: "onchain", addr: C.aqua.address },
-          { name: "The Graph index", role: "reconstructs every maker's book from primary events", kind: "service", href: `${SUBGRAPH_URL}/graphql`, tag: "query playground" },
+          { name: "The Graph index", role: "reconstructs every maker's book from primary events", kind: "service", href: INDEX_LINK, tag: "on graph explorer" },
           { name: "Keeper", role: "verifies each wallet against the chain, writes only the differences", kind: "service", href: "https://github.com/Aman035/solvent/actions/workflows/attest.yml", tag: "run history" },
           { name: "SolventBook", role: "the balance-sheet oracle: promised and settleable, per maker, per token", kind: "onchain", addr: C.solventBook.address, pivot: true },
         ]}

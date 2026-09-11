@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM } from "./data";
+import { postJSON } from "./poll";
 import baseTokens from "./base-tokens.json";
 
 /**
@@ -63,11 +64,8 @@ export function Landing({ onExplore }: { onExplore: (net: "testnet" | "mainnet")
       { name: "Optimism", url: SUBGRAPH_URL_OPTIMISM },
     ];
     Promise.allSettled(CHAINS.map(async (c) => {
-      const r = await fetch(c.url, {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ query: `{ makerBooks(first: 1000, where: { committed_gt: "0" }) { maker token committed utilisationBps } }` }),
-      });
-      const j = await r.json();
+      const j = await postJSON<{ data?: { makerBooks: { maker: string; token: string; committed: string; utilisationBps: string }[] } }>(
+        c.url, { query: `{ makerBooks(first: 1000, where: { committed_gt: "0" }) { maker token committed utilisationBps } }` });
       return { chain: c.name, books: (j.data?.makerBooks ?? []) as { maker: string; token: string; committed: string; utilisationBps: string }[] };
     })).then((results) => {
       if (!alive) return;

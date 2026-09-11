@@ -1,13 +1,42 @@
-import { postJSON } from "./poll";
+import { postJSON, FALLBACK } from "./poll";
 declare const __SUBGRAPH_URL__: string;
+declare const __SUBGRAPH_URL_BASE__: string;
+declare const __SUBGRAPH_URL_ARBITRUM__: string;
+declare const __SUBGRAPH_URL_OPTIMISM__: string;
+declare const __GRAPH_GATEWAY_KEY__: string;
 declare const __RPC_URL__: string;
 declare const __EXPLORER__: string;
-declare const __STUDIO__: string;
 
-export const SUBGRAPH_URL = __SUBGRAPH_URL__;
+/** The four subgraphs as published on The Graph Network (Arbitrum One). */
+export const NETWORK_IDS = {
+  sepolia: "FN4eAgcdPEqFSsLSraR6n7sHK52zcajNjaZdGA19ASus",
+  base: "5QXR6yixbQZpRfxr3cnDAPypqbPLEvhGwL65iWGMRTCT",
+  arbitrum: "9iyPNmnVgYmGaMDfmSppWkLqFbB5WD4dQh954rz17jjw",
+  optimism: "bJiMh5yZruGbdqao5HLn1tbintTtTMVrVqjHXGVs6bF",
+} as const;
+
+/** Public Graph Explorer page for a subgraph: no login, has a query playground. */
+export const explorerLink = (id: string) =>
+  `https://thegraph.com/explorer/subgraphs/${id}?view=Query&chain=arbitrum-one`;
+
+/**
+ * Query the decentralized network through the gateway when a key is configured;
+ * Studio stays the automatic per-request fallback (and the default with no key).
+ */
+function endpoint(id: string, studio: string): string {
+  if (!__GRAPH_GATEWAY_KEY__) return studio;
+  const gateway = `https://gateway.thegraph.com/api/${__GRAPH_GATEWAY_KEY__}/subgraphs/id/${id}`;
+  FALLBACK.set(gateway, studio);
+  return gateway;
+}
+
+export const SUBGRAPH_URL = endpoint(NETWORK_IDS.sepolia, __SUBGRAPH_URL__);
+export const SUBGRAPH_URL_BASE = endpoint(NETWORK_IDS.base, __SUBGRAPH_URL_BASE__);
+export const SUBGRAPH_URL_ARBITRUM = endpoint(NETWORK_IDS.arbitrum, __SUBGRAPH_URL_ARBITRUM__);
+export const SUBGRAPH_URL_OPTIMISM = endpoint(NETWORK_IDS.optimism, __SUBGRAPH_URL_OPTIMISM__);
+export const INDEX_LINK = explorerLink(NETWORK_IDS.sepolia);
 export const RPC_URL = __RPC_URL__;
 export const EXPLORER = __EXPLORER__;
-export const STUDIO = __STUDIO__;
 
 export interface Review { id: string; reviewer: string; value: string; txHash: string }
 export interface Counterparty { taker: string; fillCount: number; valueUsd6: string }
@@ -123,12 +152,6 @@ export function ago(ts: string | number) {
 }
 
 // ---- maker balance sheets (Solvent) ---------------------------------------
-declare const __SUBGRAPH_URL_BASE__: string;
-declare const __SUBGRAPH_URL_ARBITRUM__: string;
-declare const __SUBGRAPH_URL_OPTIMISM__: string;
-export const SUBGRAPH_URL_BASE = __SUBGRAPH_URL_BASE__;
-export const SUBGRAPH_URL_ARBITRUM = __SUBGRAPH_URL_ARBITRUM__;
-export const SUBGRAPH_URL_OPTIMISM = __SUBGRAPH_URL_OPTIMISM__;
 
 export interface MakerBook {
   maker: string; token: string;

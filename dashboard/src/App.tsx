@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   fetchSnapshot, nameOf, usd, stars, short, txUrl, addrUrl, ago,
-  STUDIO, SUBGRAPH_URL, decodeProgram, type Snapshot, type Agent, type Fill,
+  INDEX_LINK, decodeProgram, type Snapshot, type Agent, type Fill,
 } from "./data";
 import costWash from "../../docs/cost-to-fake.json";
 import costRev from "../../docs/cost-to-fake-reviews.json";
@@ -285,7 +285,7 @@ export default function App() {
           </nav>
         )}
         <span className="spacer" />
-        <a className="rail-link" href={STUDIO} target="_blank" rel="noreferrer">Live index ↗</a>
+        <a className="rail-link" href={INDEX_LINK} target="_blank" rel="noreferrer">Live index ↗</a>
         <a className="rail-link" href="https://github.com/Aman035/solvent" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
 
@@ -358,7 +358,7 @@ export default function App() {
 
           <p className="cost note" style={{ marginTop: 26, maxWidth: 760 }}>
             Every figure is read live from a Graph subgraph indexing ERC-8004 reputation
-            alongside 1inch Aqua settlement. <a href={STUDIO} target="_blank" rel="noreferrer">Query it directly ↗</a>
+            alongside 1inch Aqua settlement. <a href={INDEX_LINK} target="_blank" rel="noreferrer">Query it directly ↗</a>
           </p>
         </>
       )}

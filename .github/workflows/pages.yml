@@ -31,6 +31,8 @@ jobs:
         run: cd dashboard && pnpm exec vite build
         env:
           DASH_BASE: /solvent/
+          # queries go to The Graph Network through the gateway; Studio is the fallback
+          DASH_GRAPH_KEY: ${{ secrets.DASH_GRAPH_KEY }}
           # public, keyless endpoints only - nothing secret is baked into the bundle
           SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/aqua-solvent-base-sepolia/v0.8.0
           SUBGRAPH_URL_BASE: https://api.studio.thegraph.com/query/42912/aqua-solvent-base/v0.2.0
