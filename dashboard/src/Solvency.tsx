@@ -49,6 +49,7 @@ function tokenMeta(addr: string): { symbol: string; decimals: number } {
 function fmt(amount: string, decimals: number): string {
   const v = Number(amount) / 10 ** decimals;
   if (v === 0) return "0";
+  if (v < 0.00001) return "<0.00001";
   if (v >= 1000) return v.toLocaleString("en-US", { maximumFractionDigits: 0 });
   if (v >= 1) return v.toLocaleString("en-US", { maximumFractionDigits: 2 });
   return v.toLocaleString("en-US", { maximumFractionDigits: 5 });
@@ -71,7 +72,7 @@ function BookRow({ b, explorer, floorBps, index = 0 }: { b: MakerBook; explorer:
   const pastFloor = floorBps !== null && u >= floorBps;
 
   return (
-    <div className="book row-in" style={{ "--i": index } as never}>
+    <div className="book row-in" style={{ "--i": Math.min(index, 16) } as never}>
       <a className="book-maker" href={`${explorer}/address/${b.maker}`} target="_blank" rel="noreferrer">
         {nameOf(b.maker)}
       </a>
@@ -220,7 +221,7 @@ export function MainnetBooks() {
   const books = useMemo(() => (snap?.books ?? []).filter(nonEmpty), [snap]);
   const over = books.filter((b) => Number(b.utilisationBps) > 10_000);
   const makers = new Set(books.map((b) => b.maker)).size;
-  const worst = [...books].sort(byUtilThenSize).slice(0, 20);
+  const sorted = useMemo(() => [...books].sort(byUtilThenSize), [books]);
 
   return (
     <section className="books">
@@ -265,7 +266,7 @@ export function MainnetBooks() {
       {err && <div className="err">{chain.key} subgraph unreachable - {err}</div>}
       <div className={loading ? "table-dim" : undefined}>
         <BookHeader />
-        {worst.map((b, i) => (
+        {sorted.map((b, i) => (
           <BookRow key={b.maker + b.token} b={b} index={i} explorer={chain.explorer} floorBps={null} />
         ))}
       </div>

@@ -193,6 +193,8 @@
   gap: 14px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--rule);
 }
 .book-cols { border-bottom-color: var(--rule-lit); padding-bottom: 6px; }
+/* long books: the column header rides under the navbar */
+.book-cols { position: sticky; top: 74px; z-index: 5; background: var(--ink-900); }
 .book-maker { font-family: var(--mono); font-size: 12px; color: var(--text-2); }
 .book-token { font-family: var(--mono); font-size: 12px; color: var(--text); }
 /* the coverage capsule: the promise as a vessel, green where it is actually backed */

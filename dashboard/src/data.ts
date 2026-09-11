@@ -160,16 +160,28 @@ export interface MakerBook {
 }
 export interface BooksSnapshot { books: MakerBook[]; head: number; indexingErrors: boolean }
 
-const BOOKS_QUERY = `{
-  _meta { block { number } hasIndexingErrors }
-  makerBooks(orderBy: committed, orderDirection: desc, first: 200) {
-    maker token committed backing utilisationBps updatedAtBlock
+// The Graph caps a page at 1000 rows; every chain fits in one today, so a poll
+// is one query. Past that, page by id, pinned to the first page's block.
+const PAGE = 1000;
+const booksPage = (after: string | null, block: number) => `{
+  ${after ? "" : "_meta { block { number } hasIndexingErrors }"}
+  makerBooks(first: ${PAGE}, orderBy: id${after ? `, where: { id_gt: "${after}" }, block: { number: ${block} }` : ""}) {
+    id maker token committed backing utilisationBps updatedAtBlock
   }
 }`;
 
 export async function fetchBooks(url: string): Promise<BooksSnapshot> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const j = await postJSON<any>(url, { query: BOOKS_QUERY });
-  if (j.errors?.length) throw new Error(j.errors[0].message);
-  return { books: j.data.makerBooks, head: j.data._meta.block.number, indexingErrors: j.data._meta.hasIndexingErrors };
+  const books: MakerBook[] = [];
+  let head = 0, indexingErrors = false, after: string | null = null;
+  for (;;) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const j: any = await postJSON<any>(url, { query: booksPage(after, head) });
+    if (j.errors?.length) throw new Error(j.errors[0].message);
+    if (!after) { head = j.data._meta.block.number; indexingErrors = j.data._meta.hasIndexingErrors; }
+    const page = j.data.makerBooks;
+    books.push(...page);
+    if (page.length < PAGE) break;
+    after = page[page.length - 1].id;
+  }
+  return { books, head, indexingErrors };
 }
