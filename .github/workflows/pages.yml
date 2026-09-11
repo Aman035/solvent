@@ -32,10 +32,10 @@ jobs:
         env:
           DASH_BASE: /solvent/
           # public, keyless endpoints only - nothing secret is baked into the bundle
-          SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0
-          SUBGRAPH_URL_BASE: https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0
-          SUBGRAPH_URL_ARBITRUM: https://api.studio.thegraph.com/query/42912/solvent-arbitrum/v0.2.0
-          SUBGRAPH_URL_OPTIMISM: https://api.studio.thegraph.com/query/42912/solvent-optimism/v0.2.0
+          SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/aqua-solvent-base-sepolia/v0.8.0
+          SUBGRAPH_URL_BASE: https://api.studio.thegraph.com/query/42912/aqua-solvent-base/v0.2.0
+          SUBGRAPH_URL_ARBITRUM: https://api.studio.thegraph.com/query/42912/aqua-solvent-arbitrum/v0.2.0
+          SUBGRAPH_URL_OPTIMISM: https://api.studio.thegraph.com/query/42912/aqua-solvent-optimism/v0.2.0
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dashboard/dist

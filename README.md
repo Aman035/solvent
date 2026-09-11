@@ -334,10 +334,10 @@ Mainnet deployment is coming. All verified on Basescan; tx hashes in
 
 | Subgraph | Watches | Playground |
 | --- | --- | --- |
-| solvent-sepolia | the full Sepolia stack: maker books, fills, scores | [query](https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0/graphql) |
-| solvent-base | official Aqua on Base mainnet | [query](https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0/graphql) |
-| solvent-arbitrum | official Aqua on Arbitrum One | [query](https://api.studio.thegraph.com/query/42912/solvent-arbitrum/v0.2.0/graphql) |
-| solvent-optimism | official Aqua on Optimism | [query](https://api.studio.thegraph.com/query/42912/solvent-optimism/v0.2.0/graphql) |
+| aqua-solvent-base-sepolia | the full Sepolia stack: maker books, fills, scores | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-base-sepolia/v0.8.0/graphql) |
+| aqua-solvent-base | official Aqua on Base mainnet | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-base/v0.2.0/graphql) |
+| aqua-solvent-arbitrum | official Aqua on Arbitrum One | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-arbitrum/v0.2.0/graphql) |
+| aqua-solvent-optimism | official Aqua on Optimism | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-optimism/v0.2.0/graphql) |
 
 The mainnet indexes are observation-only today. When the contracts land on Base mainnet,
 they become the oracle feed.
@@ -385,7 +385,7 @@ pnpm attest:books           # index → live wallet reads → SolventBook
 cd subgraph && npm install
 npx graph codegen && npx graph build                    # Base Sepolia
 npx graph build subgraph.base.yaml                      # mainnet: also .arbitrum / .optimism
-npx graph deploy solvent-sepolia subgraph.yaml \
+npx graph deploy aqua-solvent-base-sepolia subgraph.yaml \
   --deploy-key "$GRAPH_DEPLOY_KEY" --node https://api.studio.thegraph.com/deploy/
 ```
 

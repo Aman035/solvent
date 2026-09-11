@@ -221,7 +221,7 @@ export const checks: Check[] = [
       const ok = built && n > 0 && !j.data._meta.hasIndexingErrors;
       return (ok ? pass : fail)([
         out.trim(),
-        `solvent-base serving ${n} live maker books, errors ${j.data._meta.hasIndexingErrors}`,
+        `aqua-solvent-base serving ${n} live maker books, errors ${j.data._meta.hasIndexingErrors}`,
       ]);
     },
   },

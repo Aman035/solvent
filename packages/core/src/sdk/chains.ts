@@ -41,23 +41,23 @@ export const SOLVENT_CHAINS: Record<SolventChain, SolventChainInfo> = {
     chain: SolventChain.BaseSepolia, mode: "full", chainId: 84532, viem: baseSepolia,
     rpcUrl: "https://sepolia.base.org", explorer: "https://sepolia.basescan.org",
     aqua: BASE_SEPOLIA_DEPLOYMENT.aqua as `0x${string}`,
-    subgraphUrl: `${STUDIO}/solvent-sepolia/v0.8.0`,
+    subgraphUrl: `${STUDIO}/aqua-solvent-base-sepolia/v0.8.0`,
     contracts: BASE_SEPOLIA_DEPLOYMENT,
   },
   [SolventChain.Base]: {
     chain: SolventChain.Base, mode: "read-only", chainId: 8453, viem: base,
     rpcUrl: "https://mainnet.base.org", explorer: "https://basescan.org",
-    aqua: OFFICIAL_AQUA, subgraphUrl: `${STUDIO}/solvent-base/v0.2.0`,
+    aqua: OFFICIAL_AQUA, subgraphUrl: `${STUDIO}/aqua-solvent-base/v0.2.0`,
   },
   [SolventChain.Arbitrum]: {
     chain: SolventChain.Arbitrum, mode: "read-only", chainId: 42161, viem: arbitrum,
     rpcUrl: "https://arb1.arbitrum.io/rpc", explorer: "https://arbiscan.io",
-    aqua: OFFICIAL_AQUA, subgraphUrl: `${STUDIO}/solvent-arbitrum/v0.2.0`,
+    aqua: OFFICIAL_AQUA, subgraphUrl: `${STUDIO}/aqua-solvent-arbitrum/v0.2.0`,
   },
   [SolventChain.Optimism]: {
     chain: SolventChain.Optimism, mode: "read-only", chainId: 10, viem: optimism,
     rpcUrl: "https://mainnet.optimism.io", explorer: "https://optimistic.etherscan.io",
-    aqua: OFFICIAL_AQUA, subgraphUrl: `${STUDIO}/solvent-optimism/v0.2.0`,
+    aqua: OFFICIAL_AQUA, subgraphUrl: `${STUDIO}/aqua-solvent-optimism/v0.2.0`,
   },
 };
 

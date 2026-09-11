@@ -42,7 +42,7 @@ jobs:
           # the attestor's own key - ATTESTOR_ROLE only, cannot touch any other wallet
           ATTESTOR_PK: ${{ secrets.ATTESTOR_PK }}
           BASE_SEPOLIA_RPC: https://sepolia.base.org
-          SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0
+          SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/aqua-solvent-base-sepolia/v0.8.0
       - name: Chain the next run
         # only a healthy run chains. A failed run falls back to the 15-minute
         # cron, which is the backoff: a failing run must never spawn another.

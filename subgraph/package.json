@@ -4,7 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy solvent-sepolia"
+    "deploy": "graph deploy aqua-solvent-base-sepolia"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.98.1",
