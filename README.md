@@ -4,10 +4,7 @@
 
 <p align="center">
   <a href="https://aman035.github.io/solvent/"><b>Live demo</b></a> ·
-  <a href="https://www.npmjs.com/package/@aqua-solvent/core">SDK on npm</a> ·
-  <a href="https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0/graphql">Mainnet index</a> ·
-  <a href="https://github.com/Aman035/solvent/actions/workflows/attest.yml">Keeper runs</a> ·
-  <a href="#contracts-live-on-base-sepolia">Contracts</a>
+  <a href="https://www.npmjs.com/package/@aqua-solvent/core">SDK on npm</a>
 </p>
 
 In options, selling what you do not hold is called writing naked. On
