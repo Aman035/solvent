@@ -300,7 +300,7 @@ pnpm demo --fast   # no pauses; the script takes the quote as the demo taker
 ├── docs/                score design, cost-to-fake, mainnet analysis data, graphics
 ├── LICENSES/            upstream 1inch licences, preserved
 ├── packages/
-│   └── core/            shared TS: program encoder, book and score math, bit-exact
+│   └── core/            the SDK (@aqua-solvent/core): program encoder, book and score math
 ├── scripts/             deploy, seed, the end-to-end demo, the mainnet analyzer
 │   ├── attack/          cost-to-fake: measured wash-trade and sybil-review attacks
 │   └── verify/          20 live checks, incl. the wei-exact mainnet parity gate
@@ -345,6 +345,19 @@ if the gateway ever errors.
 
 The mainnet indexes are observation-only today. When the contracts land on Base mainnet,
 they become the oracle feed.
+
+### SDK
+
+[`@aqua-solvent/core`](https://www.npmjs.com/package/@aqua-solvent/core) reads every
+maker's balance sheet on all four chains and builds Solvent strategy programs. Pass your
+own Graph API key to query the published indexes on The Graph Network:
+
+```ts
+import { createSolvent, SolventChain } from "@aqua-solvent/core";
+
+const base = createSolvent({ chain: SolventChain.Base, graphApiKey: process.env.GRAPH_API_KEY });
+const books = await base.books.top(10);   // the most over-committed makers on Base, live
+```
 
 ### The keeper
 
