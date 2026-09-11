@@ -330,14 +330,18 @@ Mainnet deployment is coming. All verified on Basescan; tx hashes in
 | SolventRecorder | [`0xffed…1b43b`](https://sepolia.basescan.org/address/0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b#code) | settlement record: makes reverted fills, which erase their own logs, indexable |
 | ERC-8004 registries | [identity](https://sepolia.basescan.org/address/0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33#code) · [reputation](https://sepolia.basescan.org/address/0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d#code) · [adapter](https://sepolia.basescan.org/address/0x52042cf2a100c2b8cc506cbf400737b3c5147566#code) | settlement record: agent identities, and the score by agentId |
 
-### Indexes, live on The Graph
+### Indexes, published on The Graph Network
 
-| Subgraph | Watches | Playground |
+All four are published to The Graph's decentralized network (on Arbitrum One) and served by
+its indexers. The console queries them through The Graph's gateway, falling back to Studio
+if the gateway ever errors.
+
+| Subgraph | Watches | Graph Explorer |
 | --- | --- | --- |
-| aqua-solvent-base-sepolia | the full Sepolia stack: maker books, fills, scores | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-base-sepolia/v0.8.0/graphql) |
-| aqua-solvent-base | official Aqua on Base mainnet | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-base/v0.2.0/graphql) |
-| aqua-solvent-arbitrum | official Aqua on Arbitrum One | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-arbitrum/v0.2.0/graphql) |
-| aqua-solvent-optimism | official Aqua on Optimism | [query](https://api.studio.thegraph.com/query/42912/aqua-solvent-optimism/v0.2.0/graphql) |
+| aqua-solvent-base-sepolia | the full Sepolia stack: maker books, fills, scores | [open](https://thegraph.com/explorer/subgraphs/FN4eAgcdPEqFSsLSraR6n7sHK52zcajNjaZdGA19ASus?view=Query&chain=arbitrum-one) |
+| aqua-solvent-base | official Aqua on Base mainnet | [open](https://thegraph.com/explorer/subgraphs/5QXR6yixbQZpRfxr3cnDAPypqbPLEvhGwL65iWGMRTCT?view=Query&chain=arbitrum-one) |
+| aqua-solvent-arbitrum | official Aqua on Arbitrum One | [open](https://thegraph.com/explorer/subgraphs/9iyPNmnVgYmGaMDfmSppWkLqFbB5WD4dQh954rz17jjw?view=Query&chain=arbitrum-one) |
+| aqua-solvent-optimism | official Aqua on Optimism | [open](https://thegraph.com/explorer/subgraphs/bJiMh5yZruGbdqao5HLn1tbintTtTMVrVqjHXGVs6bF?view=Query&chain=arbitrum-one) |
 
 The mainnet indexes are observation-only today. When the contracts land on Base mainnet,
 they become the oracle feed.
