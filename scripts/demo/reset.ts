@@ -19,7 +19,7 @@ console.log(`  Alice holds ${formatUnits(w, 18)} pofWETH`);
 
 if (w === 0n) {
   console.log(`  restoring inventory so she can deliver again…`);
-  execSync("pnpm exec tsx agents/maker/src/index.ts restore", { cwd: REPO_ROOT, stdio: "inherit" });
+  execSync("pnpm exec tsx scripts/maker.ts restore", { cwd: REPO_ROOT, stdio: "inherit" });
 } else {
   console.log(`  ✅ already able to deliver`);
 }
@@ -31,4 +31,4 @@ console.log(`\n  syncing scores…`);
 execSync("pnpm exec tsx services/attestor/src/index.ts --once", { cwd: REPO_ROOT, stdio: "inherit" });
 
 console.log(`\n  Note: the failed fill stays on the record permanently — that is the system working.`);
-console.log(`  Ready. Verify with: pnpm demo:check\n`);
+console.log(`  Ready. Verify with: pnpm verify\n`);

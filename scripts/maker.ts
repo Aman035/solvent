@@ -5,7 +5,7 @@ import {
 } from "@aqua-solvent/core";
 
 /**
- * Alice - the maker agent.
+ * Alice - the unprotected demo maker (no Solvent instruments: the contrast case).
  *
  *   pnpm alice status   what she has promised vs what she actually holds
  *   pnpm alice ship     approve Aqua and ship a strategy (tokens never leave her wallet)

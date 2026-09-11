@@ -12,5 +12,5 @@
     "baseUrl": ".",
     "paths": { "@aqua-solvent/core": ["packages/core/src/index.ts"] }
   },
-  "include": ["packages/**/*.ts", "scripts/**/*.ts", "agents/**/*.ts", "services/**/*.ts"]
+  "include": ["packages/**/*.ts", "scripts/**/*.ts", "services/**/*.ts"]
 }
