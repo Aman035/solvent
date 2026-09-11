@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="docs/graphics/banner.svg" alt="Solvent. On-chain market making that never quotes more than it can settle." width="100%">
-</p>
+<a href="https://aman035.github.io/solvent/"><img src="docs/screenshots/banner.png" alt="Solvent. Never quote more than you can settle." width="100%"></a>
 
 <p align="center">
   <a href="https://aman035.github.io/solvent/"><b>Live demo</b></a> ·
@@ -14,8 +12,6 @@ maker's own strategies nor the takers filling them have any way to know.
 Solvent makes Aqua positions aware of their own balance sheet: quotes that widen as the
 maker's book thins, a hard floor below which they decline instead of failing, and a
 cross-chain index of every maker's true backing.
-
-<a href="https://aman035.github.io/solvent/"><img src="docs/screenshots/landing.png" alt="The Solvent console" width="100%"></a>
 
 ---
 
