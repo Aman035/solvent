@@ -53,13 +53,27 @@ const program = sepolia.strategy()
 The oracle addresses are filled in per chain; `sepolia.contracts` has the full
 deployment (router, SolventBook, score, all verified on Basescan).
 
+## Query The Graph Network with your own key
+
+All four indexes are published on The Graph's decentralized network. Pass a gateway API
+key (free from [Subgraph Studio](https://thegraph.com/studio/apikeys/)) and reads go
+there instead of the rate-limited Studio endpoint, falling back to Studio if the gateway
+errors:
+
+```ts
+const solvent = createSolvent({ chain: SolventChain.Base, graphApiKey: process.env.GRAPH_API_KEY });
+```
+
+`gatewayUrl(chain, apiKey)` returns the raw query URL, and each chain's network ID is on
+`SOLVENT_CHAINS[chain].networkSubgraphId`.
+
 ## Overrides
 
 ```ts
 createSolvent({
   chain: SolventChain.Base,
-  rpcUrl: "https://your-endpoint",         // default: public RPC
-  subgraphUrl: "https://your-gateway-url", // default: public Studio endpoint
+  rpcUrl: "https://your-endpoint",       // default: public RPC
+  subgraphUrl: "https://your-endpoint",  // replaces both the gateway and Studio
 });
 ```
 

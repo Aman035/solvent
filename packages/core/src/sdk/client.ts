@@ -1,5 +1,5 @@
 import { createPublicClient, http, type PublicClient } from "viem";
-import { SOLVENT_CHAINS, SolventChain, ReadOnlyChainError, type SolventChainInfo } from "./chains.js";
+import { SOLVENT_CHAINS, SolventChain, ReadOnlyChainError, gatewayUrl, type SolventChainInfo } from "./chains.js";
 import { BooksApi } from "./books.js";
 import { ProgramBuilder, program } from "../program.js";
 
@@ -7,7 +7,12 @@ export interface SolventConfig {
   chain: SolventChain;
   /** Override the public default RPC. */
   rpcUrl?: string;
-  /** Override the default Graph endpoint (e.g. a gateway URL with your own key). */
+  /**
+   * Your Graph gateway API key. When set, reads go to the index published on The Graph
+   * Network (decentralized, no Studio rate limit), with Studio as the automatic fallback.
+   */
+  graphApiKey?: string;
+  /** Override the Graph endpoint entirely (takes precedence over graphApiKey). */
   subgraphUrl?: string;
 }
 
@@ -25,7 +30,11 @@ export class Solvent {
     this.info = SOLVENT_CHAINS[cfg.chain];
     if (!this.info) throw new Error(`unknown chain: ${cfg.chain}`);
     this.rpcUrl = cfg.rpcUrl ?? this.info.rpcUrl;
-    this.books = new BooksApi(this.info, cfg.subgraphUrl ?? this.info.subgraphUrl);
+    const primary = cfg.subgraphUrl
+      ?? (cfg.graphApiKey ? gatewayUrl(cfg.chain, cfg.graphApiKey) : this.info.subgraphUrl);
+    // with a gateway key, Studio remains the fallback; an explicit override has none
+    const fallback = !cfg.subgraphUrl && cfg.graphApiKey ? this.info.subgraphUrl : undefined;
+    this.books = new BooksApi(this.info, primary, fallback);
   }
 
   /** "full" when Solvent contracts are live here; "read-only" when only the index is. */

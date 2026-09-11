@@ -27,12 +27,21 @@ function parseBook(b: RawBook): MakerBook {
 const FIELDS = "maker token committed backing utilisationBps updatedAtBlock";
 
 export class BooksApi {
-  constructor(private info: SolventChainInfo, private url: string) {}
+  constructor(private info: SolventChainInfo, private url: string, private fallbackUrl?: string) {}
 
   private async gql<T>(query: string): Promise<T> {
-    const r = await fetch(this.url, {
+    try { return await this.gqlAt<T>(this.url, query); }
+    catch (e) {
+      if (!this.fallbackUrl) throw e;
+      return await this.gqlAt<T>(this.fallbackUrl, query);
+    }
+  }
+
+  private async gqlAt<T>(url: string, query: string): Promise<T> {
+    const r = await fetch(url, {
       method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ query }),
     });
+    if (!r.ok) throw new Error(`subgraph: HTTP ${r.status}`);
     const j = (await r.json()) as { data?: T; errors?: { message: string }[] };
     if (j.errors?.length) throw new Error(`subgraph: ${j.errors[0].message}`);
     if (!j.data) throw new Error("subgraph: empty response");
