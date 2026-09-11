@@ -722,3 +722,5 @@ html { scroll-behavior: smooth; }
   .lane-grid, .lane-grid.narrow { grid-template-columns: 1fr 1fr; max-width: none; }
   .gnode.haslink::after { display: none; }
 }
+
+.livedot.paused { background: var(--claimed); box-shadow: 0 0 0 4px var(--ink-700); }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchBooks, nameOf, short, SUBGRAPH_URL, SUBGRAPH_URL_BASE, SUBGRAPH_URL_ARBITRUM, SUBGRAPH_URL_OPTIMISM, type BooksSnapshot, type MakerBook } from "./data";
 import baseTokens from "./base-tokens.json";
-import { startPoll } from "./poll";
+import { startPoll, isIdle } from "./poll";
 import { MAKER as FLOOR_MAKER, readOracleBook, utilisationBps as calcUtil } from "./deskchain";
 
 /**
@@ -118,6 +118,7 @@ function Ago({ t }: { t: number | null }) {
   useEffect(() => { const h = setInterval(() => force((n) => n + 1), 5_000); return () => clearInterval(h); }, []);
   if (!t) return null;
   const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+  if (isIdle()) return <span className="ago"><i className="livedot paused" />paused while idle · move to resume</span>;
   return <span className="ago"><i className="livedot" />{s < 8 ? "live · just now" : `live · ${s}s ago`}</span>;
 }
 

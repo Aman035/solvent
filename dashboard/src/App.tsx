@@ -27,7 +27,7 @@ const VIEWS: { id: View; name: string }[] = [
   { id: "ledger", name: "Settlement ledger" },
 ];
 
-const POLL_MS = 15_000;
+const POLL_MS = 20_000;
 
 /** Concentration is the measurable tell of manufactured volume: a maker trading with
  *  very few counterparties has, by construction, a low Herfindahl diversity. */
