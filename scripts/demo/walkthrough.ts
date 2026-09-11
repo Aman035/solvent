@@ -44,9 +44,11 @@ async function withNonceRetry<T>(fn: () => Promise<T>, label: string): Promise<T
   for (let i = 0; ; i++) {
     try { return await fn(); }
     catch (e) {
-      if (!/nonce/i.test(String((e as Error).message)) || i >= 3) throw e;
+      // the always-on CI keeper signs as the same attestor, so its transactions can
+      // take our nonce; wait a jittered beat and re-read the nonce
+      if (!/nonce|underpriced|already known/i.test(String((e as Error).message)) || i >= 8) throw e;
       console.log(`  ${D}nonce race with the CI keeper, retrying ${label}…${X}`);
-      await sleep(4000);
+      await sleep(3000 + Math.floor(Math.random() * 4000));
     }
   }
 }
