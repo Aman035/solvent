@@ -27,14 +27,25 @@ export interface FillRow {
 
 export class SubgraphError extends Error {}
 
+/** Statuses worth retrying: rate limits and gateway hiccups. */
+const RETRYABLE = new Set([429, 502, 503, 504]);
+
 export async function gql<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
   const url = env.SUBGRAPH_URL;
   if (!url) throw new SubgraphError("SUBGRAPH_URL is not set");
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query, variables }),
-  });
+  let res: Response;
+  for (let attempt = 0; ; attempt++) {
+    res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, variables }),
+    });
+    if (!RETRYABLE.has(res.status) || attempt >= 4) break;
+    // back off 2s, 4s, 8s, 16s - or whatever the server asks for
+    const asked = Number(res.headers.get("retry-after"));
+    const wait = Number.isFinite(asked) && asked > 0 ? asked * 1000 : 2000 * 2 ** attempt;
+    await new Promise((r) => setTimeout(r, wait));
+  }
   if (!res.ok) throw new SubgraphError(`subgraph HTTP ${res.status}`);
   const json = await res.json() as { data?: T; errors?: { message: string }[] };
   if (json.errors?.length) throw new SubgraphError(json.errors.map((e) => e.message).join("; "));
