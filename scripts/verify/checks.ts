@@ -175,7 +175,7 @@ export const checks: Check[] = [
     },
   },
   {
-    id: "S5", name: "Vignette books quote their live risk", phase: "Solvent",
+    id: "S5", name: "Demo books quote their live risk", phase: "Solvent",
     async run() {
       // the demo maker (wallet 37): its books were shipped with floor 9500 and
       // skew from 5000; quoting must agree with the on-chain oracle, live
