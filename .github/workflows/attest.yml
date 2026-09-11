@@ -29,18 +29,24 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Sync maker books into SolventBook (8x, ~every 60s)
+        # one rate-limited minute must not kill the run; fail only if every pass failed
         run: |
+          ok=0
           for i in 1 2 3 4 5 6 7 8; do
-            pnpm attest:books
+            if pnpm attest:books; then ok=$((ok+1)); else echo "::warning::pass $i failed, continuing"; fi
             if [ "$i" != "8" ]; then sleep 60; fi
           done
+          echo "$ok/8 passes succeeded"
+          [ "$ok" -gt 0 ]
         env:
           # the attestor's own key - ATTESTOR_ROLE only, cannot touch any other wallet
           ATTESTOR_PK: ${{ secrets.ATTESTOR_PK }}
           BASE_SEPOLIA_RPC: https://sepolia.base.org
           SUBGRAPH_URL: https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0
       - name: Chain the next run
-        if: always()
+        # only a healthy run chains. A failed run falls back to the 15-minute
+        # cron, which is the backoff: a failing run must never spawn another.
+        if: success()
         run: gh workflow run attest.yml --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
