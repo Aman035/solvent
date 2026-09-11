@@ -285,7 +285,8 @@ export default function App() {
           </nav>
         )}
         <span className="spacer" />
-        <a className="rail-link" href={INDEX_LINK} target="_blank" rel="noreferrer">Live index ↗</a>
+        {/* mainnet links its chain's own subgraph beside the chain switcher instead */}
+        {net === "testnet" && <a className="rail-link" href={INDEX_LINK} target="_blank" rel="noreferrer">Live index ↗</a>}
         <a className="rail-link" href="https://github.com/Aman035/solvent" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
 
