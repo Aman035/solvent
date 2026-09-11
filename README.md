@@ -2,6 +2,14 @@
   <img src="docs/graphics/banner.svg" alt="Solvent. On-chain market making that never quotes more than it can settle." width="100%">
 </p>
 
+<p align="center">
+  <a href="https://aman035.github.io/solvent/"><b>Live demo</b></a> ·
+  <a href="https://www.npmjs.com/package/@aqua-solvent/core">SDK on npm</a> ·
+  <a href="https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0/graphql">Mainnet index</a> ·
+  <a href="https://github.com/Aman035/solvent/actions/workflows/attest.yml">Keeper runs</a> ·
+  <a href="#contracts-live-on-base-sepolia">Contracts</a>
+</p>
+
 In options, selling what you do not hold is called writing naked. On
 [1inch Aqua](https://github.com/1inch/aqua), every quote can be naked, and neither the
 maker's own strategies nor the takers filling them have any way to know.
@@ -9,6 +17,8 @@ maker's own strategies nor the takers filling them have any way to know.
 Solvent makes Aqua positions aware of their own balance sheet: quotes that widen as the
 maker's book thins, a hard floor below which they decline instead of failing, and a
 cross-chain index of every maker's true backing.
+
+<a href="https://aman035.github.io/solvent/"><img src="docs/screenshots/landing.png" alt="The Solvent console" width="100%"></a>
 
 ---
 
@@ -91,6 +101,11 @@ finds the same disease everywhere:
 | Optimism | 8 | 2 | **2** | WBTC book of ~$753 at 39% backing |
 | **Total** | **170** | **138** | **123** | |
 
+The same measurement runs live. Every row on the console's Mainnet tab is a real maker's
+book right now, the capsule filled green only as far as the wallet can actually settle:
+
+![Live maker balance sheets on Aqua mainnet](docs/screenshots/mainnet.png)
+
 Method notes, for the skeptical: USD figures use a fixed indicative price table for major
 tokens and exist only to rank materiality; backing is `min(balance, allowance)`, because
 a revoked allowance makes a quote exactly as unfillable as an empty wallet; and the
@@ -165,16 +180,10 @@ One subgraph pipeline, deployed unchanged against the identical Aqua contracts o
 publishes each maker's aggregate on-chain where the opcodes read it, and anyone can
 recompute the same number from the same public index.
 
-```mermaid
-flowchart LR
-    subgraph chains ["Base · Arbitrum · Optimism (identical Aqua contracts)"]
-        A[Aqua events<br/>Shipped · Docked · Pulled · Pushed]
-    end
-    A --> G[Solvent subgraph<br/>one pipeline, every chain]
-    G --> O[attestor writes<br/>aggregate on-chain]
-    O --> S[SolvencySkew · SolvencyFloor<br/>inside the maker's strategy]
-    G --> Q[takers · aggregators · agents<br/>one query: who is actually backed?]
-```
+The whole system as deployed, every component linked to its verified source or public logs
+on the console's How it works tab:
+
+![How Solvent works: the pipeline that maintains the oracle, and the quote that reads it](docs/screenshots/how-it-works.png)
 
 ## What each side gets
 
@@ -192,45 +201,6 @@ transactions to reverts.
 
 **Aqua** gets what the load line gave shipping: a venue where a covered quote is worth
 more than a naked one, enforced by adoption instead of protocol change.
-
----
-
-## Watch a position defend itself
-
-One wallet, 10 WETH, three strategies quoting side by side. Every number below is from
-a live run on Base Sepolia (`pnpm vignette`), flowing through the full production loop:
-chain, The Graph, attestor, SolventBook, quote.
-
-```
-wallet 10.00 WETH · committed 4.50 WETH · utilisation 45%
-
-  strategy A      bid 3,106.67
-  strategy B      bid 3,106.67
-  strategy C      bid 3,106.67
-
-a taker fills A for 500 USDC - fills are healthy business
-
-  strategy A      bid 3,809.89      ← repriced its own inventory
-  strategy B      bid 3,106.67      ← untouched, and correctly so
-  strategy C      bid 3,106.67
-
-the maker redeploys half the wallet to another venue · utilisation 87%
-
-  strategy B      bid 3,202.86      ← spread widened itself, no keeper, no dock
-  strategy C      bid 3,201.23      ← repriced for a thinner book
-
-the maker keeps going, past the floor · utilisation 99%
-
-  strategy A      declined: SolvencyFloor          ← refused at quote time
-  strategy B      declined: SolvencyFloor
-  strategy C      declined: SolvencyFloor          ← nothing for a taker to waste gas on
-```
-
-The fill only moved the book that was filled. What moved B and C was the wallet
-draining underneath them, which emits no Aqua event at all: the index catches it, the
-attestor writes it on-chain, and the quotes react. Before Solvent these books would
-quote the stale price until settlement reverted in a taker's face. Here they priced
-the risk, then refused it.
 
 ## Competitors
 
@@ -273,6 +243,54 @@ Demand here is not projected, it is already on-chain, measured:
 
 ---
 
+# Demo
+
+## Try it live, no setup
+
+Open **[aman035.github.io/solvent](https://aman035.github.io/solvent/)**.
+
+1. **Mainnet**: every real Aqua maker's book on Base, Arbitrum and Optimism, indexed live.
+   Most of the capsules are close to empty.
+2. **Testnet → How it works**: the deployed system, each box linked to its contract or logs.
+3. **Testnet → Quote desk**: a live quote from the deployed router. Step through
+   *Healthy → The wallet drains → Past the floor*, or drag the wallet level yourself.
+   Connect a wallet to take the quote for real; demo USDC is an open faucet.
+4. **Balance sheets** and **Settlement ledger**: the numbers every quote reads, and what
+   actually settled.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/desk-drain.png" alt="The wallet drains: the same book widens its own spread"></td>
+    <td width="50%"><img src="docs/screenshots/desk-floor.png" alt="Past the floor: the book declines at quote time"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>The wallet drains: the same book widens its own spread</sub></td>
+    <td align="center"><sub>Past the floor: the book declines, with a reason, before any gas is spent</sub></td>
+  </tr>
+</table>
+
+## The end-to-end demo
+
+One command drives the whole story on-chain in acts while the console reacts. It needs a
+funded Base Sepolia wallet (`MNEMONIC` in `.env`; `pnpm fund` tops up the demo wallets).
+Keep the console open beside the terminal.
+
+```bash
+pnpm demo          # pauses before each act; in act 2 you take the quote yourself
+pnpm demo --fast   # no pauses; the script takes the quote as the demo taker
+```
+
+| Act | What happens on-chain | Watch in the console |
+| --- | --- | --- |
+| 1 · Promises | One wallet holding 10 WETH ships three strategies, each promising 1.5 WETH. No tokens move. | **Balance sheets**: the maker appears at 45% utilised |
+| 2 · A real fill | A taker (you, from the Quote desk) sells 500 USDC; Aqua pulls WETH straight from the maker's wallet. | **Settlement ledger**: the fill, tagged *you* |
+| 3 · The wallet drains | The maker sweeps WETH elsewhere with a plain transfer. Aqua emits no event and would keep quoting. | **Quote desk**: spreads widen on their own, 3,106.67 → 3,202.86 at 87% |
+| 4 · Past the floor | The sweep continues to 99%, past the 95% floor the maker set at ship time. | **Quote desk**: every book declines with `SolvencyFloor`'s reason |
+| 5 · The contrast | An unprotected maker with no floor drains; a taker trusts her quote and pays gas for a revert. | **Settlement ledger**: *returned*, on the record for good |
+| 6 · Reset | Everything is restored, so the demo can run again. | |
+
+---
+
 # Project outline
 
 ## Structure
@@ -281,16 +299,16 @@ Demand here is not projected, it is already on-chain, measured:
 .
 ├── contracts/
 │   ├── src/
-│   │   ├── instructions/   SolvencyFloor and SolvencySkew (plus the reputation pair)
+│   │   ├── instructions/   SolvencyFloor and SolvencySkew, plus the settlement-record pair
 │   │   └── opcodes/        SolventOpcodes: the banked-opcode SwapVM extension
 │   └── test/            differential, invariant, and upstream 1inch regression suites
-├── dashboard/           the console: balance sheets, live mainnet makers, ledger
+├── dashboard/           the console: how it works, quote desk, balance sheets, mainnet, ledger
 ├── deployments/         Base Sepolia manifest: addresses, tx hashes, verification
 ├── docs/                score design, cost-to-fake, mainnet analysis data, graphics
 ├── LICENSES/            upstream 1inch licences, preserved
 ├── packages/
 │   └── core/            shared TS: program encoder, book and score math, bit-exact
-├── scripts/             deploy, seed, demo makers, the vignette, the mainnet analyzer
+├── scripts/             deploy, seed, the end-to-end demo, the mainnet analyzer
 │   ├── attack/          cost-to-fake: measured wash-trade and sybil-review attacks
 │   └── verify/          20 live checks, incl. the wei-exact mainnet parity gate
 ├── services/
@@ -300,68 +318,87 @@ Demand here is not projected, it is already on-chain, measured:
 
 ## Components
 
-Everything the demo needs is either already deployed or runs locally with one command.
-There is no server to host.
+The live demo needs nothing from you: contracts are deployed, the indexes are public, and
+the keeper runs on GitHub Actions.
 
-### Contracts, live on Base Sepolia (mainnet coming soon)
+### Contracts, live on Base Sepolia
 
-All verified on Basescan; full details with tx hashes in
+Mainnet deployment is coming. All verified on Basescan; tx hashes in
 [`deployments/84532.json`](deployments/84532.json).
 
 | Contract | Address | What it does |
 | --- | --- | --- |
-| SolventRouter | [`0xff00…c608`](https://sepolia.basescan.org/address/0xff00bcc12a34864a3b6e411100bf839ab441c608#code) | SwapVM router carrying the four Solvent instructions; quotes and settles |
+| SolventRouter | [`0xff00…c608`](https://sepolia.basescan.org/address/0xff00bcc12a34864a3b6e411100bf839ab441c608#code) | SwapVM router carrying the Solvent instructions; quotes and settles |
 | SolventBook | [`0xe0ac…e9de`](https://sepolia.basescan.org/address/0xe0acc7a4c35a1a1c37d5dbaee1bdedc2ff48e9de#code) | the balance-sheet oracle SolvencyFloor and SolvencySkew read at quote time |
-| SolventScore | [`0x401b…8e4d`](https://sepolia.basescan.org/address/0x401b52d106906cc71c31bf96a278c3cefdf18e4d#code) | settlement-score cache; ReputationGate reads it |
-| SolventRecorder | [`0xffed…1b43b`](https://sepolia.basescan.org/address/0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b#code) | re-emits reverted fills, which destroy their own logs, so the index can see them |
 | Aqua | [`0x525b…b6a2`](https://sepolia.basescan.org/address/0x525bebb9c5b4dad791402923e344b360bf6ab6a2#code) | pinned deployment of official 1inch Aqua, unmodified |
 | SolventHelper | [`0x6fd4…8144`](https://sepolia.basescan.org/address/0x6fd4df8c52f952269437b22c0fa9b63f1b048144#code) | read-only order encoder for the TS clients |
-| ERC-8004 registries | [identity](https://sepolia.basescan.org/address/0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33#code) · [reputation](https://sepolia.basescan.org/address/0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d#code) · [adapter](https://sepolia.basescan.org/address/0x52042cf2a100c2b8cc506cbf400737b3c5147566#code) | agent identity and reviews; the adapter reads the score by agentId |
 | Demo WETH / USDC | [WETH](https://sepolia.basescan.org/address/0x3ac3f85cdbd1ce973cce3e67bc3cf75b79c525c7#code) · [USDC](https://sepolia.basescan.org/address/0x097b80a3a5e9a82c65ef934c3ea402502cdea1af#code) | open-mint faucet tokens, so the demo never depends on testnet liquidity |
+| SolventScore | [`0x401b…8e4d`](https://sepolia.basescan.org/address/0x401b52d106906cc71c31bf96a278c3cefdf18e4d#code) | settlement record: each counterparty's delivered-value score |
+| SolventRecorder | [`0xffed…1b43b`](https://sepolia.basescan.org/address/0xffeda75bd96427ab6639a4b25d9a9ac53f51b43b#code) | settlement record: makes reverted fills, which erase their own logs, indexable |
+| ERC-8004 registries | [identity](https://sepolia.basescan.org/address/0xc5734c9bfc4f9d64356dea40e4fa6f8ed23f4a33#code) · [reputation](https://sepolia.basescan.org/address/0xe5e528e6a54e25df4b0e73d22c0153d6eddbef6d#code) · [adapter](https://sepolia.basescan.org/address/0x52042cf2a100c2b8cc506cbf400737b3c5147566#code) | settlement record: agent identities, and the score by agentId |
 
 ### Indexes, live on The Graph
 
-| Subgraph | Watches | Endpoint |
+| Subgraph | Watches | Playground |
 | --- | --- | --- |
-| solvent-sepolia | the full Sepolia stack: fills, agents, scores, maker books | [query](https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0) |
-| solvent-base | official Aqua on Base mainnet, live maker balance sheets | [query](https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0) |
-| solvent-arbitrum | official Aqua on Arbitrum One | [query](https://api.studio.thegraph.com/query/42912/solvent-arbitrum/v0.2.0) |
-| solvent-optimism | official Aqua on Optimism | [query](https://api.studio.thegraph.com/query/42912/solvent-optimism/v0.2.0) |
+| solvent-sepolia | the full Sepolia stack: maker books, fills, scores | [query](https://api.studio.thegraph.com/query/42912/solvent-sepolia/v0.8.0/graphql) |
+| solvent-base | official Aqua on Base mainnet | [query](https://api.studio.thegraph.com/query/42912/solvent-base/v0.2.0/graphql) |
+| solvent-arbitrum | official Aqua on Arbitrum One | [query](https://api.studio.thegraph.com/query/42912/solvent-arbitrum/v0.2.0/graphql) |
+| solvent-optimism | official Aqua on Optimism | [query](https://api.studio.thegraph.com/query/42912/solvent-optimism/v0.2.0/graphql) |
 
-The three mainnet indexes are observation-only today: they maintain every real maker's
-promise-vs-backing sheet from ship calldata, rawBalances, and wallet state. When the
-contracts land on Base mainnet, they become the oracle feed.
+The mainnet indexes are observation-only today. When the contracts land on Base mainnet,
+they become the oracle feed.
 
-### Local processes, one command each
+### The keeper
 
-| Component | Kind | Run with | Notes |
-| --- | --- | --- | --- |
-| Dashboard | frontend (Vite + React) | `pnpm dash`, or use the [hosted console](https://aman035.github.io/solvent/) | quote desk, balance sheets, live mainnet makers, ledger |
-| Attestor | backend keeper | `pnpm attest` · `attest:books` · `attest:failures` | bridges the index into SolventBook and SolventScore; needs the funded mnemonic |
-| Demo scripts | scripted makers | `pnpm vignette` | the solvency arc end to end: ship, fill, drain, widen, refuse |
-| @aqua-solvent/core | shared TS package | nothing to run | program encoder and book/score math, used by everything above |
-| Verify harness | test rig | `pnpm verify:all` | 20 live checks against everything in this table |
+The attestor runs as a [GitHub Actions workflow](https://github.com/Aman035/solvent/actions/workflows/attest.yml):
+about once a minute it reads every maker's book from the index, re-reads each wallet
+from the chain, and writes only what changed into SolventBook. It signs with a key that
+holds `ATTESTOR_ROLE` and nothing else.
 
-## Set up and run locally
+## Run it locally
 
-Prerequisites: Node 22+, pnpm 9, and Foundry if you want the contract tests.
+Prerequisites: Node 22+, pnpm 9, and [Foundry](https://getfoundry.sh) for the contracts.
 
 ```bash
 git clone https://github.com/Aman035/solvent && cd solvent
 pnpm install
-cp .env.example .env    # defaults are enough for the dashboard and all read-only paths
+cp .env.example .env        # public endpoints prefilled: enough for the frontend
 ```
 
+**Frontend**, the same console as the live demo:
+
 ```bash
-pnpm dash                                # the console, on live data
-pnpm exec tsx scripts/analyze-history.ts # rebuild the mainnet analysis yourself
-pnpm test && cd contracts && forge test  # 1009-case differentials, upstream 1inch suites
+pnpm dash                   # http://localhost:5173
 ```
 
-Sending transactions (the vignette, the demos, the attestor) additionally needs a
-funded Base Sepolia wallet: set `MNEMONIC` in `.env` and run `pnpm fund`.
+**Contracts**:
 
 ```bash
-pnpm vignette   # the "watch a position defend itself" sequence, live
-pnpm verify:all # 20 live checks against the deployment
+cd contracts
+forge build
+forge test                  # Solvent instructions, differential suites, upstream 1inch regression
+```
+
+**Attestor**, one pass of what the keeper runs every minute (needs a funded `MNEMONIC`):
+
+```bash
+pnpm attest:books           # index → live wallet reads → SolventBook
+```
+
+**Subgraph**, with the Graph CLI:
+
+```bash
+cd subgraph && npm install
+npx graph codegen && npx graph build                    # Base Sepolia
+npx graph build subgraph.base.yaml                      # mainnet: also .arbitrum / .optimism
+npx graph deploy solvent-sepolia subgraph.yaml \
+  --deploy-key "$GRAPH_DEPLOY_KEY" --node https://api.studio.thegraph.com/deploy/
+```
+
+**Checks**:
+
+```bash
+pnpm test                   # TS unit tests
+pnpm verify                 # live checks against the whole deployment
 ```
