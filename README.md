@@ -169,7 +169,10 @@ know a maker's book is to replay every `Shipped`, `Docked`, `Pulled` and `Pushed
 genesis, which is exactly what the analysis above did, and exactly what an index is for.
 
 One subgraph pipeline, deployed unchanged against the identical Aqua contracts on
-**Base, Arbitrum and Optimism**, maintains every maker's live balance sheet. An attestor
+**Base, Arbitrum and Optimism** and published on The Graph Network
+([Base](https://thegraph.com/explorer/subgraphs/5QXR6yixbQZpRfxr3cnDAPypqbPLEvhGwL65iWGMRTCT?view=Query&chain=arbitrum-one) ·
+[Arbitrum](https://thegraph.com/explorer/subgraphs/9iyPNmnVgYmGaMDfmSppWkLqFbB5WD4dQh954rz17jjw?view=Query&chain=arbitrum-one) ·
+[Optimism](https://thegraph.com/explorer/subgraphs/bJiMh5yZruGbdqao5HLn1tbintTtTMVrVqjHXGVs6bF?view=Query&chain=arbitrum-one)), maintains every maker's live balance sheet. An attestor
 publishes each maker's aggregate on-chain where the opcodes read it, and anyone can
 recompute the same number from the same public index.
 
@@ -243,7 +246,8 @@ Demand here is not projected, it is already on-chain, measured:
 Open **[aman035.github.io/solvent](https://aman035.github.io/solvent/)**.
 
 1. **Mainnet**: every real Aqua maker's book on Base, Arbitrum and Optimism, indexed live.
-   Most of the capsules are close to empty.
+   Most of the capsules are close to empty. Each chain's index is also open on
+   [Graph Explorer](#indexes-published-on-the-graph-network).
 2. **Testnet → How it works**: the deployed system, each box linked to its contract or logs.
 3. **Testnet → Quote desk**: a live quote from the deployed router. Step through
    *Healthy → The wallet drains → Past the floor*, or drag the wallet level yourself.
@@ -336,12 +340,12 @@ All four are published to The Graph's decentralized network (on Arbitrum One) an
 its indexers. The console queries them through The Graph's gateway, falling back to Studio
 if the gateway ever errors.
 
-| Subgraph | Watches | Graph Explorer |
-| --- | --- | --- |
-| aqua-solvent-base-sepolia | the full Sepolia stack: maker books, fills, scores | [open](https://thegraph.com/explorer/subgraphs/FN4eAgcdPEqFSsLSraR6n7sHK52zcajNjaZdGA19ASus?view=Query&chain=arbitrum-one) |
-| aqua-solvent-base | official Aqua on Base mainnet | [open](https://thegraph.com/explorer/subgraphs/5QXR6yixbQZpRfxr3cnDAPypqbPLEvhGwL65iWGMRTCT?view=Query&chain=arbitrum-one) |
-| aqua-solvent-arbitrum | official Aqua on Arbitrum One | [open](https://thegraph.com/explorer/subgraphs/9iyPNmnVgYmGaMDfmSppWkLqFbB5WD4dQh954rz17jjw?view=Query&chain=arbitrum-one) |
-| aqua-solvent-optimism | official Aqua on Optimism | [open](https://thegraph.com/explorer/subgraphs/bJiMh5yZruGbdqao5HLn1tbintTtTMVrVqjHXGVs6bF?view=Query&chain=arbitrum-one) |
+| Subgraph (Graph Explorer) | Watches |
+| --- | --- |
+| [aqua-solvent-base-sepolia](https://thegraph.com/explorer/subgraphs/FN4eAgcdPEqFSsLSraR6n7sHK52zcajNjaZdGA19ASus?view=Query&chain=arbitrum-one) | the full Sepolia stack: maker books, fills, scores |
+| [aqua-solvent-base](https://thegraph.com/explorer/subgraphs/5QXR6yixbQZpRfxr3cnDAPypqbPLEvhGwL65iWGMRTCT?view=Query&chain=arbitrum-one) | official Aqua on Base mainnet |
+| [aqua-solvent-arbitrum](https://thegraph.com/explorer/subgraphs/9iyPNmnVgYmGaMDfmSppWkLqFbB5WD4dQh954rz17jjw?view=Query&chain=arbitrum-one) | official Aqua on Arbitrum One |
+| [aqua-solvent-optimism](https://thegraph.com/explorer/subgraphs/bJiMh5yZruGbdqao5HLn1tbintTtTMVrVqjHXGVs6bF?view=Query&chain=arbitrum-one) | official Aqua on Optimism |
 
 The mainnet indexes are observation-only today. When the contracts land on Base mainnet,
 they become the oracle feed.
