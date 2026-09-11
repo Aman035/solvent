@@ -183,7 +183,7 @@ export function SepoliaBooks() {
             floorBps={b.maker.toLowerCase() === FLOOR_MAKER.toLowerCase() ? 9_500 : null} />
         ))}
       </div>
-      {snap && books.length === 0 && <div className="empty" style={{ padding: 40 }}>No books yet - run pnpm vignette.</div>}
+      {snap && books.length === 0 && <div className="empty" style={{ padding: 40 }}>No books yet - run pnpm demo.</div>}
       <p className="cost note" style={{ marginTop: 22, maxWidth: 760 }}>
         Behind the live stamp: the index watches every Aqua event, a keeper re-reads each
         wallet about once a minute, and any change lands on-chain in SolventBook - where

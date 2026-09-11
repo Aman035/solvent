@@ -76,7 +76,7 @@ contract ProgramRoundTripTest is Test {
         assertEq(_ts("solvencyFloorOnly"), SolvencyFloor.build(oracle, 9000), "floor encoding diverged");
     }
 
-    /// The exact program shape the vignette ships.
+    /// The exact program shape the demo ships.
     function test_SolventStack() public view {
         assertEq(
             _ts("solventStack"),

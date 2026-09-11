@@ -25,9 +25,9 @@
     "dash:preview": "cd dashboard && vite preview --port 4173",
     "demo:reset": "tsx scripts/demo/reset.ts",
     "attest:books": "tsx services/attestor/src/attest-books.ts",
-    "vignette": "tsx scripts/demo/vignette.ts",
     "seed:agents": "tsx scripts/seed-agents.ts",
-    "seed:fills": "tsx scripts/seed-fills.ts"
+    "seed:fills": "tsx scripts/seed-fills.ts",
+    "demo": "tsx scripts/demo/walkthrough.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

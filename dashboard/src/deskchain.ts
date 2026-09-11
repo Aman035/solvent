@@ -16,7 +16,7 @@ export const ADDR = {
   router: C.router.address, helper: C.helper.address, aqua: C.aqua.address,
   book: C.solventBook.address, weth: C.weth.address, usdc: C.usdc.address,
 };
-/** The vignette maker: one wallet, three self-defending books. */
+/** The demo maker: one wallet, three self-defending books. */
 export const MAKER = "0xcF66ABC4e23809135F349c36625b5BF41aF0Df01" as Hex;
 /** Any address works for read-only quoting; this one is obviously a probe. */
 const PROBE_TAKER = "0x0000000000000000000000000000000000000001" as Hex;

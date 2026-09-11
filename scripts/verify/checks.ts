@@ -177,14 +177,14 @@ export const checks: Check[] = [
   {
     id: "S5", name: "Vignette books quote their live risk", phase: "Solvent",
     async run() {
-      // the vignette's maker (wallet 37): its books were shipped with floor 9500 and
+      // the demo maker (wallet 37): its books were shipped with floor 9500 and
       // skew from 5000; quoting must agree with the on-chain oracle, live
       const pc = rd();
       const maker = account(37);
       const A = addrs();
       const d = await gql<{ strategies: { id: Hex; program: Hex }[] }>(
         `{ strategies(where: { maker: "${maker.address.toLowerCase()}", active: true }, first: 5) { id program } }`);
-      if (d.strategies.length === 0) return fail(["no vignette strategies indexed"], ["run pnpm vignette"]);
+      if (d.strategies.length === 0) return fail(["no demo strategies indexed"], ["run pnpm demo --fast"]);
       const bookAbi = [{ name: "utilisationBps", type: "function", stateMutability: "view",
         inputs: [{ type: "address" }, { type: "address" }], outputs: [{ type: "uint32" }] }] as const;
       const u = await pc.readContract({ address: A.solventBook, abi: bookAbi, functionName: "utilisationBps", args: [maker.address, A.weth] }) as number;
